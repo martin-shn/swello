@@ -11,8 +11,11 @@
 @import 'basics/links';
 @import 'basics/forms';
 
-// Pages
-@import 'pages/home-page';
-
 // Components
 @import 'cmps/home-header';
+@import 'cmps/board-list';
+@import 'cmps/board-preview';
+
+// Pages
+@import 'pages/home-page';
+@import 'pages/user-boards';

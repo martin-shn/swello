@@ -1,0 +1,12 @@
+[{
+    "_id": "u101",
+    "fullname": "Guest",
+    "username": "guest@guest.com",
+    "password": "1234",
+    "imgUrl": "http://some-img.jpg",
+    "mentions": [{
+        "id": "m101",
+        "boardId": "m101",
+        "taskId": "t101"
+    }]
+}]
