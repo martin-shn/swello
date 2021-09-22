@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import { RootCmp } from './root-cmp';
-import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './assets/styles/main.scss';
 

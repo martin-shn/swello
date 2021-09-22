@@ -1,3 +1,4 @@
+import { BoardPage } from './pages/board-page';
 import { HomePage } from './pages/home-page';
 import { UserBoards } from './pages/user-boards';
 
@@ -6,6 +7,10 @@ const routes = [
   {
     path: '/',
     component: HomePage,
+  },
+  {
+    path: '/board/:boardId',
+    component: BoardPage,
   },
   {
     path: '/board',

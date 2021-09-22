@@ -1,0 +1,29 @@
+.top-panel {
+  & > * {
+    gap: 15px;
+  }
+
+  .members > * {
+    width: 28px;
+    height: 28px;
+    font-size: 1em;
+  }
+
+  button {
+    padding: 6px 5px;
+    border-radius: 3px;
+    background-color: $clr-light;
+    height: 32px;
+
+    &.btn-menu {
+      padding-right: 12px;
+    }
+
+    svg {
+      max-height: 16px;
+    }
+    &:hover {
+      background-color: $clr-light-2;
+    }
+  }
+}

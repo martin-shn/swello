@@ -15,7 +15,12 @@
 @import 'cmps/home-header';
 @import 'cmps/board-list';
 @import 'cmps/board-preview';
+@import 'cmps/top-panel';
+@import 'cmps/list-preview';
+@import 'cmps/list-all';
+@import 'cmps/card-preview';
 
 // Pages
 @import 'pages/home-page';
+@import 'pages/board-page';
 @import 'pages/user-boards';
