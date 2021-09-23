@@ -18,9 +18,7 @@ const DUMMY_LISTS = [
   { _id: 'l9' },
 ];
 export class BoardPage extends Component {
-  state = {
-    activeListId: null, // only one add-card-to-list form can be active at all times.
-  };
+  state = {};
 
   componentDidMount() {
     storageService.init();
@@ -32,12 +30,11 @@ export class BoardPage extends Component {
 
   // TODO: add dynamic text color using contrast-js
   render() {
-    const { activeListId } = this.state;
     return (
       <main className="board-page" style={{ backgroundImage: `url('${DUMMY_BG}')` }}>
         <AppHeader />
         <TopPanel />
-        <ListAll lists={DUMMY_LISTS} activeListId={activeListId} onAddingCard={this.onAddingCard} />
+        <ListAll lists={DUMMY_LISTS} onAddingCard={this.onAddingCard} />
       </main>
     );
   }
