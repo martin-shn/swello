@@ -1,0 +1,166 @@
+.login,
+.signup {
+    background-color: #f9fafc;
+    min-height: 100vh;
+    color: #4d4d4d;
+    @media only screen and (max-width: 640px) {
+        background-color: #fff;
+    }
+    .login-left-img {
+        position: absolute;
+        width: 400px;
+        bottom: 0;
+        left: 0;
+        max-width: 30%;
+        @media only screen and (max-width: 640px) {
+            display: none;
+        }
+    }
+    .login-right-img {
+        position: absolute;
+        width: 400px;
+        bottom: 0;
+        right: 0;
+        max-width: 30%;
+        @media only screen and (max-width: 640px) {
+            display: none;
+        }
+    }
+    .header-logo {
+        font-size: 56px;
+        font-family: Source Sans;
+        color: #293856;
+        font-weight: 700;
+        gap: 10px;
+        margin: 0 auto;
+        padding: 40px 0;
+        img {
+            height: 36px;
+        }
+    }
+    form {
+        background-color: #ffffff;
+        border-radius: 3px;
+        padding: 25px 40px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0 0 10px;
+        max-width: 400px;
+        margin: auto;
+        @media only screen and (max-width: 640px) {
+            border-color: transparent;
+            box-shadow: 0 0 0 transparent;
+            border-radius: 0;
+            padding-top: 10px;
+        }
+        .error {
+            p {
+                background: #eb5a46;
+                color: #fbedeb;
+                font-size: 14px;
+                padding: 0.5em 1em;
+                border: 1px solid #eb5a46;
+                line-height: 1.333;
+            }
+        }
+        h1 {
+            color: #5e6c84;
+            font-size: 16px;
+            letter-spacing: -0.01em;
+            line-height: 28px;
+            margin-top: 10px;
+            margin-bottom: 25px;
+        }
+        input {
+            font-size: 14px;
+            background-color: #fafbfc;
+            border: 2px solid #dfe1e6;
+            box-sizing: border-box;
+            border-radius: 3px;
+            height: 44px;
+            width: 100%;
+            padding: 0.5em;
+            margin: 0 0 1.2em;
+            transition: background-color 0.2s ease-in-out 0s, border-color 0.2s ease-in-out 0s;
+            &:focus {
+                background-color: white;
+                border: 2px solid #4c9aff;
+                box-shadow: 0 0 0;
+                outline: none;
+            }
+        }
+        button {
+            background-color: #5aac44;
+            width: 100%;
+            text-align: center;
+            color: #fff;
+            padding: 0.6em 1.3em;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            transition: background-color 0.1s ease-out 0s, box-shadow 0.15s cubic-bezier(0.47, 0.03, 0.49, 1.38) 0s;
+            &:hover {
+                background-color: #61bd4f;
+            }
+        }
+        span {
+            font-size: 12px;
+            margin: 20px 0;
+            line-height: 1.44em;
+        }
+        .google-btn {
+            background: #fff;
+            color: rgba(0, 0, 0, 0.54);
+            box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 5px 0;
+            border-color: transparent;
+            text-align: center;
+            border-radius: 3px;
+            width: 100%;
+            height: 39px;
+            padding-top: 0;
+            margin-bottom: 12px;
+            gap: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out 0s, border-color 0.2s ease-in-out 0s;
+            &:hover {
+                background-color: #f9fafc;
+            }
+            &:active {
+                background: #eee;
+                border: 2px solid #cdd2d4;
+            }
+            .label {
+                font-size: 14px;
+                font-weight: 700;
+                color: #505f79;
+                padding: 3px;
+            }
+        }
+        hr {
+            display: block;
+            height: 1px;
+            border: 0;
+            border-top: 1px solid #cccccc;
+            margin: 25px 0 1em;
+            padding: 0;
+            width: 100%;
+        }
+        a {
+            font-size: 14px;
+            color: #0052cc;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.signup {
+    form {
+        button {
+            background-color: #0052cc;
+            font-weight: 500;
+            &:hover {
+                background-color: #0065FF;
+            }
+        }
+    }
+}

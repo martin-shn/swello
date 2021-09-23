@@ -19,57 +19,25 @@ const DUMMY_LISTS = [
 ];
 export class BoardPage extends Component {
   state = {
-    // move these to redux later:
-    isEditingTitle: false /* when editing some list title - will contain the list id that it's title is being edited.
-                             - will contain "title" if the board title is being edited */,
-    isAddingCard: false, // when adding a card - will contain the list id that it's card is being added.
-    isPopover: false,
+    activeListId: null, // only one add-card-to-list form can be active at all times.
   };
 
   componentDidMount() {
     storageService.init();
   }
 
-  onAnyClick = () => {
-    this.onEditTitle(false);
-    this.onTogglePopover(false);
-  };
-
-  onEditTitle = (listId, ev) => {
-    if (ev) ev.stopPropagation();
-    if (this.state.isPopover) this.onTogglePopover(false);
-    this.setState({ isEditingTitle: listId });
-  };
-
-  onTogglePopover = (listId, ev) => {
-    if (ev) ev.stopPropagation();
-    if (this.state.isEditingTitle) this.onEditTitle(false);
-    this.setState({ isPopover: listId });
-  };
-
   onAddingCard = listId => {
-    this.setState({ isAddingCard: listId });
+    this.setState({ activeListId: listId });
   };
 
   // TODO: add dynamic text color using contrast-js
   render() {
-    const { isEditingTitle, isPopover, isAddingCard } = this.state;
+    const { activeListId } = this.state;
     return (
-      <main
-        className="board-page"
-        style={{ backgroundImage: `url('${DUMMY_BG}')` }}
-        onClick={this.onAnyClick}>
+      <main className="board-page" style={{ backgroundImage: `url('${DUMMY_BG}')` }}>
         <AppHeader />
-        <TopPanel isEditingTitle={isEditingTitle === 'main-title'} onEditTitle={this.onEditTitle} />
-        <ListAll
-          lists={DUMMY_LISTS}
-          isEditingTitle={isEditingTitle}
-          onEditTitle={this.onEditTitle}
-          onTogglePopover={this.onTogglePopover}
-          isPopover={isPopover}
-          isAddingCard={isAddingCard}
-          onAddingCard={this.onAddingCard}
-        />
+        <TopPanel />
+        <ListAll lists={DUMMY_LISTS} activeListId={activeListId} onAddingCard={this.onAddingCard} />
       </main>
     );
   }

@@ -15,18 +15,7 @@ export function loadUsers() {
     }
 }
 
-export function removeUser(userId) {
-    return async dispatch => {
-        try {
-            await userService.remove(userId)
-            dispatch({ type: 'REMOVE_USER', userId })
-        } catch (err) {
-            console.log('UserActions: err in removeUser', err)
-        }
-    }
-}
-
-export function onLogin(credentials) {
+export function onLogin(credentials, showErrorMsg, history) {
     return async (dispatch) => {
         try {
             const user = await userService.login(credentials)
@@ -34,40 +23,43 @@ export function onLogin(credentials) {
                 type: 'SET_USER',
                 user
             })
+            history.push('/board')
         } catch (err) {
-            showErrorMsg('Cannot login')
             console.log('Cannot login', err)
+            showErrorMsg(err)
         }
     }
 }
 
-export function onSignup(credentials) {
-    return (dispatch) => {
-        userService.signup(credentials)
-            .then(user => {
-                dispatch({
-                    type: 'SET_USER',
-                    user
-                })
+export function onSignup(credentials, showErrorMsg, history) {
+    return async (dispatch) => {
+        try {
+            const user = await userService.signup(credentials)
+            dispatch({
+                type: 'SET_USER',
+                user
             })
-            .catch(err => {
-                showErrorMsg('Cannot signup')
-                console.log('Cannot signup', err)
-            })
+            history.push('/board')
+        }
+        catch (err) {
+            showErrorMsg(err)
+            console.log('Cannot signup', err)
+        }
 
     }
 }
 
 export function onLogout() {
-    return (dispatch) => {
-        userService.logout()
-            .then(() => dispatch({
+    return async (dispatch) => {
+        try {
+            await userService.logout()
+            dispatch({
                 type: 'SET_USER',
                 user: null
-            }))
-            .catch(err => {
-                showErrorMsg('Cannot logout')
-                console.log('Cannot logout', err)
             })
+        } catch (err) {
+            showErrorMsg('Cannot logout')
+            console.log('Cannot logout', err)
+        }
     }
 }
