@@ -5,7 +5,6 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Avatar } from '@mui/material';
 
 export const TopPanel = props => {
-  const { onEditTitle, isEditingTitle } = props;
   return (
     <section className="top-panel flex space-between">
       <div className="flex align-center">
@@ -14,14 +13,10 @@ export const TopPanel = props => {
           Board
           <KeyboardArrowDownIcon />
         </button>
-        <div className="board-name" onClick={ev => onEditTitle('main-title', ev)}>
-          {isEditingTitle && <input type="text" />}
-          {!isEditingTitle && (
-            <button>
-              <h1>Board Name</h1>
-            </button>
-          )}
-        </div>
+
+        <h1 className="board-name content-editable" contentEditable suppressContentEditableWarning={true}>
+          Board Name
+        </h1>
         <button>
           <StarOutlineIcon />
         </button>

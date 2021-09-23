@@ -10,7 +10,9 @@ export function ListPreview(props) {
   return (
     <div className="list-preview flex column">
       <div className="list-header flex space-between">
-        <h2>List Title</h2>
+        <h2 className="list-title content-editable" contentEditable suppressContentEditableWarning={true}>
+          List Title
+        </h2>
         <button className="btn-more" onClick={() => onTogglePopover(isPopoverOpen ? null : list._id)}>
           <MoreHorizIcon />
           <Popover isVisible={isPopoverOpen}>
