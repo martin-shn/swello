@@ -1,4 +1,5 @@
 import React from 'react';
+import { AppHeader } from '../cmps/app-header';
 import { BoardList } from '../cmps/board-list';
 
 import { storageService } from '../services/async-storage.service';
@@ -11,14 +12,14 @@ export class UserBoards extends React.Component {
 
   componentDidMount() {
     storageService.init();
-    this.setState({boards: boardService.query()})
+    this.setState({ boards: boardService.query() });
   }
-  
 
   render() {
     const { isStar } = this.state;
     return (
       <section className="user-boards">
+        <AppHeader isUserBoardsPage={true} />
         {isStar && <h3 className="star">Starred boards</h3>}
         {isStar && <BoardList isStarred />}
         <h3>YOUR BOARDS</h3>

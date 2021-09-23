@@ -6,6 +6,10 @@
   background-color: rgba(0, 0, 0, 0.45);
   color: #fff;
 
+  &.user-boards-header {
+    background-color: #026aa7;
+  }
+
   > * {
     display: flex;
     align-items: center;
@@ -85,6 +89,9 @@
       background-color: transparent;
       color: inherit;
       box-shadow: none;
+      &::placeholder {
+        color: inherit;
+      }
     }
   }
   .avatar {

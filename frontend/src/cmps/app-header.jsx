@@ -5,7 +5,11 @@ import { ReactComponent as SearchIcon } from '../assets/svg/search.svg';
 
 export const AppHeader = props => {
   return (
-    <header className="app-header flex align-center full with-main-layout">
+    <header
+      className={
+        'app-header flex align-center full with-main-layout' +
+        (props.isUserBoardsPage ? ' user-boards-header' : '')
+      }>
       <div>
         <img className="logo" />
       </div>
@@ -25,7 +29,7 @@ export const AppHeader = props => {
           <span>
             <SearchIcon />
           </span>
-          <input type="text" />
+          <input type="text" placeholder="Search" />
         </div>
         <button className="btn-notifications">
           <NotificationsIcon />
