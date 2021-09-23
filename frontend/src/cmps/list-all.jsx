@@ -8,6 +8,12 @@ export const ListAll = () => {
       <ListPreview />
       <ListPreview />
       <ListPreview />
+      <ListPreview />
+      <ListPreview />
+      <ListPreview />
+      <ListPreview />
+      <ListPreview />
+      <ListPreview />
     </section>
   );
 };

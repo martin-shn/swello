@@ -17,7 +17,7 @@ export class ListPreview extends Component {
       <div className="list-preview flex column">
         <div className="list-header flex space-between" onClick={this.onTitleToggle}>
           <input
-            className={isTitleEdit ? '' : 'disabled'}
+            className={'content' + (isTitleEdit ? ' ' : ' disabled')}
             defaultValue="List Title"
             onClick={this.onTitleToggle}
           />
@@ -29,7 +29,7 @@ export class ListPreview extends Component {
           <CardPreview />
         </div>
         <div className="add-card">
-          <button className="btn-add">
+          <button className="content btn-add">
             <AddIcon />
             Add a card
           </button>
