@@ -22,9 +22,9 @@ export class UserBoards extends React.Component {
                   <AppHeader />
                 </header>
                 <section>
-                    <nav className="side-nav">
+                    <aside className="side-nav">
                       <SideNav />
-                    </nav>
+                    </aside>
                     <section className="user-boards-main">
                         <UserBoardMain />
                     </section>
