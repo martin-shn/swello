@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { AppHeader } from '../cmps/app-header';
 import { ListAll } from '../cmps/list-all';
-import { Popover } from '../cmps/popover';
 import { TopPanel } from '../cmps/top-panel';
 import { storageService } from '../services/async-storage.service';
 
@@ -24,38 +23,52 @@ export class BoardPage extends Component {
     isEditingTitle: false /* when editing some list title - will contain the list id that it's title is being edited.
                              - will contain "title" if the board title is being edited */,
     isAddingCard: false, // when adding a card - will contain the list id that it's card is being added.
-    isPopoverVisible: false,
+    isPopover: false,
   };
 
   componentDidMount() {
     storageService.init();
   }
 
+  onAnyClick = () => {
+    this.onEditTitle(false);
+    this.onTogglePopover(false);
+  };
+
   onEditTitle = (listId, ev) => {
     if (ev) ev.stopPropagation();
+    if (this.state.isPopover) this.onTogglePopover(false);
     this.setState({ isEditingTitle: listId });
   };
 
-  togglePopover = () => {
-    this.setState(prevState => ({ isPopoverVisible: !prevState.isPopoverVisible }));
+  onTogglePopover = (listId, ev) => {
+    if (ev) ev.stopPropagation();
+    if (this.state.isEditingTitle) this.onEditTitle(false);
+    this.setState({ isPopover: listId });
+  };
+
+  onAddingCard = listId => {
+    this.setState({ isAddingCard: listId });
   };
 
   // TODO: add dynamic text color using contrast-js
   render() {
-    const { isEditingTitle, isPopoverVisible } = this.state;
+    const { isEditingTitle, isPopover, isAddingCard } = this.state;
     return (
       <main
         className="board-page"
         style={{ backgroundImage: `url('${DUMMY_BG}')` }}
-        onClick={() => this.onEditTitle(false)}>
+        onClick={this.onAnyClick}>
         <AppHeader />
         <TopPanel isEditingTitle={isEditingTitle === 'main-title'} onEditTitle={this.onEditTitle} />
         <ListAll
           lists={DUMMY_LISTS}
           isEditingTitle={isEditingTitle}
           onEditTitle={this.onEditTitle}
-          togglePopover={this.togglePopover}
-          isPopoverVisible={isPopoverVisible}
+          onTogglePopover={this.onTogglePopover}
+          isPopover={isPopover}
+          isAddingCard={isAddingCard}
+          onAddingCard={this.onAddingCard}
         />
       </main>
     );

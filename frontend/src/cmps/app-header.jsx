@@ -5,7 +5,7 @@ import { ReactComponent as NotificationsIcon } from '../assets/svg/notifications
 import { ReactComponent as SearchIcon } from '../assets/svg/search.svg';
 import { ReactComponent as CloseIcon } from '../assets/svg/close.svg';
 
-export class AppHeader extends React.Component {
+export class AppHeader extends Component {
   state = { isSearchActive: false };
   render() {
     const { isUserBoardsPage } = this.props;
@@ -17,7 +17,7 @@ export class AppHeader extends React.Component {
           (isUserBoardsPage ? ' user-boards-header' : '')
         }>
         <div>
-          <img className="logo" />
+          <img className="logo" alt="swello" />
         </div>
         <div className="actions">
           <button>

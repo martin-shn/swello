@@ -1,7 +1,15 @@
 import { ListPreview } from './list-preview';
 
 export const ListAll = props => {
-  const { isEditingTitle, lists, onEditTitle, togglePopover, isPopoverVisible } = props;
+  const {
+    isEditingTitle,
+    lists,
+    onEditTitle,
+    onTogglePopover,
+    isPopover,
+    onAddingCard,
+    isAddingCard,
+  } = props;
   return (
     <section className="list-all flex">
       {lists.map(list => (
@@ -10,8 +18,10 @@ export const ListAll = props => {
           list={list}
           isEditingTitle={isEditingTitle === list._id}
           onEditTitle={onEditTitle}
-          togglePopover={togglePopover}
-          isPopoverVisible={isPopoverVisible}
+          onTogglePopover={onTogglePopover}
+          isPopover={isPopover === list._id}
+          isAddingCard={isAddingCard === list._id}
+          onAddingCard={onAddingCard}
         />
       ))}
     </section>
