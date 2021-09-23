@@ -1,7 +1,7 @@
 import { ListPreview } from './list-preview';
 
 export const ListAll = props => {
-  const { lists, onAddingCard, activeListId } = props;
+  const { lists, onAddingCard, activeListId, popoverListId, onTogglePopover } = props;
   return (
     <section className="list-all flex">
       {lists.map(list => (
@@ -9,7 +9,9 @@ export const ListAll = props => {
           key={list._id}
           list={list}
           isAddingCard={activeListId === list._id}
+          isPopoverOpen={popoverListId === list._id}
           onAddingCard={onAddingCard}
+          onTogglePopover={onTogglePopover}
         />
       ))}
     </section>
