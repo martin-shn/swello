@@ -19,49 +19,25 @@ const DUMMY_LISTS = [
 ];
 export class BoardPage extends Component {
   state = {
-    addingCardToList: null, // only one add-card-to-list form can be active at all times.
+    activeListId: null, // only one add-card-to-list form can be active at all times.
   };
 
   componentDidMount() {
     storageService.init();
   }
 
-  onAnyClick = () => {
-    this.onEditTitle(false);
-    this.onTogglePopover(false);
-  };
-
-  onEditTitle = (listId, ev) => {
-    if (ev) ev.stopPropagation();
-    if (this.state.isPopover) this.onTogglePopover(false);
-    this.setState({ isEditingTitle: listId });
-  };
-
-  onTogglePopover = (listId, ev) => {
-    if (ev) ev.stopPropagation();
-    if (this.state.isEditingTitle) this.onEditTitle(false);
-    this.setState({ isPopover: listId });
-  };
-
   onAddingCard = listId => {
-    this.setState({ addingCardToList: listId });
+    this.setState({ activeListId: listId });
   };
 
   // TODO: add dynamic text color using contrast-js
   render() {
-    const { isEditingTitle, addingCardToList } = this.state;
+    const { activeListId } = this.state;
     return (
-      <main
-        className="board-page"
-        style={{ backgroundImage: `url('${DUMMY_BG}')` }}
-        onClick={this.onAnyClick}>
+      <main className="board-page" style={{ backgroundImage: `url('${DUMMY_BG}')` }}>
         <AppHeader />
-        <TopPanel isEditingTitle={isEditingTitle === 'main-title'} onEditTitle={this.onEditTitle} />
-        <ListAll
-          lists={DUMMY_LISTS}
-          addingCardToList={addingCardToList}
-          onAddingCard={this.onAddingCard}
-        />
+        <TopPanel />
+        <ListAll lists={DUMMY_LISTS} activeListId={activeListId} onAddingCard={this.onAddingCard} />
       </main>
     );
   }

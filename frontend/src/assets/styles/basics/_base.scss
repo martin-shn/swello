@@ -21,6 +21,13 @@ textarea,
 input,
 button {
   font-size: 1em;
+  color: inherit;
+}
+
+input {
+  box-shadow: inset 0 0 0 2px #0079bf;
+  border: none;
+  outline: none;
 }
 
 h1,
