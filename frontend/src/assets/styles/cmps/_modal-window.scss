@@ -1,4 +1,35 @@
+.react-responsive-modal-modal {
+    background-color: transparent;
+}
+
 .new-board {
+    display: flex;
+    & .main {
+        background-size: cover;
+        background-position: center center;
+        border-radius: 3px;
+        box-sizing: border-box;
+        color: #fff;
+        height: 96px;
+        padding: 10px 10px 10px 16px;
+        position: relative;
+        width: 296px;
+
+        &.img::before {
+            background: rgba(0, 0, 0, 0.15);
+            position: absolute;
+            bottom: 0;
+            content: '';
+            display: block;
+            left: 0;
+            right: 0;
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 3px;
+            z-index: 0;
+        }
+    }
+
     & .side {
         width: 100px;
         height: 96px;
@@ -57,13 +88,139 @@
                 border-radius: 3px;
                 z-index: 0;
             }
+
+            &.marked::after {
+                font-family: FA-solid;
+                content: '\f00c';
+                position: absolute;
+                display: block;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                border-radius: 3px;
+                z-index: 0;
+                text-align: center;
+                line-height: 28px;
+            }
         }
 
         & div:last-of-type {
             &::before {
                 font-family: FA-solid;
                 content: '\f141';
+                position: absolute;
+                display: block;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                border-radius: 3px;
+                z-index: 0;
+                text-align: center;
+                line-height: 28px;
+                color: rgb(66, 82, 110);
             }
         }
+    }
+}
+
+.btn {
+    display: flex;
+    & button {
+        &.not-allowed {
+            width: 105px;
+            background-color: #f4f5f7;
+            box-shadow: none;
+            border: none;
+            color: #a5adba;
+            cursor: not-allowed;
+            margin-top: 8px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+            box-sizing: border-box;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+            padding: 6px 12px;
+            text-decoration: none;
+            transition-property: background-color, border-color, box-shadow;
+            transition-duration: 85ms;
+            transition-timing-function: ease;
+            margin-bottom: 8px;
+            position: relative;
+        }
+        &.allowed {
+            background-color: #0079bf;
+            box-shadow: none;
+            border: none;
+            color: #ffffff;
+            margin-top: 8px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+            box-sizing: border-box;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+            cursor: pointer;
+            padding: 6px 12px;
+            text-decoration: none;
+            transition-property: background-color, border-color, box-shadow;
+            transition-duration: 85ms;
+            transition-timing-function: ease;
+            margin-bottom: 8px;
+            position: relative;
+            &:hover{
+                background-color: #026AA7;
+                box-shadow: none;
+                border: none;
+                color: #FFFFFF;
+            }
+        }
+    }
+}
+
+.new-board-name {
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none;
+    box-sizing: border-box;
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    left: -8px;
+    line-height: 24px;
+    margin-bottom: 4px;
+    padding: 2px 8px;
+    position: relative;
+    width: calc(100% - 18px - 16px);
+    border-radius: 3px;
+    display: block;
+    outline: none;
+    transition-duration: 85ms;
+    transition-property: background-color, border-color, box-shadow;
+    transition-timing-function: ease;
+    position: absolute;
+    top: 40px;
+    left: 30px;
+    max-width: 275px;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.15) !important;
+        box-shadow: none;
+    }
+    &:focus {
+        background: rgba(255, 255, 255, 0.3) !important;
+        box-shadow: none;
+    }
+    &::placeholder{
+        color: rgba(255, 255, 255,0.6);
     }
 }
