@@ -14,7 +14,7 @@ export const TopPanel = props => {
           <KeyboardArrowDownIcon />
         </button>
 
-        <h1 className="board-name content-editable" contentEditable>
+        <h1 className="board-name content-editable" contentEditable suppressContentEditableWarning={true}>
           Board Name
         </h1>
         <button>

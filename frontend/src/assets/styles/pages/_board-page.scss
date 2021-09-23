@@ -6,6 +6,18 @@
   font-weight: 400;
   line-height: 20px;
 
+  .popover-screen {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    display: none;
+    &.open {
+      display: block;
+    }
+  }
   .content-editable {
     &:focus {
       background-color: #fff;
