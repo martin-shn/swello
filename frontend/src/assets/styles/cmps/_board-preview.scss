@@ -21,8 +21,8 @@
         top: 0;
         border-radius: 3px;
         display: block;
-        opacity: 0.2;
-        transition: .15s;
+        opacity: 0.7;
+        transition: opacity .15s ease;
     }
 
     &:not(.new-board) > div {
@@ -38,6 +38,7 @@
     }
     &.new-board > div {
         display: flex;
+        color: #172b4d;
         flex-direction: column;
         height: 80px;
         align-items: center;
@@ -52,7 +53,7 @@
 
     &:hover span:first-child{
         opacity: 1;
-        transition: .15s;
+        transition: opacity .15s ease;
     }
 
     &:hover .star {
