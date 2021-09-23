@@ -17,8 +17,8 @@ window.userService = userService
 
 
 function getUsers() {
-    return storageService.query('user')
-    // return httpService.get(`user`)
+  return storageService.query('user');
+  // return httpService.get(`user`)
 }
 
 async function getById(userId) {
@@ -40,31 +40,30 @@ async function login(userCred) {
     if (user) return _saveLocalUser(user)
     throw new Error('Auth error')
 
-    // const user = await httpService.post('auth/login', userCred)
-    // socketService.emit('set-user-socket', user._id);
-    // if (user) return _saveLocalUser(user)
+  // const user = await httpService.post('auth/login', userCred)
+  // socketService.emit('set-user-socket', user._id);
+  // if (user) return _saveLocalUser(user)
 }
 async function signup(userCred) {
-    const user = await storageService.post('user', userCred)
-    // const user = await httpService.post('auth/signup', userCred)
-    socketService.emit('set-user-socket', user._id);
-    return _saveLocalUser(user)
+  const user = await storageService.post('user', userCred);
+  // const user = await httpService.post('auth/signup', userCred)
+  socketService.emit('set-user-socket', user._id);
+  return _saveLocalUser(user);
 }
 async function logout() {
-    sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
-    socketService.emit('unset-user-socket');
-    // return await httpService.post('auth/logout')
+  sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER);
+  socketService.emit('unset-user-socket');
+  // return await httpService.post('auth/logout')
 }
 
 function _saveLocalUser(user) {
-    sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
-    return user
+  sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user));
+  return user;
 }
 
 function getLoggedinUser() {
-    return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER) || 'null')
+  return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER) || 'null');
 }
-
 
 // (async ()=>{
 //     await userService.signup({fullname: 'Puki Norma', username: 'user1', password:'123',score: 10000, isAdmin: false})
@@ -72,9 +71,7 @@ function getLoggedinUser() {
 //     await userService.signup({fullname: 'Muki G', username: 'muki', password:'123', score: 10000})
 // })();
 
-
-
-// This IIFE functions for Dev purposes 
+// This IIFE functions for Dev purposes
 // It allows testing of real time updates (such as sockets) by listening to storage events
 // (async () => {
 //     var user = getLoggedinUser()
@@ -99,4 +96,3 @@ function getLoggedinUser() {
 //     var user = getLoggedinUser()
 //     if (user) socketService.emit('set-user-socket', user._id)
 // })();
-

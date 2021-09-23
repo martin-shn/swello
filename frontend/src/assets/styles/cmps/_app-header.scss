@@ -1,0 +1,109 @@
+.app-header {
+  min-height: 44px;
+  max-height: 44px;
+  backdrop-filter: blur(24px);
+  padding: 6px 4px;
+  background-color: rgba(0, 0, 0, 0.45);
+  color: #fff;
+
+  &.user-boards-header {
+    background-color: #026aa7;
+  }
+
+  > * {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 100%;
+  }
+
+  // LEFT SIDE
+
+  .logo {
+    max-height: 100%;
+    width: 75px;
+    cursor: pointer;
+    margin-right: 20px;
+    content: url(../../img/logo-static.gif);
+    &:hover {
+      content: url(../../img/logo-moving.gif);
+    }
+  }
+
+  // CENTER
+
+  .actions {
+    flex-grow: 1;
+  }
+
+  button {
+    color: inherit;
+    background-color: transparent;
+    align-items: center;
+    padding: 6px 10px;
+    gap: 5px;
+
+    &.btn-notifications {
+      padding: 6px;
+      background-color: rgba(255, 255, 255, 0.3);
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+    &.btn-create {
+      background-color: rgba(0, 0, 0, 0.24);
+    }
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+    svg {
+      width: 16px;
+      height: 16px;
+      align-self: flex-end;
+    }
+  }
+
+  // RIGHT SIDE
+  .search {
+    width: 250px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    height: 100%;
+
+    &.active {
+      background-color: #fff;
+      color: $clr-default;
+    }
+
+    span {
+      height: 100%;
+    }
+    svg {
+      height: 100%;
+      padding-left: 4px;
+    }
+    input {
+      height: 100%;
+      width: 100%;
+      outline: none;
+      background-color: transparent;
+      color: inherit;
+      box-shadow: none;
+      &::placeholder {
+        color: inherit;
+      }
+    }
+  }
+  .avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 1em;
+    cursor: pointer;
+  }
+}

@@ -6,9 +6,11 @@
     "createdBy": {
         "_id": "u101",
         "fullname": "Guest",
-        "imgUrl": "http://some-img"
+        "imgUrl": "http://google.com"
     },
-    "style": {},
+    "style": {
+        "imgUrl":"https://images.unsplash.com/photo-1457195740896-7f345efef228?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8c2VhfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+    },
     "labels": [
         {
             "id": "l101",
@@ -99,7 +101,7 @@
             "imgUrl": "https://www.google.com"
         },
         {
-            "_id": "u102",
+            "_id": "u101",
             "fullname": "Aviv",
             "imgUrl": "https://www.google.com"
         }

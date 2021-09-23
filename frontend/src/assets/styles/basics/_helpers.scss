@@ -34,3 +34,17 @@
 .portrait-ratio {
   @include aspect-ratio(9, 16);
 }
+
+
+.home::before{
+  font-family: FA-solid;
+  content: '\f83e';
+}
+
+.boards::before{
+  content: url(../../svg/logo-icon-copy.svg);
+}
+
+.templates::before{
+  content: url(../../svg/template.svg);
+}

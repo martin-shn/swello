@@ -42,9 +42,30 @@
   }
 
   .add-card {
-    .btn-add {
+    .btn-adding {
       gap: 5px;
       width: 100%;
+    }
+    textarea {
+      overflow: hidden;
+      overflow-wrap: break-word;
+      resize: none;
+      padding: 6px 8px 2px;
+      width: 100%;
+      max-height: 162px;
+      min-height: 66px;
+      box-shadow: 0 1px 0 #091e4240;
+      border-radius: 3px;
+      outline: none;
+      border: none;
+    }
+    .btn-add {
+      background-color: #0079bf;
+      color: #fff;
+      padding: 6px 12px;
+      &:hover {
+        background-color: #026aa7;
+      }
     }
   }
 }
