@@ -42,8 +42,8 @@ export class HomeHeader extends Component {
           <LogoText />
         </div>
         <div className="btns">
-          <Link to="/">Log in</Link>
-          <Link to="/" className="btn">Sign up</Link>
+          <Link to="/login">Log in</Link>
+          <Link to="/signup" className="btn">Sign up</Link>
         </div>
       </header>
     );
