@@ -19,11 +19,7 @@ const DUMMY_LISTS = [
 ];
 export class BoardPage extends Component {
   state = {
-    // move these to redux later:
-    isEditingTitle: false /* when editing some list title - will contain the list id that it's title is being edited.
-                             - will contain "title" if the board title is being edited */,
-    isAddingCard: false, // when adding a card - will contain the list id that it's card is being added.
-    isPopover: false,
+    addingCardToList: null, // only one add-card-to-list form can be active at all times.
   };
 
   componentDidMount() {
@@ -48,12 +44,12 @@ export class BoardPage extends Component {
   };
 
   onAddingCard = listId => {
-    this.setState({ isAddingCard: listId });
+    this.setState({ addingCardToList: listId });
   };
 
   // TODO: add dynamic text color using contrast-js
   render() {
-    const { isEditingTitle, isPopover, isAddingCard } = this.state;
+    const { isEditingTitle, addingCardToList } = this.state;
     return (
       <main
         className="board-page"
@@ -63,11 +59,7 @@ export class BoardPage extends Component {
         <TopPanel isEditingTitle={isEditingTitle === 'main-title'} onEditTitle={this.onEditTitle} />
         <ListAll
           lists={DUMMY_LISTS}
-          isEditingTitle={isEditingTitle}
-          onEditTitle={this.onEditTitle}
-          onTogglePopover={this.onTogglePopover}
-          isPopover={isPopover}
-          isAddingCard={isAddingCard}
+          addingCardToList={addingCardToList}
           onAddingCard={this.onAddingCard}
         />
       </main>
