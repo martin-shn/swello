@@ -75,6 +75,12 @@
     border-radius: 3px;
     border: 1px solid rgba(255, 255, 255, 0.25);
     height: 100%;
+
+    &.active {
+      background-color: #fff;
+      color: $clr-default;
+    }
+
     span {
       height: 100%;
     }
