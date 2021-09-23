@@ -1,11 +1,39 @@
 .home-page header {
   justify-content: space-between;
   padding: 1rem;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  background-color: transparent;
+
+  transition: background-color 1s ease 0s;
 
   .logo {
+    font-family: Source Sans;
     .icon {
       width: 25px;
       height: 25px;
+    }
+  }
+
+  .btns {
+    a {
+      padding: 0.5rem 0.75rem;
+      font-size: 1.15rem;
+      line-height: 1.5;
+      border: 1px solid transparent;
+      &:first-child {
+        color: $clr-primary-blue;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      &:last-child {
+        border-radius: 0.2rem;
+        font-weight: 700;
+      }
     }
   }
 }
