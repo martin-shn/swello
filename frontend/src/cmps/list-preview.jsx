@@ -2,9 +2,18 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import AddIcon from '@mui/icons-material/Add';
 import { CardPreview } from './card-preview';
 import { Popover } from './popover';
+import { ReactComponent as CloseIcon } from '../assets/svg/close.svg';
 
 export const ListPreview = props => {
-  const { isEditingTitle, onEditTitle, list, togglePopover, isPopoverVisible } = props;
+  const {
+    isEditingTitle,
+    onEditTitle,
+    list,
+    onTogglePopover,
+    isPopover,
+    isAddingCard,
+    onAddingCard,
+  } = props;
 
   return (
     <div className="list-preview flex column">
@@ -14,19 +23,33 @@ export const ListPreview = props => {
           defaultValue="List Title"
           onClick={ev => onEditTitle(list._id, ev)}
         />
-        <button className="btn-more" onClick={togglePopover}>
+        <button className="btn-more" onClick={ev => onTogglePopover(list._id, ev)}>
           <MoreHorizIcon />
-          {isPopoverVisible && <Popover />}
+          {isPopover && <Popover>some menu</Popover>}
         </button>
       </div>
       <div className="list-cards">
         <CardPreview />
       </div>
       <div className="add-card">
-        <button className="content btn-add" onClick={() => this.setState({ isAddingCard: true })}>
-          <AddIcon />
-          Add a card
-        </button>
+        {!isAddingCard && (
+          <button className="content btn-adding" onClick={() => onAddingCard(list._id)}>
+            <AddIcon />
+            <span>Add a card</span>
+          </button>
+        )}
+        {isAddingCard && (
+          <>
+            <textarea placeholder="Enter a title for this card..." />
+            <div className="flex align-center" style={{ gap: '10px' }}>
+              <button className="btn-add">Add Card</button>
+              <CloseIcon
+                style={{ width: '25px', height: '25px', cursor: 'pointer' }}
+                onClick={() => onAddingCard(false)}
+              />
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

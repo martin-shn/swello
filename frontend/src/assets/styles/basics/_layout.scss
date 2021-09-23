@@ -1,19 +1,39 @@
 //H0ME-PAGE CONTAINERS LAYOUT
 
 .home-page {
-    .container {
-        margin: auto;
-        @media (min-width: 576px) {
-            max-width: 540px;
-        }
-        @media (min-width: 768px) {
-            max-width: 720px;
-        }
-        @media (min-width: 992px) {
-            max-width: 960px;
-        }
-        @media (min-width: 1200px) {
-            max-width: 1140px;
-        }
+  .container {
+    margin: auto;
+    @media (min-width: 576px) {
+      max-width: 540px;
     }
+    @media (min-width: 768px) {
+      max-width: 720px;
+    }
+    @media (min-width: 992px) {
+      max-width: 960px;
+    }
+    @media (min-width: 1200px) {
+      max-width: 1140px;
+    }
+  }
+}
+
+// BOARD-PAGE LAYOUT
+
+.board-page {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 0 1fr 0;
+  gap: 8px;
+  grid-template-rows: auto auto 1fr;
+  > * {
+    grid-column: 2;
+  }
+  > .full {
+    grid-column: 1 / -1;
+  }
+  > .with-main-layout {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
 }
