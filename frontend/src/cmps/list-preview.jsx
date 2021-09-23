@@ -4,22 +4,19 @@ import AddIcon from '@mui/icons-material/Add';
 import { CardPreview } from './card-preview';
 
 export class ListPreview extends Component {
-  state = { isTitleEdit: false };
-
-  onTitleToggle = ev => {
-    ev.stopPropagation();
-    this.setState(prevState => ({ isTitleEdit: !prevState.isTitleEdit }));
-  };
+  state = { isTitleEdit: false, isAddingCard: false };
 
   render() {
     const { isTitleEdit } = this.state;
     return (
       <div className="list-preview flex column">
-        <div className="list-header flex space-between" onClick={this.onTitleToggle}>
+        <div
+          className="list-header flex space-between"
+          onClick={() => this.setState({ isTitleEdit: false })}>
           <input
             className={'content' + (isTitleEdit ? ' ' : ' disabled')}
             defaultValue="List Title"
-            onClick={this.onTitleToggle}
+            onClick={() => this.setState({ isTitleEdit: false })}
           />
           <button>
             <MoreHorizIcon />
@@ -29,7 +26,7 @@ export class ListPreview extends Component {
           <CardPreview />
         </div>
         <div className="add-card">
-          <button className="content btn-add">
+          <button className="content btn-add" onClick={() => this.setState({ isAddingCard: true })}>
             <AddIcon />
             Add a card
           </button>
