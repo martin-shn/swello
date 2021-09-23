@@ -6,6 +6,10 @@
   gap: 10px;
   height: fit-content;
 
+  .btn-more {
+    position: relative;
+  }
+
   button {
     padding: 6px;
   }
@@ -26,12 +30,9 @@
     input {
       font-weight: 600;
       font-size: 1em;
-      border: none;
       border-radius: 3px;
       flex-grow: 1;
       height: 28px;
-      box-shadow: inset 0 0 0 2px #0079bf;
-      outline: none;
     }
     input.disabled {
       background-color: inherit;

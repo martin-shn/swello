@@ -9,6 +9,19 @@
     font-size: 1em;
   }
 
+  .board-name {
+    h1 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    input {
+      background-color: white;
+      padding: 6px 5px;
+      border-radius: 3px;
+      height: 32px;
+    }
+  }
+
   button {
     padding: 6px 5px;
     border-radius: 3px;

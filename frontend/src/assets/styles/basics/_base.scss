@@ -3,8 +3,8 @@
 }
 
 html {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans,
+    Helvetica Neue, sans-serif;
   color: $clr-default;
   line-height: 1.15;
 }
@@ -21,6 +21,12 @@ textarea,
 input,
 button {
   font-size: 1em;
+}
+
+input {
+  box-shadow: inset 0 0 0 2px #0079bf;
+  border: none;
+  outline: none;
 }
 
 h1,
