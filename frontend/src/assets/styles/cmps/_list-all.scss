@@ -2,4 +2,21 @@
   gap: 8px;
   overflow-x: auto;
   flex-grow: 1;
+
+  &::-webkit-scrollbar {
+    height: 12px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    border-radius: 5px;
+    margin: 0 5px;
+    background-color: rgba($color: #000000, $alpha: 0.15);
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: rgba($color: rgb(136, 136, 136), $alpha: 0.35);
+  }
 }
