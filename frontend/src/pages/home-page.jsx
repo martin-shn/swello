@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { HomeFooter } from '../cmps/home-footer';
 import { HomeHeader } from '../cmps/home-header';
 import HeroImg from '../assets/img/hero.png';
-import BoardImg from '../assets/img/board.png';
+import BoardImg from '../assets/img/board-s.png';
 import ViewImg from '../assets/svg/view.svg';
 import CardImg from '../assets/svg/card-back.svg'
 
@@ -25,7 +25,7 @@ export const HomePage = () => {
         <div className="container flex column">
           <div>
             <h2>It’s more than work. It’s a way of working together.</h2>
-            <p>Start with a Trello board, lists, and cards. Customize and expand with more features as your teamwork grows.
+            <p>Start with a Sweelo board, lists, and cards. Customize and expand with more features as your teamwork grows.
               Manage projects, organize tasks, and build team spirit—all in one place.</p>
             <p><Link to="/" className="btn">Start doing <span>→</span></Link></p>
           </div>
@@ -37,14 +37,14 @@ export const HomePage = () => {
           <div>
             <h2>Features to help your team succeed</h2>
             <p>Powering a productive team means using a powerful tool (and plenty of snacks). From meetings and projects to events and goal setting,
-              Trello’s intuitive features give any team the ability to quickly set up and customize workflows for just about anything.</p>
+              Sweelo’s intuitive features give any team the ability to quickly set up and customize workflows for just about anything.</p>
           </div>
           <div className="flex">
             <img src={ViewImg} alt="view" />
             <div className="txt">
               <h5>Choose a view</h5>
               <h2>The board is just the beginning</h2>
-              <p>Lists and cards are the building blocks of organizing work on a Trello board.
+              <p>Lists and cards are the building blocks of organizing work on a Sweelo board.
                 Grow from there with task assignments, timelines, productivity metrics, calendars, and more.</p>
             </div>
           </div>
@@ -53,7 +53,7 @@ export const HomePage = () => {
             <div className="txt">
               <h5>Dive into the details</h5>
               <h2>Cards contain everything you need</h2>
-              <p>Trello cards are your portal to more organized work—where every single part of your task can be managed, tracked, and shared with teammates.
+              <p>Sweelo cards are your portal to more organized work—where every single part of your task can be managed, tracked, and shared with teammates.
                 Open any card to uncover an ecosystem of checklists, due dates, attachments, conversations, and more.</p>
             </div>
           </div>
@@ -72,7 +72,7 @@ export const HomePage = () => {
           </div>
         </div>
       </section>
-      <div className="pre-footer flex justify-center">Trello also works great on your smaller screen.</div>
+      <div className="pre-footer flex justify-center">Sweelo also works great on your smaller screen.</div>
       <HomeFooter />
     </section>
   );
