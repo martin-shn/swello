@@ -1,4 +1,4 @@
-.home-page footer {
+.home-page footer, .login footer, .signup footer {
     font-size: 0.8em;
     margin: 4em 1em;
     text-align: center;
@@ -9,5 +9,25 @@
             height: 25px;
         }
         margin-bottom: 15px;
+    }
+    hr {
+        display: none;
+    }
+}
+
+.login footer, .signup footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: 2em;
+    hr {
+        display: block;
+        max-width: 400px;
+        margin: 25px auto;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid #cccccc;
+        padding: 0;
     }
 }

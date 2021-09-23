@@ -144,7 +144,7 @@
     }
   }
 
-  .signup {
+  .signup-box {
     .container {
       padding: 5rem 15px;
       .form-container {
@@ -207,6 +207,7 @@
             }
             width: 100%;
             color: #fff;
+            justify-content: center;
             background-color: #00b8d9;
             border-color: #00b8d9;
             border: 1px solid transparent;
