@@ -5,13 +5,15 @@ import reportWebVitals from './reportWebVitals';
 import { RootCmp } from './root-cmp';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './assets/styles/main.scss';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 ReactDOM.render(
-  // <Provider store={store}>
-  <Router>
-    <RootCmp />
-  </Router>,
-  // </Provider>,
+  <Provider store={store}>
+    <Router>
+      <RootCmp />
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
 
