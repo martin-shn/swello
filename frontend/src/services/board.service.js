@@ -16,15 +16,9 @@ window.bs = boardService;
 // return axios.get('api/toy/?', {params: {id: 1223, balanse:13}})
 
 function query(filterBy) {
-<<<<<<< HEAD
   // var queryStr = (!filterBy) ? '' : `?byUser=${filterBy.byUser}`
   // return httpService.get(`board${queryStr}`)
   return storageService.query('board', filterBy)
-=======
-  var queryStr = !filterBy ? '' : `?name=${filterBy.name}&sort=anaAref`;
-  // return httpService.get(`board${queryStr}`)
-  return storageService.query('board', queryStr);
->>>>>>> 85d04d7c6a840e73ded576b73828661de365809c
 }
 
 function getById(boardId) {
