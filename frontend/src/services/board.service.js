@@ -5,6 +5,7 @@ import { socketService, SOCKET_EVENT_REVIEW_ADDED } from './socket.service';
 export const boardService = {
   add,
   query,
+  update,
   remove,
   getById,
 };
@@ -18,7 +19,7 @@ window.bs = boardService;
 function query(filterBy) {
   // var queryStr = (!filterBy) ? '' : `?byUser=${filterBy.byUser}`
   // return httpService.get(`board${queryStr}`)
-  return storageService.query('board', filterBy)
+  return storageService.query('board', filterBy);
 }
 
 function getById(boardId) {
@@ -37,6 +38,11 @@ async function add(board) {
   const addedBoard = storageService.post('board', board);
 
   return addedBoard;
+}
+
+async function update(updatedBoard) {
+  const board = await storageService.put('board', updatedBoard);
+  return board;
 }
 
 // This IIFE functions for Dev purposes

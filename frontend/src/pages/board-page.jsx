@@ -4,7 +4,7 @@ import { AppHeader } from '../cmps/app-header';
 import { ListAll } from '../cmps/list-all';
 import { TopPanel } from '../cmps/top-panel';
 import { storageService } from '../services/async-storage.service';
-import { loadBoard } from '../store/actions/board.actions';
+import { loadBoard, updateBoard } from '../store/actions/board.actions';
 import { PopoverScreen } from '../cmps/popover-screen';
 
 const DUMMY_BG =
@@ -20,14 +20,15 @@ const DUMMY_LISTS = [
   { _id: 'l8' },
   { _id: 'l9' },
 ];
-export class BoardPage extends Component {
+export class _BoardPage extends Component {
   state = {
     activeListId: null, // only one add-card-to-list form can be active at all times.
     popoverListId: null,
   };
 
   async componentDidMount() {
-    this.props.loadBoard(this.props.match.boardId);
+    await this.props.loadBoard(this.props.match.params.boardId);
+    if (!this.props.board) this.props.history.replace('/board');
   }
 
   onAddingCard = listId => {
@@ -38,13 +39,21 @@ export class BoardPage extends Component {
     this.setState({ popoverListId: listId });
   };
 
+  onUpdateBoard = update => {
+    const { board } = this.props;
+    const updateBoard = { ...board, ...update };
+    this.props.updateBoard(updateBoard);
+  };
+
   // TODO: add dynamic text color using contrast-js
   render() {
+    if (!this.props.board) return <div>Loading</div>;
     const { activeListId, popoverListId } = this.state;
+    const { title, members } = this.props.board;
     return (
       <main className="board-page" style={{ backgroundImage: `url('${DUMMY_BG}')` }}>
         <AppHeader />
-        <TopPanel />
+        <TopPanel title={title} members={members} onUpdateBoard={this.onUpdateBoard} />
         <PopoverScreen
           isOpen={popoverListId ? true : false}
           onTogglePopover={this.onTogglePopover}
@@ -63,6 +72,7 @@ export class BoardPage extends Component {
 
 const mapDispatchToProps = {
   loadBoard,
+  updateBoard,
 };
 
 const mapStateToProps = state => {

@@ -1,204 +1,204 @@
 [
-    {
+  {
     "_id": "b101",
     "title": "Our first board",
     "createdAt": 1589983468418,
     "createdBy": {
-        "_id": "u101",
-        "fullname": "Guest",
-        "imgUrl": "http://google.com"
+      "_id": "u101",
+      "fullname": "Guest",
+      "imgUrl": "http://google.com"
     },
     "style": {
-        "imgUrl":"https://images.unsplash.com/photo-1457195740896-7f345efef228?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8c2VhfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+      "imgUrl": "https://images.unsplash.com/photo-1457195740896-7f345efef228?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8c2VhfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
     },
     "labels": [
-        {
-            "id": "l101",
-            "title": "Done",
-            "color": "#61bd4f"
-        },
-        {
-            "id": "l102",
-            "title": "TBD",
-            "color": "#21dd40"
-        }
+      {
+        "id": "l101",
+        "title": "Done",
+        "color": "#61bd4f"
+      },
+      {
+        "id": "l102",
+        "title": "TBD",
+        "color": "#21dd40"
+      }
     ],
     "members": [
-        {
-            "_id": "u101",
-            "fullname": "Guest",
-            "imgUrl": "https://www.google.com"
-        },
-        {
-            "_id": "u102",
-            "fullname": "Martin",
-            "imgUrl": "https://www.google.com"
-        }
+      {
+        "_id": "u101",
+        "fullname": "Guest",
+        "imgUrl": "https://www.google.com"
+      },
+      {
+        "_id": "u102",
+        "fullname": "Martin",
+        "imgUrl": "https://www.google.com"
+      }
     ],
-    "groups": [
-        {
-            "id": "g101",
-            "title": "TODO list",
-            "tasks": [
-                {
-                    "id": "c101",
-                    "title": "Replace logo",
-                    "style": {
-                        "bgColor": "#aa0055"
-                    }
-                },
-                {
-                    "id": "c102",
-                    "title": "Add Samples"
-                }
-            ],
-            "style": {}
-        }
+    "lists": [
+      {
+        "id": "g101",
+        "title": "TODO list",
+        "tasks": [
+          {
+            "id": "c101",
+            "title": "Replace logo",
+            "style": {
+              "bgColor": "#aa0055"
+            }
+          },
+          {
+            "id": "c102",
+            "title": "Add Samples"
+          }
+        ],
+        "style": {}
+      }
     ],
     "activities": [
-        {
-            "id": "a101",
-            "txt": "Changed Color",
-            "createdAt": 154514,
-            "byMember": {
-                "_id": "u101",
-                "fullname": "Guest",
-                "imgUrl": "http://some-img"
-            },
-            "task": {
-                "id": "c101",
-                "title": "Replace Logo"
-            }
+      {
+        "id": "a101",
+        "txt": "Changed Color",
+        "createdAt": 154514,
+        "byMember": {
+          "_id": "u101",
+          "fullname": "Guest",
+          "imgUrl": "http://some-img"
+        },
+        "task": {
+          "id": "c101",
+          "title": "Replace Logo"
         }
+      }
     ]
-    },
-    {
+  },
+  {
     "_id": "b102",
     "title": "Another board",
     "createdAt": 1589983478418,
     "createdBy": {
-        "_id": "u102",
-        "fullname": "Aviv",
-        "imgUrl": "http://some-img"
+      "_id": "u102",
+      "fullname": "Aviv",
+      "imgUrl": "http://some-img"
     },
     "style": {},
     "labels": [
-        {
-            "id": "l101",
-            "title": "Done",
-            "color": "#61bd4f"
-        },
-        {
-            "id": "l102",
-            "title": "Maybe",
-            "color": "#21004f"
-        }
+      {
+        "id": "l101",
+        "title": "Done",
+        "color": "#61bd4f"
+      },
+      {
+        "id": "l102",
+        "title": "Maybe",
+        "color": "#21004f"
+      }
     ],
     "members": [
-        {
-            "_id": "u104",
-            "fullname": "Ziv",
-            "imgUrl": "https://www.google.com"
-        },
-        {
-            "_id": "u101",
-            "fullname": "Aviv",
-            "imgUrl": "https://www.google.com"
-        }
+      {
+        "_id": "u104",
+        "fullname": "Ziv",
+        "imgUrl": "https://www.google.com"
+      },
+      {
+        "_id": "u101",
+        "fullname": "Aviv",
+        "imgUrl": "https://www.google.com"
+      }
     ],
-    "groups": [
-        {
-            "id": "g101",
-            "title": "Group 1",
-            "tasks": [
-                {
-                    "id": "c101",
-                    "title": "Replace logo"
-                },
-                {
-                    "id": "c102",
-                    "title": "Add Samples"
+    "lists": [
+      {
+        "id": "g101",
+        "title": "Group 1",
+        "tasks": [
+          {
+            "id": "c101",
+            "title": "Replace logo"
+          },
+          {
+            "id": "c102",
+            "title": "Add Samples"
+          }
+        ],
+        "style": {}
+      },
+      {
+        "id": "g102",
+        "title": "Group 2",
+        "tasks": [
+          {
+            "id": "c103",
+            "title": "Do that"
+          },
+          {
+            "id": "c104",
+            "title": "Help me",
+            "description": "description",
+            "comments": [
+              {
+                "id": "ZdPnm",
+                "txt": "also @yaronb please CR this",
+                "createdAt": 1590999817436.0,
+                "byMember": {
+                  "_id": "u101",
+                  "fullname": "Tal Tarablus",
+                  "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                 }
+              }
             ],
-            "style": {}
-        },
-        {
-            "id": "g102",
-            "title": "Group 2",
-            "tasks": [
-                {
-                    "id": "c103",
-                    "title": "Do that"
-                },
-                {
-                    "id": "c104",
-                    "title": "Help me",
-                    "description": "description",
-                    "comments": [
-                        {
-                            "id": "ZdPnm",
-                            "txt": "also @yaronb please CR this",
-                            "createdAt": 1590999817436.0,
-                            "byMember": {
-                                "_id": "u101",
-                                "fullname": "Tal Tarablus",
-                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                            }
-                        }
-                    ],
-                    "checklists": [
-                        {
-                            "id": "YEhmF",
-                            "title": "Checklist",
-                            "todos": [
-                                {
-                                    "id": "212jX",
-                                    "title": "To Do 1",
-                                    "isDone": false
-                                }
-                            ]
-                        }
-                    ],
-                    "members": [
-                        {
-                            "_id": "u101",
-                            "username": "guest@guest.com",
-                            "fullname": "Guest",
-                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                        }
-                    ],
-                    "labelIds": ["l101", "l102"],
-                    "createdAt": 1590999730348,
-                    "dueDate": 16156215211,
-                    "byMember": {
-                        "_id": "u101",
-                        "username": "Tal",
-                        "fullname": "Tal Tarablus",
-                        "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                    },
-                    "style": {
-                        "bgColor": "#26de81"
-                    }
-                }
+            "checklists": [
+              {
+                "id": "YEhmF",
+                "title": "Checklist",
+                "todos": [
+                  {
+                    "id": "212jX",
+                    "title": "To Do 1",
+                    "isDone": false
+                  }
+                ]
+              }
             ],
-            "style": {}
-        }
+            "members": [
+              {
+                "_id": "u101",
+                "username": "guest@guest.com",
+                "fullname": "Guest",
+                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+              }
+            ],
+            "labelIds": ["l101", "l102"],
+            "createdAt": 1590999730348,
+            "dueDate": 16156215211,
+            "byMember": {
+              "_id": "u101",
+              "username": "Tal",
+              "fullname": "Tal Tarablus",
+              "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+            },
+            "style": {
+              "bgColor": "#26de81"
+            }
+          }
+        ],
+        "style": {}
+      }
     ],
     "activities": [
-        {
-            "id": "a101",
-            "txt": "Changed Color",
-            "createdAt": 154514,
-            "byMember": {
-                "_id": "u101",
-                "fullname": "Abi Abambi",
-                "imgUrl": "http://some-img"
-            },
-            "task": {
-                "id": "c101",
-                "title": "Replace Logo"
-            }
+      {
+        "id": "a101",
+        "txt": "Changed Color",
+        "createdAt": 154514,
+        "byMember": {
+          "_id": "u101",
+          "fullname": "Abi Abambi",
+          "imgUrl": "http://some-img"
+        },
+        "task": {
+          "id": "c101",
+          "title": "Replace Logo"
         }
+      }
     ]
-    }
+  }
 ]

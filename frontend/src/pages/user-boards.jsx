@@ -9,27 +9,27 @@ import { UserBoardMain } from '../cmps/board-list/user-board-main';
 import { SideNav } from '../cmps/board-list/side-nav';
 
 export class UserBoards extends React.Component {
-    state = {};
+  state = {};
 
-    async componentDidMount() {
-        storageService.init();
-    }
+  async componentDidMount() {
+    await storageService.init();
+  }
 
-    render() {
-        return (
-            <section className="user-boards">
-                <header className="upper-nav">
-                  <AppHeader />
-                </header>
-                <section>
-                    <aside className="side-nav">
-                      <SideNav />
-                    </aside>
-                    <section className="user-boards-main">
-                        <UserBoardMain />
-                    </section>
-                </section>
-            </section>
-        );
-    }
+  render() {
+    return (
+      <section className="user-boards">
+        <header className="upper-nav">
+          <AppHeader />
+        </header>
+        <section>
+          <aside className="side-nav">
+            <SideNav />
+          </aside>
+          <section className="user-boards-main">
+            <UserBoardMain />
+          </section>
+        </section>
+      </section>
+    );
+  }
 }
