@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { AppHeader } from '../cmps/app-header';
 import { ListAll } from '../cmps/list-all';
 import { Popover } from '../cmps/popover';
 import { TopPanel } from '../cmps/top-panel';
@@ -44,9 +45,10 @@ export class BoardPage extends Component {
     const { isEditingTitle, isPopoverVisible } = this.state;
     return (
       <main
-        className="board-page flex column"
+        className="board-page"
         style={{ backgroundImage: `url('${DUMMY_BG}')` }}
         onClick={() => this.onEditTitle(false)}>
+        <AppHeader />
         <TopPanel isEditingTitle={isEditingTitle === 'main-title'} onEditTitle={this.onEditTitle} />
         <ListAll
           lists={DUMMY_LISTS}
