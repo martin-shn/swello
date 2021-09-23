@@ -1,10 +1,11 @@
-[{
+[
+    {
     "_id": "b101",
-    "title": "Robot dev proj",
+    "title": "Our first board",
     "createdAt": 1589983468418,
     "createdBy": {
         "_id": "u101",
-        "fullname": "Abi Abambi",
+        "fullname": "Guest",
         "imgUrl": "http://some-img"
     },
     "style": {},
@@ -13,12 +14,93 @@
             "id": "l101",
             "title": "Done",
             "color": "#61bd4f"
+        },
+        {
+            "id": "l102",
+            "title": "TBD",
+            "color": "#21dd40"
         }
     ],
     "members": [
         {
             "_id": "u101",
-            "fullname": "Tal Tarablus",
+            "fullname": "Guest",
+            "imgUrl": "https://www.google.com"
+        },
+        {
+            "_id": "u102",
+            "fullname": "Martin",
+            "imgUrl": "https://www.google.com"
+        }
+    ],
+    "groups": [
+        {
+            "id": "g101",
+            "title": "TODO list",
+            "tasks": [
+                {
+                    "id": "c101",
+                    "title": "Replace logo",
+                    "style": {
+                        "bgColor": "#aa0055"
+                    }
+                },
+                {
+                    "id": "c102",
+                    "title": "Add Samples"
+                }
+            ],
+            "style": {}
+        }
+    ],
+    "activities": [
+        {
+            "id": "a101",
+            "txt": "Changed Color",
+            "createdAt": 154514,
+            "byMember": {
+                "_id": "u101",
+                "fullname": "Guest",
+                "imgUrl": "http://some-img"
+            },
+            "task": {
+                "id": "c101",
+                "title": "Replace Logo"
+            }
+        }
+    ]
+    },
+    {
+    "_id": "b102",
+    "title": "Another board",
+    "createdAt": 1589983478418,
+    "createdBy": {
+        "_id": "u102",
+        "fullname": "Aviv",
+        "imgUrl": "http://some-img"
+    },
+    "style": {},
+    "labels": [
+        {
+            "id": "l101",
+            "title": "Done",
+            "color": "#61bd4f"
+        },
+        {
+            "id": "l102",
+            "title": "Maybe",
+            "color": "#21004f"
+        }
+    ],
+    "members": [
+        {
+            "_id": "u104",
+            "fullname": "Ziv",
+            "imgUrl": "https://www.google.com"
+        },
+        {
+            "_id": "u102",
+            "fullname": "Aviv",
             "imgUrl": "https://www.google.com"
         }
     ],
@@ -78,8 +160,8 @@
                     "members": [
                         {
                             "_id": "u101",
-                            "username": "Tal",
-                            "fullname": "Tal Tarablus",
+                            "username": "guest@guest.com",
+                            "fullname": "Guest",
                             "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                         }
                     ],
@@ -116,4 +198,5 @@
             }
         }
     ]
-}]
+    }
+]
