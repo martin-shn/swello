@@ -1,6 +1,47 @@
-.user-boards {
+.user-boards{
     display: flex;
     flex-direction: column;
+    & section{
+        display: flex;
+
+        & .side-nav{
+            margin: 40px 0 0;
+            padding: 0 16px;
+            width: 240px;
+            & ul{
+                list-style: none;
+                margin: 0;
+                margin-block: 0;
+                padding-inline-start: 0;
+                & li{
+                    &::before{
+                        width:1rem;
+                        height: 1rem;
+                        font-size: 1rem;
+                        object-fit:scale-down;
+                    }
+                    line-height: 20px;
+                    margin-bottom: 15px;
+                    display: flex;
+                    align-items: center;
+                    & a{
+                        padding-inline-start: 15px;
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+
+        & .user-boards-main{
+            flex-grow: 1;
+        }
+    }
+}
+
+.user-boards-main {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
 
     & > h3 {
         align-items: center;

@@ -1,31 +1,34 @@
 import React from 'react';
-import { BoardList } from '../cmps/board-list';
+import { BoardList } from '../cmps/board-list/board-list';
 
 import { storageService } from '../services/async-storage.service';
 import { boardService } from '../services/board.service';
+import { userService } from '../services/user.service';
+import { UserBoardMain } from '../cmps/board-list/user-board-main';
+import { SideNav } from '../cmps/board-list/side-nav';
 
 export class UserBoards extends React.Component {
-  state = {
-    isStar: true,
-  };
+    state = {};
 
-  componentDidMount() {
-    storageService.init();
-    this.setState({boards: boardService.query()})
-  }
-  
+    async componentDidMount() {
+        storageService.init();
+    }
 
-  render() {
-    const { isStar } = this.state;
-    return (
-      <section className="user-boards">
-        {isStar && <h3 className="star">Starred boards</h3>}
-        {isStar && <BoardList isStarred />}
-        <h3>YOUR BOARDS</h3>
-        <BoardList isAdd />
-        <h3>GUEST BOARDS</h3>
-        <BoardList />
-      </section>
-    );
-  }
+    render() {
+        return (
+            <section className="user-boards">
+                <header className="upper-nav">
+                  {/* <AppHeader /> */}
+                </header>
+                <section>
+                    <nav className="side-nav">
+                      <SideNav />
+                    </nav>
+                    <section className="user-boards-main">
+                        <UserBoardMain />
+                    </section>
+                </section>
+            </section>
+        );
+    }
 }
