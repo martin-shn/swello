@@ -4,13 +4,13 @@ import { socketService } from './socket.service'
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 
 export const userService = {
-    login,
-    logout,
-    signup,
-    getLoggedinUser,
-    getUsers,
-    getById,
-    update
+  login,
+  logout,
+  signup,
+  getLoggedinUser,
+  getUsers,
+  getById,
+  update
 }
 
 window.userService = userService
@@ -22,23 +22,23 @@ function getUsers() {
 }
 
 async function getById(userId) {
-    const user = await storageService.get('user', userId)
-    // const user = await httpService.get(`user/${userId}`)
-    return user;
+  const user = await storageService.get('user', userId)
+  // const user = await httpService.get(`user/${userId}`)
+  return user;
 }
 
 
 async function update(user) {
-    await storageService.put('user', user)
-    // user = await httpService.put(`user/${user._id}`, user)
-    return user;
+  await storageService.put('user', user)
+  return _saveLocalUser(user);
+  // user = await httpService.put(`user/${user._id}`, user)
 }
 
 async function login(userCred) {
-    const users = await storageService.query('user')
-    const user = users.find(user => user.username === userCred.username)
-    if (user) return _saveLocalUser(user)
-    throw new Error('Auth error')
+  const users = await storageService.query('user')
+  const user = users.find(user => user.username === userCred.username)
+  if (user) return _saveLocalUser(user)
+  throw new Error('Auth error')
 
   // const user = await httpService.post('auth/login', userCred)
   // socketService.emit('set-user-socket', user._id);

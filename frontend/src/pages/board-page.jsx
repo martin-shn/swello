@@ -60,7 +60,7 @@ export class _BoardPage extends Component {
       <main
         className="board-page"
         style={{
-          backgroundImage: style.imgUrl || 'none',
+          backgroundImage: `url(${style.imgUrl})` || 'none',
           backgroundColor: style.bgColor || 'unset',
         }}>
         <AppHeader />

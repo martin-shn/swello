@@ -36,12 +36,12 @@ export class HomeHeader extends Component {
   render() {
     const { style } = this.state;
     return (
-      <header className="flex" style={style}>
+      <header className="flex align-center" style={style}>
         <div className="logo">
           <LogoIcon />
           <LogoText />
         </div>
-        <div className="btns">
+        <div className="btns flex">
           <Link to="/login">Log in</Link>
           <Link to="/signup" className="btn">Sign up</Link>
         </div>

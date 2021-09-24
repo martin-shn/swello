@@ -114,11 +114,13 @@
             flex-direction: row;
           }
           img {
+            margin-bottom: 1rem;
+            padding: 0 15px;
             @media (min-width: 768px) {
               flex: 0 0 41.66666667%;
               max-width: 41.66666667%;
+              margin-bottom: 0;
             }
-            padding: 0 15px;
           }
           .txt {
             padding: 0 15px;
@@ -146,7 +148,10 @@
 
   .signup-box {
     .container {
-      padding: 5rem 15px;
+      padding: 0 15px 5rem;
+      @media (min-width: 768px) {
+        padding: 5rem 15px;
+      }
       .form-container {
         padding: 3rem 1rem;
         background-image: url(../../svg/background.svg), linear-gradient(0deg, #4c9aff, #403294 100%);

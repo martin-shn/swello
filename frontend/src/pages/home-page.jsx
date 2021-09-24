@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
+import { storageService } from '../services/async-storage.service';
+import { onLogin } from '../store/actions/user.actions'
 import { HomeFooter } from '../cmps/home-footer';
 import { HomeHeader } from '../cmps/home-header';
 import HeroImg from '../assets/img/hero.png';
@@ -7,10 +10,15 @@ import BoardImg from '../assets/img/board-s.png';
 import ViewImg from '../assets/svg/view.svg';
 import CardImg from '../assets/svg/card-back.svg'
 
-export class HomePage extends React.Component {
+export class _HomePage extends React.Component {
   state = {
     userEmail: ''
   }
+
+  async componentDidMount() {
+    await storageService.init();
+  }
+
   handleChange = ({ target }) => {
     this.setState({ userEmail: target.value })
   }
@@ -20,6 +28,11 @@ export class HomePage extends React.Component {
     sessionStorage.setItem('userEmail', userEmail)
     this.props.history.push('/signup')
   }
+
+  onGetStarted = () => {
+    this.props.onLogin({ username: 'guest@guest.com', password: '1234' }, (err) => { console.log(err) }, this.props.history)
+  }
+
   render() {
     const { userEmail } = this.state;
     return (
@@ -31,7 +44,7 @@ export class HomePage extends React.Component {
               <h1>Swello helps teams move work forward.</h1>
               <p>Collaborate, manage projects, and reach new productivity peaks.
                 From high rises to the home office, the way your team works is unique—accomplish it all with Swello.</p>
-              <Link to="/board" className="btn">Get Started-it's free!</Link>
+              <Link to="/" className="btn" onClick={this.onGetStarted}>Get Started-it's free!</Link>
             </div>
             <img src={HeroImg} alt="hero" />
           </div>
@@ -42,7 +55,7 @@ export class HomePage extends React.Component {
               <h2>It’s more than work. It’s a way of working together.</h2>
               <p>Start with a Sweelo board, lists, and cards. Customize and expand with more features as your teamwork grows.
                 Manage projects, organize tasks, and build team spirit—all in one place.</p>
-              <p><Link to="/board" className="btn">Start doing <span>→</span></Link></p>
+              <p><Link to="/board">Start doing <span>→</span></Link></p>
             </div>
             <img src={BoardImg} alt="board" />
           </div>
@@ -93,3 +106,9 @@ export class HomePage extends React.Component {
     );
   }
 }
+
+const mapDispatchToProps = {
+  onLogin
+}
+
+export const HomePage = connect(null, mapDispatchToProps)(_HomePage)

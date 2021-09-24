@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Avatar } from '@mui/material';
 import { ReactComponent as ArrowDownIcon } from '../assets/svg/arrow-down.svg';
 import { ReactComponent as NotificationsIcon } from '../assets/svg/notifications.svg';
@@ -16,9 +17,9 @@ export class AppHeader extends Component {
           'app-header flex align-center full with-main-layout' +
           (isUserBoardsPage ? ' user-boards-header' : '')
         }>
-        <div>
+        <Link to="/board">
           <img className="logo" alt="swello" />
-        </div>
+        </Link>
         <div className="actions">
           <button>
             <span>Boards</span>

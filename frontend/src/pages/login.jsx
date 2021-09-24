@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { onLogin } from '../store/user.actions'
+import { onLogin } from '../store/actions/user.actions'
 import { HomeFooter } from '../cmps/home-footer'
 import { ReactComponent as FlatIcon } from '../assets/svg/flat-icon.svg';
 import { ReactComponent as GoogleIcon } from '../assets/svg/google-icon.svg';
