@@ -24,7 +24,6 @@
   height: 100vh;
   display: grid;
   grid-template-columns: 0 1fr 0;
-  row-gap: 10px;
   column-gap: 8px;
   grid-template-rows: auto auto 1fr;
   > * {

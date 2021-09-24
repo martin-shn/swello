@@ -15,18 +15,17 @@ export class _BoardPage extends Component {
     activeListId: null, // only one add-card-to-list form can be active at all times.
     popoverListId: null, // only one popover can be active at all times
     isAddingList: false,
-    board: null
+    board: null,
   };
 
   async componentDidMount() {
     const board = await boardService.getById(this.props.match.params.boardId);
     if (!board) this.props.history.replace('/board');
-    this.setState({ board })
+    this.setState({ board });
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.board !== this.state.board) {
-
     }
   }
 
@@ -46,34 +45,29 @@ export class _BoardPage extends Component {
     const list = { id, title, cards: [], style: {} };
     const updatedBoard = { ...board, lists: [...board.lists, list] };
     this.setState({ board: updatedBoard, isAddingList: false }, () => {
-      this.onUpdateBoard()
-      ev.target.reset()
-    })
+      this.onUpdateBoard();
+      ev.target.reset();
+    });
   };
 
-  onUpdateTitle = (title) => {
-    this.setState({ board: { ...this.state.board, title } }, this.onUpdateBoard)
-  }
+  onUpdateTitle = title => {
+    this.setState({ board: { ...this.state.board, title } }, this.onUpdateBoard);
+  };
 
   onTogglePopover = listId => {
     this.setState({ popoverListId: listId });
   };
 
-  onListUpdated = (updatedList) => {
-    const updatedBoard = { ...this.state.board, lists: this.state.board.lists.map(list => list.id === updatedList.id ? updatedList : list) }
-    this.setState({ board: updatedBoard }, this.onUpdateBoard)
-  }
+  onListUpdated = updatedList => {
+    const updatedBoard = {
+      ...this.state.board,
+      lists: this.state.board.lists.map(list => (list.id === updatedList.id ? updatedList : list)),
+    };
+    this.setState({ board: updatedBoard }, this.onUpdateBoard);
+  };
 
   onUpdateBoard = () => {
     this.props.updateBoard(this.state.board);
-  };
-
-  onUpdateList = listToUpdate => {
-    const { board } = this.props;
-    const updatedLists = board.lists.map(list =>
-      list.id === listToUpdate.id ? listToUpdate : list
-    );
-    this.onUpdateBoard({ lists: updatedLists });
   };
 
   // TODO: add dynamic text color using contrast-js
@@ -103,7 +97,7 @@ export class _BoardPage extends Component {
           isAddingList={isAddingList}
           onAddingList={this.onAddingList}
           onAddList={this.onAddList}
-          onUpdateList={this.onUpdateList}
+          onListUpdated={this.onListUpdated}
         />
       </main>
     );

@@ -8,17 +8,25 @@ import { utilService } from '../services/util.service';
 import { CardList } from './card-list';
 
 export class ListPreview extends Component {
+  state = { list: this.props.list };
+
   onAddCard = ev => {
     ev.preventDefault();
-    const { list } = this.props;
+    const { list } = this.state;
     const title = ev.target.title.value;
     const card = {
       id: utilService.makeId(),
       title,
     };
-    const updatedList = { ...list, cards: [...list.cards, card] };
-    this.props.onUpdateList(updatedList);
-    this.props.onAddingCard(false);
+    this.setState(
+      prevState => ({
+        list: { ...prevState.list, cards: [...prevState.list.cards, card] },
+      }),
+      () => {
+        this.props.onListUpdated(this.state.list);
+        this.props.onAddingCard(false);
+      }
+    );
   };
 
   render() {

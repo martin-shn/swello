@@ -7,7 +7,7 @@ import { Avatar } from '@mui/material';
 export const TopPanel = props => {
   const { title, members, onUpdateTitle } = props;
   return (
-    <section className="top-panel flex space-between">
+    <section className="top-panel full flex space-between">
       <div className="flex align-center">
         <button>
           <BtnBoardIcon />

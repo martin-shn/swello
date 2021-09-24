@@ -11,10 +11,10 @@ export const ListAll = props => {
     isAddingList,
     onAddingList,
     onAddList,
-    onUpdateList,
+    onListUpdated,
   } = props;
   return (
-    <section className="list-all flex">
+    <section className="list-all flex full with-main-layout">
       {lists.map(list => (
         <ListPreview
           key={list.id}
@@ -23,7 +23,7 @@ export const ListAll = props => {
           isPopoverOpen={popoverListId === list.id}
           onAddingCard={onAddingCard}
           onTogglePopover={onTogglePopover}
-          onUpdateList={onUpdateList}
+          onListUpdated={onListUpdated}
         />
       ))}
       <ListAdd isAddingList={isAddingList} onAddingList={onAddingList} onAddList={onAddList} />
