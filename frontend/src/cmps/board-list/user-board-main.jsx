@@ -29,9 +29,9 @@ class _UserBoardMain extends React.Component {
         {showStarred && <h3 className='star'>Starred boards</h3>}
         {showStarred && <BoardList boards={boards.filter(board => user.starredBoardsIds.includes(board._id))} setShowStarred={(this.setShowStarred)} isStarred />}
         <h3 className="your-boards">YOUR BOARDS</h3>
-        <BoardList boards={boards.filter(board => board.createdBy._id === user._id)} isAdd setShowStarred={this.setShowStarred} />
+        <BoardList boards={boards.filter(board => board.createdBy._id === user._id && !user.starredBoardsIds.includes(board._id))} isAdd setShowStarred={this.setShowStarred} />
         <h3 className="guest-boards">GUEST BOARDS</h3>
-        <BoardList boards={boards.filter(board => board.members.some(member => member._id === user._id))} setShowStarred={this.setShowStarred} />
+        <BoardList boards={boards.filter(board => board.members.some(member => member._id === user._id) && !user.starredBoardsIds.includes(board._id))} setShowStarred={this.setShowStarred} />
       </section>
     );
   }
