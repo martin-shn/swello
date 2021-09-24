@@ -12,11 +12,11 @@ export const ListAdd = props => {
         </div>
       )}
       {isAddingList && (
-        <form onSubmit={onAddList}>
+        <form onSubmit={onAddList} className="flex column">
           <div>
             <input name="title" placeholder="Enter list title..." />
           </div>
-          <div className="flex align-center" style={{ gap: '10px' }}>
+          <div className="add-controls flex align-center" style={{ gap: '10px' }}>
             <button className="btn-add">Add List</button>
             <CloseIcon
               style={{ width: '25px', height: '25px', cursor: 'pointer' }}
