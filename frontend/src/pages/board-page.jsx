@@ -6,24 +6,15 @@ import { TopPanel } from '../cmps/top-panel';
 import { storageService } from '../services/async-storage.service';
 import { loadBoard, updateBoard } from '../store/actions/board.actions';
 import { PopoverScreen } from '../cmps/popover-screen';
+import { utilService } from '../services/util.service';
 
 const DUMMY_BG =
   'https://trello-backgrounds.s3.amazonaws.com/5f52ac04a60f498ce74a6b64/1280x856/fa5aaef20b1be05b0c9cf24debcad762/hero7.jpg';
-const DUMMY_LISTS = [
-  { _id: 'l1' },
-  { _id: 'l2' },
-  { _id: 'l3' },
-  { _id: 'l4' },
-  { _id: 'l5' },
-  { _id: 'l6' },
-  { _id: 'l7' },
-  { _id: 'l8' },
-  { _id: 'l9' },
-];
 export class _BoardPage extends Component {
   state = {
     activeListId: null, // only one add-card-to-list form can be active at all times.
-    popoverListId: null,
+    popoverListId: null, // only one popover can be active at all times
+    isAddingList: false,
   };
 
   async componentDidMount() {
@@ -35,23 +26,43 @@ export class _BoardPage extends Component {
     this.setState({ activeListId: listId });
   };
 
+  onAddingList = isAddingList => {
+    console.log('isAddingList', isAddingList);
+    this.setState({ isAddingList });
+  };
+
+  onAddList = ev => {
+    ev.preventDefault();
+    const { board } = this.props;
+    const title = ev.target.title.value;
+    const id = utilService.makeId();
+    const list = { id, title, tasks: [], style: {} };
+    const updatedBoard = { ...board, lists: [...board.lists, list] };
+    this.props.updateBoard(updatedBoard);
+  };
+
   onTogglePopover = listId => {
     this.setState({ popoverListId: listId });
   };
 
   onUpdateBoard = update => {
     const { board } = this.props;
-    const updateBoard = { ...board, ...update };
-    this.props.updateBoard(updateBoard);
+    const updatedBoard = { ...board, ...update };
+    this.props.updateBoard(updatedBoard);
   };
 
   // TODO: add dynamic text color using contrast-js
   render() {
     if (!this.props.board) return <div>Loading</div>;
-    const { activeListId, popoverListId } = this.state;
-    const { title, members } = this.props.board;
+    const { activeListId, popoverListId, isAddingList } = this.state;
+    const { title, members, lists, style } = this.props.board;
     return (
-      <main className="board-page" style={{ backgroundImage: `url('${DUMMY_BG}')` }}>
+      <main
+        className="board-page"
+        style={{
+          backgroundImage: style.imgUrl || 'none',
+          backgroundColor: style.bgColor || 'unset',
+        }}>
         <AppHeader />
         <TopPanel title={title} members={members} onUpdateBoard={this.onUpdateBoard} />
         <PopoverScreen
@@ -59,11 +70,14 @@ export class _BoardPage extends Component {
           onTogglePopover={this.onTogglePopover}
         />
         <ListAll
-          lists={DUMMY_LISTS}
+          lists={lists}
           activeListId={activeListId}
           popoverListId={popoverListId}
           onTogglePopover={this.onTogglePopover}
           onAddingCard={this.onAddingCard}
+          isAddingList={isAddingList}
+          onAddingList={this.onAddingList}
+          onAddList={this.onAddList}
         />
       </main>
     );
