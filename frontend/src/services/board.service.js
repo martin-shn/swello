@@ -1,6 +1,7 @@
 import { storageService } from './async-storage.service';
 import { userService } from './user.service';
 import { socketService, SOCKET_EVENT_REVIEW_ADDED } from './socket.service';
+import { utilService } from './util.service';
 
 export const boardService = {
   add,
@@ -33,7 +34,14 @@ function remove(boardId) {
 async function add(board) {
   // const addedBoard = await httpService.post(`board`, board)
 
+  board._id = utilService.makeId();
   board.createdBy = userService.getLoggedinUser();
+  if (!board.createdBy) {
+    board.createdBy = await userService.getById('u101');
+    delete board.createdBy.password
+    delete board.createdBy.mentions
+  }
+  board.members.push(board.createdBy)
   board.createdAt = Date.now();
   const addedBoard = storageService.post('board', board);
 

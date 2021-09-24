@@ -15,11 +15,12 @@ async function init() {
   const boards = await query('board');
   const users = await query('user');
   if (!boards.length) {
-    postMany('board', boardData);
+    await postMany('board', boardData);
   }
   if (!users.length) {
-    postMany('user', userData);
+    await postMany('user', userData);
   }
+  return Promise.resolve()
 }
 
 function query(entityType, filterBy, delay = 1200) {

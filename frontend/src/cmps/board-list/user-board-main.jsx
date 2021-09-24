@@ -1,11 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { loadBoards } from '../../store/actions/board.actions';
 import { BoardList } from './board-list';
 
 import { storageService } from '../../services/async-storage.service';
 import { boardService } from '../../services/board.service';
 import { userService } from '../../services/user.service';
 
-export class UserBoardMain extends React.Component {
+class _UserBoardMain extends React.Component {
     state = {
       showStarred: false,
       boards: null,
@@ -13,15 +15,10 @@ export class UserBoardMain extends React.Component {
     };
 
     async componentDidMount() {
-        storageService.init();
         // const user = userService.getLoggedinUser();
-        // if (!user) this.props.history.push('/')
-        const user = {
-            '_id': 'u101',
-            'fullname': 'Guest',
-            'username': 'guest@guest.com',
-        };
-        const boards = await boardService.query({ byUserId: user._id })
+        const user = this.props.user;
+        await this.props.loadBoards({ byUserId: user._id })
+        const boards = this.props.boards
         this.setState({ boards, user }, async () => {
             const fullUser = await userService.getById(this.state.user._id)
             const starredBoards = fullUser.starredBoards.map(starredBoard=>starredBoard.boardId)
@@ -51,3 +48,17 @@ export class UserBoardMain extends React.Component {
         );
     }
 }
+
+
+const mapDispatchToProps = {
+  loadBoards,
+};
+
+const mapStateToProps = state => {
+  return {
+    user: state.userModule.user,
+    boards: state.boardModule.boards
+  };
+};
+
+export const UserBoardMain = connect(mapStateToProps, mapDispatchToProps)(_UserBoardMain);

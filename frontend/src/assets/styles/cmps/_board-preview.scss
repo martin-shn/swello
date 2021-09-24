@@ -10,6 +10,7 @@
     padding: rem(8px);
     position: relative;
     text-decoration: none;
+    width: 100%;
     // height: 80px;
 
     & > span:first-child {
@@ -34,6 +35,9 @@
         position: relative;
         & span {
             font-weight: 400;
+            width: calc(100% - 28px);
+            overflow: hidden;
+            white-space: nowrap;
         }
     }
     &.new-board > div {

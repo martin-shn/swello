@@ -1,9 +1,9 @@
 import { boardService } from '../../services/board.service';
 
-export function loadBoards() {
+export function loadBoards(filterBy) {
   try {
     return async dispatch => {
-      await boardService.query();
+      await boardService.query(filterBy);
     };
   } catch (err) {
     console.error(err);
@@ -26,6 +26,18 @@ export function updateBoard(updatedBoard) {
     try {
       const board = await boardService.update(updatedBoard);
       dispatch({ type: 'SET_BOARD', board });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+}
+
+export function createBoard(newBoard) {
+  return async dispatch => {
+    try {
+      const board = await boardService.add(newBoard);
+      dispatch({ type: 'SET_BOARD', board });
+      return board;
     } catch (err) {
       console.error(err);
     }
