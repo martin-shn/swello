@@ -38,9 +38,14 @@ export class _BoardPage extends Component {
   render() {
     if (!this.props.board) return <div>Loading</div>;
     const { activeListId, popoverListId } = this.state;
-    const { title, members, lists } = this.props.board;
+    const { title, members, lists, style } = this.props.board;
     return (
-      <main className="board-page" style={{ backgroundImage: `url('${DUMMY_BG}')` }}>
+      <main
+        className="board-page"
+        style={{
+          backgroundImage: style.imgUrl || 'none',
+          backgroundColor: style.bgColor || 'unset',
+        }}>
         <AppHeader />
         <TopPanel title={title} members={members} onUpdateBoard={this.onUpdateBoard} />
         <PopoverScreen

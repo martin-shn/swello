@@ -7,14 +7,14 @@
     "imgUrl": "http://some-img.jpg",
     "mentions": [
       {
-        "_id": "m101",
+        "id": "m101",
         "boardId": "m101",
         "taskId": "t101"
       }
     ],
     "starredBoards": [
       {
-        "_id": "sb101",
+        "id": "sb101",
         "boardId": "WMhuB"
       }
     ]
@@ -27,14 +27,14 @@
     "imgUrl": "http://some-img.jpg",
     "mentions": [
       {
-        "_id": "m101",
+        "id": "m101",
         "boardId": "m101",
         "taskId": "t101"
       }
     ],
     "starredBoards": [
       {
-        "_id": "sb101",
+        "id": "sb101",
         "boardId": "b101"
       }
     ]
@@ -47,14 +47,14 @@
     "imgUrl": "http://some-img.jpg",
     "mentions": [
       {
-        "_id": "m101",
+        "id": "m101",
         "boardId": "m101",
         "taskId": "t101"
       }
     ],
     "starredBoards": [
       {
-        "_id": "sb101",
+        "id": "sb101",
         "boardId": "m101"
       }
     ]
@@ -67,14 +67,14 @@
     "imgUrl": "http://some-img.jpg",
     "mentions": [
       {
-        "_id": "m101",
+        "id": "m101",
         "boardId": "m101",
         "taskId": "t101"
       }
     ],
     "starredBoards": [
       {
-        "_id": "sb101",
+        "id": "sb101",
         "boardId": "m101"
       }
     ]

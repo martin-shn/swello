@@ -13,12 +13,12 @@
     },
     "labels": [
       {
-        "_id": "l101",
+        "id": "l101",
         "title": "Done",
         "color": "#61bd4f"
       },
       {
-        "_id": "l102",
+        "id": "l102",
         "title": "TBD",
         "color": "#21dd40"
       }
@@ -37,18 +37,18 @@
     ],
     "lists": [
       {
-        "_id": "g101",
+        "id": "g101",
         "title": "TODO list",
         "tasks": [
           {
-            "_id": "c101",
+            "id": "c101",
             "title": "Replace logo",
             "style": {
               "bgColor": "#aa0055"
             }
           },
           {
-            "_id": "c102",
+            "id": "c102",
             "title": "Add Samples"
           }
         ],
@@ -57,7 +57,7 @@
     ],
     "activities": [
       {
-        "_id": "a101",
+        "id": "a101",
         "txt": "Changed Color",
         "createdAt": 154514,
         "byMember": {
@@ -66,7 +66,7 @@
           "imgUrl": "http://some-img"
         },
         "task": {
-          "_id": "c101",
+          "id": "c101",
           "title": "Replace Logo"
         }
       }
@@ -84,12 +84,12 @@
     "style": {},
     "labels": [
       {
-        "_id": "l101",
+        "id": "l101",
         "title": "Done",
         "color": "#61bd4f"
       },
       {
-        "_id": "l102",
+        "id": "l102",
         "title": "Maybe",
         "color": "#21004f"
       }
@@ -108,35 +108,35 @@
     ],
     "lists": [
       {
-        "_id": "g101",
+        "id": "g101",
         "title": "Group 1",
         "tasks": [
           {
-            "_id": "c101",
+            "id": "c101",
             "title": "Replace logo"
           },
           {
-            "_id": "c102",
+            "id": "c102",
             "title": "Add Samples"
           }
         ],
         "style": {}
       },
       {
-        "_id": "g102",
+        "id": "g102",
         "title": "Group 2",
         "tasks": [
           {
-            "_id": "c103",
+            "id": "c103",
             "title": "Do that"
           },
           {
-            "_id": "c104",
+            "id": "c104",
             "title": "Help me",
             "description": "description",
             "comments": [
               {
-                "_id": "ZdPnm",
+                "id": "ZdPnm",
                 "txt": "also @yaronb please CR this",
                 "createdAt": 1590999817436.0,
                 "byMember": {
@@ -148,11 +148,11 @@
             ],
             "checklists": [
               {
-                "_id": "YEhmF",
+                "id": "YEhmF",
                 "title": "Checklist",
                 "todos": [
                   {
-                    "_id": "212jX",
+                    "id": "212jX",
                     "title": "To Do 1",
                     "isDone": false
                   }
@@ -186,7 +186,7 @@
     ],
     "activities": [
       {
-        "_id": "a101",
+        "id": "a101",
         "txt": "Changed Color",
         "createdAt": 154514,
         "byMember": {
@@ -195,7 +195,7 @@
           "imgUrl": "http://some-img"
         },
         "task": {
-          "_id": "c101",
+          "id": "c101",
           "title": "Replace Logo"
         }
       }

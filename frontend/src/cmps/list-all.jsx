@@ -2,6 +2,7 @@ import { ListPreview } from './list-preview';
 
 export const ListAll = props => {
   const { lists, onAddingCard, activeListId, popoverListId, onTogglePopover } = props;
+  console.log(lists);
   return (
     <section className="list-all flex">
       {lists.map(list => (
