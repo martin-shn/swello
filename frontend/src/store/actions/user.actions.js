@@ -16,13 +16,15 @@ export function loadUsers() {
 }
 
 export function onUpdateUser(user) {
+    const currUser = userService.getLoggedinUser()
     return async dispatch => {
         try {
+            dispatch({ type: 'SET_USER', user })
             const updatedUser = await userService.update(user);
-            dispatch({ type: 'SET_USER', user: updatedUser })
             return updatedUser
         } catch (err) {
-            console.log(err);
+            dispatch({ type: 'SET_USER', user: currUser })
+            return currUser;
         }
     }
 }
