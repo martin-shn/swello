@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { AppHeader } from '../cmps/app-header';
 import { ListAll } from '../cmps/list-all';
 import { TopPanel } from '../cmps/top-panel';
-import { storageService } from '../services/async-storage.service';
-import { loadBoard, updateBoard } from '../store/actions/board.actions';
+import { boardService } from '../services/board.service';
+import { updateBoard } from '../store/actions/board.actions';
 import { PopoverScreen } from '../cmps/popover-screen';
 import { utilService } from '../services/util.service';
 
@@ -15,11 +15,19 @@ export class _BoardPage extends Component {
     activeListId: null, // only one add-card-to-list form can be active at all times.
     popoverListId: null, // only one popover can be active at all times
     isAddingList: false,
+    board: null
   };
 
   async componentDidMount() {
-    await this.props.loadBoard(this.props.match.params.boardId);
-    if (!this.props.board) this.props.history.replace('/board');
+    const board = await boardService.getById(this.props.match.params.boardId);
+    if (!board) this.props.history.replace('/board');
+    this.setState({ board })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.board !== this.state.board) {
+
+    }
   }
 
   onAddingCard = listId => {
@@ -27,35 +35,44 @@ export class _BoardPage extends Component {
   };
 
   onAddingList = isAddingList => {
-    console.log('isAddingList', isAddingList);
     this.setState({ isAddingList });
   };
 
   onAddList = ev => {
     ev.preventDefault();
-    const { board } = this.props;
+    const { board } = this.state;
     const title = ev.target.title.value;
     const id = utilService.makeId();
     const list = { id, title, tasks: [], style: {} };
     const updatedBoard = { ...board, lists: [...board.lists, list] };
-    this.props.updateBoard(updatedBoard);
+    this.setState({ board: updatedBoard, isAddingList: false }, () => {
+      this.onUpdateBoard()
+      ev.target.reset()
+    })
   };
+
+  onUpdateTitle = (title) => {
+    this.setState({ board: { ...this.state.board, title } }, this.onUpdateBoard)
+  }
 
   onTogglePopover = listId => {
     this.setState({ popoverListId: listId });
   };
 
-  onUpdateBoard = update => {
-    const { board } = this.props;
-    const updatedBoard = { ...board, ...update };
-    this.props.updateBoard(updatedBoard);
+  onListUpdated = (updatedList) => {
+    const updatedBoard = { ...this.state.board, lists: this.state.board.lists.map(list => list.id === updatedList.id ? updatedList : list) }
+    this.setState({ board: updatedBoard }, this.onUpdateBoard)
+  }
+
+  onUpdateBoard = () => {
+    this.props.updateBoard(this.state.board);
   };
 
   // TODO: add dynamic text color using contrast-js
   render() {
-    if (!this.props.board) return <div>Loading</div>;
+    if (!this.state.board) return <div>Loading</div>;
     const { activeListId, popoverListId, isAddingList } = this.state;
-    const { title, members, lists, style } = this.props.board;
+    const { title, members, lists, style } = this.state.board;
     return (
       <main
         className="board-page"
@@ -64,7 +81,7 @@ export class _BoardPage extends Component {
           backgroundColor: style.bgColor || 'unset',
         }}>
         <AppHeader />
-        <TopPanel title={title} members={members} onUpdateBoard={this.onUpdateBoard} />
+        <TopPanel title={title} members={members} onUpdateTitle={this.onUpdateTitle} />
         <PopoverScreen
           isOpen={popoverListId ? true : false}
           onTogglePopover={this.onTogglePopover}
@@ -85,7 +102,6 @@ export class _BoardPage extends Component {
 }
 
 const mapDispatchToProps = {
-  loadBoard,
   updateBoard,
 };
 
