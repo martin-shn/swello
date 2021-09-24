@@ -1,20 +1,30 @@
+import { ListAdd } from './list-add';
 import { ListPreview } from './list-preview';
 
 export const ListAll = props => {
-  const { lists, onAddingCard, activeListId, popoverListId, onTogglePopover } = props;
-  console.log(lists);
+  const {
+    lists,
+    onAddingCard,
+    activeListId,
+    popoverListId,
+    onTogglePopover,
+    isAddingList,
+    onAddingList,
+    onAddList,
+  } = props;
   return (
     <section className="list-all flex">
       {lists.map(list => (
         <ListPreview
-          key={list._id}
+          key={list.id}
           list={list}
-          isAddingCard={activeListId === list._id}
-          isPopoverOpen={popoverListId === list._id}
+          isAddingCard={activeListId === list.id}
+          isPopoverOpen={popoverListId === list.id}
           onAddingCard={onAddingCard}
           onTogglePopover={onTogglePopover}
         />
       ))}
+      <ListAdd isAddingList={isAddingList} onAddingList={onAddingList} onAddList={onAddList} />
     </section>
   );
 };

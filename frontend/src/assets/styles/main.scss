@@ -1,40 +1,38 @@
 // Setup
-@import "setup/variables";
-@import "setup/functions";
-@import "setup/mixins";
-@import "setup/typography";
+@import 'setup/variables';
+@import 'setup/functions';
+@import 'setup/mixins';
+@import 'setup/typography';
 
 // Basics
-@import "basics/helpers";
-@import "basics/layout";
-@import "basics/base";
-@import "basics/links";
-@import "basics/forms";
+@import 'basics/helpers';
+@import 'basics/layout';
+@import 'basics/base';
+@import 'basics/links';
+@import 'basics/forms';
 
 // Components
-@import "cmps/home-header";
-@import "cmps/home-footer";
-@import "cmps/board-list";
-@import "cmps/board-preview";
-@import "cmps/top-panel";
-@import "cmps/list-preview";
-@import "cmps/list-all";
-@import "cmps/card-preview";
-@import "cmps/popover";
-@import 'cmps/home-header';
-@import 'cmps/home-footer';
+// Board Page
 @import 'cmps/board-list';
 @import 'cmps/board-preview';
 @import 'cmps/top-panel';
 @import 'cmps/list-preview';
 @import 'cmps/list-all';
 @import 'cmps/card-preview';
-@import 'cmps/popover';
+@import 'cmps/list-add';
 @import 'cmps/app-header';
+
+//
+@import 'cmps/home-header';
+@import 'cmps/home-footer';
+@import 'cmps/popover';
+@import 'cmps/home-header';
+@import 'cmps/home-footer';
+@import 'cmps/popover';
 @import 'cmps/modal-window';
 
 // Pages
-@import "pages/home-page";
-@import "pages/board-page";
-@import "pages/user-boards";
-@import "pages/login-signup";
+@import 'pages/home-page';
+@import 'pages/board-page';
+@import 'pages/user-boards';
+@import 'pages/login-signup';

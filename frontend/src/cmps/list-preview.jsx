@@ -10,14 +10,19 @@ export function ListPreview(props) {
   return (
     <div className="list-preview flex column">
       <div className="list-header flex space-between">
-        <h2 className="list-title content-editable" contentEditable suppressContentEditableWarning={true}>
-          List Title
+        <h2
+          className="list-title content-editable"
+          contentEditable
+          suppressContentEditableWarning={true}>
+          {list.title}
         </h2>
-        <button className="btn-more" onClick={() => onTogglePopover(isPopoverOpen ? null : list._id)}>
+        <button
+          className="btn-more"
+          onClick={() => onTogglePopover(isPopoverOpen ? null : list.id)}>
           <MoreHorizIcon />
           <Popover isVisible={isPopoverOpen}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. At a nihil omnis ex iste,
-            sint enim molestias ab laudantium odio assumenda, tempora aut atque provident. Optio
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. At a nihil omnis ex iste, sint
+            enim molestias ab laudantium odio assumenda, tempora aut atque provident. Optio
             voluptatem ipsa neque iste!
           </Popover>
         </button>
@@ -27,7 +32,7 @@ export function ListPreview(props) {
       </div>
       <div className="add-card">
         {!isAddingCard && (
-          <button className="content btn-adding" onClick={() => onAddingCard(list._id)}>
+          <button className="content btn-adding" onClick={() => onAddingCard(list.id)}>
             <AddIcon />
             <span>Add a card</span>
           </button>
@@ -45,6 +50,6 @@ export function ListPreview(props) {
           </>
         )}
       </div>
-    </div >
+    </div>
   );
 }
