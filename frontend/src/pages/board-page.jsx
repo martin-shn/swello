@@ -9,17 +9,6 @@ import { PopoverScreen } from '../cmps/popover-screen';
 
 const DUMMY_BG =
   'https://trello-backgrounds.s3.amazonaws.com/5f52ac04a60f498ce74a6b64/1280x856/fa5aaef20b1be05b0c9cf24debcad762/hero7.jpg';
-const DUMMY_LISTS = [
-  { _id: 'l1' },
-  { _id: 'l2' },
-  { _id: 'l3' },
-  { _id: 'l4' },
-  { _id: 'l5' },
-  { _id: 'l6' },
-  { _id: 'l7' },
-  { _id: 'l8' },
-  { _id: 'l9' },
-];
 export class _BoardPage extends Component {
   state = {
     activeListId: null, // only one add-card-to-list form can be active at all times.
@@ -49,7 +38,7 @@ export class _BoardPage extends Component {
   render() {
     if (!this.props.board) return <div>Loading</div>;
     const { activeListId, popoverListId } = this.state;
-    const { title, members } = this.props.board;
+    const { title, members, lists } = this.props.board;
     return (
       <main className="board-page" style={{ backgroundImage: `url('${DUMMY_BG}')` }}>
         <AppHeader />
@@ -59,7 +48,7 @@ export class _BoardPage extends Component {
           onTogglePopover={this.onTogglePopover}
         />
         <ListAll
-          lists={DUMMY_LISTS}
+          lists={lists}
           activeListId={activeListId}
           popoverListId={popoverListId}
           onTogglePopover={this.onTogglePopover}

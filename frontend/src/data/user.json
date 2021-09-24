@@ -1,66 +1,82 @@
 [
-    {
+  {
     "_id": "u101",
     "fullname": "Guest",
     "username": "guest@guest.com",
     "password": "1234",
     "imgUrl": "http://some-img.jpg",
-    "mentions": [{
-        "id": "m101",
+    "mentions": [
+      {
+        "_id": "m101",
         "boardId": "m101",
         "taskId": "t101"
-    }],
-    "starredBoards":[{
-        "id": "sb101",
-        "boardId":"WMhuB"
-    }]
-    },
-    {
+      }
+    ],
+    "starredBoards": [
+      {
+        "_id": "sb101",
+        "boardId": "WMhuB"
+      }
+    ]
+  },
+  {
     "_id": "u102",
     "fullname": "Martin",
     "username": "martin@guest.com",
     "password": "1234",
     "imgUrl": "http://some-img.jpg",
-    "mentions": [{
-        "id": "m101",
+    "mentions": [
+      {
+        "_id": "m101",
         "boardId": "m101",
         "taskId": "t101"
-    }],
-    "starredBoards":[{
-        "id": "sb101",
-        "boardId":"b101"
-    }]
-    },
-    {
+      }
+    ],
+    "starredBoards": [
+      {
+        "_id": "sb101",
+        "boardId": "b101"
+      }
+    ]
+  },
+  {
     "_id": "u103",
     "fullname": "Aviv",
     "username": "aviv@guest.com",
     "password": "1234",
     "imgUrl": "http://some-img.jpg",
-    "mentions": [{
-        "id": "m101",
+    "mentions": [
+      {
+        "_id": "m101",
         "boardId": "m101",
         "taskId": "t101"
-    }],
-    "starredBoards":[{
-        "id": "sb101",
-        "boardId":"m101"
-    }]
-    },
-    {
+      }
+    ],
+    "starredBoards": [
+      {
+        "_id": "sb101",
+        "boardId": "m101"
+      }
+    ]
+  },
+  {
     "_id": "u104",
     "fullname": "Ziv",
     "username": "ziv@guest.com",
     "password": "1234",
     "imgUrl": "http://some-img.jpg",
-    "mentions": [{
-        "id": "m101",
+    "mentions": [
+      {
+        "_id": "m101",
         "boardId": "m101",
         "taskId": "t101"
-    }],
-    "starredBoards":[{
-        "id": "sb101",
-        "boardId":"m101"
-    }]
-    }
+      }
+    ],
+    "starredBoards": [
+      {
+        "_id": "sb101",
+        "boardId": "m101"
+      }
+    ]
+  }
 ]
