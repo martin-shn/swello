@@ -36,7 +36,7 @@ export class _BoardPage extends Component {
     const { board } = this.props;
     const title = ev.target.title.value;
     const id = utilService.makeId();
-    const list = { id, title, tasks: [], style: {} };
+    const list = { id, title, cards: [], style: {} };
     const updatedBoard = { ...board, lists: [...board.lists, list] };
     this.props.updateBoard(updatedBoard);
   };
@@ -49,6 +49,14 @@ export class _BoardPage extends Component {
     const { board } = this.props;
     const updatedBoard = { ...board, ...update };
     this.props.updateBoard(updatedBoard);
+  };
+
+  onUpdateList = listToUpdate => {
+    const { board } = this.props;
+    const updatedLists = board.lists.map(list =>
+      list.id === listToUpdate.id ? listToUpdate : list
+    );
+    this.onUpdateBoard({ lists: updatedLists });
   };
 
   // TODO: add dynamic text color using contrast-js
@@ -78,6 +86,7 @@ export class _BoardPage extends Component {
           isAddingList={isAddingList}
           onAddingList={this.onAddingList}
           onAddList={this.onAddList}
+          onUpdateList={this.onUpdateList}
         />
       </main>
     );

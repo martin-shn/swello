@@ -4,11 +4,21 @@ import AddIcon from '@mui/icons-material/Add';
 import { CardPreview } from './card-preview';
 import { Popover } from './popover';
 import { ReactComponent as CloseIcon } from '../assets/svg/close.svg';
+import { utilService } from '../services/util.service';
+import { CardList } from './card-list';
 
 export class ListPreview extends Component {
   onAddCard = ev => {
     ev.preventDefault();
-    console.log('adding card to list: ', this.props.list);
+    const { list } = this.props;
+    const title = ev.target.title.value;
+    const card = {
+      id: utilService.makeId(),
+      title,
+    };
+    const updatedList = { ...list, cards: [...list.cards, card] };
+    this.props.onUpdateList(updatedList);
+    this.props.onAddingCard(false);
   };
 
   render() {
@@ -33,9 +43,7 @@ export class ListPreview extends Component {
             </Popover>
           </button>
         </div>
-        <div className="list-cards">
-          <CardPreview />
-        </div>
+        {list.cards && <CardList cards={list.cards} />}
         <div className="add-card">
           {!isAddingCard && (
             <button className="content btn-adding" onClick={() => onAddingCard(list.id)}>
@@ -45,13 +53,15 @@ export class ListPreview extends Component {
           )}
           {isAddingCard && (
             <>
-              <textarea placeholder="Enter a title for this card..." />
-              <form className="flex align-center" style={{ gap: '10px' }} onSubmit={this.onAddCard}>
-                <button className="btn-add">Add Card</button>
-                <CloseIcon
-                  style={{ width: '25px', height: '25px', cursor: 'pointer' }}
-                  onClick={() => onAddingCard(false)}
-                />
+              <form onSubmit={this.onAddCard}>
+                <textarea name="title" placeholder="Enter a title for this card..." />
+                <div className="add-controls flex align-center" style={{ gap: '10px' }}>
+                  <button className="btn-add">Add Card</button>
+                  <CloseIcon
+                    style={{ width: '25px', height: '25px', cursor: 'pointer' }}
+                    onClick={() => onAddingCard(false)}
+                  />
+                </div>
               </form>
             </>
           )}

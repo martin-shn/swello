@@ -11,6 +11,7 @@ export const ListAll = props => {
     isAddingList,
     onAddingList,
     onAddList,
+    onUpdateList,
   } = props;
   return (
     <section className="list-all flex">
@@ -22,6 +23,7 @@ export const ListAll = props => {
           isPopoverOpen={popoverListId === list.id}
           onAddingCard={onAddingCard}
           onTogglePopover={onTogglePopover}
+          onUpdateList={onUpdateList}
         />
       ))}
       <ListAdd isAddingList={isAddingList} onAddingList={onAddingList} onAddList={onAddList} />
