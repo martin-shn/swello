@@ -1,5 +1,14 @@
 .react-responsive-modal-modal {
     background-color: transparent;
+    & .react-responsive-modal-closeButton{
+        top: 28px;
+        left: 285px;
+        right: unset;
+        fill: #fff;
+        & svg{
+            transform: scale(0.6);
+        }
+    }
 }
 
 .new-board {
@@ -208,9 +217,9 @@
     transition-property: background-color, border-color, box-shadow;
     transition-timing-function: ease;
     position: absolute;
-    top: 40px;
+    top: 34px;
     left: 30px;
-    max-width: 275px;
+    max-width: 250px;
 
     &:hover {
         background: rgba(255, 255, 255, 0.15) !important;

@@ -43,9 +43,9 @@ export class UserBoardMain extends React.Component {
             <section className='user-boards-main'>
                 {showStarred && <h3 className='star'>Starred boards</h3>}
                 {showStarred && <BoardList boards={boards.filter(board=>board.isStar)} isStarred />}
-                <h3>YOUR BOARDS</h3>
+                <h3 className="your-boards">YOUR BOARDS</h3>
                 <BoardList boards={boards.filter(board=>board.createdBy._id===user._id)} isAdd />
-                <h3>GUEST BOARDS</h3>
+                <h3 className="guest-boards">GUEST BOARDS</h3>
                 <BoardList boards={boards.filter(board=>board.members.some(member=>member._id===user._id))} />
             </section>
         );

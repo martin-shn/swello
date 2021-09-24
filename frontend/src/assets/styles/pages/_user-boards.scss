@@ -51,9 +51,27 @@
         font-size: rem(16px);
         font-weight: 700;
         line-height: rem(24px);
-        margin: rem(20px) 0;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        margin: 0;
+        line-height: 30px;
+        padding: 0 0 11px 0;
+    }
+
+    &>.star::before{
+        font-family: FA-solid;
+        content: '\f005';
+        margin-right: 15px;
+    }
+    & .your-boards::before{
+        font-family: FA-solid;
+        content: '\f007';
+        margin-right: 15px;
+    }
+    & .guest-boards::before{
+        font-family: FA-solid;
+        content: '\f0c0';
+        margin-right: 15px;
     }
 }
