@@ -4,6 +4,7 @@ import { AppHeader } from '../cmps/app-header';
 import { ListAll } from '../cmps/list-all';
 import { TopPanel } from '../cmps/top-panel';
 import { boardService } from '../services/board.service';
+import { showPopover, hidePopover } from '../store/actions/system.actions';
 import { updateBoard, loadBoard } from '../store/actions/board.actions';
 import { PopoverScreen } from '../cmps/popover-screen';
 import { utilService } from '../services/util.service';
@@ -18,7 +19,7 @@ export class _BoardPage extends Component {
       id: null,
       isTopAdd: false,
     },
-    popoverListId: null, // only one popover can be active at all times
+    // popoverListId: null, // only one popover can be active at all times
     isAddingList: false,
   };
 
@@ -105,6 +106,10 @@ export class _BoardPage extends Component {
     this.setState({ board: updatedBoard }, this.onUpdateBoard);
   };
 
+  onTogglePopover = listId => {
+    listId?this.props.showPopover(listId):this.props.hidePopover();
+  }
+    
   onUpdateTitle = title => {
     const { board } = this.props;
     const updatedBoard = { ...board, title };
@@ -124,8 +129,10 @@ export class _BoardPage extends Component {
   // TODO: add dynamic text color using contrast-js
   render() {
     if (!this.props.board) return <CircularProgress />;
-    const { activeList, popoverListId, isAddingList } = this.state;
+    const { activeList, isAddingList, isCardPageOpen } = this.state;
+    const {popoverListId} = this.props;
     const { title, members, lists, style } = this.props.board;
+    
     return (
       <main
         className="board-page"
@@ -136,7 +143,7 @@ export class _BoardPage extends Component {
         <AppHeader />
         <TopPanel title={title} members={members} onUpdateTitle={this.onUpdateTitle} />
         <PopoverScreen
-          isOpen={popoverListId ? true : false}
+          isOpen={popoverListId}
           onTogglePopover={this.onTogglePopover}
         />
         <Route path="/board/:boardId/card/:cardId" component={CardPage} />
@@ -161,12 +168,15 @@ export class _BoardPage extends Component {
 
 const mapDispatchToProps = {
   updateBoard,
+  showPopover,
+  hidePopover,
   loadBoard,
 };
 
 const mapStateToProps = state => {
   return {
     board: state.boardModule.board,
+    popoverListId: state.systemModule.popoverListId,
   };
 };
 

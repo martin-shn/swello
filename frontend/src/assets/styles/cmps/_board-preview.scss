@@ -26,6 +26,10 @@
         transition: opacity 0.15s ease;
     }
 
+    &.bg-color>span:first-child{
+        background-color: unset;
+    }
+
     &:not(.new-board) > div {
         display: flex;
         flex-direction: column;
