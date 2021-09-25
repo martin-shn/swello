@@ -8,6 +8,7 @@ import { CardDescription } from '../cmps/card/card-description';
 import { CardHeader } from '../cmps/card/card-header';
 import { boardService } from '../services/board.service';
 import { CardPopover } from '../cmps/card/card-popover';
+import { CardChecklist } from '../cmps/card/card-checklist';
 
 class _CardPage extends Component {
   state = { card: null, popover: null };
@@ -28,7 +29,7 @@ class _CardPage extends Component {
     this.setState(
       prevState => ({ card: { ...prevState.card, ...data } }),
       async () => {
-        const updatedBoard = boardService.saveCard(board, this.state.card);
+        const updatedBoard = boardService.updateCard(board, this.state.card);
         this.props.updateBoard(updatedBoard);
       }
     );
@@ -40,7 +41,7 @@ class _CardPage extends Component {
 
   render() {
     if (!this.state.card) return <CircularProgress sx={{ position: 'absolute' }} />;
-    const { description, title } = this.state.card;
+    const { description, title, checklist } = this.state.card;
     const { boardId } = this.props.match.params;
     const { popover } = this.state;
     return (
@@ -54,6 +55,7 @@ class _CardPage extends Component {
           <div className="data-and-sidebar flex">
             <main className="card-data">
               <CardDescription description={description} updateField={this.updateField} />
+              <CardChecklist checklist={checklist} />
             </main>
             <aside className="card-sidebar">
               <h3>Add to card</h3>
