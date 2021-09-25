@@ -50,16 +50,7 @@ class _CardPage extends Component {
     const { popoverType, popoverAnchor } = this.state;
     return (
       <Modal open={true} onClose={() => this.props.history.push(`/board/${boardId}`)}>
-        <div
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            fontFamily: 'unset',
-            outline: 'none',
-            fontSize: '14px',
-          }}>
+        <div className="card-page-wrapper">
           {popoverType && popoverAnchor && (
             <CardPopover
               popoverType={popoverType}

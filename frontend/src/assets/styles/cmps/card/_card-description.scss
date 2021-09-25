@@ -2,20 +2,32 @@
   .btn-edit {
     margin-left: 8px;
   }
-  textarea {
-    border-radius: 3px;
-    padding: 8px 12px;
-    width: 100%;
-    resize: none;
-    &:not(:focus) {
+  .description-view {
+    cursor: pointer;
+    white-space: pre;
+    &.empty {
       background-color: #091e420a;
-      box-shadow: none;
-      &::placeholder {
-        color: $clr-default;
+      height: 56px;
+      padding: 8px 12px;
+      &:hover {
+        background-color: #091e4214;
+      }
+      &:active {
+        background-color: #e4f0f6;
+        color: #0079bf;
       }
     }
-    &:focus {
-      background-color: #fff;
-    }
+  }
+
+  textarea,
+  .description-view {
+    padding: 8px 12px;
+  }
+  textarea {
+    border-radius: 3px;
+    width: 100%;
+    resize: none;
+    overflow: hidden;
+    min-height: 108px;
   }
 }
