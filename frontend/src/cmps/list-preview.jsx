@@ -12,14 +12,14 @@ import { CardList } from './card-list';
 export class ListPreview extends Component {
   state = {
     list: this.props.list,
-    popoverPage: 'main'
+    popoverPage: 'main',
   };
 
-  componentDidUpdate = (prevProps) => {
+  componentDidUpdate = prevProps => {
     if (prevProps.isPopoverOpen !== this.props.isPopoverOpen) {
-      this.setState({ popoverPage: 'main' })
+      this.setState({ popoverPage: 'main' });
     }
-  }
+  };
 
   onAddCard = (ev, isTopAdd = false) => {
     ev.preventDefault();
@@ -52,19 +52,22 @@ export class ListPreview extends Component {
   };
 
   onMovePage = page => {
-    this.setState({ popoverPage: page })
-  }
-
-  // onCardUpdated = updatedCard => {
-  //   const updatedList = {
-  //     ...this.state.list,
-  //     cards: this.state.list.cards.map(card => (card.id === updatedCard.id ? updatedCard : card)),
-  //   };
-  //   this.setState({ list: updatedList }, this.props.onListUpdated);
-  // };
+    this.setState({ popoverPage: page });
+  };
 
   render() {
-    const { list, lists, isAddingCard, onAddingCard, onAddingTopCard, isPopoverOpen, onTogglePopover, isTopAdd, onCopyList, onMoveList } = this.props;
+    const {
+      list,
+      lists,
+      isAddingCard,
+      onAddingCard,
+      onAddingTopCard,
+      isPopoverOpen,
+      onTogglePopover,
+      isTopAdd,
+      onCopyList,
+      onMoveList,
+    } = this.props;
     const { popoverPage } = this.state;
     return (
       <div className="list-preview flex column">
@@ -82,15 +85,39 @@ export class ListPreview extends Component {
           </button>
         </div>
         <Popover isVisible={isPopoverOpen}>
-          {popoverPage === 'main' && <MainPage onMovePage={this.onMovePage} list={list} onTogglePopover={onTogglePopover} onAddingTopCard={onAddingTopCard} />}
-          {popoverPage === 'copy' && <CopyPage onMovePage={this.onMovePage} list={list} onTogglePopover={onTogglePopover} onCopyList={onCopyList} />}
-          {popoverPage === 'move' && <MovePage onMovePage={this.onMovePage} list={list} lists={lists} onTogglePopover={onTogglePopover} onMoveList={onMoveList} />}
+          {popoverPage === 'main' && (
+            <MainPage
+              onMovePage={this.onMovePage}
+              list={list}
+              onTogglePopover={onTogglePopover}
+              onAddingTopCard={onAddingTopCard}
+            />
+          )}
+          {popoverPage === 'copy' && (
+            <CopyPage
+              onMovePage={this.onMovePage}
+              list={list}
+              onTogglePopover={onTogglePopover}
+              onCopyList={onCopyList}
+            />
+          )}
+          {popoverPage === 'move' && (
+            <MovePage
+              onMovePage={this.onMovePage}
+              list={list}
+              lists={lists}
+              onTogglePopover={onTogglePopover}
+              onMoveList={onMoveList}
+            />
+          )}
         </Popover>
         {isTopAdd && (
           <div className="add-card">
-            <form onSubmit={(ev) => this.onAddCard(ev, true)}>
+            <form onSubmit={ev => this.onAddCard(ev, true)}>
               <textarea name="title" placeholder="Enter a title for this card..." />
-              <div className="add-controls flex align-center" style={{ gap: '10px', marginBottom: '8px' }}>
+              <div
+                className="add-controls flex align-center"
+                style={{ gap: '10px', marginBottom: '8px' }}>
                 <button className="btn-add">Add Card</button>
                 <CloseIcon
                   style={{ width: '25px', height: '25px', cursor: 'pointer' }}
@@ -120,7 +147,7 @@ export class ListPreview extends Component {
             </>
           )}
         </div>
-      </div >
+      </div>
     );
   }
 }

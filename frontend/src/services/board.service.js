@@ -9,13 +9,13 @@ export const boardService = {
   update,
   remove,
   getById,
+  getCardById,
+  saveCard,
+  addList,
+  updateList,
 };
 
 window.bs = boardService;
-
-// More ways to send query params:
-// return axios.get('api/toy/?id=1223&balance=13')
-// return axios.get('api/toy/?', {params: {id: 1223, balanse:13}})
 
 function query(filterBy) {
   // var queryStr = (!filterBy) ? '' : `?byUser=${filterBy.byUser}`
@@ -31,14 +31,15 @@ function remove(boardId) {
   // return httpService.delete(`board/${boardId}`)
   return storageService.remove('board', boardId);
 }
+
 async function add(board) {
   // const addedBoard = await httpService.post(`board`, board)
 
   board._id = utilService.makeId();
   board.createdBy = userService.getLoggedinUser();
   board.labels = [];
-  board.lists = [{id: utilService.makeId(), title: 'List title'}]
-  board.members.push(board.createdBy)
+  board.lists = [];
+  board.members.push(board.createdBy);
   board.createdAt = Date.now();
   const addedBoard = storageService.post('board', board);
   return addedBoard;
@@ -46,6 +47,42 @@ async function add(board) {
 
 async function update(updatedBoard) {
   const board = await storageService.put('board', updatedBoard);
+  return board;
+}
+
+function getCardById(board, cardId) {
+  for (const list of board.lists) {
+    if (!list.cards) continue;
+    for (const card of list.cards) {
+      if (card.id === cardId) return card;
+    }
+  }
+  return null;
+}
+
+function saveCard(board, updatedCard, activity) {
+  board.lists.forEach(list => {
+    if (!list.cards) return;
+    list.cards.forEach((card, idx) => {
+      if (card.id === updatedCard.id) list.cards[idx] = updatedCard;
+    });
+  });
+  // board.activities.push(activity);
+  const updatedBoard = { ...board };
+  return updatedBoard;
+}
+
+function addList(board, listTitle) {
+  const id = utilService.makeId();
+  const list = { id, title: listTitle, cards: [], style: {} };
+  board.lists.push(list);
+  return board;
+}
+
+function updateList(board, updatedList) {
+  board.lists.forEach((list, idx) => {
+    if (list.id === updatedList.id) board.lists[idx] = updatedList;
+  });
   return board;
 }
 
