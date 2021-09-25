@@ -27,14 +27,6 @@ export class ListPreview extends Component {
     );
   };
 
-  // onCardUpdated = updatedCard => {
-  //   const updatedList = {
-  //     ...this.state.list,
-  //     cards: this.state.list.cards.map(card => (card.id === updatedCard.id ? updatedCard : card)),
-  //   };
-  //   this.setState({ list: updatedList }, this.props.onListUpdated);
-  // };
-
   render() {
     const { list, isAddingCard, onAddingCard, isPopoverOpen, onTogglePopover } = this.props;
     return (

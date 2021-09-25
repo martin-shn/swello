@@ -8,10 +8,6 @@ import { Signup } from './pages/signup';
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [
   {
-    path: '/board/:boardId/card/:cardId',
-    component: BoardPage,
-  },
-  {
     path: '/board/:boardId',
     component: BoardPage,
   },
