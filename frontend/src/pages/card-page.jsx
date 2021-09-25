@@ -29,7 +29,7 @@ class _CardPage extends Component {
     this.setState(
       prevState => ({ card: { ...prevState.card, ...data } }),
       async () => {
-        const updatedBoard = boardService.saveCard(board, this.state.card);
+        const updatedBoard = boardService.updateCard(board, this.state.card);
         this.props.updateBoard(updatedBoard);
       }
     );

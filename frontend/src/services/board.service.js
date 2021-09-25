@@ -2,7 +2,8 @@ import { storageService } from './async-storage.service';
 import { userService } from './user.service';
 import { socketService, SOCKET_EVENT_REVIEW_ADDED } from './socket.service';
 import { utilService } from './util.service';
-
+import { addList, copyList, updateList, moveList } from './board-services/list.service';
+import { getCardById, updateCard, addCard } from './board-services/card.service';
 export const boardService = {
   add,
   query,
@@ -10,9 +11,12 @@ export const boardService = {
   remove,
   getById,
   getCardById,
-  saveCard,
+  updateCard,
+  addCard,
   addList,
+  copyList,
   updateList,
+  moveList,
 };
 
 window.bs = boardService;
@@ -34,7 +38,6 @@ function remove(boardId) {
 
 async function add(board) {
   // const addedBoard = await httpService.post(`board`, board)
-
   board._id = utilService.makeId();
   board.createdBy = userService.getLoggedinUser();
   board.labels = [];
@@ -47,41 +50,6 @@ async function add(board) {
 
 async function update(updatedBoard) {
   const board = await storageService.put('board', updatedBoard);
-  return board;
-}
-
-function getCardById(board, cardId) {
-  for (const list of board.lists) {
-    if (!list.cards) continue;
-    for (const card of list.cards) {
-      if (card.id === cardId) return card;
-    }
-  }
-  return null;
-}
-
-function saveCard(board, updatedCard, activity) {
-  board.lists.forEach(list => {
-    if (!list.cards) return;
-    list.cards.forEach((card, idx) => {
-      if (card.id === updatedCard.id) list.cards[idx] = updatedCard;
-    });
-  });
-  // board.activities.push(activity);
-  return board;
-}
-
-function addList(board, listTitle) {
-  const id = utilService.makeId();
-  const list = { id, title: listTitle, cards: [], style: {} };
-  board.lists.push(list);
-  return board;
-}
-
-function updateList(board, updatedList) {
-  board.lists.forEach((list, idx) => {
-    if (list.id === updatedList.id) board.lists[idx] = updatedList;
-  });
   return board;
 }
 

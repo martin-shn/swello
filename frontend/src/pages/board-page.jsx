@@ -34,7 +34,7 @@ export class _BoardPage extends Component {
   // UI ACTIONS
 
   onAddingCard = listId => {
-    this.setState(prevState => ({ activeList: { ...prevState.activeList, id: listId } }));
+    this.setState({ activeList: { id: listId, isTopAdd: false } });
   };
 
   onAddingTopCard = (isOpen, listId) => {
@@ -67,52 +67,22 @@ export class _BoardPage extends Component {
   };
 
   onCopyList = (list, title) => {
-    const copyList = JSON.parse(JSON.stringify(list));
-    copyList.title = title;
-    copyList.id = utilService.makeId();
-    const { board } = this.state;
-    const { lists } = board;
-    const listIdx = lists.findIndex(currList => currList.id === list.id);
-    const updatedBoard = {
-      ...board,
-      lists: [...lists.slice(0, listIdx + 1), copyList, ...lists.slice(listIdx + 1, lists.length)],
-    };
-    this.setState({ board: updatedBoard }, this.onUpdateBoard);
+    const { board } = this.props;
+    const updatedBoard = boardService.copyList(board, list, title)
+    this.props.updateBoard(updatedBoard)
   };
 
   onMoveList = (currIdx, newIdx) => {
     if (currIdx === newIdx) return;
-    const { board } = this.state;
-    const { lists } = board;
-    const currList = lists[currIdx];
-    let newLists;
-    if (newIdx === 0) {
-      newLists = [currList, ...lists.slice(0, currIdx), ...lists.splice(currIdx + 1, lists.length)];
-    } else if (newIdx === lists.length - 1) {
-      newLists = [...lists.slice(0, currIdx), ...lists.splice(currIdx + 1, lists.length), currList];
-    } else if (newIdx > currIdx) {
-      newLists = [
-        ...lists.slice(0, currIdx),
-        ...lists.slice(currIdx + 1, newIdx + 1),
-        currList,
-        ...lists.slice(newIdx + 1, lists.length),
-      ];
-    } else if (currIdx < newIdx) {
-      newLists = [
-        ...lists.slice(0, newIdx),
-        currList,
-        ...lists.slice(newIdx, currIdx),
-        ...lists.slice(currIdx + 1, lists.length),
-      ];
-    }
-    const updatedBoard = { ...board, lists: newLists };
-    this.setState({ board: updatedBoard }, this.onUpdateBoard);
-  };
+    const { board } = this.props;
+    const updatedBoard = boardService.moveList(board, currIdx, newIdx)
+    this.props.updateBoard(updatedBoard)
+  }
 
   onTogglePopover = listId => {
-     this.props.togglePopover(listId);
+    this.props.togglePopover(listId);
   }
-    
+
   onUpdateTitle = title => {
     const { board } = this.props;
     const updatedBoard = { ...board, title };
@@ -125,17 +95,15 @@ export class _BoardPage extends Component {
     this.props.updateBoard(updatedBoard);
   };
 
-  onUpdateBoard = () => {
-    this.props.updateBoard(this.props.board);
-  };
+
 
   // TODO: add dynamic text color using contrast-js
   render() {
     if (this.props.isLoadingPage) return <LoaderPage />;
     const { activeList, isAddingList, isCardPageOpen } = this.state;
-    const {popoverListId} = this.props;
+    const { popoverListId } = this.props;
     const { title, members, lists, style } = this.props.board;
-    
+
     return (
       <main
         className="board-page"

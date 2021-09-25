@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import AddIcon from '@mui/icons-material/Add';
+import { boardService } from '../services/board.service'
+import { updateBoard } from '../store/actions/board.actions';
 import { Popover } from './popover';
 import { MainPage } from './list-popover-pages/main-page';
 import { CopyPage } from './list-popover-pages/copy-page';
@@ -9,10 +12,9 @@ import { ReactComponent as CloseIcon } from '../assets/svg/close.svg';
 import { utilService } from '../services/util.service';
 import { CardList } from './card-list';
 
-export class ListPreview extends Component {
+export class _ListPreview extends Component {
   state = {
-    list: this.props.list,
-    popoverPage: 'main',
+    popoverPage: 'main'
   };
 
   componentDidUpdate = prevProps => {
@@ -24,31 +26,14 @@ export class ListPreview extends Component {
   onAddCard = (ev, isTopAdd = false) => {
     ev.preventDefault();
     const title = ev.target.title.value;
-    const card = {
-      id: utilService.makeId(),
-      title,
-    };
+    const { board, list } = this.props;
+    const updatedBoard = boardService.addCard(board, list, title, isTopAdd)
     if (isTopAdd) {
-      this.setState(
-        prevState => ({
-          list: { ...prevState.list, cards: [card, ...prevState.list.cards] },
-        }),
-        () => {
-          this.props.onListUpdated(this.state.list);
-          this.props.onAddingTopCard(false);
-        }
-      );
+      this.props.onAddingTopCard(false);
     } else {
-      this.setState(
-        prevState => ({
-          list: { ...prevState.list, cards: [...prevState.list.cards, card] },
-        }),
-        () => {
-          this.props.onListUpdated(this.state.list);
-          this.props.onAddingCard(false);
-        }
-      );
+      this.props.onAddingCard(false);
     }
+    this.props.updateBoard(updatedBoard)
   };
 
   onMovePage = page => {
@@ -151,3 +136,15 @@ export class ListPreview extends Component {
     );
   }
 }
+
+const mapDispatchToProps = {
+  updateBoard,
+}
+
+function mapStateToProps(state) {
+  return {
+    board: state.boardModule.board
+  }
+}
+
+export const ListPreview = connect(mapStateToProps, mapDispatchToProps)(_ListPreview)
