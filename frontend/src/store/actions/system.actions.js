@@ -1,15 +1,9 @@
 import { userService } from "../../services/user.service.js";
 import { showErrorMsg } from '../../services/event-bus.service.js'
 
-export function showPopover(popoverListId) {
+export function togglePopover(popoverListId) {
     return async dispatch => {
         dispatch({ type: 'SET_POPOVER', popoverListId })
-    }
-}
-
-export function hidePopover() {
-    return async dispatch => {
-        dispatch({ type: 'SET_POPOVER', popoverListId: null })
     }
 }
 

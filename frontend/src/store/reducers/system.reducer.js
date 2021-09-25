@@ -2,7 +2,7 @@ import { userService } from '../../services/user.service.js';
 
 const initialState = {
   popoverListId: null,
-  isLoadingPage: false,
+  isLoadingPage: true,
 };
 
 export function systemReducer(state = initialState, action) {

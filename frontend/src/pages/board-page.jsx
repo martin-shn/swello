@@ -4,13 +4,14 @@ import { AppHeader } from '../cmps/app-header';
 import { ListAll } from '../cmps/list-all';
 import { TopPanel } from '../cmps/top-panel';
 import { boardService } from '../services/board.service';
-import { showPopover, hidePopover } from '../store/actions/system.actions';
+import { togglePopover } from '../store/actions/system.actions';
 import { updateBoard, loadBoard } from '../store/actions/board.actions';
+import { hideLoadingPage, showLoadingPage } from '../store/actions/system.actions';
 import { PopoverScreen } from '../cmps/popover-screen';
 import { utilService } from '../services/util.service';
 import { CardPage } from './card-page';
 import { Route } from 'react-router';
-import { CircularProgress } from '@mui/material';
+import { LoaderPage } from '../cmps/loader/loader-page';
 
 export class _BoardPage extends Component {
   state = {
@@ -23,9 +24,11 @@ export class _BoardPage extends Component {
     isAddingList: false,
   };
 
-  componentDidMount() {
+  async componentDidMount() {
+    this.props.showLoadingPage();
     const { boardId } = this.props.match.params;
-    this.props.loadBoard(boardId);
+    await this.props.loadBoard(boardId);
+    this.props.hideLoadingPage();
   }
 
   // UI ACTIONS
@@ -107,7 +110,7 @@ export class _BoardPage extends Component {
   };
 
   onTogglePopover = listId => {
-    listId?this.props.showPopover(listId):this.props.hidePopover();
+     this.props.togglePopover(listId);
   }
     
   onUpdateTitle = title => {
@@ -128,7 +131,7 @@ export class _BoardPage extends Component {
 
   // TODO: add dynamic text color using contrast-js
   render() {
-    if (!this.props.board) return <CircularProgress />;
+    if (this.props.isLoadingPage) return <LoaderPage />;
     const { activeList, isAddingList, isCardPageOpen } = this.state;
     const {popoverListId} = this.props;
     const { title, members, lists, style } = this.props.board;
@@ -168,15 +171,17 @@ export class _BoardPage extends Component {
 
 const mapDispatchToProps = {
   updateBoard,
-  showPopover,
-  hidePopover,
+  togglePopover,
   loadBoard,
+  hideLoadingPage,
+  showLoadingPage,
 };
 
 const mapStateToProps = state => {
   return {
     board: state.boardModule.board,
     popoverListId: state.systemModule.popoverListId,
+    isLoadingPage: state.systemModule.isLoadingPage,
   };
 };
 
