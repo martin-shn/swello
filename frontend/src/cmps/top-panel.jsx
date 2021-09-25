@@ -5,7 +5,9 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Avatar } from '@mui/material';
 
 export const TopPanel = props => {
-  const { title, members, onUpdateTitle } = props;
+  const { title, members, onUpdateTitle, user, board, onUpdateUser } = props;
+  const isStar = user.starredBoardsIds.includes(board._id)
+
   return (
     <section className="top-panel full flex space-between">
       <div className="flex align-center">
@@ -22,7 +24,7 @@ export const TopPanel = props => {
           onBlur={ev => onUpdateTitle(ev.target.innerText)}>
           {title}
         </h1>
-        <button>
+        <button className={(isStar?'starred':'') + ` star`} onClick={()=>{onStar(user,board._id, onUpdateUser)}}>
           <StarOutlineIcon />
         </button>
         <div className="members flex">
@@ -41,3 +43,12 @@ export const TopPanel = props => {
     </section>
   );
 };
+
+
+function onStar(user, boardId, onUpdateUser){
+  let newUser = {...user}
+        newUser.starredBoardsIds = newUser.starredBoardsIds.filter(id=>id!==boardId)
+        onUpdateUser(newUser)
+        // this.setState({starredBoards: this.props.boards.filter((board) => board._id!==boardId && 
+        //     this.props.user.starredBoardsIds.includes(board._id))})
+}

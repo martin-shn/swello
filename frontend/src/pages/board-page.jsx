@@ -7,6 +7,7 @@ import { boardService } from '../services/board.service';
 import { togglePopover } from '../store/actions/system.actions';
 import { updateBoard, loadBoard } from '../store/actions/board.actions';
 import { hideLoadingPage, showLoadingPage } from '../store/actions/system.actions';
+import { onUpdateUser } from '../store/actions/user.actions';
 import { PopoverScreen } from '../cmps/popover-screen';
 import { utilService } from '../services/util.service';
 import { CardPage } from './card-page';
@@ -95,7 +96,9 @@ export class _BoardPage extends Component {
     this.props.updateBoard(updatedBoard);
   };
 
-
+  onUpdateUser = async (user) => {
+    await this.props.onUpdateUser(user)
+  }
 
   // TODO: add dynamic text color using contrast-js
   render() {
@@ -112,7 +115,7 @@ export class _BoardPage extends Component {
           backgroundColor: style.bgColor || 'unset',
         }}>
         <AppHeader />
-        <TopPanel title={title} members={members} onUpdateTitle={this.onUpdateTitle} />
+        <TopPanel title={title} members={members} onUpdateTitle={this.onUpdateTitle} user={this.props.user} board={this.props.board} onUpdateUser={this.onUpdateUser}/>
         <PopoverScreen
           isOpen={popoverListId}
           onTogglePopover={this.onTogglePopover}
@@ -143,6 +146,7 @@ const mapDispatchToProps = {
   loadBoard,
   hideLoadingPage,
   showLoadingPage,
+  onUpdateUser,
 };
 
 const mapStateToProps = state => {
@@ -150,6 +154,7 @@ const mapStateToProps = state => {
     board: state.boardModule.board,
     popoverListId: state.systemModule.popoverListId,
     isLoadingPage: state.systemModule.isLoadingPage,
+    user: state.userModule.user,
   };
 };
 
