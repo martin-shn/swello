@@ -16,6 +16,8 @@ export class _ListPreview extends Component {
   state = {
     popoverPage: 'main',
   };
+  bottomAddRef = React.createRef();
+  topAddRef = React.createRef();
 
   componentDidUpdate = prevProps => {
     if (prevProps.isPopoverOpen !== this.props.isPopoverOpen) {
@@ -59,6 +61,7 @@ export class _ListPreview extends Component {
         <div className="list-header flex space-between">
           <h2
             className="list-title content-editable"
+            onKeyDown={ev => ev.key === 'Enter' && ev.target.blur()}
             contentEditable
             suppressContentEditableWarning={true}>
             {list.title}
@@ -99,11 +102,17 @@ export class _ListPreview extends Component {
         {isTopAdd && (
           <div className="add-card">
             <form onSubmit={ev => this.onAddCard(ev, true)}>
-              <textarea name="title" placeholder="Enter a title for this card..." />
+              <textarea
+                name="title"
+                placeholder="Enter a title for this card..."
+                onKeyDown={ev => ev.key === 'Enter' && this.topAddRef.current.click()}
+              />
               <div
                 className="add-controls flex align-center"
                 style={{ gap: '10px', marginBottom: '8px' }}>
-                <button className="btn-add">Add Card</button>
+                <button ref={this.topAddRef} className="btn-add">
+                  Add Card
+                </button>
                 <CloseIcon
                   style={{ width: '25px', height: '25px', cursor: 'pointer' }}
                   onClick={() => onAddingTopCard(false)}
@@ -123,9 +132,15 @@ export class _ListPreview extends Component {
           {isAddingCard && !isTopAdd && (
             <>
               <form onSubmit={this.onAddCard}>
-                <textarea name="title" placeholder="Enter a title for this card..." />
+                <textarea
+                  name="title"
+                  placeholder="Enter a title for this card..."
+                  onKeyDown={ev => ev.key === 'Enter' && this.bottomAddRef.current.click()}
+                />
                 <div className="add-controls">
-                  <button className="btn-add">Add Card</button>
+                  <button ref={this.bottomAddRef} className="btn-add">
+                    Add Card
+                  </button>
                   <CloseIcon className="close-icon" onClick={() => onAddingCard(false)} />
                 </div>
               </form>

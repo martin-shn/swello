@@ -6,7 +6,7 @@ import { Avatar } from '@mui/material';
 
 export const TopPanel = props => {
   const { title, members, onUpdateTitle, user, board, onUpdateUser } = props;
-  const isStar = user.starredBoardsIds.includes(board._id)
+  const isStar = user.starredBoardsIds.includes(board._id);
 
   return (
     <section className="top-panel full flex space-between">
@@ -21,10 +21,15 @@ export const TopPanel = props => {
           className="board-name content-editable"
           contentEditable
           suppressContentEditableWarning={true}
+          onKeyDown={ev => ev.key === 'Enter' && ev.target.blur()}
           onBlur={ev => onUpdateTitle(ev.target.innerText)}>
           {title}
         </h1>
-        <button className={(isStar?'starred':'') + ` star`} onClick={()=>{onStar(user,board._id, onUpdateUser)}}>
+        <button
+          className={(isStar ? 'starred' : '') + ` star`}
+          onClick={() => {
+            onStar(user, board._id, onUpdateUser);
+          }}>
           <StarOutlineIcon />
         </button>
         <div className="members flex">
@@ -44,11 +49,10 @@ export const TopPanel = props => {
   );
 };
 
-
-function onStar(user, boardId, onUpdateUser){
-  let newUser = {...user}
-        newUser.starredBoardsIds = newUser.starredBoardsIds.filter(id=>id!==boardId)
-        onUpdateUser(newUser)
-        // this.setState({starredBoards: this.props.boards.filter((board) => board._id!==boardId && 
-        //     this.props.user.starredBoardsIds.includes(board._id))})
+function onStar(user, boardId, onUpdateUser) {
+  let newUser = { ...user };
+  newUser.starredBoardsIds = newUser.starredBoardsIds.filter(id => id !== boardId);
+  onUpdateUser(newUser);
+  // this.setState({starredBoards: this.props.boards.filter((board) => board._id!==boardId &&
+  //     this.props.user.starredBoardsIds.includes(board._id))})
 }
