@@ -12,6 +12,7 @@ export const CardHeader = props => {
         <h2
           ref={titleRef}
           className="card-title content-editable"
+          onKeyDown={ev => ev.key === 'Enter' && ev.target.blur()}
           contentEditable
           suppressContentEditableWarning
           onBlur={ev => props.updateField({ title: ev.target.innerText })}>
