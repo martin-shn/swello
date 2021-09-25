@@ -2,11 +2,17 @@
   .btn-edit {
     margin-left: 8px;
   }
+  svg {
+    fill: #42526e;
+  }
   textarea {
     border-radius: 3px;
     padding: 8px 12px;
     width: 100%;
     resize: none;
+    transition-duration: 85ms;
+    transition-property: background-color, border-color, box-shadow;
+    transition-timing-function: ease;
     &:not(:focus) {
       background-color: #091e420a;
       box-shadow: none;
@@ -16,6 +22,7 @@
     }
     &:focus {
       background-color: #fff;
+      height: 100px;
     }
   }
 }
