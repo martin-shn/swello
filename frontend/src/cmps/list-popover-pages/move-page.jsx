@@ -13,7 +13,7 @@ export class MovePage extends React.Component {
         return (
             <>
                 <div className="popover-header flex align-center">
-                    <button onClick={() => onMovePage('main')}>{'<'}</button>
+                    <button onClick={() => onMovePage('main')}></button>
                     <span>Move list</span>
                     <button onClick={() => {
                         onTogglePopover(null)

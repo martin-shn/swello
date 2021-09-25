@@ -30,7 +30,7 @@ export class _BoardPage extends Component {
   }
 
   onAddingCard = listId => {
-    this.setState(prevState => ({ activeList: { ...prevState.activeList, id: listId } }));
+    this.setState({ activeList: { id: listId, isTopAdd: false } });
   };
 
   onAddingTopCard = (isOpen, listId) => {
@@ -75,16 +75,9 @@ export class _BoardPage extends Component {
     const { board } = this.state;
     const { lists } = board;
     const currList = lists[currIdx];
-    let newLists;
-    if (newIdx === 0) {
-      newLists = [currList, ...lists.slice(0, currIdx), ...lists.splice(currIdx + 1, lists.length)]
-    } else if (newIdx === lists.length - 1) {
-      newLists = [...lists.slice(0, currIdx), ...lists.splice(currIdx + 1, lists.length), currList]
-    } else if (newIdx > currIdx) {
-      newLists = [...lists.slice(0, currIdx), ...lists.slice(currIdx + 1, newIdx + 1), currList, ...lists.slice(newIdx + 1, lists.length)]
-    } else if (currIdx < newIdx) {
-      newLists = [...lists.slice(0, newIdx), currList, ...lists.slice(newIdx, currIdx), ...lists.slice(currIdx + 1, lists.length)]
-    }
+    const newLists = [...lists]
+    newLists.splice(currIdx, 1);
+    newLists.splice(newIdx, 0, currList)
     const updatedBoard = { ...board, lists: newLists }
     this.setState({ board: updatedBoard }, this.onUpdateBoard)
   }

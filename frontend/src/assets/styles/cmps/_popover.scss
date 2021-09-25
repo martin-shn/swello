@@ -28,6 +28,11 @@
 
       &:first-child {
         left: 0;
+        &::before {
+          font-family: FA-Solid;
+          font-size: 12px;
+          content: "\f053";
+        }
       }
 
       &:last-child {

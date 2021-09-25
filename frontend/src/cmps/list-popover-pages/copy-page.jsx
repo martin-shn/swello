@@ -12,7 +12,7 @@ export class CopyPage extends React.Component {
         return (
             <>
                 <div className="popover-header flex align-center">
-                    <button onClick={() => onMovePage('main')}>{'<'}</button>
+                    <button onClick={() => onMovePage('main')}></button>
                     <span>Copy list</span>
                     <button onClick={() => {
                         onTogglePopover(null)
