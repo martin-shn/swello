@@ -1,14 +1,14 @@
 import { boardService } from '../../services/board.service';
 
 export function loadBoards(filterBy) {
-  try {
-    return async dispatch => {
+  return async dispatch => {
+    try {
       const boards = await boardService.query(filterBy);
       dispatch({ type: 'SET_BOARDS', boards });
-    };
-  } catch (err) {
-    console.error(err);
-  }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 }
 
 export function updateBoard(updatedBoard) {

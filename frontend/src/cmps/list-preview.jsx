@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import AddIcon from '@mui/icons-material/Add';
-import { CardPreview } from './card-preview';
 import { Popover } from './popover';
 import { ReactComponent as CloseIcon } from '../assets/svg/close.svg';
 import { utilService } from '../services/util.service';
@@ -12,7 +11,6 @@ export class ListPreview extends Component {
 
   onAddCard = ev => {
     ev.preventDefault();
-    const { list } = this.state;
     const title = ev.target.title.value;
     const card = {
       id: utilService.makeId(),
@@ -28,6 +26,14 @@ export class ListPreview extends Component {
       }
     );
   };
+
+  // onCardUpdated = updatedCard => {
+  //   const updatedList = {
+  //     ...this.state.list,
+  //     cards: this.state.list.cards.map(card => (card.id === updatedCard.id ? updatedCard : card)),
+  //   };
+  //   this.setState({ list: updatedList }, this.props.onListUpdated);
+  // };
 
   render() {
     const { list, isAddingCard, onAddingCard, isPopoverOpen, onTogglePopover } = this.props;
@@ -63,12 +69,9 @@ export class ListPreview extends Component {
             <>
               <form onSubmit={this.onAddCard}>
                 <textarea name="title" placeholder="Enter a title for this card..." />
-                <div className="add-controls flex align-center" style={{ gap: '10px' }}>
+                <div className="add-controls">
                   <button className="btn-add">Add Card</button>
-                  <CloseIcon
-                    style={{ width: '25px', height: '25px', cursor: 'pointer' }}
-                    onClick={() => onAddingCard(false)}
-                  />
+                  <CloseIcon className="close-icon" onClick={() => onAddingCard(false)} />
                 </div>
               </form>
             </>

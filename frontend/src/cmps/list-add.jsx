@@ -16,12 +16,9 @@ export const ListAdd = props => {
           <div>
             <input name="title" placeholder="Enter list title..." />
           </div>
-          <div className="add-controls flex align-center" style={{ gap: '10px' }}>
+          <div className="add-controls">
             <button className="btn-add">Add List</button>
-            <CloseIcon
-              style={{ width: '25px', height: '25px', cursor: 'pointer' }}
-              onClick={() => onAddingList(false)}
-            />
+            <CloseIcon className="close-icon" onClick={() => onAddingList(false)} />
           </div>
         </form>
       )}
