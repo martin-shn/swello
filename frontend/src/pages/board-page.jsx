@@ -4,30 +4,34 @@ import { AppHeader } from '../cmps/app-header';
 import { ListAll } from '../cmps/list-all';
 import { TopPanel } from '../cmps/top-panel';
 import { boardService } from '../services/board.service';
-import { updateBoard } from '../store/actions/board.actions';
+import { togglePopover } from '../store/actions/system.actions';
+import { updateBoard, loadBoard } from '../store/actions/board.actions';
+import { hideLoadingPage, showLoadingPage } from '../store/actions/system.actions';
 import { PopoverScreen } from '../cmps/popover-screen';
 import { utilService } from '../services/util.service';
 import { CardPage } from './card-page';
+import { Route } from 'react-router';
+import { LoaderPage } from '../cmps/loader/loader-page';
 
 export class _BoardPage extends Component {
   state = {
-    activeList: { // only one add-card-to-list form can be active at all times.
+    activeList: {
+      // only one add-card-to-list form can be active at all times.
       id: null,
-      isTopAdd: false
+      isTopAdd: false,
     },
-    popoverListId: null, // only one popover can be active at all times
+    // popoverListId: null, // only one popover can be active at all times
     isAddingList: false,
-    isCardPageOpen: false,
-    board: null,
   };
 
   async componentDidMount() {
-    const board = await boardService.getById(this.props.match.params.boardId);
-    if (!board) this.props.history.replace('/board');
-    this.setState({ board });
-    const { cardId } = this.props.match.params;
-    if (cardId) this.setState({ isCardPageOpen: true });
+    this.props.showLoadingPage();
+    const { boardId } = this.props.match.params;
+    await this.props.loadBoard(boardId);
+    this.props.hideLoadingPage();
   }
+
+  // UI ACTIONS
 
   onAddingCard = listId => {
     this.setState({ activeList: { id: listId, isTopAdd: false } });
@@ -35,88 +39,71 @@ export class _BoardPage extends Component {
 
   onAddingTopCard = (isOpen, listId) => {
     if (isOpen) {
-      this.onTogglePopover(null)
-      this.setState({ activeList: { id: listId, isTopAdd: true } })
+      this.onTogglePopover(null);
+      this.setState({ activeList: { id: listId, isTopAdd: true } });
     } else {
-      this.setState({ activeList: { id: null, isTopAdd: false } })
+      this.setState({ activeList: { id: null, isTopAdd: false } });
     }
-  }
+  };
 
   onAddingList = isAddingList => {
     this.setState({ isAddingList });
-  };
-
-  onAddList = ev => {
-    ev.preventDefault();
-    const { board } = this.state;
-    const title = ev.target.title.value;
-    const id = utilService.makeId();
-    const list = { id, title, cards: [], style: {} };
-    const updatedBoard = { ...board, lists: [...board.lists, list] };
-    this.setState({ board: updatedBoard, isAddingList: false }, () => {
-      this.onUpdateBoard();
-      ev.target.reset();
-    });
-  };
-
-  onCopyList = (list, title) => {
-    const copyList = JSON.parse(JSON.stringify(list))
-    copyList.title = title;
-    copyList.id = utilService.makeId()
-    const { board } = this.state;
-    const { lists } = board;
-    const listIdx = lists.findIndex(currList => currList.id === list.id)
-    const updatedBoard = { ...board, lists: [...lists.slice(0, listIdx + 1), copyList, ...lists.slice(listIdx + 1, lists.length)] }
-    this.setState({ board: updatedBoard }, this.onUpdateBoard)
-  }
-
-  onMoveList = (currIdx, newIdx) => {
-    if (currIdx === newIdx) return;
-    const { board } = this.state;
-    const { lists } = board;
-    const currList = lists[currIdx];
-    const newLists = [...lists]
-    newLists.splice(currIdx, 1);
-    newLists.splice(newIdx, 0, currList)
-    const updatedBoard = { ...board, lists: newLists }
-    this.setState({ board: updatedBoard }, this.onUpdateBoard)
-  }
-
-  onUpdateTitle = title => {
-    this.setState({ board: { ...this.state.board, title } }, this.onUpdateBoard);
   };
 
   onTogglePopover = listId => {
     this.setState({ popoverListId: listId });
   };
 
+  // DATA ACTIONS
+
+  onAddList = ev => {
+    ev.preventDefault();
+    const { board } = this.props;
+    const listTitle = ev.target.title.value;
+    ev.target.reset();
+    const updatedBoard = boardService.addList(board, listTitle);
+    this.props.updateBoard(updatedBoard);
+    this.setState({ isAddingList: false });
+  };
+
+  onCopyList = (list, title) => {
+    const { board } = this.props;
+    const updatedBoard = boardService.copyList(board, list, title)
+    this.props.updateBoard(updatedBoard)
+  };
+
+  onMoveList = (currIdx, newIdx) => {
+    if (currIdx === newIdx) return;
+    const { board } = this.props;
+    const updatedBoard = boardService.moveList(board, currIdx, newIdx)
+    this.props.updateBoard(updatedBoard)
+  }
+
+  onTogglePopover = listId => {
+    this.props.togglePopover(listId);
+  }
+
+  onUpdateTitle = title => {
+    const { board } = this.props;
+    const updatedBoard = { ...board, title };
+    this.props.updateBoard(updatedBoard);
+  };
+
   onListUpdated = updatedList => {
-    const updatedBoard = {
-      ...this.state.board,
-      lists: this.state.board.lists.map(list => (list.id === updatedList.id ? updatedList : list)),
-    };
-    this.setState({ board: updatedBoard }, this.onUpdateBoard);
+    const { board } = this.props;
+    const updatedBoard = boardService.updateList(board, updatedList);
+    this.props.updateBoard(updatedBoard);
   };
 
-  onUpdateBoard = () => {
-    this.props.updateBoard(this.state.board);
-  };
 
-  getCardById = id => {
-    // TODO - move this to card page
-    for (const list of this.state.board.lists) {
-      for (const card of list.cards) {
-        if (card.id === id) return card;
-      }
-    }
-    return null;
-  };
 
   // TODO: add dynamic text color using contrast-js
   render() {
-    if (!this.state.board) return <div>Loading</div>;
-    const { activeList, popoverListId, isAddingList, isCardPageOpen } = this.state;
-    const { title, members, lists, style } = this.state.board;
+    if (this.props.isLoadingPage) return <LoaderPage />;
+    const { activeList, isAddingList, isCardPageOpen } = this.state;
+    const { popoverListId } = this.props;
+    const { title, members, lists, style } = this.props.board;
+
     return (
       <main
         className="board-page"
@@ -127,10 +114,10 @@ export class _BoardPage extends Component {
         <AppHeader />
         <TopPanel title={title} members={members} onUpdateTitle={this.onUpdateTitle} />
         <PopoverScreen
-          isOpen={popoverListId ? true : false}
+          isOpen={popoverListId}
           onTogglePopover={this.onTogglePopover}
         />
-        {isCardPageOpen && <CardPage card={this.getCardById(this.props.match.params.cardId)} />}
+        <Route path="/board/:boardId/card/:cardId" component={CardPage} />
         <ListAll
           lists={lists}
           activeList={activeList}
@@ -152,11 +139,17 @@ export class _BoardPage extends Component {
 
 const mapDispatchToProps = {
   updateBoard,
+  togglePopover,
+  loadBoard,
+  hideLoadingPage,
+  showLoadingPage,
 };
 
 const mapStateToProps = state => {
   return {
     board: state.boardModule.board,
+    popoverListId: state.systemModule.popoverListId,
+    isLoadingPage: state.systemModule.isLoadingPage,
   };
 };
 

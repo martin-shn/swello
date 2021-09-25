@@ -2,20 +2,24 @@ import { storageService } from './async-storage.service';
 import { userService } from './user.service';
 import { socketService, SOCKET_EVENT_REVIEW_ADDED } from './socket.service';
 import { utilService } from './util.service';
-
+import { addList, copyList, updateList, moveList } from './board-services/list.service';
+import { getCardById, updateCard, addCard } from './board-services/card.service';
 export const boardService = {
   add,
   query,
   update,
   remove,
   getById,
+  getCardById,
+  updateCard,
+  addCard,
+  addList,
+  copyList,
+  updateList,
+  moveList,
 };
 
 window.bs = boardService;
-
-// More ways to send query params:
-// return axios.get('api/toy/?id=1223&balance=13')
-// return axios.get('api/toy/?', {params: {id: 1223, balanse:13}})
 
 function query(filterBy) {
   // var queryStr = (!filterBy) ? '' : `?byUser=${filterBy.byUser}`
@@ -31,14 +35,14 @@ function remove(boardId) {
   // return httpService.delete(`board/${boardId}`)
   return storageService.remove('board', boardId);
 }
+
 async function add(board) {
   // const addedBoard = await httpService.post(`board`, board)
-
   board._id = utilService.makeId();
   board.createdBy = userService.getLoggedinUser();
   board.labels = [];
-  board.lists = [{id: utilService.makeId(), title: 'List title'}]
-  board.members.push(board.createdBy)
+  board.lists = [];
+  board.members.push(board.createdBy);
   board.createdAt = Date.now();
   const addedBoard = storageService.post('board', board);
   return addedBoard;
@@ -48,6 +52,7 @@ async function update(updatedBoard) {
   const board = await storageService.put('board', updatedBoard);
   return board;
 }
+
 
 // This IIFE functions for Dev purposes
 // It allows testing of real time updates (such as sockets) by listening to storage events

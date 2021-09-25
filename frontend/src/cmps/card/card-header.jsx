@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 export const CardHeader = props => {
   return (
     <header className="card-section card-header">

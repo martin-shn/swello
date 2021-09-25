@@ -1,24 +1,54 @@
+import { CircularProgress } from '@mui/material';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Modal } from 'react-responsive-modal';
+import { updateBoard } from '../store/actions/board.actions';
 import { withRouter } from 'react-router';
 import { CardDescription } from '../cmps/card/card-description';
 import { CardHeader } from '../cmps/card/card-header';
+import { boardService } from '../services/board.service';
+import { CardPopover } from '../cmps/card/card-popover';
 
 class _CardPage extends Component {
-  state = { card: this.props.card };
+  state = { card: null, popover: null };
+
+  componentDidMount() {
+    this.loadCard(this.props.match.params.cardId);
+  }
+
+  loadCard = async cardId => {
+    const { board } = this.props;
+    const card = boardService.getCardById(board, cardId);
+    if (!card) this.props.history.replace('/board/' + board._id);
+    this.setState({ card });
+  };
 
   updateField = data => {
-    this.setState(prevState => ({ card: { ...prevState.card, ...data } }));
+    const { board } = this.props;
+    this.setState(
+      prevState => ({ card: { ...prevState.card, ...data } }),
+      async () => {
+        const updatedBoard = boardService.updateCard(board, this.state.card);
+        this.props.updateBoard(updatedBoard);
+      }
+    );
+  };
+
+  onTogglePopover = popover => {
+    this.setState({ popover });
   };
 
   render() {
+    if (!this.state.card) return <CircularProgress sx={{ position: 'absolute' }} />;
     const { description, title } = this.state.card;
     const { boardId } = this.props.match.params;
+    const { popover } = this.state;
     return (
       <Modal
         open
         showCloseIcon={false}
         onClose={() => this.props.history.push(`/board/${boardId}`)}>
+        {<CardPopover popover={popover} />}
         <section className="card-page">
           <CardHeader updateField={this.updateField} title={title} />
           <div className="data-and-sidebar flex">
@@ -27,7 +57,7 @@ class _CardPage extends Component {
             </main>
             <aside className="card-sidebar">
               <h3>Add to card</h3>
-              <button>Members</button>
+              <button onClick={() => this.setState({ popover: 'add-members' })}>Members</button>
               <button>Labels</button>
               <button>Checklist</button>
               <button>Dates</button>
@@ -42,4 +72,12 @@ class _CardPage extends Component {
   }
 }
 
-export const CardPage = withRouter(_CardPage);
+const mapDispatchToProps = {
+  updateBoard,
+};
+
+const mapStateToProps = state => ({
+  board: state.boardModule.board,
+});
+
+export const CardPage = withRouter(connect(mapStateToProps, mapDispatchToProps)(_CardPage));

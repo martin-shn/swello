@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import AddIcon from '@mui/icons-material/Add';
+import { boardService } from '../services/board.service'
+import { updateBoard } from '../store/actions/board.actions';
 import { Popover } from './popover';
 import { MainPage } from './list-popover-pages/main-page';
 import { CopyPage } from './list-popover-pages/copy-page';
@@ -9,62 +12,47 @@ import { ReactComponent as CloseIcon } from '../assets/svg/close.svg';
 import { utilService } from '../services/util.service';
 import { CardList } from './card-list';
 
-export class ListPreview extends Component {
+export class _ListPreview extends Component {
   state = {
-    list: this.props.list,
     popoverPage: 'main'
   };
 
-  componentDidUpdate = (prevProps) => {
+  componentDidUpdate = prevProps => {
     if (prevProps.isPopoverOpen !== this.props.isPopoverOpen) {
-      this.setState({ popoverPage: 'main' })
+      this.setState({ popoverPage: 'main' });
     }
-  }
+  };
 
   onAddCard = (ev, isTopAdd = false) => {
     ev.preventDefault();
     const title = ev.target.title.value;
-    const card = {
-      id: utilService.makeId(),
-      title,
-    };
+    const { board, list } = this.props;
+    const updatedBoard = boardService.addCard(board, list, title, isTopAdd)
     if (isTopAdd) {
-      this.setState(
-        prevState => ({
-          list: { ...prevState.list, cards: [card, ...prevState.list.cards] },
-        }),
-        () => {
-          this.props.onListUpdated(this.state.list);
-          this.props.onAddingTopCard(false);
-        }
-      );
+      this.props.onAddingTopCard(false);
     } else {
-      this.setState(
-        prevState => ({
-          list: { ...prevState.list, cards: [...prevState.list.cards, card] },
-        }),
-        () => {
-          this.props.onListUpdated(this.state.list);
-          this.props.onAddingCard(false);
-        }
-      );
+      this.props.onAddingCard(false);
     }
+    this.props.updateBoard(updatedBoard)
   };
 
   onMovePage = page => {
-    this.setState({ popoverPage: page })
-  }
-
-  // onCardUpdated = updatedCard => {
-  //   const updatedList = {
-  //     ...this.state.list,
-  //     cards: this.state.list.cards.map(card => (card.id === updatedCard.id ? updatedCard : card)),
-  //   };
-  //   this.setState({ list: updatedList }, this.props.onListUpdated);
-  // };
+    this.setState({ popoverPage: page });
+  };
 
   render() {
-    const { list, lists, isAddingCard, onAddingCard, onAddingTopCard, isPopoverOpen, onTogglePopover, isTopAdd, onCopyList, onMoveList } = this.props;
+    const {
+      list,
+      lists,
+      isAddingCard,
+      onAddingCard,
+      onAddingTopCard,
+      isPopoverOpen,
+      onTogglePopover,
+      isTopAdd,
+      onCopyList,
+      onMoveList,
+    } = this.props;
     const { popoverPage } = this.state;
     return (
       <div className="list-preview flex column">
@@ -82,15 +70,39 @@ export class ListPreview extends Component {
           </button>
         </div>
         <Popover isVisible={isPopoverOpen}>
-          {popoverPage === 'main' && <MainPage onMovePage={this.onMovePage} list={list} onTogglePopover={onTogglePopover} onAddingTopCard={onAddingTopCard} />}
-          {popoverPage === 'copy' && <CopyPage onMovePage={this.onMovePage} list={list} onTogglePopover={onTogglePopover} onCopyList={onCopyList} />}
-          {popoverPage === 'move' && <MovePage onMovePage={this.onMovePage} list={list} lists={lists} onTogglePopover={onTogglePopover} onMoveList={onMoveList} />}
+          {popoverPage === 'main' && (
+            <MainPage
+              onMovePage={this.onMovePage}
+              list={list}
+              onTogglePopover={onTogglePopover}
+              onAddingTopCard={onAddingTopCard}
+            />
+          )}
+          {popoverPage === 'copy' && (
+            <CopyPage
+              onMovePage={this.onMovePage}
+              list={list}
+              onTogglePopover={onTogglePopover}
+              onCopyList={onCopyList}
+            />
+          )}
+          {popoverPage === 'move' && (
+            <MovePage
+              onMovePage={this.onMovePage}
+              list={list}
+              lists={lists}
+              onTogglePopover={onTogglePopover}
+              onMoveList={onMoveList}
+            />
+          )}
         </Popover>
         {isTopAdd && (
           <div className="add-card">
-            <form onSubmit={(ev) => this.onAddCard(ev, true)}>
+            <form onSubmit={ev => this.onAddCard(ev, true)}>
               <textarea name="title" placeholder="Enter a title for this card..." />
-              <div className="add-controls flex align-center" style={{ gap: '10px', marginBottom: '8px' }}>
+              <div
+                className="add-controls flex align-center"
+                style={{ gap: '10px', marginBottom: '8px' }}>
                 <button className="btn-add">Add Card</button>
                 <CloseIcon
                   style={{ width: '25px', height: '25px', cursor: 'pointer' }}
@@ -120,7 +132,19 @@ export class ListPreview extends Component {
             </>
           )}
         </div>
-      </div >
+      </div>
     );
   }
 }
+
+const mapDispatchToProps = {
+  updateBoard,
+}
+
+function mapStateToProps(state) {
+  return {
+    board: state.boardModule.board
+  }
+}
+
+export const ListPreview = connect(mapStateToProps, mapDispatchToProps)(_ListPreview)

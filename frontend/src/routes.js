@@ -1,16 +1,11 @@
 import { BoardPage } from './pages/board-page';
 import { HomePage } from './pages/home-page';
 import { UserBoards } from './pages/user-boards';
-import { CardPage } from './pages/card-page';
 import { Login } from './pages/login';
 import { Signup } from './pages/signup';
 
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [
-  {
-    path: '/board/:boardId/card/:cardId',
-    component: BoardPage,
-  },
   {
     path: '/board/:boardId',
     component: BoardPage,
