@@ -12,7 +12,10 @@ const DUMMY_BG =
   'https://trello-backgrounds.s3.amazonaws.com/5f52ac04a60f498ce74a6b64/1280x856/fa5aaef20b1be05b0c9cf24debcad762/hero7.jpg';
 export class _BoardPage extends Component {
   state = {
-    activeListId: null, // only one add-card-to-list form can be active at all times.
+    activeList: { // only one add-card-to-list form can be active at all times.
+      id: null,
+      isTopAdd: false
+    },
     popoverListId: null, // only one popover can be active at all times
     isAddingList: false,
     board: null,
@@ -24,14 +27,18 @@ export class _BoardPage extends Component {
     this.setState({ board });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.board !== this.state.board) {
+  onAddingCard = listId => {
+    this.setState(prevState => ({ activeList: { ...prevState.activeList, id: listId } }));
+  };
+
+  onAddingTopCard = (isOpen, listId) => {
+    if (isOpen) {
+      this.onTogglePopover(null)
+      this.setState({ activeList: { id: listId, isTopAdd: true } })
+    } else {
+      this.setState({ activeList: { id: null, isTopAdd: false } })
     }
   }
-
-  onAddingCard = listId => {
-    this.setState({ activeListId: listId });
-  };
 
   onAddingList = isAddingList => {
     this.setState({ isAddingList });
@@ -49,6 +56,36 @@ export class _BoardPage extends Component {
       ev.target.reset();
     });
   };
+
+  onCopyList = (list, title) => {
+    const copyList = JSON.parse(JSON.stringify(list))
+    copyList.title = title;
+    copyList.id = utilService.makeId()
+    const { board } = this.state;
+    const { lists } = board;
+    const listIdx = lists.findIndex(currList => currList.id === list.id)
+    const updatedBoard = { ...board, lists: [...lists.slice(0, listIdx + 1), copyList, ...lists.slice(listIdx + 1, lists.length)] }
+    this.setState({ board: updatedBoard }, this.onUpdateBoard)
+  }
+
+  onMoveList = (currIdx, newIdx) => {
+    if (currIdx === newIdx) return;
+    const { board } = this.state;
+    const { lists } = board;
+    const currList = lists[currIdx];
+    let newLists;
+    if (newIdx === 0) {
+      newLists = [currList, ...lists.slice(0, currIdx), ...lists.splice(currIdx + 1, lists.length)]
+    } else if (newIdx === lists.length - 1) {
+      newLists = [...lists.slice(0, currIdx), ...lists.splice(currIdx + 1, lists.length), currList]
+    } else if (newIdx > currIdx) {
+      newLists = [...lists.slice(0, currIdx), ...lists.slice(currIdx + 1, newIdx + 1), currList, ...lists.slice(newIdx + 1, lists.length)]
+    } else if (currIdx < newIdx) {
+      newLists = [...lists.slice(0, newIdx), currList, ...lists.slice(newIdx, currIdx), ...lists.slice(currIdx + 1, lists.length)]
+    }
+    const updatedBoard = { ...board, lists: newLists }
+    this.setState({ board: updatedBoard }, this.onUpdateBoard)
+  }
 
   onUpdateTitle = title => {
     this.setState({ board: { ...this.state.board, title } }, this.onUpdateBoard);
@@ -73,7 +110,7 @@ export class _BoardPage extends Component {
   // TODO: add dynamic text color using contrast-js
   render() {
     if (!this.state.board) return <div>Loading</div>;
-    const { activeListId, popoverListId, isAddingList } = this.state;
+    const { activeList, popoverListId, isAddingList } = this.state;
     const { title, members, lists, style } = this.state.board;
     return (
       <main
@@ -90,14 +127,17 @@ export class _BoardPage extends Component {
         />
         <ListAll
           lists={lists}
-          activeListId={activeListId}
+          activeList={activeList}
           popoverListId={popoverListId}
           onTogglePopover={this.onTogglePopover}
           onAddingCard={this.onAddingCard}
+          onAddingTopCard={this.onAddingTopCard}
           isAddingList={isAddingList}
           onAddingList={this.onAddingList}
           onAddList={this.onAddList}
           onListUpdated={this.onListUpdated}
+          onCopyList={this.onCopyList}
+          onMoveList={this.onMoveList}
         />
       </main>
     );

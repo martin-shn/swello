@@ -23,6 +23,12 @@
   }
 }
 
+.clean-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 // Media helpers
 
 .square-ratio {
@@ -35,16 +41,15 @@
   @include aspect-ratio(9, 16);
 }
 
-
-.home::before{
+.home::before {
   font-family: FA-solid;
-  content: '\f83e';
+  content: "\f83e";
 }
 
-.boards::before{
+.boards::before {
   content: url(../../svg/logo-icon-copy.svg);
 }
 
-.templates::before{
+.templates::before {
   content: url(../../svg/template.svg);
 }

@@ -19,7 +19,7 @@ export const ListAdd = props => {
           <div className="add-controls flex align-center" style={{ gap: '10px' }}>
             <button className="btn-add">Add List</button>
             <CloseIcon
-              style={{ width: '25px', height: '25px', cursor: 'pointer' }}
+              style={{ width: '25px', height: '25px', cursor: 'pointer', color: '#42526e' }}
               onClick={() => onAddingList(false)}
             />
           </div>
