@@ -40,7 +40,14 @@ async function add(board) {
   // const addedBoard = await httpService.post(`board`, board)
   board._id = utilService.makeId();
   board.createdBy = userService.getLoggedinUser();
-  board.labels = [];
+  board.labels = [
+    { id: utilService.makeId(), title: '', color: 'green' },
+    { id: utilService.makeId(), title: '', color: 'yellow' },
+    { id: utilService.makeId(), title: '', color: 'orange' },
+    { id: utilService.makeId(), title: '', color: 'red' },
+    { id: utilService.makeId(), title: '', color: 'purple' },
+    { id: utilService.makeId(), title: '', color: 'blue' },
+  ];
   board.lists = [];
   board.members.push(board.createdBy);
   board.createdAt = Date.now();

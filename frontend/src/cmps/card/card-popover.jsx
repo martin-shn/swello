@@ -5,10 +5,10 @@ import { AddLabels } from './card-popover-pages/add-labels';
 
 export class CardPopover extends Component {
   render() {
-    const { popoverType, popoverAnchor, onClosePopover } = this.props;
+    const { popoverType, popoverAnchor, card, onClosePopover } = this.props;
     return (
       <Popper
-        className="borads-popper header-popper-menu"
+        className="cards-popper header-popper-menu"
         open={true}
         anchorEl={popoverAnchor}
         placement="bottom-start"
@@ -24,7 +24,7 @@ export class CardPopover extends Component {
               <ClickAwayListener onClickAway={onClosePopover}>
                 <div>
                   {popoverType === 'add-members' && <AddMembers onClosePopover={onClosePopover} />}
-                  {popoverType === 'add-labels' && <AddLabels onClosePopover={onClosePopover} />}
+                  {popoverType === 'add-labels' && <AddLabels card={card} onClosePopover={onClosePopover} />}
                 </div>
               </ClickAwayListener>
             </Paper>

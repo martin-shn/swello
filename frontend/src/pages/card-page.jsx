@@ -5,6 +5,7 @@ import Modal from '@mui/material/Modal';
 import { updateBoard } from '../store/actions/board.actions';
 import { withRouter } from 'react-router';
 import { CardDescription } from '../cmps/card/card-description';
+import { CardLabels } from '../cmps/card/card-labels';
 import { CardHeader } from '../cmps/card/card-header';
 import { boardService } from '../services/board.service';
 import { CardPopover } from '../cmps/card/card-popover';
@@ -55,6 +56,7 @@ class _CardPage extends Component {
             <CardPopover
               popoverType={popoverType}
               popoverAnchor={popoverAnchor}
+              card={this.state.card}
               onClosePopover={this.onClosePopover}
             />
           )}
@@ -62,6 +64,7 @@ class _CardPage extends Component {
             <CardHeader updateField={this.updateField} title={title} />
             <div className="data-and-sidebar flex">
               <main className="card-data">
+                <CardLabels />
                 <CardDescription description={description} updateField={this.updateField} />
                 <CardChecklist checklist={checklist} />
               </main>
