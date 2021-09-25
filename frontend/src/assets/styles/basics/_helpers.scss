@@ -6,6 +6,9 @@
   > *.full {
     flex: 1;
   }
+  > *.grow {
+    flex: 1;
+  }
   &.column {
     flex-direction: column;
   }
@@ -52,4 +55,34 @@
 
 .templates::before {
   content: url(../../svg/template.svg);
+}
+
+// Board Page
+.content-editable {
+  &:focus {
+    background-color: #fff;
+    box-shadow: inset 0 0 0 2px #0079bf;
+    outline: none;
+    cursor: text;
+  }
+}
+
+.add-controls {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  .btn-add {
+    background-color: #0079bf;
+    color: #fff;
+    padding: 6px 12px;
+    &:hover {
+      background-color: #026aa7;
+    }
+  }
+  .close-icon {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+  }
 }

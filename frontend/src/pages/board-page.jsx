@@ -7,9 +7,8 @@ import { boardService } from '../services/board.service';
 import { updateBoard } from '../store/actions/board.actions';
 import { PopoverScreen } from '../cmps/popover-screen';
 import { utilService } from '../services/util.service';
+import { CardPage } from './card-page';
 
-const DUMMY_BG =
-  'https://trello-backgrounds.s3.amazonaws.com/5f52ac04a60f498ce74a6b64/1280x856/fa5aaef20b1be05b0c9cf24debcad762/hero7.jpg';
 export class _BoardPage extends Component {
   state = {
     activeList: { // only one add-card-to-list form can be active at all times.
@@ -18,6 +17,7 @@ export class _BoardPage extends Component {
     },
     popoverListId: null, // only one popover can be active at all times
     isAddingList: false,
+    isCardPageOpen: false,
     board: null,
   };
 
@@ -25,6 +25,8 @@ export class _BoardPage extends Component {
     const board = await boardService.getById(this.props.match.params.boardId);
     if (!board) this.props.history.replace('/board');
     this.setState({ board });
+    const { cardId } = this.props.match.params;
+    if (cardId) this.setState({ isCardPageOpen: true });
   }
 
   onAddingCard = listId => {
@@ -107,10 +109,20 @@ export class _BoardPage extends Component {
     this.props.updateBoard(this.state.board);
   };
 
+  getCardById = id => {
+    // TODO - move this to card page
+    for (const list of this.state.board.lists) {
+      for (const card of list.cards) {
+        if (card.id === id) return card;
+      }
+    }
+    return null;
+  };
+
   // TODO: add dynamic text color using contrast-js
   render() {
     if (!this.state.board) return <div>Loading</div>;
-    const { activeList, popoverListId, isAddingList } = this.state;
+    const { activeList, popoverListId, isAddingList, isCardPageOpen } = this.state;
     const { title, members, lists, style } = this.state.board;
     return (
       <main
@@ -125,6 +137,7 @@ export class _BoardPage extends Component {
           isOpen={popoverListId ? true : false}
           onTogglePopover={this.onTogglePopover}
         />
+        {isCardPageOpen && <CardPage card={this.getCardById(this.props.match.params.cardId)} />}
         <ListAll
           lists={lists}
           activeList={activeList}

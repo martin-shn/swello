@@ -22,6 +22,10 @@
 @import 'cmps/list-add';
 @import 'cmps/app-header';
 
+// Card Page
+@import 'cmps/card/card-header';
+@import 'cmps/card/card-description';
+
 //
 @import 'cmps/home-header';
 @import 'cmps/home-footer';
@@ -32,6 +36,7 @@
 @import 'cmps/modal-window';
 
 // Pages
+@import 'cmps/card-page';
 @import 'pages/home-page';
 @import 'pages/board-page';
 @import 'pages/user-boards';

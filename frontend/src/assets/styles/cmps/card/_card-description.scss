@@ -1,0 +1,21 @@
+.card-description {
+  .btn-edit {
+    margin-left: 8px;
+  }
+  textarea {
+    border-radius: 3px;
+    padding: 8px 12px;
+    width: 100%;
+    resize: none;
+    &:not(:focus) {
+      background-color: #091e420a;
+      box-shadow: none;
+      &::placeholder {
+        color: $clr-default;
+      }
+    }
+    &:focus {
+      background-color: #fff;
+    }
+  }
+}

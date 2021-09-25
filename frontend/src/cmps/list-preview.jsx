@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import AddIcon from '@mui/icons-material/Add';
-import { CardPreview } from './card-preview';
 import { Popover } from './popover';
 import { MainPage } from './list-popover-pages/main-page';
 import { CopyPage } from './list-popover-pages/copy-page';
@@ -56,6 +55,13 @@ export class ListPreview extends Component {
     this.setState({ popoverPage: page })
   }
 
+  // onCardUpdated = updatedCard => {
+  //   const updatedList = {
+  //     ...this.state.list,
+  //     cards: this.state.list.cards.map(card => (card.id === updatedCard.id ? updatedCard : card)),
+  //   };
+  //   this.setState({ list: updatedList }, this.props.onListUpdated);
+  // };
 
   render() {
     const { list, lists, isAddingCard, onAddingCard, onAddingTopCard, isPopoverOpen, onTogglePopover, isTopAdd, onCopyList, onMoveList } = this.props;
@@ -106,12 +112,9 @@ export class ListPreview extends Component {
             <>
               <form onSubmit={this.onAddCard}>
                 <textarea name="title" placeholder="Enter a title for this card..." />
-                <div className="add-controls flex align-center" style={{ gap: '10px' }}>
+                <div className="add-controls">
                   <button className="btn-add">Add Card</button>
-                  <CloseIcon
-                    style={{ width: '25px', height: '25px', cursor: 'pointer' }}
-                    onClick={() => onAddingCard(false)}
-                  />
+                  <CloseIcon className="close-icon" onClick={() => onAddingCard(false)} />
                 </div>
               </form>
             </>
