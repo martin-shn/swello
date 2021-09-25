@@ -38,7 +38,7 @@ async function add(board) {
   board._id = utilService.makeId();
   board.createdBy = userService.getLoggedinUser();
   board.labels = [];
-  board.lists = [{ id: utilService.makeId(), title: 'List title' }];
+  board.lists = [];
   board.members.push(board.createdBy);
   board.createdAt = Date.now();
   const addedBoard = storageService.post('board', board);
