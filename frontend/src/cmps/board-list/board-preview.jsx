@@ -208,7 +208,7 @@ class _BoardPreview extends React.Component {
       return (
         <a
           href={`/board/${board._id}`}
-          className="board-preview"
+          className={(bgColor!=='inherit'?'bg-color':'') + ' board-preview'}
           style={{ backgroundImage: `url(${imgUrl})`, backgroundColor: bgColor }}>
           <span></span>
           <div>

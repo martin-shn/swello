@@ -5,6 +5,7 @@ import { ListAll } from '../cmps/list-all';
 import { TopPanel } from '../cmps/top-panel';
 import { boardService } from '../services/board.service';
 import { updateBoard } from '../store/actions/board.actions';
+import { showPopover, hidePopover } from '../store/actions/system.actions';
 import { PopoverScreen } from '../cmps/popover-screen';
 import { utilService } from '../services/util.service';
 import { CardPage } from './card-page';
@@ -15,7 +16,7 @@ export class _BoardPage extends Component {
       id: null,
       isTopAdd: false
     },
-    popoverListId: null, // only one popover can be active at all times
+    // popoverListId: null, // only one popover can be active at all times
     isAddingList: false,
     isCardPageOpen: false,
     board: null,
@@ -29,6 +30,13 @@ export class _BoardPage extends Component {
     if (cardId) this.setState({ isCardPageOpen: true });
   }
 
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevProps.isPopoverOpen!==this.props.isPopoverOpen ){
+  //     console.log('change');
+  //     this.setState({popoverListId:null})
+  //   }
+  // }
+  
   onAddingCard = listId => {
     this.setState(prevState => ({ activeList: { ...prevState.activeList, id: listId } }));
   };
@@ -94,7 +102,7 @@ export class _BoardPage extends Component {
   };
 
   onTogglePopover = listId => {
-    this.setState({ popoverListId: listId });
+    listId?this.props.showPopover(listId):this.props.hidePopover();
   };
 
   onListUpdated = updatedList => {
@@ -122,7 +130,8 @@ export class _BoardPage extends Component {
   // TODO: add dynamic text color using contrast-js
   render() {
     if (!this.state.board) return <div>Loading</div>;
-    const { activeList, popoverListId, isAddingList, isCardPageOpen } = this.state;
+    const { activeList, isAddingList, isCardPageOpen } = this.state;
+    const {popoverListId} = this.props;
     const { title, members, lists, style } = this.state.board;
     return (
       <main
@@ -134,7 +143,7 @@ export class _BoardPage extends Component {
         <AppHeader />
         <TopPanel title={title} members={members} onUpdateTitle={this.onUpdateTitle} />
         <PopoverScreen
-          isOpen={popoverListId ? true : false}
+          isOpen={popoverListId}
           onTogglePopover={this.onTogglePopover}
         />
         {isCardPageOpen && <CardPage card={this.getCardById(this.props.match.params.cardId)} />}
@@ -159,11 +168,14 @@ export class _BoardPage extends Component {
 
 const mapDispatchToProps = {
   updateBoard,
+  showPopover,
+  hidePopover,
 };
 
 const mapStateToProps = state => {
   return {
     board: state.boardModule.board,
+    popoverListId: state.systemModule.popoverListId,
   };
 };
 
