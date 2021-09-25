@@ -1,7 +1,7 @@
 import { CircularProgress } from '@mui/material';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Modal } from 'react-responsive-modal';
+import Modal from '@mui/material/Modal';
 import { updateBoard } from '../store/actions/board.actions';
 import { withRouter } from 'react-router';
 import { CardDescription } from '../cmps/card/card-description';
@@ -11,7 +11,7 @@ import { CardPopover } from '../cmps/card/card-popover';
 import { CardChecklist } from '../cmps/card/card-checklist';
 
 class _CardPage extends Component {
-  state = { card: null, popover: null };
+  state = { card: null, popoverType: null, popoverAnchor: null };
 
   componentDidMount() {
     this.loadCard(this.props.match.params.cardId);
@@ -35,40 +35,68 @@ class _CardPage extends Component {
     );
   };
 
-  onTogglePopover = popover => {
-    this.setState({ popover });
+  onTogglePopover = popoverType => {
+    this.setState({ popoverType });
+  };
+
+  onClosePopover = () => {
+    this.setState({ popoverType: null, popoverAnchor: null });
   };
 
   render() {
     if (!this.state.card) return <CircularProgress sx={{ position: 'absolute' }} />;
     const { description, title, checklist } = this.state.card;
     const { boardId } = this.props.match.params;
-    const { popover } = this.state;
+    const { popoverType, popoverAnchor } = this.state;
     return (
-      <Modal
-        open
-        showCloseIcon={false}
-        onClose={() => this.props.history.push(`/board/${boardId}`)}>
-        {<CardPopover popover={popover} />}
-        <section className="card-page">
-          <CardHeader updateField={this.updateField} title={title} />
-          <div className="data-and-sidebar flex">
-            <main className="card-data">
-              <CardDescription description={description} updateField={this.updateField} />
-              <CardChecklist checklist={checklist} />
-            </main>
-            <aside className="card-sidebar">
-              <h3>Add to card</h3>
-              <button onClick={() => this.setState({ popover: 'add-members' })}>Members</button>
-              <button>Labels</button>
-              <button>Checklist</button>
-              <button>Dates</button>
-              <button>Attachment</button>
-              <button>Location</button>
-              <button>Cover</button>
-            </aside>
-          </div>
-        </section>
+      <Modal open={true} onClose={() => this.props.history.push(`/board/${boardId}`)}>
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            fontFamily: 'unset',
+            outline: 'none',
+            fontSize: '14px',
+          }}>
+          {popoverType && popoverAnchor && (
+            <CardPopover
+              popoverType={popoverType}
+              popoverAnchor={popoverAnchor}
+              onClosePopover={this.onClosePopover}
+            />
+          )}
+          <section className="card-page">
+            <CardHeader updateField={this.updateField} title={title} />
+            <div className="data-and-sidebar flex">
+              <main className="card-data">
+                <CardDescription description={description} updateField={this.updateField} />
+                <CardChecklist checklist={checklist} />
+              </main>
+              <aside className="card-sidebar">
+                <h3>Add to card</h3>
+                <button
+                  onClick={ev =>
+                    this.setState({ popoverType: 'add-members', popoverAnchor: ev.target })
+                  }>
+                  Members
+                </button>
+                <button
+                  onClick={ev =>
+                    this.setState({ popoverType: 'add-labels', popoverAnchor: ev.target })
+                  }>
+                  Labels
+                </button>
+                <button>Checklist</button>
+                <button>Dates</button>
+                <button>Attachment</button>
+                <button>Location</button>
+                <button>Cover</button>
+              </aside>
+            </div>
+          </section>
+        </div>
       </Modal>
     );
   }

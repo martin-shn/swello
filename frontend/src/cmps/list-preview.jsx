@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import AddIcon from '@mui/icons-material/Add';
-import { boardService } from '../services/board.service'
+import { boardService } from '../services/board.service';
 import { updateBoard } from '../store/actions/board.actions';
 import { Popover } from './popover';
 import { MainPage } from './list-popover-pages/main-page';
@@ -14,7 +14,7 @@ import { CardList } from './card-list';
 
 export class _ListPreview extends Component {
   state = {
-    popoverPage: 'main'
+    popoverPage: 'main',
   };
 
   componentDidUpdate = prevProps => {
@@ -27,13 +27,13 @@ export class _ListPreview extends Component {
     ev.preventDefault();
     const title = ev.target.title.value;
     const { board, list } = this.props;
-    const updatedBoard = boardService.addCard(board, list, title, isTopAdd)
+    const updatedBoard = boardService.addCard(board, list, title, isTopAdd);
     if (isTopAdd) {
       this.props.onAddingTopCard(false);
     } else {
       this.props.onAddingCard(false);
     }
-    this.props.updateBoard(updatedBoard)
+    this.props.updateBoard(updatedBoard);
   };
 
   onMovePage = page => {
@@ -139,12 +139,12 @@ export class _ListPreview extends Component {
 
 const mapDispatchToProps = {
   updateBoard,
-}
+};
 
 function mapStateToProps(state) {
   return {
-    board: state.boardModule.board
-  }
+    board: state.boardModule.board,
+  };
 }
 
-export const ListPreview = connect(mapStateToProps, mapDispatchToProps)(_ListPreview)
+export const ListPreview = connect(mapStateToProps, mapDispatchToProps)(_ListPreview);
