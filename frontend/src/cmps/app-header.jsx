@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { togglePopover } from '../store/actions/system.actions';
 import { createBoard, loadBoards } from '../store/actions/board.actions';
+import { onUpdateUser } from '../store/actions/user.actions';
 import { Link } from 'react-router-dom';
 import { Avatar } from '@mui/material';
 import { ReactComponent as ArrowDownIcon } from '../assets/svg/arrow-down.svg';
@@ -36,10 +37,16 @@ class _AppHeader extends Component {
           await this.props.loadBoards({ byUserId: user._id })
           boards = this.props.boards;
         }
-        console.log('boards from props:', boards, 'user is:', user);
         this.setState({starredBoards: boards.filter((board) => user.starredBoardsIds.includes(board._id))})
     }
 
+    async componentDidUpdate(prevProps, prevState) {
+        if(prevProps.user.starredBoardsIds!==this.props.user.starredBoardsIds){
+            await this.props.loadBoards({ byUserId: this.props.user._id })
+            const boards = this.props.boards;
+            this.setState({starredBoards: boards.filter((board) => this.props.user.starredBoardsIds.includes(board._id))})
+        }
+    }
     
 
     closePopover = () => {
@@ -76,12 +83,22 @@ class _AppHeader extends Component {
         this.setState({ isBoardsMenuOpen: false });
     };
 
+    onStar = async (ev, boardId) => {
+        ev.preventDefault()
+        ev.stopPropagation()
+        this.onCloseStarredBoards(ev)
+        let newUser = {...this.props.user}
+        newUser.starredBoardsIds = newUser.starredBoardsIds.filter(id=>id!==boardId)
+        await this.props.onUpdateUser(newUser)
+        this.setState({starredBoards: this.props.boards.filter((board) => board._id!==boardId && 
+            this.props.user.starredBoardsIds.includes(board._id))})
+    }
+
     render() {
         const { isUserBoardsPage } = this.props;
         const { isSearchActive } = this.state;
         const { isStarredMenuOpen, isBoardsMenuOpen, starredBoards } = this.state;
         const { boards, board, user } = this.props;
-        console.log('board:',board);
         if (!starredBoards) return <div></div>
         return (
             <header
@@ -90,6 +107,7 @@ class _AppHeader extends Component {
             >
                 <Link to='/board'>
                     <img className='logo' alt='swello' />
+                    <span>Swello</span>
                 </Link>
                 <div className='actions'>
                     <button
@@ -118,15 +136,34 @@ class _AppHeader extends Component {
                                             id='composition-menu'
                                             aria-labelledby='composition-button'
                                         >
-                                        <Typography className="popper-header">
+                                        <div className="popper-header">
                                                 <div>
                                                     Boards
                                                 </div>
-                                                <button onClick={this.onCloseStarredBoards}></button>
-                                            </Typography>
-                                            <Typography className="current-board list-group">
-                                                <div>CURRENT BOARD</div>
-                                                <div>
+                                                <button onClick={this.onCloseBoards}></button>
+                                        </div>
+                                        <div className="current-board list-group">
+                                            <div>CURRENT BOARD</div>
+                                            <div>
+                                                <div style={{backgroundImage:`url(${board?.style?.imgUrl}&w=400)`, backgroundColor:`${board?.style?.bgColor}`}}>
+                                                    {board.createdBy.fullname.charAt(0)}
+                                                </div>
+                                                <span>
+                                                    {board.title}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div className="your-boards list-group">
+                                            <div>YOUR BOARDS</div>
+                                            <ul>
+                                            {boards
+                                            .filter(board => board.createdBy._id === user._id && !user.starredBoardsIds.includes(board._id))
+                                            .map(board=><MenuItem 
+                                                key={board._id}
+                                                onClick={(ev)=>{
+                                                  this.onCloseBoards(ev); 
+                                                  window.location.href=`/board/${board._id}`
+                                                  }}>
                                                 <div>
                                                     <div style={{backgroundImage:`url(${board?.style?.imgUrl}&w=400)`, backgroundColor:`${board?.style?.bgColor}`}}>
                                                         {board.createdBy.fullname.charAt(0)}
@@ -135,63 +172,45 @@ class _AppHeader extends Component {
                                                         {board.title}
                                                     </span>
                                                 </div>
+                                            </MenuItem>)}
+                                            </ul>
+                                        </div>
+                                        <div className="guest-boards your-boards list-group">
+                                            <div>GUEST BOARDS</div>
+                                            <ul>
+                                            {boards
+                                            .filter(board => board.members.some(member => member._id === user._id) && !user.starredBoardsIds.includes(board._id))
+                                            .map(board=><MenuItem 
+                                                key={board._id}
+                                                onClick={(ev)=>{
+                                                    this.onCloseBoards(ev); 
+                                                    window.location.href=`/board/${board._id}`
+                                                }}>
+                                                <div>
+                                                    <div style={{backgroundImage:`url(${board?.style?.imgUrl}&w=400)`, backgroundColor:`${board?.style?.bgColor}`}}>
+                                                        {board.createdBy.fullname.charAt(0)}
+                                                    </div>
+                                                    <span>
+                                                        {board.title}
+                                                    </span>
                                                 </div>
-                                            </Typography>
-                                            <Typography className="your-boards list-group">
-                                                <div>YOUR BOARDS</div>
-                                                {boards
-                                                .filter(board => board.createdBy._id === user._id && !user.starredBoardsIds.includes(board._id))
-                                                .map(board=><MenuItem 
-                                                    key={board._id}
-                                                    onClick={(ev)=>{
-                                                      this.onCloseBoards(ev); 
-                                                      window.location.href=`/board/${board._id}`
-                                                      }}>
-                                                    <div>
-                                                        <div style={{backgroundImage:`url(${board?.style?.imgUrl}&w=400)`, backgroundColor:`${board?.style?.bgColor}`}}>
-                                                            {board.createdBy.fullname.charAt(0)}
-                                                        </div>
-                                                        <span>
-                                                            {board.title}
-                                                        </span>
-                                                    </div>
-                                                </MenuItem>)}
-                                            </Typography>
-
-                                            <Typography className="guest-boards list-group">
-                                                <div>GUEST BOARDS</div>
-                                                {boards
-                                                .filter(board => board.members.some(member => member._id === user._id) && !user.starredBoardsIds.includes(board._id))
-                                                .map(board=><MenuItem 
-                                                    key={board._id}
-                                                    onClick={(ev)=>{
-                                                        this.onCloseBoards(ev); 
-                                                        window.location.href=`/board/${board._id}`
-                                                    }}>
-                                                    <div>
-                                                        <div style={{backgroundImage:`url(${board?.style?.imgUrl}&w=400)`, backgroundColor:`${board?.style?.bgColor}`}}>
-                                                            {board.createdBy.fullname.charAt(0)}
-                                                        </div>
-                                                        <span>
-                                                            {board.title}
-                                                        </span>
-                                                    </div>
-                                                </MenuItem>)}
-                                            </Typography>
-                                        </MenuList>
-                                    </ClickAwayListener>
-                                </Paper>
-                            </Grow>
-                        )}
-                    </Popper>
-                    <button
-                        ref={this.starredAnchorRef}
-                        id='composition-button'
-                        aria-controls={isStarredMenuOpen ? 'composition-menu' : undefined}
-                        aria-expanded={isStarredMenuOpen ? 'true' : undefined}
-                        aria-haspopup='true'
-                        onClick={this.onStarredBoards}
-                    >
+                                            </MenuItem>)}
+                                            </ul>
+                                        </div>
+                                    </MenuList>
+                                </ClickAwayListener>
+                            </Paper>
+                        </Grow>
+                    )}
+                </Popper>
+                <button
+                    ref={this.starredAnchorRef}
+                    id='composition-button'
+                    aria-controls={isStarredMenuOpen ? 'composition-menu' : undefined}
+                    aria-expanded={isStarredMenuOpen ? 'true' : undefined}
+                    aria-haspopup='true'
+                    onClick={this.onStarredBoards}
+                >
                         <span>Starred</span>
                         <ArrowDownIcon />
                     </button>
@@ -210,18 +229,35 @@ class _AppHeader extends Component {
                                             id='composition-menu'
                                             aria-labelledby='composition-button'
                                         >
-                                            {starredBoards.map(starredBoard=>{
-                                            return <MenuItem 
-                                              key={starredBoard._id} 
-                                              onClick={(ev)=>{
-                                                this.onCloseStarredBoards(ev); 
-                                                window.location.href=`/board/${starredBoard._id}`
-                                                }}>
-                                              {starredBoard.title}
-                                            </MenuItem>})}
-                                            {/* <MenuItem onClick={this.onCloseStarredBoards}>Profile</MenuItem>
-                                            <MenuItem onClick={this.onCloseStarredBoards}>My account</MenuItem>
-                                            <MenuItem onClick={this.onCloseStarredBoards}>Logout</MenuItem> */}
+                                            <div className="popper-header">
+                                                <div>
+                                                    Starred boards
+                                                </div>
+                                                <button onClick={this.onCloseStarredBoards}></button>
+                                            </div>
+                                            <div className="starred-boards list-group">
+                                            {/* <div>YOUR BOARDS</div> */}
+                                            <ul>
+                                            {starredBoards
+                                            // .filter(board => board.createdBy._id === user._id && !user.starredBoardsIds.includes(board._id))
+                                            .map(starredBoard=><MenuItem 
+                                                key={starredBoard._id}
+                                                onClick={(ev)=>{
+                                                  this.onCloseBoards(ev); 
+                                                  window.location.href=`/board/${starredBoard._id}`
+                                                  }}>
+                                                <div>
+                                                    <div style={{backgroundImage:`url(${starredBoard?.style?.imgUrl}&w=400)`, backgroundColor:`${starredBoard?.style?.bgColor}`}}>
+                                                        {/* {starredBoard.createdBy.fullname.charAt(0)} */}
+                                                    </div>
+                                                    <span>
+                                                        {starredBoard.title}
+                                                    </span>
+                                                    <span onClick={(ev)=>{this.onStar(ev,starredBoard._id)}} title="Click to unstar this board. It will be removed from your starred list."></span>
+                                                </div>
+                                            </MenuItem>)}
+                                            </ul>
+                                        </div>
                                         </MenuList>
                                     </ClickAwayListener>
                                 </Paper>
@@ -264,6 +300,7 @@ const mapDispatchToProps = {
     togglePopover,
     createBoard,
     loadBoards,
+    onUpdateUser,
 };
 
 const mapStateToProps = (state) => {

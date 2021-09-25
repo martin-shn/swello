@@ -23,12 +23,19 @@
 
   .logo {
     max-height: 100%;
-    width: 75px;
+    height: 15px;
     cursor: pointer;
-    margin-right: 20px;
-    content: url(../../img/logo-static.gif);
+    content: url(../../img/static-icon.gif);
     &:hover {
-      content: url(../../img/logo-moving.gif);
+      content: url(../../img/moving-icon.gif);
+    }
+    &+span{
+      font-family: Charlie;
+      margin-right: 20px;
+      line-height: normal;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 1px;
     }
   }
 

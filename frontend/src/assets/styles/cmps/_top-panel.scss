@@ -37,4 +37,10 @@
       background-color: $clr-light-2;
     }
   }
+
+  .star{
+    &.starred>svg{
+      color: #e6c60d;
+    }
+  }
 }

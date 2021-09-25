@@ -29,7 +29,7 @@
         & .list-group {
             display: flex;
             flex-direction: column;
-            &>div:first-child {
+            & > div:first-child {
                 font-size: 12px;
                 color: #5e6c84;
                 font-weight: 500;
@@ -37,8 +37,8 @@
                 line-height: 16px;
                 margin: 8px 12px 0;
             }
-            &>div:not(:first-child),
-            &>li {
+            & > div:not(:first-child),
+            & > li {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
@@ -47,14 +47,21 @@
                 border-radius: 4px;
                 padding: 0 8px 6px;
                 margin: 8px 8px 14px;
-                &>div>div {
+                // &:hover {
+                //     background-color: rgba(9, 30, 66, 0.08);
+                //     color: #091e42;
+                // }
+                // &:active {
+                //     outline: 0;
+                // }
+                & > div {
                     height: 32px;
                     width: 32px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     border-radius: 6px;
-                    background-color: #f4f5f7;
+                    background-color: #c5c5c5;
                     overflow: hidden;
                     font-size: 20px;
                     color: #ffffff;
@@ -63,7 +70,7 @@
                     line-height: 16px;
                     margin: 0;
                 }
-                &>span {
+                & > span {
                     font-size: 14px;
                     font-weight: 600;
                     margin: 0 0 0 8px;
@@ -71,6 +78,153 @@
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
+                }
+            }
+        }
+
+        & .your-boards {
+            & > ul {
+                list-style: none;
+                padding-inline: 0;
+                margin-inline: 0;
+                & > li {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    text-decoration: none;
+                    overflow: hidden;
+                    border-radius: 4px;
+                    padding: 0 8px 6px;
+                    margin: 8px 8px 14px;
+                    &:hover {
+                        background-color: rgba(9, 30, 66, 0.08);
+                        color: #091e42;
+                    }
+                    &:active {
+                        outline: 0;
+                    }
+                    & > div {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        & > div {
+                            // your and guest avatar
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            height: 32px;
+                            width: 32px;
+                            border-radius: 6px;
+                            background-color: #c5c5c5;
+                            overflow: hidden;
+                            font-size: 20px;
+                            color: #ffffff;
+                            font-weight: bold;
+                            text-transform: uppercase;
+                            line-height: 16px;
+                            margin: 0;
+                            background-position: center center;
+                            background-size: cover;
+                        }
+
+                        & > span {
+                            // your and guest board name
+                            font-size: 14px;
+                            font-weight: 600;
+                            margin: 0 0 0 8px;
+                            flex: 1;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                    }
+                }
+            }
+        }
+
+        & .starred-boards {
+            & > ul {
+                display: inline-block;
+                width: 100%;
+                margin-top: -2px;
+                margin-bottom: 6px;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+
+                & > li {
+                    text-decoration: none;
+                    overflow: hidden;
+                    border-radius: 4px;
+                    padding: 6px 8px;
+                    margin: 8px 0;
+                    &:hover {
+                        background-color: rgba(9, 30, 66, 0.08);
+                        color: #091e42;
+                    }
+                    &:active {
+                        outline: 0;
+                    }
+                    & > div {
+                        display: flex!important;
+                        flex-direction: row;
+                        align-items: center;
+                        box-sizing: border-box;
+                        border-radius: 4px;
+                        position: relative;
+                        min-width: 0;
+                        display: block;
+                        float: left;
+                        width: 100%;
+                        & > div {
+                            // board avatar
+                            display: inline-block;
+                            flex: 0 0 auto;
+                            background-size: cover;
+                            border-radius: 4px;
+                            height: 32px;
+                            width: 40px;
+                            position: relative;
+                            opacity: 1;
+                        }
+
+                        & > span:first-of-type {
+                            // starred board name
+                            display: block;
+                            padding-right: 12px;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            font-size: 12px;
+                            color: #172B4D;
+                            line-height: 16px;
+                            font-weight: 500;
+                            padding: 0 0 0 8px;
+                            flex-grow: 1;
+                        }
+                        &>span:last-of-type{
+                            // star icon
+                            &::before{
+                                font-family: FA-regular;
+                                content: '\f005';
+                            }
+                            width: 24px;
+                            margin-right: 4px;
+                            font-size: 0.8rem;
+                            color: rgb(242, 214, 0);
+                            fill: inherit;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            transition-duration: 85ms;
+                            transition-property: transform;
+                            &:hover{
+                                transform: scale(1.2);
+                                transition-duration: 85ms;
+                                transition-property: transform;
+                            }
+                        }
+                    }
                 }
             }
         }
