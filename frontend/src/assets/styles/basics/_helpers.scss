@@ -26,6 +26,12 @@
   }
 }
 
+.clean-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 // Media helpers
 
 .square-ratio {
@@ -40,7 +46,7 @@
 
 .home::before {
   font-family: FA-solid;
-  content: '\f83e';
+  content: "\f83e";
 }
 
 .boards::before {

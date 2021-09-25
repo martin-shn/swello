@@ -5,13 +5,16 @@ export const ListAll = props => {
   const {
     lists,
     onAddingCard,
-    activeListId,
+    onAddingTopCard,
+    activeList,
     popoverListId,
     onTogglePopover,
     isAddingList,
     onAddingList,
     onAddList,
     onListUpdated,
+    onCopyList,
+    onMoveList
   } = props;
   return (
     <section className="list-all flex full with-main-layout">
@@ -19,11 +22,16 @@ export const ListAll = props => {
         <ListPreview
           key={list.id}
           list={list}
-          isAddingCard={activeListId === list.id}
+          lists={lists}
+          isAddingCard={activeList.id === list.id && !activeList.isTopAdd}
+          isTopAdd={activeList.isTopAdd && activeList.id === list.id}
           isPopoverOpen={popoverListId === list.id}
           onAddingCard={onAddingCard}
+          onAddingTopCard={onAddingTopCard}
           onTogglePopover={onTogglePopover}
           onListUpdated={onListUpdated}
+          onCopyList={onCopyList}
+          onMoveList={onMoveList}
         />
       ))}
       <ListAdd isAddingList={isAddingList} onAddingList={onAddingList} onAddList={onAddList} />
