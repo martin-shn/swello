@@ -131,7 +131,7 @@ export class _BoardPage extends Component {
     if (!this.props.board) return <CircularProgress />;
     const { activeList, isAddingList, isCardPageOpen } = this.state;
     const {popoverListId} = this.props;
-    const { title, members, lists, style } = this.state.board;
+    const { title, members, lists, style } = this.props.board;
     
     return (
       <main
@@ -170,7 +170,7 @@ const mapDispatchToProps = {
   updateBoard,
   showPopover,
   hidePopover,
-  // loadBoard,
+  loadBoard,
 };
 
 const mapStateToProps = state => {

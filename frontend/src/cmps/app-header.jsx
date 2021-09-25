@@ -132,7 +132,6 @@ class _AppHeader extends Component {
         const { isStarredMenuOpen, isBoardsMenuOpen, starredBoards } = this.state;
         const { boards } = this.props;
         if (!starredBoards) return <div>Loading</div>
-        console.log('starredBoards from state:', starredBoards);
         return (
             <header
                 onClick={this.closePopover}
