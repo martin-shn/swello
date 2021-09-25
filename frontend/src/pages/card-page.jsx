@@ -64,6 +64,7 @@ class _CardPage extends Component {
             <CardPopover
               popoverType={popoverType}
               popoverAnchor={popoverAnchor}
+              card={this.state.card}
               onClosePopover={this.onClosePopover}
             />
           )}

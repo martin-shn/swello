@@ -25,7 +25,7 @@ export function updateCard(board, updatedCard, activity) {
 export function addCard(board, list, cardTitle, isTopAdd) {
     const card = {
         id: utilService.makeId(),
-        title: cardTitle
+        title: cardTitle,
     };
     const listIdx = board.lists.findIndex(currList => currList.id === list.id)
     if (isTopAdd) {

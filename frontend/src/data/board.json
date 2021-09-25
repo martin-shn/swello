@@ -14,13 +14,33 @@
     "labels": [
       {
         "id": "l101",
-        "title": "Done",
-        "color": "#61bd4f"
+        "title": "",
+        "color": "green"
       },
       {
         "id": "l102",
-        "title": "TBD",
-        "color": "#21dd40"
+        "title": "",
+        "color": "yellow"
+      },
+      {
+        "id": "l103",
+        "title": "",
+        "color": "orange"
+      },
+      {
+        "id": "l104",
+        "title": "",
+        "color": "red"
+      },
+      {
+        "id": "l105",
+        "title": "",
+        "color": "purple"
+      },
+      {
+        "id": "l106",
+        "title": "",
+        "color": "blue"
       }
     ],
     "members": [
@@ -45,7 +65,11 @@
             "title": "Replace logo",
             "style": {
               "bgColor": "#aa0055"
-            }
+            },
+            "labelIds": [
+              "l101",
+              "l102"
+            ]
           },
           {
             "id": "c102",
@@ -85,13 +109,33 @@
     "labels": [
       {
         "id": "l101",
-        "title": "Done",
-        "color": "#61bd4f"
+        "title": "",
+        "color": "green"
       },
       {
         "id": "l102",
-        "title": "Maybe",
-        "color": "#21004f"
+        "title": "",
+        "color": "yellow"
+      },
+      {
+        "id": "l103",
+        "title": "",
+        "color": "orange"
+      },
+      {
+        "id": "l104",
+        "title": "",
+        "color": "red"
+      },
+      {
+        "id": "l105",
+        "title": "",
+        "color": "purple"
+      },
+      {
+        "id": "l106",
+        "title": "",
+        "color": "blue"
       }
     ],
     "members": [
@@ -167,7 +211,10 @@
                 "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
               }
             ],
-            "labelIds": ["l101", "l102"],
+            "labelIds": [
+              "l101",
+              "l102"
+            ],
             "createdAt": 1590999730348,
             "dueDate": 16156215211,
             "byMember": {
