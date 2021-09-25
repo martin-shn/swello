@@ -68,8 +68,7 @@ function saveCard(board, updatedCard, activity) {
     });
   });
   // board.activities.push(activity);
-  const updatedBoard = { ...board };
-  return updatedBoard;
+  return board;
 }
 
 function addList(board, listTitle) {

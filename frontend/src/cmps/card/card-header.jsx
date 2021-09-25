@@ -1,9 +1,16 @@
+import { useEffect, useRef } from 'react';
+
 export const CardHeader = props => {
+  const titleRef = useRef();
+  useEffect(() => {
+    titleRef.current.blur();
+  }, []);
   return (
     <header className="card-section card-header">
       <div> Img </div>
       <div>
         <h2
+          ref={titleRef}
           className="card-title content-editable"
           contentEditable
           suppressContentEditableWarning
