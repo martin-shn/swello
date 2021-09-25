@@ -1,11 +1,12 @@
+// TODO OPTIONAL - cancel list-preview class padding and move it to the contents, like the real trello
 .list-preview {
   min-width: 272px; // do not grow, do not shrink, stay 272px
   max-width: 272px;
   background-color: #ebecf0;
   border-radius: 3px;
   padding: 10px 8px;
-  gap: 10px;
   height: fit-content;
+  position: relative;
 
   .btn-more {
     position: relative;
@@ -29,6 +30,7 @@
   }
 
   .list-header {
+    margin-bottom: 8px;
     .list-title {
       font-weight: 600;
       font-size: 1em;
@@ -59,13 +61,12 @@
       border-radius: 3px;
       outline: none;
       border: none;
+      margin-bottom: 4px;
     }
-    .btn-add {
-      background-color: #0079bf;
-      color: #fff;
-      padding: 6px 12px;
+    .close-icon {
+      color: #6b778c;
       &:hover {
-        background-color: #026aa7;
+        color: #172b4d;
       }
     }
   }

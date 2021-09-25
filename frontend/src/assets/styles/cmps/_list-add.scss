@@ -1,8 +1,24 @@
 .list-add {
-  background-color: #00000014;
   cursor: pointer;
+  color: #fff;
 
-  &:not(.adding):hover {
-    background-color: #00000029;
+  input {
+    background-color: #fff;
+    width: 100%;
+    padding: 8px 12px;
+  }
+
+  form {
+    gap: 5px;
+  }
+
+  // TODO bonus: Add transition to list change from not adding to adding
+
+  &:not(.adding) {
+    background-color: #ffffff3d;
+
+    &:hover {
+      background-color: #ffffff52;
+    }
   }
 }

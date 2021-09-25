@@ -36,15 +36,11 @@ async function add(board) {
 
   board._id = utilService.makeId();
   board.createdBy = userService.getLoggedinUser();
-  if (!board.createdBy) {
-    board.createdBy = await userService.getById('u101');
-    delete board.createdBy.password
-    delete board.createdBy.mentions
-  }
+  board.labels = [];
+  board.lists = [{id: utilService.makeId(), title: 'List title'}]
   board.members.push(board.createdBy)
   board.createdAt = Date.now();
   const addedBoard = storageService.post('board', board);
-
   return addedBoard;
 }
 

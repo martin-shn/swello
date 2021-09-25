@@ -5,9 +5,9 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Avatar } from '@mui/material';
 
 export const TopPanel = props => {
-  const { title, members, onUpdateBoard } = props;
+  const { title, members, onUpdateTitle } = props;
   return (
-    <section className="top-panel flex space-between">
+    <section className="top-panel full flex space-between">
       <div className="flex align-center">
         <button>
           <BtnBoardIcon />
@@ -19,7 +19,7 @@ export const TopPanel = props => {
           className="board-name content-editable"
           contentEditable
           suppressContentEditableWarning={true}
-          onBlur={ev => onUpdateBoard({ title: ev.target.innerText })}>
+          onBlur={ev => onUpdateTitle(ev.target.innerText)}>
           {title}
         </h1>
         <button>

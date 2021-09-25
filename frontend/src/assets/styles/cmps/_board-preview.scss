@@ -23,14 +23,14 @@
         border-radius: 3px;
         display: block;
         opacity: 0.7;
-        transition: opacity .15s ease;
+        transition: opacity 0.15s ease;
     }
 
     &:not(.new-board) > div {
         display: flex;
         flex-direction: column;
         height: 80px;
-        font-weight: 800;
+        font-weight: 700;
         justify-content: space-between;
         position: relative;
         & span {
@@ -40,24 +40,43 @@
             white-space: nowrap;
         }
     }
-    &.new-board > div {
-        display: flex;
-        color: #172b4d;
-        flex-direction: column;
-        height: 80px;
-        align-items: center;
-        justify-content: center;
-        position: relative;
+    &.new-board {
+        background-color: #f0f2f5;
+        color: $clr-default;
+        font-size: rem(14px);
+        &:hover {
+            background-color: #e7e9ed;
+        }
+        &:active {
+            background-color: #e4f0f6;
+            border: none;
+            box-shadow: none;
+            color: #0079bf;
+            outline: 0;
+        }
+        div {
+            display: flex;
+            flex-direction: column;
+            background-color: transparent;
+            height: 80px;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        span {
+            display: none;
+        }
     }
 
     & .star::before {
         font-family: FA-regular;
-        content: '\f005';
+        content: "\f005";
     }
 
-    &:hover span:first-child{
+    &:hover span:first-child {
         opacity: 1;
-        transition: opacity .15s ease;
+        transition: opacity 0.15s ease;
     }
 
     &:hover .star {
@@ -71,7 +90,7 @@
         margin-right: 6px;
         width: 18px;
         transition-duration: 0.15s;
-        transition-property: color, background, opacity, transform, width, margin;
+        transition-property: color, background-color, opacity, transform, width, margin;
     }
 
     & .star {
@@ -87,7 +106,7 @@
         opacity: 0;
         color: #fff;
         transition-duration: 0.15s;
-        transition-property: color, background, opacity, transform, width, margin;
+        transition-property: color, background-color, opacity, transform, width, margin;
 
         &:hover {
             color: #e6c60d;
@@ -105,10 +124,10 @@
             line-height: 18px;
             margin-right: 6px;
             width: 18px;
-            transition: .15s;
-            &:hover{
+            transition: 0.15s;
+            &:hover {
                 transform: scale(1.2);
-                transition: .15s;
+                transition: 0.15s;
             }
         }
     }

@@ -1,30 +1,42 @@
-.user-boards{
+.user-boards {
     display: flex;
     flex-direction: column;
-    & section{
+    & section {
         display: flex;
 
-        & .side-nav{
+        & .side-nav {
             margin: 40px 0 0;
             padding: 0 16px;
             width: 240px;
-            & ul{
+            & ul {
                 list-style: none;
                 margin: 0;
                 margin-block: 0;
                 padding-inline-start: 0;
-                & li{
-                    &::before{
-                        width:1rem;
-                        height: 1rem;
-                        font-size: 1rem;
-                        object-fit:scale-down;
-                    }
+                & li {
                     line-height: 20px;
-                    margin-bottom: 15px;
+                    margin-bottom: 5px;
+                    padding: 8px 6px;
                     display: flex;
                     align-items: center;
-                    & a{
+                    border-radius: 4px;
+                    cursor: pointer;
+                    &.active {
+                        background-color: #e4f0f6;
+                        color: #0079bf;
+                    }
+                    &:hover {
+                        &:not(.active) {
+                            background-color: rgba(9, 30, 66, 0.08);
+                        }
+                    }
+                    &::before {
+                        width: 1rem;
+                        height: 1rem;
+                        font-size: 1rem;
+                        object-fit: scale-down;
+                    }
+                    & a {
                         padding-inline-start: 15px;
                         font-weight: 700;
                     }
@@ -32,7 +44,7 @@
             }
         }
 
-        & .user-boards-main{
+        & .user-boards-main {
             flex-grow: 1;
         }
     }
@@ -45,8 +57,6 @@
 
     & > h3 {
         align-items: center;
-        color: #5e6c84;
-        display: flex;
         flex: 1;
         font-size: rem(16px);
         font-weight: 700;
@@ -59,19 +69,19 @@
         padding: 0 0 11px 0;
     }
 
-    &>.star::before{
+    & > .star::before {
         font-family: FA-solid;
-        content: '\f005';
+        content: "\f005";
         margin-right: 15px;
     }
-    & .your-boards::before{
+    & .your-boards::before {
         font-family: FA-solid;
-        content: '\f007';
+        content: "\f007";
         margin-right: 15px;
     }
-    & .guest-boards::before{
+    & .guest-boards::before {
         font-family: FA-solid;
-        content: '\f0c0';
+        content: "\f0c0";
         margin-right: 15px;
     }
 }

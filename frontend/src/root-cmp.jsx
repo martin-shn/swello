@@ -9,7 +9,7 @@ export class RootCmp extends React.Component {
       <main>
         <Switch>
           {routes.map(route => (
-            <Route key={route.path} exact component={route.component} path={route.path} />
+            <Route key={route.path} component={route.component} path={route.path} />
           ))}
         </Switch>
       </main>
