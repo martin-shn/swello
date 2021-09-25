@@ -13,6 +13,7 @@ import { BoardAdd } from './board-list/board-add'
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
 import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
 import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
@@ -79,7 +80,8 @@ class _AppHeader extends Component {
         const { isUserBoardsPage } = this.props;
         const { isSearchActive } = this.state;
         const { isStarredMenuOpen, isBoardsMenuOpen, starredBoards } = this.state;
-        const { boards } = this.props;
+        const { boards, board, user } = this.props;
+        console.log('board:',board);
         if (!starredBoards) return <div></div>
         return (
             <header
@@ -101,7 +103,7 @@ class _AppHeader extends Component {
                         <span>Boards</span>
                         <ArrowDownIcon />
                     </button>
-                    <Popper open={isBoardsMenuOpen} anchorEl={this.boardsAnchorRef.current} role={undefined} placement='bottom-start' transition disablePortal>
+                    <Popper className="borads-popper header-popper-menu" open={isBoardsMenuOpen} anchorEl={this.boardsAnchorRef.current} role={undefined} placement='bottom-start' transition disablePortal>
                         {({ TransitionProps, placement }) => (
                             <Grow
                                 {...TransitionProps}
@@ -116,18 +118,66 @@ class _AppHeader extends Component {
                                             id='composition-menu'
                                             aria-labelledby='composition-button'
                                         >
-                                            {boards.map(board=>{
-                                            return <MenuItem 
-                                                      key={board._id}
-                                                      onClick={(ev)=>{
+                                        <Typography className="popper-header">
+                                                <div>
+                                                    Boards
+                                                </div>
+                                                <button onClick={this.onCloseStarredBoards}></button>
+                                            </Typography>
+                                            <Typography className="current-board list-group">
+                                                <div>CURRENT BOARD</div>
+                                                <div>
+                                                <div>
+                                                    <div style={{backgroundImage:`url(${board?.style?.imgUrl}&w=400)`, backgroundColor:`${board?.style?.bgColor}`}}>
+                                                        {board.createdBy.fullname.charAt(0)}
+                                                    </div>
+                                                    <span>
+                                                        {board.title}
+                                                    </span>
+                                                </div>
+                                                </div>
+                                            </Typography>
+                                            <Typography className="your-boards list-group">
+                                                <div>YOUR BOARDS</div>
+                                                {boards
+                                                .filter(board => board.createdBy._id === user._id && !user.starredBoardsIds.includes(board._id))
+                                                .map(board=><MenuItem 
+                                                    key={board._id}
+                                                    onClick={(ev)=>{
+                                                      this.onCloseBoards(ev); 
+                                                      window.location.href=`/board/${board._id}`
+                                                      }}>
+                                                    <div>
+                                                        <div style={{backgroundImage:`url(${board?.style?.imgUrl}&w=400)`, backgroundColor:`${board?.style?.bgColor}`}}>
+                                                            {board.createdBy.fullname.charAt(0)}
+                                                        </div>
+                                                        <span>
+                                                            {board.title}
+                                                        </span>
+                                                    </div>
+                                                </MenuItem>)}
+                                            </Typography>
+
+                                            <Typography className="guest-boards list-group">
+                                                <div>GUEST BOARDS</div>
+                                                {boards
+                                                .filter(board => board.members.some(member => member._id === user._id) && !user.starredBoardsIds.includes(board._id))
+                                                .map(board=><MenuItem 
+                                                    key={board._id}
+                                                    onClick={(ev)=>{
                                                         this.onCloseBoards(ev); 
                                                         window.location.href=`/board/${board._id}`
-                                                        }}>
-                                                        {board.title}
-                                                    </MenuItem>})}
-                                            {/* <MenuItem onClick={this.onCloseBoards}>Profile</MenuItem>
-                                            <MenuItem onClick={this.onCloseBoards}>My account</MenuItem>
-                                            <MenuItem onClick={this.onCloseBoards}>Logout</MenuItem> */}
+                                                    }}>
+                                                    <div>
+                                                        <div style={{backgroundImage:`url(${board?.style?.imgUrl}&w=400)`, backgroundColor:`${board?.style?.bgColor}`}}>
+                                                            {board.createdBy.fullname.charAt(0)}
+                                                        </div>
+                                                        <span>
+                                                            {board.title}
+                                                        </span>
+                                                    </div>
+                                                </MenuItem>)}
+                                            </Typography>
                                         </MenuList>
                                     </ClickAwayListener>
                                 </Paper>
@@ -145,7 +195,7 @@ class _AppHeader extends Component {
                         <span>Starred</span>
                         <ArrowDownIcon />
                     </button>
-                    <Popper open={isStarredMenuOpen} anchorEl={this.starredAnchorRef.current} role={undefined} placement='bottom-start' transition disablePortal>
+                    <Popper className="starred-borads-popper header-popper-menu" open={isStarredMenuOpen} anchorEl={this.starredAnchorRef.current} role={undefined} placement='bottom-start' transition disablePortal>
                         {({ TransitionProps, placement }) => (
                             <Grow
                                 {...TransitionProps}
@@ -220,6 +270,7 @@ const mapStateToProps = (state) => {
     return {
         isPopoverOpen: state.boardModule.boards,
         boards: state.boardModule.boards,
+        board: state.boardModule.board,
         user: state.userModule.user,
     };
 };
