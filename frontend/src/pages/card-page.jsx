@@ -18,6 +18,11 @@ class _CardPage extends Component {
     this.loadCard(this.props.match.params.cardId);
   }
 
+  onCloseCard = () => {
+    const { boardId } = this.props.match.params;
+    this.props.history.push(`/board/${boardId}`);
+  };
+
   loadCard = async cardId => {
     const { board } = this.props;
     const card = boardService.getCardById(board, cardId);
@@ -47,10 +52,9 @@ class _CardPage extends Component {
   render() {
     if (!this.state.card) return <CircularProgress sx={{ position: 'absolute' }} />;
     const { description, title, checklist } = this.state.card;
-    const { boardId } = this.props.match.params;
     const { popoverType, popoverAnchor } = this.state;
     return (
-      <Modal open={true} onClose={() => this.props.history.push(`/board/${boardId}`)}>
+      <Modal open={true} onClose={this.onCloseCard}>
         <div className="card-page-wrapper">
           {popoverType && popoverAnchor && (
             <CardPopover
@@ -61,7 +65,11 @@ class _CardPage extends Component {
             />
           )}
           <section className="card-page">
-            <CardHeader updateField={this.updateField} title={title} />
+            <CardHeader
+              updateField={this.updateField}
+              title={title}
+              onCloseCard={this.onCloseCard}
+            />
             <div className="data-and-sidebar flex">
               <main className="card-data">
                 <CardLabels />
