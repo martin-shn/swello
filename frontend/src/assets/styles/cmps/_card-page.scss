@@ -59,8 +59,8 @@
       min-height: 32px;
       > *:first-child {
         // the svg img
-        width: 25px;
-        height: 25px;
+        width: 22px;
+        height: 22px;
       }
       > *:nth-child(2) {
         // the title
@@ -78,7 +78,7 @@
   button {
     padding: 6px 12px;
   }
-  button,
+  button:not(.btn-add),
   .btn {
     &:hover {
       background-color: #091e4214;

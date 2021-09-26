@@ -23,12 +23,13 @@
 @import 'cmps/app-header';
 
 // Card Page
-@import "cmps/card/card-header";
-@import "cmps/card/card-description";
-@import "cmps/card/card-details";
-@import 'cmps/card/card-checklist';
-@import "cmps/card/popover";
-@import "cmps/card/card-popover-pages/add-labels";
+@import 'cmps/card/card-header';
+@import 'cmps/card/card-description';
+@import 'cmps/card/card-members-labels';
+@import 'cmps/card/card-checklists';
+@import 'cmps/card/popover';
+@import 'cmps/card/card-popover-pages/add-labels';
+@import 'cmps/card/card-popover-pages/add-checklist';
 
 //
 @import 'cmps/home-header';

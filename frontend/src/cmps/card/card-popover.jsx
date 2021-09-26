@@ -2,10 +2,12 @@ import { ClickAwayListener, Grow, MenuList, Paper, Popper } from '@mui/material'
 import React, { Component } from 'react';
 import { AddMembers } from './card-popover-pages/add-members';
 import { AddLabels } from './card-popover-pages/add-labels';
+import { AddChecklist } from './card-popover-pages/add-checklist';
 
 export class CardPopover extends Component {
+  onClosePopover = () => this.props.onTogglePopover(null, null);
   render() {
-    const { popoverType, popoverAnchor, card, onTogglePopover, updateField } = this.props;
+    const { popoverType, popoverAnchor, card, updateField } = this.props;
     return (
       <Popper
         className="cards-popper header-popper-menu"
@@ -21,10 +23,25 @@ export class CardPopover extends Component {
               transformOrigin: placement === 'bottom-start' ? 'left top' : 'left bottom',
             }}>
             <Paper>
-              <ClickAwayListener onClickAway={() => onTogglePopover(null, null)}>
+              <ClickAwayListener onClickAway={this.onClosePopover}>
                 <div>
-                  {popoverType === 'add-members' && <AddMembers onTogglePopover={() => onTogglePopover(null, null)} />}
-                  {popoverType === 'add-labels' && <AddLabels card={card} onTogglePopover={() => onTogglePopover(null, null)} updateField={updateField} />}
+                  {popoverType === 'add-members' && (
+                    <AddMembers onTogglePopover={this.onClosePopover} />
+                  )}
+                  {popoverType === 'add-labels' && (
+                    <AddLabels
+                      card={card}
+                      onTogglePopover={this.onClosePopover}
+                      updateField={updateField}
+                    />
+                  )}
+                  {popoverType === 'add-checklist' && (
+                    <AddChecklist
+                      card={card}
+                      onClosePopover={this.onClosePopover}
+                      updateField={updateField}
+                    />
+                  )}
                 </div>
               </ClickAwayListener>
             </Paper>
