@@ -24,6 +24,7 @@ export class CardChecklists extends Component {
   render() {
     const { checklists } = this.props;
     const { addingChecklistId } = this.state;
+    if (!checklists) return <></>;
     return (
       <section className="card-section card-checklists">
         {checklists.map(checklist => (
