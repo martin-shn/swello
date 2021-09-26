@@ -2,27 +2,23 @@
   .btn-edit {
     margin-left: 8px;
   }
-  svg {
-    fill: #42526e;
+  .description-view {
+    cursor: pointer;
+    white-space: pre;
+    padding: 8px 12px 8px 0;
+    &.empty {
+      background-color: #091e420a;
+      height: 56px;
+      padding: 8px 12px;
+    }
   }
+
   textarea {
-    border-radius: 3px;
     padding: 8px 12px;
+    border-radius: 3px;
     width: 100%;
     resize: none;
-    transition-duration: 85ms;
-    transition-property: background-color, border-color, box-shadow;
-    transition-timing-function: ease;
-    &:not(:focus) {
-      background-color: #091e420a;
-      box-shadow: none;
-      &::placeholder {
-        color: $clr-default;
-      }
-    }
-    &:focus {
-      background-color: #fff;
-      height: 100px;
-    }
+    overflow: hidden;
+    min-height: 108px;
   }
 }

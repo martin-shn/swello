@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { ReactComponent as CloseIcon } from '../../assets/svg/close.svg';
 
 export const CardHeader = props => {
   const titleRef = useRef();
@@ -20,6 +21,9 @@ export const CardHeader = props => {
         </h2>
         <p className="in-list">in list: List Name</p>
       </div>
+      <button className="btn-close" onClick={props.onCloseCard}>
+        <CloseIcon />
+      </button>
     </header>
   );
 };

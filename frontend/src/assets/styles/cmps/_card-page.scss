@@ -1,3 +1,14 @@
+.card-page-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: unset;
+  outline: none;
+  font-size: 14px;
+  line-height: 20px;
+}
+
 .card-page {
   width: 768px;
   background-color: #f4f5f7;
@@ -43,6 +54,7 @@
       align-items: center;
       gap: 15px;
       margin-bottom: 10px;
+      min-height: 32px;
       > *:first-child {
         width: 25px;
         height: 25px;
@@ -59,8 +71,15 @@
 
   button {
     padding: 6px 12px;
+  }
+  button,
+  .btn {
     &:hover {
       background-color: #091e4214;
+    }
+    &:active {
+      background-color: #e4f0f6;
+      color: #0079bf;
     }
   }
 }

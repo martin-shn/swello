@@ -22,7 +22,7 @@ export class CardDescription extends Component {
   };
 
   onEdit = () => {
-    this.descriptionRef.current.focus();
+    this.setState({ isEditing: true }, () => this.descriptionRef.current.select());
   };
 
   onCancel = () => {
@@ -45,21 +45,34 @@ export class CardDescription extends Component {
           </div>
         </div>
         <div className="section-data">
-          <textarea
-            name="description"
-            placeholder="Add a more detailed description..."
-            onChange={ev => this.setState({ description: ev.target.value })}
-            onFocus={() => this.setState({ isEditing: true })}
-            ref={this.descriptionRef}
-            value={description}
-          />
+          {!isEditing && (
+            <p
+              className={'description-view' + (description ? '' : ' btn empty')}
+              onClick={this.onEdit}>
+              {description || 'Add a more detailed description...'}
+            </p>
+          )}
           {isEditing && (
-            <div className="add-controls">
-              <button onClick={this.onSave} className="btn-add">
-                Save
-              </button>
-              <CloseIcon className="close-icon" onClick={this.onCancel} />
-            </div>
+            <>
+              <textarea
+                name="description"
+                placeholder="Add a more detailed description..."
+                onChange={ev => this.setState({ description: ev.target.value })}
+                onFocus={ev => this.setState({ isEditing: true })}
+                ref={this.descriptionRef}
+                onKeyDown={ev => {
+                  ev.target.style.height = '5px';
+                  ev.target.style.height = ev.target.scrollHeight + 'px';
+                }}
+                value={description}
+              />
+              <div className="add-controls">
+                <button onClick={this.onSave} className="btn-add">
+                  Save
+                </button>
+                <CloseIcon className="close-icon" onClick={this.onCancel} />
+              </div>
+            </>
           )}
         </div>
       </section>
