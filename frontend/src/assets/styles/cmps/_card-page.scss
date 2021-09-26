@@ -64,3 +64,108 @@
     }
   }
 }
+
+// LABELS COLORS
+
+.label {
+  color: #fff;
+  &.detail {
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  &.green {
+    background-color: #61bd4f;
+    &.add {
+      &:hover {
+        box-shadow: -8px 0 #519839;
+      }
+    }
+    &.detail {
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+  &.yellow {
+    background-color: #f2d600;
+    &.add {
+      &:hover {
+        box-shadow: -8px 0 #d9b51c;
+      }
+    }
+  }
+  &.orange {
+    background-color: #ff9f1a;
+    &.add {
+      &:hover {
+        box-shadow: -8px 0 #cd8313;
+      }
+    }
+  }
+  &.red {
+    background-color: #eb5a46;
+    &.add {
+      &:hover {
+        box-shadow: -8px 0 #b04632;
+      }
+    }
+  }
+  &.purple {
+    background-color: #c377e0;
+    &.add {
+      &:hover {
+        box-shadow: -8px 0 #89609e;
+      }
+    }
+  }
+  &.blue {
+    background-color: #0079bf;
+    &.add {
+      &:hover {
+        box-shadow: -8px 0 #055a8c;
+      }
+    }
+  }
+  &.sky {
+    background-color: #00c2e0;
+    &.add {
+      &:hover {
+        box-shadow: -8px 0 #0098b7;
+      }
+    }
+  }
+  &.lime {
+    background-color: #51e898;
+    &.add {
+      &:hover {
+        box-shadow: -8px 0 #4bbf6b;
+      }
+    }
+  }
+  &.pink {
+    background-color: #ff78cb;
+    &.add {
+      &:hover {
+        box-shadow: -8px 0 #c9558f;
+      }
+    }
+  }
+  &.black {
+    background-color: #344563;
+    &.add {
+      &:hover {
+        box-shadow: -8px 0 #091e42;
+      }
+    }
+  }
+  &.gray {
+    background-color: #b3bac5;
+    &.add {
+      &:hover {
+        box-shadow: -8px 0 #97a0af;
+      }
+    }
+  }
+}

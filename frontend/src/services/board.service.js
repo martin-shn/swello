@@ -3,14 +3,13 @@ import { userService } from './user.service';
 import { socketService, SOCKET_EVENT_REVIEW_ADDED } from './socket.service';
 import { utilService } from './util.service';
 import { addList, copyList, updateList, moveList } from './board-services/list.service';
-import { getCardById, updateCard, addCard } from './board-services/card.service';
+import { updateCard, addCard } from './board-services/card.service';
 export const boardService = {
   add,
   query,
   update,
   remove,
   getById,
-  getCardById,
   updateCard,
   addCard,
   addList,

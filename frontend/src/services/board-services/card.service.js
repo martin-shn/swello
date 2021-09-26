@@ -1,14 +1,12 @@
 import { utilService } from "../util.service";
 
-export function getCardById(board, cardId) {
-    for (const list of board.lists) {
-        if (!list.cards) continue;
-        for (const card of list.cards) {
-            if (card.id === cardId) return card;
-        }
-    }
-    return null;
+export const cardService = {
+    getCardById,
+    toggleLabel
 }
+
+// CARD FUNCTIONS - returns updated board
+
 
 export function updateCard(board, updatedCard, activity) {
     board.lists.forEach(list => {
@@ -34,4 +32,27 @@ export function addCard(board, list, cardTitle, isTopAdd) {
         board.lists[listIdx].cards.push(card)
     }
     return board;
+}
+
+// CARD FUNCTIONS - returns updated card
+
+function getCardById(board, cardId) {
+    for (const list of board.lists) {
+        if (!list.cards) continue;
+        for (const card of list.cards) {
+            if (card.id === cardId) return card;
+        }
+    }
+    return null;
+}
+
+function toggleLabel(card, labelId) {
+    if (!card.labelIds) card.labelIds = [];
+    const idx = card.labelIds.findIndex(currLabelId => currLabelId === labelId)
+    if (idx === -1) {
+        card.labelIds.push(labelId)
+    } else {
+        card.labelIds.splice(idx, 1)
+    }
+    return card;
 }
