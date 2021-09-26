@@ -5,6 +5,7 @@ export const cardService = {
   toggleLabel,
   addChecklist,
   deleteChecklist,
+  getListOfCard,
 };
 
 // CARD FUNCTIONS - returns updated board
@@ -47,6 +48,17 @@ function getCardById(board, cardId) {
   return null;
 }
 
+// General
+
+function getListOfCard(board, cardId) {
+  for (const list of board.lists) {
+    if (!list.cards) continue;
+    for (const card of list.cards) {
+      if (card.id === cardId) return list;
+    }
+  }
+  return null; // shouldnt happen but anyways
+}
 // Labels
 
 function toggleLabel(card, labelId) {

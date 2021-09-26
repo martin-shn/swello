@@ -67,6 +67,8 @@ class _CardPage extends Component {
               updateField={this.updateField}
               title={title}
               onCloseCard={this.onCloseCard}
+              board={this.props.board}
+              card={card}
             />
             <div className="data-and-sidebar flex">
               <main className="card-data">
