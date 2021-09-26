@@ -1,6 +1,8 @@
 .list-add {
   cursor: pointer;
-  // color: #fff;
+  .add-placeholder {
+    color: #fff;
+  }
 
   input {
     background-color: #fff;
@@ -15,7 +17,8 @@
   // TODO bonus: Add transition to list change from not adding to adding
 
   &:not(.adding) {
-    background-color: #ffffff3d;
+    // background-color: #ffffff3d;
+    background-color: $clr-light;
 
     &:hover {
       background-color: #ffffff52;

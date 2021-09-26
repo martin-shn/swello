@@ -40,6 +40,7 @@ export class CardChecklist extends Component {
   get percentageDone() {
     const { items } = this.props.checklist;
     const countDone = items.reduce((count, item) => count + (item.isDone ? 1 : 0), 0);
+    if (countDone === 0) return 0;
     return parseInt((countDone / items.length) * 100);
   }
 
