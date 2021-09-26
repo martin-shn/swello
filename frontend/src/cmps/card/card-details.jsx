@@ -19,7 +19,7 @@ export class CardDetails extends React.Component {
                     <div className="labels-container flex">
                         {card.labelIds.map(labelId => {
                             const label = board.labels.find(label => label.id === labelId)
-                            return <div key={labelId} className={"label detail " + label.color} onClick={(ev) => {
+                            return <div key={labelId} className={"label detail flex justify-center " + label.color} onClick={(ev) => {
                                 this.setState({ currLabelId: labelId })
                                 onTogglePopover('add-labels', ev.target)
                             }}>{label.title}</div>

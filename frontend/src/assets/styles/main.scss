@@ -28,7 +28,9 @@
 @import "cmps/card/card-details";
 @import 'cmps/card/card-checklist';
 @import "cmps/card/popover";
-@import "cmps/card/card-popover-pages/add-labels";
+@import "cmps/card/card-popover-pages/add-labels/add-labels";
+@import "cmps/card/card-popover-pages/add-labels/add-edit-label";
+@import "cmps/card/card-popover-pages/add-labels/remove-label";
 
 //
 @import 'cmps/home-header';

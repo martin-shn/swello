@@ -1,7 +1,7 @@
 import { ClickAwayListener, Grow, MenuList, Paper, Popper } from '@mui/material';
 import React, { Component } from 'react';
 import { AddMembers } from './card-popover-pages/add-members';
-import { AddLabels } from './card-popover-pages/add-labels';
+import { AddLabels } from './card-popover-pages/add-labels/add-labels';
 
 export class CardPopover extends Component {
   render() {

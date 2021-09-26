@@ -1,0 +1,16 @@
+.remove-label {
+    p {
+        margin-bottom: 8px;
+    }
+    button {
+        color: #fff;
+        background-color: #b04632;
+        padding: 6px 12px;
+        margin-top: 8px;
+        margin-bottom: -10px;
+        justify-content: center;
+        &:hover {
+            background-color: #933b27;
+        }
+    }
+}
