@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { cardService } from '../../services/board-services/card.service';
+import { cardService } from '../../../services/board-services/card.service';
 import { CardChecklist } from './card-checklist';
 
 export class CardChecklists extends Component {
@@ -12,10 +12,21 @@ export class CardChecklists extends Component {
     });
   };
 
+  onAddItem = (checklist, item) => {
+    const { card } = this.props;
+    const updatedCard = cardService.addChecklistItem(card, checklist.id, item);
+    this.props.updateField(updatedCard.checklists);
+  };
+
+  onRemoveItem = (checklist, itemId) => {
+    const { card } = this.props;
+    const updatedCard = cardService.removeChecklistItem(card, checklist.id, itemId);
+    this.props.updateField(updatedCard.checklists);
+  };
+
   onDeleteChecklist = checklistId => {
     const { card } = this.props;
     const updatedCard = cardService.deleteChecklist(card, checklistId);
-    console.log('updated card:', updatedCard);
     this.props.updateField(updatedCard.checklists);
   };
 
@@ -33,6 +44,8 @@ export class CardChecklists extends Component {
             checklist={checklist}
             isAdding={addingChecklistId === checklist.id}
             onAddingItem={this.onAddingItem}
+            onAddItem={this.onAddItem}
+            onRemoveItem={this.onRemoveItem}
             onDeleteChecklist={this.onDeleteChecklist}
           />
         ))}

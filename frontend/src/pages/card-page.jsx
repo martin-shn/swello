@@ -9,7 +9,7 @@ import { CardMembersLabels } from '../cmps/card/card-members-labels';
 import { CardHeader } from '../cmps/card/card-header';
 import { boardService } from '../services/board.service';
 import { CardPopover } from '../cmps/card/card-popover';
-import { CardChecklists } from '../cmps/card/card-checklists';
+import { CardChecklists } from '../cmps/card/checklist/card-checklists';
 import { cardService } from '../services/board-services/card.service';
 
 class _CardPage extends Component {

@@ -5,6 +5,8 @@ export const cardService = {
   toggleLabel,
   addChecklist,
   deleteChecklist,
+  addChecklistItem,
+  removeChecklistItem,
   getListOfCard,
 };
 
@@ -84,5 +86,20 @@ function addChecklist(card, title) {
 function deleteChecklist(card, checklistId) {
   const updatedChecklists = card.checklists.filter(checklist => checklist.id !== checklistId);
   card.checklists = updatedChecklists;
+  return card;
+}
+
+function addChecklistItem(card, checklistId, item) {
+  const idx = card.checklists.findIndex(checklist => checklist.id === checklistId);
+  item.id = utilService.makeId();
+  if (!card.checklists[idx].items) card.checklists[idx].items = [];
+  card.checklists[idx].items.push(item);
+  return card;
+}
+
+function removeChecklistItem(card, checklistId, itemId) {
+  const listIdx = card.checklists.findIndex(checklist => checklist.id === checklistId);
+  const itemIdx = card.checklists[listIdx].items.findIndex(item => item.id === itemId);
+  if (listIdx !== -1 && itemId !== -1) card.checklists[listIdx].items.splice(itemIdx, 1);
   return card;
 }
