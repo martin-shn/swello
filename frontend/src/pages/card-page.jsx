@@ -5,11 +5,11 @@ import Modal from '@mui/material/Modal';
 import { updateBoard } from '../store/actions/board.actions';
 import { withRouter } from 'react-router';
 import { CardDescription } from '../cmps/card/card-description';
-import { CardDetails } from '../cmps/card/card-details';
+import { CardMembersLabels } from '../cmps/card/card-members-labels';
 import { CardHeader } from '../cmps/card/card-header';
 import { boardService } from '../services/board.service';
 import { CardPopover } from '../cmps/card/card-popover';
-import { CardChecklist } from '../cmps/card/card-checklist';
+import { CardChecklists } from '../cmps/card/checklist/card-checklists';
 import { cardService } from '../services/board-services/card.service';
 
 class _CardPage extends Component {
@@ -43,13 +43,13 @@ class _CardPage extends Component {
   };
 
   onTogglePopover = (popoverType, popoverAnchor) => {
-    this.setState({ popoverType, popoverAnchor })
-  }
+    this.setState({ popoverType, popoverAnchor });
+  };
 
   render() {
     if (!this.state.card) return <CircularProgress sx={{ position: 'absolute' }} />;
-    const { description, title, checklist } = this.state.card;
-    const { popoverType, popoverAnchor } = this.state;
+    const { description, title, checklists } = this.state.card;
+    const { card, popoverType, popoverAnchor } = this.state;
     return (
       <Modal open={true} onClose={this.onCloseCard}>
         <div className="card-page-wrapper">
@@ -57,7 +57,7 @@ class _CardPage extends Component {
             <CardPopover
               popoverType={popoverType}
               popoverAnchor={popoverAnchor}
-              card={this.state.card}
+              card={card}
               onTogglePopover={this.onTogglePopover}
               updateField={this.updateField}
             />
@@ -67,12 +67,22 @@ class _CardPage extends Component {
               updateField={this.updateField}
               title={title}
               onCloseCard={this.onCloseCard}
+              board={this.props.board}
+              card={card}
             />
             <div className="data-and-sidebar flex">
               <main className="card-data">
-                <CardDetails card={this.state.card} board={this.props.board} onTogglePopover={this.onTogglePopover} />
+                <CardMembersLabels
+                  card={card}
+                  board={this.props.board}
+                  onTogglePopover={this.onTogglePopover}
+                />
                 <CardDescription description={description} updateField={this.updateField} />
-                <CardChecklist checklist={checklist} />
+                <CardChecklists
+                  card={card}
+                  checklists={checklists}
+                  updateField={this.updateField}
+                />
               </main>
               <aside className="card-sidebar">
                 <h3>Add to card</h3>
@@ -82,7 +92,9 @@ class _CardPage extends Component {
                 <button onClick={ev => this.onTogglePopover('add-labels', ev.target)}>
                   Labels
                 </button>
-                <button>Checklist</button>
+                <button onClick={ev => this.onTogglePopover('add-checklist', ev.target)}>
+                  Checklist
+                </button>
                 <button>Dates</button>
                 <button>Attachment</button>
                 <button>Location</button>

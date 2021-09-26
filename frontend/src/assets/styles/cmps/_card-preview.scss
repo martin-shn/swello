@@ -9,6 +9,10 @@
   padding: 5px;
   position: relative;
 
+  .content {
+    padding: 6px 8px 2px;
+  }
+
   .edit-icon {
     visibility: hidden;
     position: absolute;
@@ -18,5 +22,131 @@
 
   &:hover .edit-icon {
     visibility: visible;
+  }
+  .labels-container {
+    flex-wrap: wrap;
+    &:hover {
+      .label {
+        &.green {
+          background-color: #519839;
+        }
+        &.yellow {
+          background-color: #d9b51c;
+        }
+        &.orange {
+          background-color: #cd8313;
+        }
+        &.red {
+          background-color: #b04632;
+        }
+        &.purple {
+          background-color: #89609e;
+        }
+        &.blue {
+          background-color: #055a8c;
+        }
+        &.sky {
+          background-color: #0098b7;
+        }
+        &.lime {
+          background-color: #4bbf6b;
+        }
+        &.pink {
+          background-color: #c9558f;
+        }
+        &.black {
+          background-color: #091e42;
+        }
+        &.gray {
+          background-color: #97a0af;
+        }
+      }
+    }
+    .label {
+      font-size: 12px;
+      font-weight: 700;
+      height: 8px;
+      margin: 0 4px 4px 0;
+      padding: 0;
+      min-width: 40px;
+      border-radius: 4px;
+      width: auto;
+      &.close-animation {
+        animation: label_text_disappear 0.45s ease-in forwards;
+      }
+      &.open-animation {
+        animation: label_text_appear 0.45s ease-out;
+      }
+
+      &.open {
+        height: 16px;
+        line-height: 16px;
+        min-width: 56px;
+        max-width: 198px;
+        padding: 0 8px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
+
+@keyframes label_text_appear {
+  0% {
+    width: 40px;
+    height: 8px;
+    color: transparent;
+  }
+  10% {
+    min-width: 56px;
+    max-width: 198px;
+    padding: 0 8px;
+  }
+  75% {
+    height: 8px;
+  }
+  99% {
+    color: transparent;
+  }
+  100% {
+    min-width: 56px;
+    max-width: 198px;
+    padding: 0 8px;
+    height: 16px;
+    line-height: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #fff;
+  }
+}
+
+@keyframes label_text_disappear {
+  0% {
+    height: 16px;
+    line-height: 16px;
+    min-width: 56px;
+    max-width: 198px;
+    padding: 0 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: transparent;
+  }
+  10% {
+    height: 8px;
+  }
+  50% {
+    min-width: 56px;
+    max-width: 198px;
+    padding: 0 8px;
+  }
+  75% {
+    width: 40px;
+    height: 8px;
+    color: transparent;
+  }
+  100% {
+    width: 40px;
+    height: 8px;
+    color: transparent;
   }
 }

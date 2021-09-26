@@ -1,0 +1,65 @@
+.card-checklists {
+  .checklist-progress-bar {
+    background: #091e4214;
+    border-radius: 4px;
+    clear: both;
+    height: 8px;
+    overflow: hidden;
+    position: relative;
+  }
+  .percentage {
+    text-align: center;
+    font-size: 11px;
+  }
+  .checklist-add-item {
+    textarea {
+      resize: none;
+      padding: 8px 12px;
+      width: 100%;
+    }
+  }
+
+  // Each Item:
+  .checklist-item {
+    &:hover {
+      background-color: #091e420a;
+      cursor: pointer;
+    }
+
+    .checkbox {
+      background-color: #fafbfc;
+      border-radius: 2px;
+      box-shadow: inset 0 0 0 2px #dfe1e6;
+      height: 16px !important;
+      width: 16px !important;
+      margin: 6px;
+      transition: all 0.2s ease-in-out;
+    }
+
+    &.done {
+      .checkbox {
+        background-color: #0079bf;
+        box-shadow: inset 0 0 0 2px #0079bf;
+        content: url(../../../svg/card/checklist-completed.svg);
+        opacity: 1;
+      }
+    }
+
+    &:not(:hover) {
+      .actions {
+        display: none;
+      }
+    }
+    .actions {
+      gap: 3px;
+      button {
+        width: 22px;
+        height: 26px;
+        padding: 3px;
+        svg {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

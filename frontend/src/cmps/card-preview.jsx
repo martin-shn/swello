@@ -1,21 +1,39 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import EditIcon from '@mui/icons-material/Edit';
 import { withRouter } from 'react-router';
 
 class _CardPreview extends Component {
   render() {
-    const { id, title } = this.props.card;
+    const { card, board, isFullLabels, labelsClass, onToggleFullLabels } = this.props;
+    console.log(isFullLabels);
     return (
       <div
         className="content card-preview"
-        onClick={() => this.props.history.push(this.props.location.pathname + `/card/${id}`)}>
+        onClick={() => this.props.history.push(this.props.location.pathname + `/card/${card.id}`)}>
+        <div className="labels-container flex" onClick={onToggleFullLabels}>
+          {card.labelIds.map(labelId => {
+            const label = board.labels.find(label => label.id === labelId);
+            return (
+              <div key={labelId} className={`label ${label.color}${isFullLabels ? ' open' : ''}${labelsClass}`}>
+                {isFullLabels ? label.title : ''}
+              </div>
+            );
+          })}
+        </div>
         <button className="edit-icon">
           <EditIcon fontSize="small" />
         </button>
-        {title}
+        {card.title}
       </div>
     );
   }
 }
 
-export const CardPreview = withRouter(_CardPreview);
+function mapStateToProps(state) {
+  return {
+    board: state.boardModule.board
+  }
+}
+
+export const CardPreview = connect(mapStateToProps)(withRouter(_CardPreview))
