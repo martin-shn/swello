@@ -6,6 +6,7 @@ export const cardService = {
   addChecklist,
   deleteChecklist,
   addChecklistItem,
+  updateChecklistItem,
   removeChecklistItem,
   getListOfCard,
 };
@@ -90,10 +91,10 @@ function deleteChecklist(card, checklistId) {
 }
 
 function addChecklistItem(card, checklistId, item) {
-  const idx = card.checklists.findIndex(checklist => checklist.id === checklistId);
+  const listIdx = card.checklists.findIndex(checklist => checklist.id === checklistId);
   item.id = utilService.makeId();
-  if (!card.checklists[idx].items) card.checklists[idx].items = [];
-  card.checklists[idx].items.push(item);
+  if (!card.checklists[listIdx].items) card.checklists[listIdx].items = [];
+  card.checklists[listIdx].items.push(item);
   return card;
 }
 
@@ -101,5 +102,16 @@ function removeChecklistItem(card, checklistId, itemId) {
   const listIdx = card.checklists.findIndex(checklist => checklist.id === checklistId);
   const itemIdx = card.checklists[listIdx].items.findIndex(item => item.id === itemId);
   if (listIdx !== -1 && itemId !== -1) card.checklists[listIdx].items.splice(itemIdx, 1);
+  return card;
+}
+
+function updateChecklistItem(card, checklistId, updatedItem) {
+  const listIdx = card.checklists.findIndex(checklist => checklist.id === checklistId);
+  card.checklists[listIdx].items.forEach((item, itemIdx) => {
+    if (item.id === updatedItem.id) {
+      card.checklists[listIdx].items[itemIdx] = updatedItem;
+      return;
+    }
+  });
   return card;
 }

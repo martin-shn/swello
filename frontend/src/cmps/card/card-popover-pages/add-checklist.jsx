@@ -14,7 +14,8 @@ export class AddChecklist extends Component {
     const { card, updateField } = this.props;
     const title = ev.target.title.value;
     const updatedCard = cardService.addChecklist(card, title);
-    updateField({ checklists: updatedCard.checklists });
+    const { checklists } = updatedCard;
+    updateField({ checklists });
     ev.target.reset();
     this.props.onClosePopover();
   };

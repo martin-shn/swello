@@ -15,25 +15,35 @@ export class CardChecklists extends Component {
   onAddItem = (checklist, item) => {
     const { card } = this.props;
     const updatedCard = cardService.addChecklistItem(card, checklist.id, item);
-    this.props.updateField(updatedCard.checklists);
+    const { checklists } = updatedCard;
+    this.props.updateField({ checklists });
+  };
+
+  onUpdateItem = (checklist, updatedItem) => {
+    const { card } = this.props;
+    const updatedCard = cardService.updateChecklistItem(card, checklist.id, updatedItem);
+    const { checklists } = updatedCard;
+    this.props.updateField({ checklists });
   };
 
   onRemoveItem = (checklist, itemId) => {
     const { card } = this.props;
     const updatedCard = cardService.removeChecklistItem(card, checklist.id, itemId);
-    this.props.updateField(updatedCard.checklists);
+    const { checklists } = updatedCard;
+    this.props.updateField({ checklists });
   };
 
   onDeleteChecklist = checklistId => {
     const { card } = this.props;
     const updatedCard = cardService.deleteChecklist(card, checklistId);
-    this.props.updateField(updatedCard.checklists);
+    const { checklists } = updatedCard;
+    this.props.updateField({ checklists });
   };
 
   // add checklist logic is in "add_checklist" cmp (popover)
 
   render() {
-    const { checklists } = this.props;
+    const { checklists, card } = this.props;
     const { addingChecklistId } = this.state;
     if (!checklists) return <></>;
     return (
@@ -45,6 +55,7 @@ export class CardChecklists extends Component {
             isAdding={addingChecklistId === checklist.id}
             onAddingItem={this.onAddingItem}
             onAddItem={this.onAddItem}
+            onUpdateItem={this.onUpdateItem}
             onRemoveItem={this.onRemoveItem}
             onDeleteChecklist={this.onDeleteChecklist}
           />
