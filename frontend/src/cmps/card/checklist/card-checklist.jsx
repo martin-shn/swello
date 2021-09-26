@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ChecklistIcon from '@mui/icons-material/CheckBoxOutlined';
 import { ReactComponent as CloseIcon } from '../../../assets/svg/close.svg';
 import { ChecklistItemList } from './checklist-item-list';
+import { cardService } from '../../../services/board-services/card.service';
 
 const initialState = {
   addedItem: { assignedToMemberId: null, dueDate: null, isDone: false, title: '' },
@@ -20,6 +21,12 @@ export class CardChecklist extends Component {
     this.setState(initialState);
   };
 
+  onUpdateItem = (item, update) => {
+    const { checklist } = this.props;
+    const updatedItem = { ...item, ...update };
+    this.props.onUpdateItem(checklist, updatedItem);
+  };
+
   onRemoveItem = itemId => {
     const { checklist } = this.props;
     this.props.onRemoveItem(checklist, itemId);
@@ -30,8 +37,15 @@ export class CardChecklist extends Component {
     this.setState(prevState => ({ addedItem: { ...prevState.addedItem, [name]: value } }));
   };
 
+  get percentageDone() {
+    const { items } = this.props.checklist;
+    const countDone = items.reduce((count, item) => count + (item.isDone ? 1 : 0), 0);
+    if (countDone === 0) return 0;
+    return parseInt((countDone / items.length) * 100);
+  }
+
   render() {
-    const { onAddingItem, checklist, isAdding, onDeleteChecklist } = this.props;
+    const { onAddingItem, checklist, isAdding, onDeleteChecklist, onUpdateItem } = this.props;
     const { addedItem } = this.state;
     return (
       <section className="card-checklist card-section">
@@ -43,10 +57,20 @@ export class CardChecklist extends Component {
           </div>
         </div>
         <div className="section-header" style={{ marginBottom: '5px' }}>
-          <span className="percentage">0%</span>
-          <div className="checklist-progress-bar"></div>
+          <span className="percentage">{this.percentageDone}%</span>
+          <div className="checklist-progress-bar">
+            <div
+              className={`progress-bar-current ${this.percentageDone === 100 ? 'done' : ''}`}
+              style={{ width: this.percentageDone + '%' }}></div>
+          </div>
         </div>
-        <ChecklistItemList items={checklist.items} onRemoveItem={this.onRemoveItem} />
+
+        <ChecklistItemList
+          items={checklist.items}
+          onRemoveItem={this.onRemoveItem}
+          onUpdateItem={this.onUpdateItem}
+        />
+
         <div className="section-data checklist-add-item">
           {!isAdding && (
             <button onClick={() => onAddingItem(checklist.id, this.inputRef)}>Add an item</button>
