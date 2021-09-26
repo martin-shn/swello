@@ -10,6 +10,7 @@
 }
 
 .card-page {
+  min-height: 700px;
   width: 768px;
   background-color: #f4f5f7;
   border-radius: 2px;
@@ -47,6 +48,7 @@
     line-height: 20px;
     font-weight: 600;
   }
+
   .card-section {
     margin-bottom: 24px;
     .section-header {
@@ -56,10 +58,14 @@
       margin-bottom: 10px;
       min-height: 32px;
       > *:first-child {
+        // the svg img
         width: 25px;
         height: 25px;
       }
       > *:nth-child(2) {
+        // the title
+        display: flex;
+        align-items: center;
         flex-grow: 1;
       }
     }
