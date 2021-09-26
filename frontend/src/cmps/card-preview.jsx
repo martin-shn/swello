@@ -6,7 +6,6 @@ import { withRouter } from 'react-router';
 class _CardPreview extends Component {
   render() {
     const { card, board, isFullLabels, labelsClass, onToggleFullLabels } = this.props;
-    console.log(isFullLabels);
     return (
       <div
         className="content card-preview"
