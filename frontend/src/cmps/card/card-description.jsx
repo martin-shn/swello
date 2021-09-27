@@ -10,6 +10,10 @@ export class CardDescription extends Component {
     this.loadDescription();
   }
 
+  componentWillUnmount() {
+    clearTimeout(this.timeout);
+  }
+
   loadDescription = () => {
     const { description = '' } = this.props;
     this.setState({ description, isEditing: false });
@@ -25,14 +29,16 @@ export class CardDescription extends Component {
     this.setState({ isEditing: true }, () => this.descriptionRef.current.select());
   };
 
-  onCancel = () => {
-    this.loadDescription();
+  onBlur = () => {
+    this.timeout = setTimeout(() => {
+      if (this.state.isEditing) this.onSave();
+    }, 100);
   };
 
   render() {
     const { isEditing, description } = this.state;
     return (
-      <section className="card-section card-description" onClick={this.onAnyClick}>
+      <section className="card-section card-description">
         <div className="section-header">
           <DescriptionIcon />
           <div className="flex align-center">
@@ -46,7 +52,9 @@ export class CardDescription extends Component {
         </div>
         <div className="section-data">
           {!isEditing && (
-            <p className={'description-view' + (description ? '' : ' empty')} onClick={this.onEdit}>
+            <p
+              className={'description-view' + (description ? '' : ' btn empty')}
+              onClick={this.onEdit}>
               {description || 'Add a more detailed description...'}
             </p>
           )}
@@ -57,6 +65,7 @@ export class CardDescription extends Component {
                 placeholder="Add a more detailed description..."
                 onChange={ev => this.setState({ description: ev.target.value })}
                 onFocus={ev => this.setState({ isEditing: true })}
+                onBlur={this.onBlur}
                 ref={this.descriptionRef}
                 onKeyDown={ev => {
                   ev.target.style.height = '5px';
@@ -68,7 +77,7 @@ export class CardDescription extends Component {
                 <button onClick={this.onSave} className="btn-add">
                   Save
                 </button>
-                <CloseIcon className="close-icon" onClick={this.onCancel} />
+                <CloseIcon className="close-icon" onClick={this.loadDescription} />
               </div>
             </>
           )}

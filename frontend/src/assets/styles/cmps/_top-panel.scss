@@ -18,6 +18,10 @@
     font-weight: 700;
     padding: 6px 5px;
     border-radius: 3px;
+    background-color: $clr-light;
+    &:focus {
+      background-color: #fff;
+    }
   }
 
   button {
@@ -38,8 +42,8 @@
     }
   }
 
-  .star{
-    &.starred>svg{
+  .star {
+    &.starred > svg {
       color: #e6c60d;
     }
   }

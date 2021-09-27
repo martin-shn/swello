@@ -43,6 +43,7 @@
         "color": "blue"
       }
     ],
+    "isFullLabels": false,
     "members": [
       {
         "_id": "u101",
@@ -138,6 +139,7 @@
         "color": "blue"
       }
     ],
+    "isFullLabels": false,
     "members": [
       {
         "_id": "u104",
@@ -194,11 +196,13 @@
               {
                 "id": "YEhmF",
                 "title": "Checklist",
-                "todos": [
+                "items": [
                   {
                     "id": "212jX",
                     "title": "To Do 1",
-                    "isDone": false
+                    "isDone": false,
+                    "dueDate": 16156215211,
+                    "assignedToMemberId": "u101"
                   }
                 ]
               }

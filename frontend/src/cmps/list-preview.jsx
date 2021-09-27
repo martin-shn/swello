@@ -25,7 +25,7 @@ export class _ListPreview extends Component {
     }
   };
 
-  onAddCard = (ev, isTopAdd = false) => {
+  onAddCard = (ev, isTopAdd) => {
     ev.preventDefault();
     const title = ev.target.title.value;
     const { board, list } = this.props;
@@ -99,53 +99,33 @@ export class _ListPreview extends Component {
             />
           )}
         </Popover>
-        {isTopAdd && (
-          <div className="add-card">
-            <form onSubmit={ev => this.onAddCard(ev, true)}>
-              <textarea
-                name="title"
-                placeholder="Enter a title for this card..."
-                onKeyDown={ev => ev.key === 'Enter' && this.topAddRef.current.click()}
-              />
-              <div
-                className="add-controls flex align-center"
-                style={{ gap: '10px', marginBottom: '8px' }}>
-                <button ref={this.topAddRef} className="btn-add">
-                  Add Card
-                </button>
-                <CloseIcon
-                  style={{ width: '25px', height: '25px', cursor: 'pointer' }}
-                  onClick={() => onAddingTopCard(false)}
-                />
-              </div>
-            </form>
+        <div className="cards-container flex column" style={{ gap: isTopAdd ? '10px' : '0' }}>
+          {list.cards && <CardList cards={list.cards} />}
+          <div className="add-card" style={{ order: isTopAdd ? '-1' : '0' }}>
+            {!isAddingCard && !isTopAdd && (
+              <button className="content btn-adding" onClick={() => onAddingCard(list.id)}>
+                <AddIcon />
+                <span>Add a card</span>
+              </button>
+            )}
+            {(isAddingCard || isTopAdd) && (
+              <>
+                <form onSubmit={(ev) => { this.onAddCard(ev, isTopAdd) }}>
+                  <textarea
+                    name="title"
+                    placeholder="Enter a title for this card..."
+                    onKeyDown={ev => ev.key === 'Enter' && this.bottomAddRef.current.click()}
+                  />
+                  <div className="add-controls">
+                    <button ref={this.bottomAddRef} className="btn-add">
+                      Add Card
+                    </button>
+                    <CloseIcon className="close-icon" onClick={() => onAddingCard(false)} />
+                  </div>
+                </form>
+              </>
+            )}
           </div>
-        )}
-        {list.cards && <CardList cards={list.cards} />}
-        <div className="add-card">
-          {!isAddingCard && !isTopAdd && (
-            <button className="content btn-adding" onClick={() => onAddingCard(list.id)}>
-              <AddIcon />
-              <span>Add a card</span>
-            </button>
-          )}
-          {isAddingCard && !isTopAdd && (
-            <>
-              <form onSubmit={this.onAddCard}>
-                <textarea
-                  name="title"
-                  placeholder="Enter a title for this card..."
-                  onKeyDown={ev => ev.key === 'Enter' && this.bottomAddRef.current.click()}
-                />
-                <div className="add-controls">
-                  <button ref={this.bottomAddRef} className="btn-add">
-                    Add Card
-                  </button>
-                  <CloseIcon className="close-icon" onClick={() => onAddingCard(false)} />
-                </div>
-              </form>
-            </>
-          )}
         </div>
       </div>
     );

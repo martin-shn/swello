@@ -57,7 +57,8 @@
   content: url(../../svg/template.svg);
 }
 
-// Board Page
+// Elements
+
 .content-editable {
   &:focus {
     background-color: #fff;
@@ -73,17 +74,18 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  .btn-add {
-    background-color: #0079bf;
-    color: #fff;
-    padding: 6px 12px;
-    &:hover {
-      background-color: #026aa7;
-    }
-  }
   .close-icon {
     width: 25px;
     height: 25px;
     cursor: pointer;
+  }
+}
+
+.btn-add {
+  background-color: #0079bf;
+  color: #fff;
+  padding: 6px 12px;
+  &:hover {
+    background-color: #026aa7;
   }
 }

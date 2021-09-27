@@ -5,22 +5,35 @@ import Modal from '@mui/material/Modal';
 import { updateBoard } from '../store/actions/board.actions';
 import { withRouter } from 'react-router';
 import { CardDescription } from '../cmps/card/card-description';
-import { CardLabels } from '../cmps/card/card-labels';
+import { CardMembersLabels } from '../cmps/card/card-members-labels';
 import { CardHeader } from '../cmps/card/card-header';
 import { boardService } from '../services/board.service';
 import { CardPopover } from '../cmps/card/card-popover';
-import { CardChecklist } from '../cmps/card/card-checklist';
+import { CardChecklists } from '../cmps/card/checklist/card-checklists';
+import { cardService } from '../services/board-services/card.service';
 
 class _CardPage extends Component {
   state = { card: null, popoverType: null, popoverAnchor: null };
 
   componentDidMount() {
-    this.loadCard(this.props.match.params.cardId);
+    this.loadCard();
   }
 
-  loadCard = async cardId => {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.board !== this.props.board) {
+      this.loadCard();
+    }
+  }
+
+  onCloseCard = () => {
+    const { boardId } = this.props.match.params;
+    this.props.history.push(`/board/${boardId}`);
+  };
+
+  loadCard = async () => {
     const { board } = this.props;
-    const card = boardService.getCardById(board, cardId);
+    const { cardId } = this.props.match.params;
+    const card = cardService.getCardById(board, cardId);
     if (!card) this.props.history.replace('/board/' + board._id);
     this.setState({ card });
   };
@@ -36,53 +49,59 @@ class _CardPage extends Component {
     );
   };
 
-  onTogglePopover = popoverType => {
-    this.setState({ popoverType });
-  };
-
-  onClosePopover = () => {
-    this.setState({ popoverType: null, popoverAnchor: null });
+  onTogglePopover = (popoverType, popoverAnchor) => {
+    this.setState({ popoverType, popoverAnchor });
   };
 
   render() {
     if (!this.state.card) return <CircularProgress sx={{ position: 'absolute' }} />;
-    const { description, title, checklist } = this.state.card;
-    const { boardId } = this.props.match.params;
-    const { popoverType, popoverAnchor } = this.state;
+    const { description, title, checklists } = this.state.card;
+    const { card, popoverType, popoverAnchor } = this.state;
     return (
-      <Modal open={true} onClose={() => this.props.history.push(`/board/${boardId}`)}>
+      <Modal open={true} onClose={this.onCloseCard}>
         <div className="card-page-wrapper">
           {popoverType && popoverAnchor && (
             <CardPopover
               popoverType={popoverType}
               popoverAnchor={popoverAnchor}
-              card={this.state.card}
-              onClosePopover={this.onClosePopover}
+              card={card}
+              onTogglePopover={this.onTogglePopover}
+              updateField={this.updateField}
             />
           )}
           <section className="card-page">
-            <CardHeader updateField={this.updateField} title={title} />
+            <CardHeader
+              updateField={this.updateField}
+              title={title}
+              onCloseCard={this.onCloseCard}
+              board={this.props.board}
+              card={card}
+            />
             <div className="data-and-sidebar flex">
               <main className="card-data">
-                <CardLabels />
+                <CardMembersLabels
+                  card={card}
+                  board={this.props.board}
+                  onTogglePopover={this.onTogglePopover}
+                />
                 <CardDescription description={description} updateField={this.updateField} />
-                <CardChecklist checklist={checklist} />
+                <CardChecklists
+                  card={card}
+                  checklists={checklists}
+                  updateField={this.updateField}
+                />
               </main>
               <aside className="card-sidebar">
                 <h3>Add to card</h3>
-                <button
-                  onClick={ev =>
-                    this.setState({ popoverType: 'add-members', popoverAnchor: ev.target })
-                  }>
+                <button onClick={ev => this.onTogglePopover('add-members', ev.target)}>
                   Members
                 </button>
-                <button
-                  onClick={ev =>
-                    this.setState({ popoverType: 'add-labels', popoverAnchor: ev.target })
-                  }>
+                <button onClick={ev => this.onTogglePopover('add-labels', ev.target)}>
                   Labels
                 </button>
-                <button>Checklist</button>
+                <button onClick={ev => this.onTogglePopover('add-checklist', ev.target)}>
+                  Checklist
+                </button>
                 <button>Dates</button>
                 <button>Attachment</button>
                 <button>Location</button>

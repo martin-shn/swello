@@ -1,5 +1,16 @@
 .cards-popper {
-    .popover-content {
+    z-index: 2;
+    .popper-content {
         padding: 0 12px 12px;
+    }
+    .popper-header {
+        .back-btn {
+            grid-column: 1;
+            grid-row: 1;
+            &::before {
+                content: "\f104";
+                font-size: 1rem;
+            }
+        }
     }
 }

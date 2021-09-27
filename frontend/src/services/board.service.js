@@ -3,14 +3,15 @@ import { userService } from './user.service';
 import { socketService, SOCKET_EVENT_REVIEW_ADDED } from './socket.service';
 import { utilService } from './util.service';
 import { addList, copyList, updateList, moveList } from './board-services/list.service';
-import { getCardById, updateCard, addCard } from './board-services/card.service';
+import { updateCard, addCard } from './board-services/card.service';
 export const boardService = {
   add,
   query,
   update,
   remove,
   getById,
-  getCardById,
+  saveLabel,
+  removeLabel,
   updateCard,
   addCard,
   addList,
@@ -48,6 +49,7 @@ async function add(board) {
     { id: utilService.makeId(), title: '', color: 'purple' },
     { id: utilService.makeId(), title: '', color: 'blue' },
   ];
+  board.isFullLabels = false;
   board.lists = [];
   board.members.push(board.createdBy);
   board.createdAt = Date.now();
@@ -57,6 +59,31 @@ async function add(board) {
 
 async function update(updatedBoard) {
   const board = await storageService.put('board', updatedBoard);
+  return board;
+}
+
+function saveLabel(board, label) {
+  if (label.id) {
+    const idx = board.labels.findIndex(currLabel => currLabel.id === label.id);
+    board.labels[idx] = label;
+  } else {
+    label.id = utilService.makeId();
+    board.labels.push(label);
+  }
+  return board;
+}
+
+function removeLabel(board, labelId) {
+  const idx = board.labels.findIndex(label => label.id === labelId); //removing from the board
+  board.labels.splice(idx, 1);
+  board.lists.forEach(list => {
+    //removing from each card
+    list.cards.forEach(card => {
+      if (card.labelIds) {
+        card.labelIds = card.labelIds.filter(id => id !== labelId);
+      }
+    });
+  });
   return board;
 }
 
