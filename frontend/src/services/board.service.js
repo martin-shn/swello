@@ -58,6 +58,17 @@ async function add(board) {
 }
 
 async function update(updatedBoard) {
+  // Test reject:
+  // return new Promise((resolve, reject) => {
+  //   setTimeout(() => {
+  //     const rand = Math.random();
+  //     if (rand < 0.5) reject('hey');
+  //     else {
+  //       resolve(storageService.put('board', updatedBoard));
+  //     }
+  //   }, 1000);
+  // });
+  //
   const board = await storageService.put('board', updatedBoard);
   return board;
 }
