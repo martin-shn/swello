@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ReactComponent as DueDateIcon } from '../../../assets/svg/card/checklist-due-date.svg';
 import { ReactComponent as AddMemberIcon } from '../../../assets/svg/card/add-member.svg';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { AppCheckbox } from '../../general/app-checkbox';
 
 export class ChecklistItemList extends Component {
   render() {
@@ -26,9 +27,10 @@ const ChecklistItem = props => {
   const { id, title, isDone } = props.item;
   return (
     <div className={`section-header checklist-item ${isDone ? 'done' : ''}`}>
-      <div className="checkbox" onClick={() => props.onUpdateItem(props.item, { isDone: !isDone })}>
-        <span className="checkbox-check"></span>
-      </div>
+      <AppCheckbox
+        isDone={isDone}
+        onClick={() => props.onUpdateItem(props.item, { isDone: !isDone })}
+      />
       <div className="item flex space-between">
         <span className="title">{title}</span>
         <section className="actions flex">

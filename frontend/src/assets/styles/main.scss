@@ -27,10 +27,11 @@
 @import 'cmps/card/card-description';
 @import 'cmps/card/card-members-labels';
 @import 'cmps/card/card-checklists';
+@import 'cmps/card/card-due-date';
 @import 'cmps/card/popover';
-@import "cmps/card/card-popover-pages/add-labels/add-labels";
-@import "cmps/card/card-popover-pages/add-labels/add-edit-label";
-@import "cmps/card/card-popover-pages/add-labels/remove-label";
+@import 'cmps/card/card-popover-pages/add-labels/add-labels';
+@import 'cmps/card/card-popover-pages/add-labels/add-edit-label';
+@import 'cmps/card/card-popover-pages/add-labels/remove-label';
 @import 'cmps/card/card-popover-pages/add-checklist';
 
 //
@@ -50,3 +51,6 @@
 @import 'pages/board-page';
 @import 'pages/user-boards';
 @import 'pages/login-signup';
+
+// General
+@import 'cmps/general/app-checkbox.scss';

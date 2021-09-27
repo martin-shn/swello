@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { AddMembers } from './card-popover-pages/add-members';
 import { AddLabels } from './card-popover-pages/add-labels/add-labels';
 import { AddChecklist } from './card-popover-pages/add-checklist';
+import { AddDueDate } from './card-popover-pages/add-due-date';
 
 export class CardPopover extends Component {
   onClosePopover = () => this.props.onTogglePopover(null, null);
@@ -37,6 +38,13 @@ export class CardPopover extends Component {
                   )}
                   {popoverType === 'add-checklist' && (
                     <AddChecklist
+                      card={card}
+                      onClosePopover={this.onClosePopover}
+                      updateField={updateField}
+                    />
+                  )}
+                  {popoverType === 'add-due-date' && (
+                    <AddDueDate
                       card={card}
                       onClosePopover={this.onClosePopover}
                       updateField={updateField}
