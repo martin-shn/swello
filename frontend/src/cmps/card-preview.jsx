@@ -2,16 +2,32 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import EditIcon from '@mui/icons-material/Edit';
 import { withRouter } from 'react-router';
+import { updateBoard, setFullLabels, setLabelsClass } from '../store/actions/board.actions'
 
 class _CardPreview extends Component {
+  state = {
+    labelClass: ''
+  }
+  onToggleFullLabels = (ev) => {
+    ev.stopPropagation()
+    const { isFullLabels } = this.props;
+    this.props.setLabelsClass(isFullLabels ? ' close-animation' : ' open-animation')
+    this.props.setFullLabels(!isFullLabels)
+    this.timeout = setTimeout(() => { this.props.setLabelsClass('') }, 500)
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeout)
+  }
+
   render() {
-    const { card, board, isFullLabels, labelsClass, onToggleFullLabels } = this.props;
+    const { card, board, isFullLabels, labelsClass } = this.props;
     return (
       <div
         className="content card-preview"
         onClick={() => this.props.history.push(this.props.location.pathname + `/card/${card.id}`)}>
-        <div className="labels-container flex" onClick={onToggleFullLabels}>
-          {card.labelIds.map(labelId => {
+        <div className="labels-container flex" onClick={this.onToggleFullLabels}>
+          {card.labelIds && card.labelIds.map(labelId => {
             const label = board.labels.find(label => label.id === labelId);
             return (
               <div key={labelId} className={`label ${label.color}${isFullLabels ? ' open' : ''}${labelsClass}`}>
@@ -29,10 +45,18 @@ class _CardPreview extends Component {
   }
 }
 
+const mapDispatchToProps = {
+  updateBoard,
+  setFullLabels,
+  setLabelsClass
+}
+
 function mapStateToProps(state) {
   return {
-    board: state.boardModule.board
+    board: state.boardModule.board,
+    isFullLabels: state.boardModule.isFullLabels,
+    labelsClass: state.boardModule.labelsClass
   }
 }
 
-export const CardPreview = connect(mapStateToProps)(withRouter(_CardPreview))
+export const CardPreview = connect(mapStateToProps, mapDispatchToProps)(withRouter(_CardPreview))

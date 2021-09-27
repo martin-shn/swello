@@ -47,6 +47,7 @@ export class _BoardPage extends Component {
     }
   };
 
+
   onAddingList = isAddingList => {
     this.setState({ isAddingList });
   };
@@ -115,7 +116,7 @@ export class _BoardPage extends Component {
           backgroundColor: style.bgColor || 'unset',
         }}>
         <AppHeader />
-        <TopPanel title={title} members={members} onUpdateTitle={this.onUpdateTitle} user={this.props.user} board={this.props.board} onUpdateUser={this.onUpdateUser}/>
+        <TopPanel title={title} members={members} onUpdateTitle={this.onUpdateTitle} user={this.props.user} board={this.props.board} onUpdateUser={this.onUpdateUser} />
         <PopoverScreen
           isOpen={popoverListId}
           onTogglePopover={this.onTogglePopover}

@@ -18,8 +18,9 @@ export class CardMembersLabels extends React.Component {
           <div className="card-item card-labels flex column">
             <span>labels</span>
             <div className="labels-container flex">
-              {card.labelIds.map(labelId => {
+              {card.labelIds && card.labelIds.map(labelId => {
                 const label = board.labels.find(label => label.id === labelId);
+                if (!label) return <></>
                 return (
                   <div
                     key={labelId}

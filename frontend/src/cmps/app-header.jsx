@@ -25,7 +25,7 @@ class _AppHeader extends Component {
     isModal: false,
     isStarredMenuOpen: false,
     isBoardsMenuOpen: false,
-    starredBoards: null,
+    starredBoards: [],
   };
 
   starredAnchorRef = React.createRef(null);
@@ -103,7 +103,6 @@ class _AppHeader extends Component {
     const { isSearchActive } = this.state;
     const { isStarredMenuOpen, isBoardsMenuOpen, starredBoards } = this.state;
     const { boards, board, user } = this.props;
-    if (!starredBoards) return <div></div>;
     return (
       <header
         onClick={this.closePopover}
@@ -266,10 +265,8 @@ class _AppHeader extends Component {
                         <button onClick={this.onCloseStarredBoards}></button>
                       </div>
                       <div className="starred-boards list-group">
-                        {/* <div>YOUR BOARDS</div> */}
                         <ul>
                           {starredBoards
-                            // .filter(board => board.createdBy._id === user._id && !user.starredBoardsIds.includes(board._id))
                             .map(starredBoard => (
                               <MenuItem
                                 key={starredBoard._id}

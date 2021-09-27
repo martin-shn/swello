@@ -49,6 +49,7 @@ async function add(board) {
     { id: utilService.makeId(), title: '', color: 'purple' },
     { id: utilService.makeId(), title: '', color: 'blue' },
   ];
+  board.isFullLabels = false;
   board.lists = [];
   board.members.push(board.createdBy);
   board.createdAt = Date.now();
@@ -57,8 +58,13 @@ async function add(board) {
 }
 
 async function update(updatedBoard) {
-  const board = await storageService.put('board', updatedBoard);
-  return board;
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject('hey')
+    }, 1000)
+  })
+  // const board = await storageService.put('board', updatedBoard);
+  // return board;
 }
 
 function saveLabel(board, label) {
@@ -77,7 +83,9 @@ function removeLabel(board, labelId) {
   board.labels.splice(idx, 1)
   board.lists.forEach(list => { //removing from each card
     list.cards.forEach(card => {
-      card.labelIds = card.labelIds.filter(id => id !== labelId)
+      if (card.labelIds) {
+        card.labelIds = card.labelIds.filter(id => id !== labelId)
+      }
     })
   })
   return board;

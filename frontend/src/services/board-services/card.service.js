@@ -21,8 +21,7 @@ export function updateCard(board, updatedCard, activity) {
     });
   });
   // board.activities.push(activity);
-  const updatedBoard = { ...board };
-  return updatedBoard;
+  return board;
 }
 
 export function addCard(board, list, cardTitle, isTopAdd) {

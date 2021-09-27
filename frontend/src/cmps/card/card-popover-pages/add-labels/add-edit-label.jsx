@@ -13,7 +13,7 @@ export class AddEditLabel extends Component {
     onSaveLabel = () => {
         let { title, color } = this.state;
         if (!title) return;
-        if (!color) color = "gray"
+        if (!color) color = 'gray'
         const labelToSave = { title, color }
         if (!this.props.isAdd) labelToSave.id = this.props.label.id
         this.props.onSaveLabel(labelToSave)
