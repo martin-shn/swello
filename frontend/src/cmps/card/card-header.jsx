@@ -10,7 +10,7 @@ export const CardHeader = props => {
   const { board, card } = props;
   return (
     <header className="card-section card-header">
-      <div> Img </div>
+      <span className="header-icon"></span>
       <div>
         <h2
           ref={titleRef}

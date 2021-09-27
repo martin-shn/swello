@@ -7,9 +7,11 @@ import { AppHeader } from '../cmps/app-header';
 // import { userService } from '../services/user.service';
 import { UserBoardMain } from '../cmps/board-list/user-board-main';
 import { SideNav } from '../cmps/board-list/side-nav';
+import { LoaderPage } from '../cmps/loader/loader-page'
 
 class _UserBoards extends React.Component {
   state = {};
+
   render() {
     const user = this.props.user;
     if (!user) {

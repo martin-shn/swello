@@ -26,6 +26,12 @@ export function loadBoard(id) {
   };
 }
 
+export function clearBoard(){
+  return dispatch => {
+    dispatch({type: 'CLEAR_BOARD'})
+  }
+}
+
 export function updateBoard(updatedBoard) {
   return async dispatch => {
     try {

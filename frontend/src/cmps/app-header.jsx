@@ -19,6 +19,8 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 
+import {ReactComponent as StarredImage} from '../assets/svg/starred-board.svg'
+
 class _AppHeader extends Component {
   state = {
     isSearchActive: false,
@@ -84,6 +86,7 @@ class _AppHeader extends Component {
     this.setState({ isBoardsMenuOpen: false });
   };
 
+  // remove starred board from app header popper
   onStar = async (ev, boardId) => {
     ev.preventDefault();
     ev.stopPropagation();
@@ -103,6 +106,7 @@ class _AppHeader extends Component {
     const { isSearchActive } = this.state;
     const { isStarredMenuOpen, isBoardsMenuOpen, starredBoards } = this.state;
     const { boards, board, user } = this.props;
+
     return (
       <header
         onClick={this.closePopover}
@@ -267,6 +271,10 @@ class _AppHeader extends Component {
                       </div>
                       <div className="starred-boards list-group">
                         <ul>
+                          {!starredBoards.length && <div className="empty-starred-list">
+                            <StarredImage/>
+                            <p>Star important boards to access them quickly and easily.</p>
+                            </div>}
                           {starredBoards
                             .map(starredBoard => (
                               <MenuItem

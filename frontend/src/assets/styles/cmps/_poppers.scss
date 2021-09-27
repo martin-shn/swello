@@ -143,6 +143,14 @@
         }
 
         & .starred-boards {
+            & .empty-starred-list{
+                padding: 0 12px 0 12px;
+                &>p{
+                    margin: 12px 0 8px;
+                    text-align: center;
+                    color: #5E6C84;
+                }
+            }
             & > ul {
                 display: inline-block;
                 width: 100%;

@@ -11,6 +11,8 @@ export function boardReducer(state = initialState, action) {
       return { ...state, board: { ...action.board } };
     case 'SET_BOARDS':
       return { ...state, boards: action.boards };
+    case 'CLEAR_BOARD':
+      return {...state, board: null};
     case 'SET_FULL_LABELS':
       return { ...state, isFullLabels: action.isFullLabels };
     case 'SET_LABELS_CLASS':

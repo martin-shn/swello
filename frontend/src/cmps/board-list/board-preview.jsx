@@ -28,8 +28,7 @@ class _BoardPreview extends React.Component {
         starredBoardsIds: [...starredBoardsIds, this.props.board._id],
       };
     }
-    await this.props.onUpdateUser(updatedUser);
-    this.props.setShowStarred();
+    this.props.onUpdateUser(updatedUser);
   };
 
   onNew = () => {

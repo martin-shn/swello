@@ -5,7 +5,7 @@ import { ListAll } from '../cmps/list-all';
 import { TopPanel } from '../cmps/top-panel';
 import { boardService } from '../services/board.service';
 import { togglePopover } from '../store/actions/system.actions';
-import { updateBoard, loadBoard } from '../store/actions/board.actions';
+import { updateBoard, loadBoard, clearBoard } from '../store/actions/board.actions';
 import { hideLoadingPage, showLoadingPage } from '../store/actions/system.actions';
 import { onUpdateUser } from '../store/actions/user.actions';
 import { PopoverScreen } from '../cmps/popover-screen';
@@ -32,6 +32,10 @@ export class _BoardPage extends Component {
     this.props.hideLoadingPage();
   }
 
+  componentWillUnmount(){
+    this.props.clearBoard()
+  }
+  
   // UI ACTIONS
 
   onAddingCard = listId => {
@@ -103,7 +107,12 @@ export class _BoardPage extends Component {
 
   // TODO: add dynamic text color using contrast-js
   render() {
-    if (this.props.isLoadingPage) return <LoaderPage />;
+    if (this.props.isLoadingPage) return (
+      <>
+        <AppHeader/>
+        <LoaderPage />;
+      </>)
+  
     const { activeList, isAddingList, isCardPageOpen } = this.state;
     const { popoverListId } = this.props;
     const { title, members, lists, style } = this.props.board;
@@ -143,6 +152,7 @@ export class _BoardPage extends Component {
 
 const mapDispatchToProps = {
   updateBoard,
+  clearBoard,
   togglePopover,
   loadBoard,
   hideLoadingPage,
