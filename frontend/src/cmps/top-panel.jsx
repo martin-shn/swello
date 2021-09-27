@@ -28,7 +28,7 @@ export const TopPanel = props => {
         <button
           className={(isStar ? 'starred' : '') + ` star`}
           onClick={() => {
-            onStar(user, board._id, onUpdateUser);
+            onStar(user, board._id, onUpdateUser, isStar);
           }}>
           <StarOutlineIcon />
         </button>
@@ -49,10 +49,14 @@ export const TopPanel = props => {
   );
 };
 
-function onStar(user, boardId, onUpdateUser) {
+function onStar(user, boardId, onUpdateUser, isStar) {
   let newUser = { ...user };
-  newUser.starredBoardsIds = newUser.starredBoardsIds.filter(id => id !== boardId);
-  onUpdateUser(newUser);
+  if (isStar)
+    newUser.starredBoardsIds = newUser.starredBoardsIds.filter(id => id !== boardId);
+  else
+    newUser.starredBoardsIds.push(boardId);
+  
+    onUpdateUser(newUser);
   // this.setState({starredBoards: this.props.boards.filter((board) => board._id!==boardId &&
   //     this.props.user.starredBoardsIds.includes(board._id))})
 }

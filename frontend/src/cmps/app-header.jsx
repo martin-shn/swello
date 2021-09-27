@@ -203,6 +203,7 @@ class _AppHeader extends Component {
                               board =>
                                 board.members.some(member => member._id === user._id) &&
                                 !user.starredBoardsIds.includes(board._id)
+                                && board.createdBy._id !== user._id
                             )
                             .map(board => (
                               <MenuItem
