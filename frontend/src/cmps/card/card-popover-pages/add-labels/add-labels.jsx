@@ -64,7 +64,7 @@ export class _AddLabels extends Component {
               <button onClick={onTogglePopover}></button>
             </section>
             <section className="popper-content add-labels flex column">
-              <input type="text" placeholder="Search labels..." value={this.state.search} onChange={this.handleChange} />
+              <input autoCorrect="off" autoComplete="off" type="text" placeholder="Search labels..." value={this.state.search} onChange={this.handleChange} />
               <span className="title">Labels</span>
               {board.labels.map(label => (
                 label.title.toLowerCase().includes(search.toLowerCase()) &&

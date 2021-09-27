@@ -310,6 +310,7 @@ class _AppHeader extends Component {
               <SearchIcon />
             </span>
             <input
+              autoCorrect="off" autoComplete="off"
               type="text"
               placeholder="Search"
               onFocus={() => this.setState({ isSearchActive: true })}

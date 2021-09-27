@@ -94,7 +94,7 @@ export class _HomePage extends React.Component {
                 <h3>Sign up and get started with Swello today. A world of productive teamwork awaits!</h3>
               </div>
               <form className="input-container flex" onSubmit={this.onSignup}>
-                <input name="email" type="email" placeholder="Email" value={userEmail} onChange={this.handleChange} />
+                <input autoCorrect="off" autoComplete="off" name="email" type="email" placeholder="Email" value={userEmail} onChange={this.handleChange} />
                 <button type="submit">Sign up</button>
               </form>
             </div>

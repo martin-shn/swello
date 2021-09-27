@@ -31,6 +31,7 @@ export class AddChecklist extends Component {
         <section className="popper-content add-checklist flex column">
           <form onSubmit={this.onAddChecklist}>
             <input
+            autoCorrect="off" autoComplete="off"
               ref={this.titleRef}
               className="title"
               name="title"

@@ -33,7 +33,7 @@ export class AddEditLabel extends Component {
                 </section>
                 <section className="popper-content add-edit-label flex column">
                     <label htmlFor="name" className="title">Name</label>
-                    <input type="text" name="name" id="name" value={title} onChange={this.handleChange} autoFocus />
+                    <input autoCorrect="off" autoComplete="off" type="text" name="name" id="name" value={title} onChange={this.handleChange} autoFocus />
                     <span className="title">Select a color</span>
                     <div className="colors-container flex">
                         {this.colors.map(currColor => (
