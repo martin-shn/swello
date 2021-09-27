@@ -53,9 +53,9 @@ export class CardDescription extends Component {
         <div className="section-data">
           {!isEditing && (
             <p
-              className={'description-view' + (description ? '' : ' btn empty')}
+              className={'description-view' + (this.props.description ? '' : ' btn empty')}
               onClick={this.onEdit}>
-              {description || 'Add a more detailed description...'}
+              {this.props.description || 'Add a more detailed description...'}
             </p>
           )}
           {isEditing && (

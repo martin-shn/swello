@@ -21,6 +21,7 @@ class _CardPage extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.board !== this.props.board) {
+      console.log('board changed');
       this.loadCard();
     }
   }
@@ -40,13 +41,10 @@ class _CardPage extends Component {
 
   updateField = data => {
     const { board } = this.props;
-    this.setState(
-      prevState => ({ card: { ...prevState.card, ...data } }),
-      async () => {
-        const updatedBoard = boardService.updateCard(board, this.state.card);
-        this.props.updateBoard(updatedBoard);
-      }
-    );
+    const { card } = this.state;
+    const updatedCard = { ...card, ...data };
+    const updatedBoard = boardService.updateCard(board, updatedCard);
+    this.props.updateBoard(updatedBoard);
   };
 
   onTogglePopover = (popoverType, popoverAnchor) => {
