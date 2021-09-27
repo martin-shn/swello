@@ -16,7 +16,13 @@ class _CardPage extends Component {
   state = { card: null, popoverType: null, popoverAnchor: null };
 
   componentDidMount() {
-    this.loadCard(this.props.match.params.cardId);
+    this.loadCard();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.board !== this.props.board) {
+      this.loadCard();
+    }
   }
 
   onCloseCard = () => {
@@ -24,8 +30,9 @@ class _CardPage extends Component {
     this.props.history.push(`/board/${boardId}`);
   };
 
-  loadCard = async cardId => {
+  loadCard = async () => {
     const { board } = this.props;
+    const { cardId } = this.props.match.params;
     const card = cardService.getCardById(board, cardId);
     if (!card) this.props.history.replace('/board/' + board._id);
     this.setState({ card });

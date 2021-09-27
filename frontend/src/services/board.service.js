@@ -58,36 +58,32 @@ async function add(board) {
 }
 
 async function update(updatedBoard) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      reject('hey')
-    }, 1000)
-  })
-  // const board = await storageService.put('board', updatedBoard);
-  // return board;
+  const board = await storageService.put('board', updatedBoard);
+  return board;
 }
 
 function saveLabel(board, label) {
   if (label.id) {
-    const idx = board.labels.findIndex(currLabel => currLabel.id === label.id)
+    const idx = board.labels.findIndex(currLabel => currLabel.id === label.id);
     board.labels[idx] = label;
   } else {
     label.id = utilService.makeId();
-    board.labels.push(label)
+    board.labels.push(label);
   }
   return board;
 }
 
 function removeLabel(board, labelId) {
-  const idx = board.labels.findIndex(label => label.id === labelId) //removing from the board
-  board.labels.splice(idx, 1)
-  board.lists.forEach(list => { //removing from each card
+  const idx = board.labels.findIndex(label => label.id === labelId); //removing from the board
+  board.labels.splice(idx, 1);
+  board.lists.forEach(list => {
+    //removing from each card
     list.cards.forEach(card => {
       if (card.labelIds) {
-        card.labelIds = card.labelIds.filter(id => id !== labelId)
+        card.labelIds = card.labelIds.filter(id => id !== labelId);
       }
-    })
-  })
+    });
+  });
   return board;
 }
 
