@@ -1,9 +1,11 @@
 .card-header {
   display: flex;
   align-items: center;
+  align-items: flex-start;
   gap: 6px;
   padding-top: 12px;
   > *:first-child {
+    margin-top: 11px;
     width: 25px;
     height: 25px;
   }

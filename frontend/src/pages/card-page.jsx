@@ -13,6 +13,7 @@ import { CardPopover } from '../cmps/card/card-popover';
 import { CardChecklists } from '../cmps/card/card-checklists';
 import { cardService } from '../services/board-services/card.service';
 import { CardDueDate } from '../cmps/card/card-due-date';
+import { LocationCard } from '../cmps/card/location/location-card';
 
 class _CardPage extends Component {
   state = { card: null };
@@ -60,7 +61,7 @@ class _CardPage extends Component {
 
   render() {
     if (!this.state.card) return <CircularProgress sx={{ position: 'absolute' }} />;
-    const { description, title, checklists, dueDate, members = [] } = this.state.card;
+    const { description, title, checklists, dueDate, members = [], location } = this.state.card;
     const { card } = this.state;
     const { cardPopover, board } = this.props;
     const { updateField } = this;
@@ -94,6 +95,7 @@ class _CardPage extends Component {
                   />
                 </section>
                 <CardDescription description={description} updateField={updateField} />
+                <LocationCard location={location} updateField={updateField}/>
                 <CardChecklists card={card} checklists={checklists} updateField={updateField} />
               </main>
               <aside className="card-sidebar">

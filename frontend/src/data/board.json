@@ -74,7 +74,13 @@
           },
           {
             "id": "c102",
-            "title": "Add Samples"
+            "title": "location example",
+            "location": {
+              "title": "אלנבי 84 - תל אביב - מסעדת לה-פון-פון",
+              "lat" : 32.0672452,
+              "lng": 34.7734203,
+              "address": "alenbi 84, tel aviv"
+            }
           }
         ],
         "style": {}
