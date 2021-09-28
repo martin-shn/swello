@@ -24,7 +24,7 @@ const _ChecklistItem = props => {
         <span className="title">{title}</span>
         <section className="actions flex">
           <button className="btn-due-date"
-            onClick={ev => props.setCardPopover('add-checkitem-due-date', ev.target, { item, onUpdateItem, }) }
+            onClick={ev => props.setCardPopover('add-checkitem-due-date', ev.target, { item, onUpdateItem }) }
             style={{ width: 'auto', gap: '4px' }}>
             <DueDateIcon style={{ width: '15px' }} />
             {dueDate && <span className="due-date-text" style={{ fontSize: '12px' }}>{formattedDate}</span>}

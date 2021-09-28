@@ -9,7 +9,6 @@ import { updateBoard, loadBoard, clearBoard } from '../store/actions/board.actio
 import { hideLoadingPage, showLoadingPage } from '../store/actions/system.actions';
 import { onUpdateUser } from '../store/actions/user.actions';
 import { PopoverScreen } from '../cmps/popover-screen';
-import { utilService } from '../services/util.service';
 import { CardPage } from './card-page';
 import { Route } from 'react-router';
 import { LoaderPage } from '../cmps/loader/loader-page';
@@ -32,10 +31,10 @@ export class _BoardPage extends Component {
     this.props.hideLoadingPage();
   }
 
-  componentWillUnmount(){
-    this.props.clearBoard()
+  componentWillUnmount() {
+    this.props.clearBoard();
   }
-  
+
   // UI ACTIONS
 
   onAddingCard = listId => {
@@ -50,7 +49,6 @@ export class _BoardPage extends Component {
       this.setState({ activeList: { id: null, isTopAdd: false } });
     }
   };
-
 
   onAddingList = isAddingList => {
     this.setState({ isAddingList });
@@ -74,20 +72,20 @@ export class _BoardPage extends Component {
 
   onCopyList = (list, title) => {
     const { board } = this.props;
-    const updatedBoard = boardService.copyList(board, list, title)
-    this.props.updateBoard(updatedBoard)
+    const updatedBoard = boardService.copyList(board, list, title);
+    this.props.updateBoard(updatedBoard);
   };
 
   onMoveList = (currIdx, newIdx) => {
     if (currIdx === newIdx) return;
     const { board } = this.props;
-    const updatedBoard = boardService.moveList(board, currIdx, newIdx)
-    this.props.updateBoard(updatedBoard)
-  }
+    const updatedBoard = boardService.moveList(board, currIdx, newIdx);
+    this.props.updateBoard(updatedBoard);
+  };
 
   onTogglePopover = listId => {
     this.props.togglePopover(listId);
-  }
+  };
 
   onUpdateTitle = title => {
     const { board } = this.props;
@@ -101,19 +99,21 @@ export class _BoardPage extends Component {
     this.props.updateBoard(updatedBoard);
   };
 
-  onUpdateUser = async (user) => {
-    await this.props.onUpdateUser(user)
-  }
+  onUpdateUser = async user => {
+    await this.props.onUpdateUser(user);
+  };
 
   // TODO: add dynamic text color using contrast-js
   render() {
-    if (this.props.isLoadingPage) return (
-      <>
-        <AppHeader/>
-        <LoaderPage />;
-      </>)
-    if (!this.props.board) this.props.history.push('/board')
-  
+    if (this.props.isLoadingPage)
+      return (
+        <>
+          <AppHeader />
+          <LoaderPage />;
+        </>
+      );
+    if (!this.props.board) this.props.history.push('/board');
+
     const { activeList, isAddingList, isCardPageOpen } = this.state;
     const { popoverListId } = this.props;
     const { title, members, lists, style } = this.props.board;
@@ -126,11 +126,15 @@ export class _BoardPage extends Component {
           backgroundColor: style.bgColor || 'unset',
         }}>
         <AppHeader />
-        <TopPanel title={title} members={members} onUpdateTitle={this.onUpdateTitle} user={this.props.user} board={this.props.board} onUpdateUser={this.onUpdateUser} />
-        <PopoverScreen
-          isOpen={popoverListId}
-          onTogglePopover={this.onTogglePopover}
+        <TopPanel
+          title={title}
+          members={members}
+          onUpdateTitle={this.onUpdateTitle}
+          user={this.props.user}
+          board={this.props.board}
+          onUpdateUser={this.onUpdateUser}
         />
+        <PopoverScreen isOpen={popoverListId} onTogglePopover={this.onTogglePopover} />
         <Route path="/board/:boardId/card/:cardId" component={CardPage} />
         <ListAll
           lists={lists}

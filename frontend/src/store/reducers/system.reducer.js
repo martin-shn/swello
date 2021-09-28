@@ -1,7 +1,7 @@
 const initialState = {
   popoverListId: null,
   isLoadingPage: true,
-  cardPopover: { type: '', anchorEl: null, props: null },
+  cardPopover: { name: '', anchorEl: null, props: null },
 };
 
 export function systemReducer(state = initialState, action) {

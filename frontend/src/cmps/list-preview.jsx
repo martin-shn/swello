@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import AddIcon from '@mui/icons-material/Add';
@@ -11,6 +12,7 @@ import { MovePage } from './list-popover-pages/move-page';
 import { ReactComponent as CloseIcon } from '../assets/svg/close.svg';
 import { utilService } from '../services/util.service';
 import { CardList } from './card-list';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 
 export class _ListPreview extends Component {
   state = {
@@ -44,6 +46,7 @@ export class _ListPreview extends Component {
 
   render() {
     const {
+      idx,
       list,
       lists,
       isAddingCard,
@@ -57,77 +60,88 @@ export class _ListPreview extends Component {
     } = this.props;
     const { popoverPage } = this.state;
     return (
-      <div className="list-preview flex column">
-        <div className="list-header flex space-between">
-          <h2
-            className="list-title content-editable"
-            onKeyDown={ev => ev.key === 'Enter' && ev.target.blur()}
-            contentEditable
-            suppressContentEditableWarning={true}>
-            {list.title}
-          </h2>
-          <button
-            className="btn-more"
-            onClick={() => onTogglePopover(isPopoverOpen ? null : list.id)}>
-            <MoreHorizIcon />
-          </button>
-        </div>
-        <Popover isVisible={isPopoverOpen}>
-          {popoverPage === 'main' && (
-            <MainPage
-              onMovePage={this.onMovePage}
-              list={list}
-              onTogglePopover={onTogglePopover}
-              onAddingTopCard={onAddingTopCard}
-            />
-          )}
-          {popoverPage === 'copy' && (
-            <CopyPage
-              onMovePage={this.onMovePage}
-              list={list}
-              onTogglePopover={onTogglePopover}
-              onCopyList={onCopyList}
-            />
-          )}
-          {popoverPage === 'move' && (
-            <MovePage
-              onMovePage={this.onMovePage}
-              list={list}
-              lists={lists}
-              onTogglePopover={onTogglePopover}
-              onMoveList={onMoveList}
-            />
-          )}
-        </Popover>
-        <div className="cards-container flex column" style={{ gap: isTopAdd ? '10px' : '0' }}>
-          {list.cards && <CardList cards={list.cards} />}
-          <div className="add-card" style={{ order: isTopAdd ? '-1' : '0' }}>
-            {!isAddingCard && !isTopAdd && (
-              <button className="content btn-adding" onClick={() => onAddingCard(list.id)}>
-                <AddIcon />
-                <span>Add a card</span>
+      <Draggable draggableId={list.id} index={idx}>
+        {provided => (
+          <div
+            className="list-preview flex column"
+            {...provided.draggableProps}
+            ref={provided.innerRef}>
+            <div className="list-header flex space-between" {...provided.dragHandleProps}>
+              <h2
+                className="list-title content-editable"
+                onKeyDown={ev => ev.key === 'Enter' && ev.target.blur()}
+                contentEditable
+                suppressContentEditableWarning={true}>
+                {list.title}
+              </h2>
+              <button
+                className="btn-more"
+                onClick={() => onTogglePopover(isPopoverOpen ? null : list.id)}>
+                <MoreHorizIcon />
               </button>
-            )}
-            {(isAddingCard || isTopAdd) && (
-              <>
-                <form onSubmit={(ev) => { this.onAddCard(ev, isTopAdd) }}>
-                  <textarea
-                    name="title"
-                    placeholder="Enter a title for this card..."
-                    onKeyDown={ev => ev.key === 'Enter' && this.bottomAddRef.current.click()}
-                  />
-                  <div className="add-controls">
-                    <button ref={this.bottomAddRef} className="btn-add">
-                      Add Card
-                    </button>
-                    <CloseIcon className="close-icon" onClick={() => onAddingCard(false)} />
-                  </div>
-                </form>
-              </>
-            )}
+            </div>
+            <Popover isVisible={isPopoverOpen}>
+              {popoverPage === 'main' && (
+                <MainPage
+                  onMovePage={this.onMovePage}
+                  list={list}
+                  onTogglePopover={onTogglePopover}
+                  onAddingTopCard={onAddingTopCard}
+                />
+              )}
+              {popoverPage === 'copy' && (
+                <CopyPage
+                  onMovePage={this.onMovePage}
+                  list={list}
+                  onTogglePopover={onTogglePopover}
+                  onCopyList={onCopyList}
+                />
+              )}
+              {popoverPage === 'move' && (
+                <MovePage
+                  onMovePage={this.onMovePage}
+                  list={list}
+                  lists={lists}
+                  onTogglePopover={onTogglePopover}
+                  onMoveList={onMoveList}
+                />
+              )}
+            </Popover>
+            <div className="cards-container flex column" style={{ gap: isTopAdd ? '10px' : '0' }}>
+              {list.cards && <CardList listId={list.id} cards={list.cards} />}
+
+              <div className="add-card" style={{ order: isTopAdd ? '-1' : '0' }}>
+                {!isAddingCard && !isTopAdd && (
+                  <button className="content btn-adding" onClick={() => onAddingCard(list.id)}>
+                    <AddIcon />
+                    <span>Add a card</span>
+                  </button>
+                )}
+                {(isAddingCard || isTopAdd) && (
+                  <>
+                    <form
+                      onSubmit={ev => {
+                        this.onAddCard(ev, isTopAdd);
+                      }}>
+                      <textarea
+                        name="title"
+                        placeholder="Enter a title for this card..."
+                        onKeyDown={ev => ev.key === 'Enter' && this.bottomAddRef.current.click()}
+                      />
+                      <div className="add-controls">
+                        <button ref={this.bottomAddRef} className="btn-add">
+                          Add Card
+                        </button>
+                        <CloseIcon className="close-icon" onClick={() => onAddingCard(false)} />
+                      </div>
+                    </form>
+                  </>
+                )}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        )}
+      </Draggable>
     );
   }
 }

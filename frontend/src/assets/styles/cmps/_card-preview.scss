@@ -2,7 +2,7 @@
   background-color: #fff;
   border-radius: 3px;
   box-shadow: 0 1px 0 #091e4240;
-  cursor: pointer;
+  cursor: pointer !important;
   margin-bottom: 8px;
   min-height: 32px;
   text-decoration: none;
@@ -19,6 +19,10 @@
     top: 2px;
     right: 2px;
   }
+
+  // &.dragging {
+  //   transform: rotate(20deg);
+  // }
 
   &:hover .edit-icon {
     visibility: visible;

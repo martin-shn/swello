@@ -4,6 +4,10 @@
   background: linear-gradient(180deg, #0000003d 0, #0000003d 48px, #0000 80px, #0000);
   padding-top: 10px;
 
+  & .lists-container {
+    gap: 8px;
+  }
+
   /* Scrollbar */
   &::-webkit-scrollbar {
     height: 12px;
