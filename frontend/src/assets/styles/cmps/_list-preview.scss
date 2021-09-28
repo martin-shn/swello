@@ -8,6 +8,15 @@
   height: fit-content;
   position: relative;
 
+  .cards-container {
+    position: relative;
+  }
+
+  .add-card {
+    position: relative;
+    z-index: 1;
+  }
+
   .btn-more {
     position: relative;
     z-index: 2;
@@ -19,7 +28,13 @@
   button:not(.btn-add):hover {
     background-color: #091e4214;
   }
+
   svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .close-icon {
     width: 16px;
     height: 16px;
   }

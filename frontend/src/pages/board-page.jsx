@@ -137,6 +137,8 @@ export class _BoardPage extends Component {
         <PopoverScreen isOpen={popoverListId} onTogglePopover={this.onTogglePopover} />
         <Route path="/board/:boardId/card/:cardId" component={CardPage} />
         <ListAll
+          board={this.props.board}
+          updateBoard={this.props.updateBoard}
           lists={lists}
           activeList={activeList}
           popoverListId={popoverListId}

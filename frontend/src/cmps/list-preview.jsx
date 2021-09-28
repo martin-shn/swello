@@ -17,9 +17,11 @@ import { Draggable, Droppable } from 'react-beautiful-dnd';
 export class _ListPreview extends Component {
   state = {
     popoverPage: 'main',
+    isDragging: true
   };
   bottomAddRef = React.createRef();
   topAddRef = React.createRef();
+  title = React.createRef();
 
   componentDidUpdate = prevProps => {
     if (prevProps.isPopoverOpen !== this.props.isPopoverOpen) {
@@ -67,13 +69,15 @@ export class _ListPreview extends Component {
             {...provided.draggableProps}
             ref={provided.innerRef}>
             <div className="list-header flex space-between" {...provided.dragHandleProps}>
-              <h2
+              {!this.state.isDragging && <input type="text" autoFocus onBlur={() => { this.setState({ isDragging: true }) }} style={{ width: '100%' }} />}
+              {this.state.isDragging && <h2
                 className="list-title content-editable"
-                onKeyDown={ev => ev.key === 'Enter' && ev.target.blur()}
-                contentEditable
-                suppressContentEditableWarning={true}>
+                onClick={() => {
+                  this.setState({ isDragging: false })
+                }}
+              >
                 {list.title}
-              </h2>
+              </h2>}
               <button
                 className="btn-more"
                 onClick={() => onTogglePopover(isPopoverOpen ? null : list.id)}>
@@ -140,7 +144,8 @@ export class _ListPreview extends Component {
               </div>
             </div>
           </div>
-        )}
+        )
+        }
       </Draggable>
     );
   }

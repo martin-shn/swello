@@ -38,6 +38,23 @@ export function addCard(board, list, cardTitle, isTopAdd) {
   return board;
 }
 
+export function moveCard(board, currListId, currCardIdx, newListId, newCardIdx) {
+  const currListIdx = board.lists.findIndex(list => list.id === currListId)
+  const currList = board.lists[currListIdx]
+  const currCard = currList.cards[currCardIdx]
+  if (currListId === newListId) {
+    if (currCardIdx === newCardIdx) return board;
+    currList.cards.splice(currCardIdx, 1);
+    currList.cards.splice(newCardIdx, 0, currCard)
+  } else {
+    currList.cards.splice(currCardIdx, 1);
+    const newListIdx = board.lists.findIndex(list => list.id === newListId)
+    const newList = board.lists[newListIdx]
+    newList.cards.splice(newCardIdx, 0, currCard)
+  }
+  return board;
+}
+
 // CARD FUNCTIONS - returns updated card
 
 function getCardById(board, cardId) {
