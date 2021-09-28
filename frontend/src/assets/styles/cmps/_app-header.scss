@@ -29,7 +29,7 @@
     &:hover {
       content: url(../../img/moving-icon.gif);
     }
-    &+span{
+    & + span {
       font-family: Charlie;
       margin-right: 20px;
       line-height: normal;
@@ -108,11 +108,5 @@
         color: inherit;
       }
     }
-  }
-  .avatar {
-    width: 32px;
-    height: 32px;
-    font-size: 1em;
-    cursor: pointer;
   }
 }

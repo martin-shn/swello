@@ -95,12 +95,16 @@ class _CardPage extends Component {
                   />
                 </section>
                 <CardDescription description={description} updateField={updateField} />
-                <LocationCard location={location} updateField={updateField}/>
+                <LocationCard location={location} updateField={updateField} />
                 <CardChecklists card={card} checklists={checklists} updateField={updateField} />
               </main>
               <aside className="card-sidebar">
                 <h3>Add to card</h3>
-                <button name="add-members" onClick={ev => this.onOpenPopover(ev, { members })}>
+                <button
+                  name="add-members"
+                  onClick={ev =>
+                    this.onOpenPopover(ev, { boardMembers: board.members, cardMembers: members })
+                  }>
                   Members
                 </button>
                 <button

@@ -14,12 +14,11 @@ import { BoardAdd } from './board-list/board-add';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
 import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
 import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 
-import {ReactComponent as StarredImage} from '../assets/svg/starred-board.svg'
+import { ReactComponent as StarredImage } from '../assets/svg/starred-board.svg';
 
 class _AppHeader extends Component {
   state = {
@@ -205,8 +204,8 @@ class _AppHeader extends Component {
                             .filter(
                               board =>
                                 board.members.some(member => member._id === user._id) &&
-                                !user.starredBoardsIds.includes(board._id)
-                                && board.createdBy._id !== user._id
+                                !user.starredBoardsIds.includes(board._id) &&
+                                board.createdBy._id !== user._id
                             )
                             .map(board => (
                               <MenuItem
@@ -271,35 +270,36 @@ class _AppHeader extends Component {
                       </div>
                       <div className="starred-boards list-group">
                         <ul>
-                          {!starredBoards.length && <div className="empty-starred-list">
-                            <StarredImage/>
-                            <p>Star important boards to access them quickly and easily.</p>
-                            </div>}
-                          {starredBoards
-                            .map(starredBoard => (
-                              <MenuItem
-                                key={starredBoard._id}
-                                onClick={ev => {
-                                  this.onCloseBoards(ev);
-                                  window.location.href = `/board/${starredBoard._id}`;
-                                }}>
-                                <div>
-                                  <div
-                                    style={{
-                                      backgroundImage: `url(${starredBoard?.style?.imgUrl}&w=400)`,
-                                      backgroundColor: `${starredBoard?.style?.bgColor}`,
-                                    }}>
-                                    {/* {starredBoard.createdBy.fullname.charAt(0)} */}
-                                  </div>
-                                  <span>{starredBoard.title}</span>
-                                  <span
-                                    onClick={ev => {
-                                      this.onStar(ev, starredBoard._id);
-                                    }}
-                                    title="Click to unstar this board. It will be removed from your starred list."></span>
+                          {!starredBoards.length && (
+                            <div className="empty-starred-list">
+                              <StarredImage />
+                              <p>Star important boards to access them quickly and easily.</p>
+                            </div>
+                          )}
+                          {starredBoards.map(starredBoard => (
+                            <MenuItem
+                              key={starredBoard._id}
+                              onClick={ev => {
+                                this.onCloseBoards(ev);
+                                window.location.href = `/board/${starredBoard._id}`;
+                              }}>
+                              <div>
+                                <div
+                                  style={{
+                                    backgroundImage: `url(${starredBoard?.style?.imgUrl}&w=400)`,
+                                    backgroundColor: `${starredBoard?.style?.bgColor}`,
+                                  }}>
+                                  {/* {starredBoard.createdBy.fullname.charAt(0)} */}
                                 </div>
-                              </MenuItem>
-                            ))}
+                                <span>{starredBoard.title}</span>
+                                <span
+                                  onClick={ev => {
+                                    this.onStar(ev, starredBoard._id);
+                                  }}
+                                  title="Click to unstar this board. It will be removed from your starred list."></span>
+                              </div>
+                            </MenuItem>
+                          ))}
                         </ul>
                       </div>
                     </MenuList>
@@ -318,7 +318,8 @@ class _AppHeader extends Component {
               <SearchIcon />
             </span>
             <input
-              autoCorrect="off" autoComplete="off"
+              autoCorrect="off"
+              autoComplete="off"
               type="text"
               placeholder="Search"
               onFocus={() => this.setState({ isSearchActive: true })}
