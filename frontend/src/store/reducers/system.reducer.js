@@ -1,26 +1,24 @@
-import { userService } from '../../services/user.service.js';
-
 const initialState = {
   popoverListId: null,
   isLoadingPage: true,
+  cardPopover: { type: '', anchorEl: null, props: null },
 };
 
 export function systemReducer(state = initialState, action) {
-  var newState = state;
   switch (action.type) {
     case 'SET_POPOVER':
-      newState = { ...state, popoverListId: action.popoverListId }
-      break;
+      return { ...state, popoverListId: action.popoverListId };
+    case 'SET_CARD_POPOVER':
+      const { name, anchorEl, props } = action;
+      return {
+        ...state,
+        cardPopover: { name, anchorEl, props },
+      };
     case 'SHOW_LOADING_PAGE':
-      newState = { ...state, isLoadingPage: true }
-      break;
+      return { ...state, isLoadingPage: true };
     case 'HIDE_LOADING_PAGE':
-      newState = { ...state, isLoadingPage: false }
-      break;
+      return { ...state, isLoadingPage: false };
     default:
       return state;
   }
-
-  window.ss = newState;
-  return newState;
 }

@@ -17,21 +17,22 @@ export class AddChecklist extends Component {
     const { checklists } = updatedCard;
     updateField({ checklists });
     ev.target.reset();
-    this.props.onClosePopover();
+    this.props.closeCardPopover();
   };
 
   render() {
-    const { onClosePopover } = this.props;
+    const { closeCardPopover } = this.props;
     return (
       <>
         <section className="popper-header">
           <div>Checklist</div>
-          <button onClick={onClosePopover}></button>
+          <button onClick={closeCardPopover}></button>
         </section>
         <section className="popper-content add-checklist flex column">
           <form onSubmit={this.onAddChecklist}>
             <input
-            autoCorrect="off" autoComplete="off"
+              autoCorrect="off"
+              autoComplete="off"
               ref={this.titleRef}
               className="title"
               name="title"

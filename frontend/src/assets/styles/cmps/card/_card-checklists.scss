@@ -43,13 +43,21 @@
       .item .title {
         text-decoration: line-through;
       }
+      .btn-due-date {
+        background-color: #61bd4f;
+        color: #fff;
+        &:hover {
+          background-color: unset;
+        }
+      }
     }
 
-    &:not(:hover) {
+    &:not(:hover):not(.is-data) {
       .actions {
         display: none;
       }
     }
+
     .actions {
       gap: 3px;
       button {

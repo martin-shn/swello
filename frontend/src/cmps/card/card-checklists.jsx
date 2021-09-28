@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { cardService } from '../../../services/board-services/card.service';
-import { CardChecklist } from './card-checklist';
+import { cardService } from '../../services/board-services/card.service';
+import { CardChecklist } from './checklist/card-checklist';
 
 export class CardChecklists extends Component {
   state = { addingChecklistId: null };

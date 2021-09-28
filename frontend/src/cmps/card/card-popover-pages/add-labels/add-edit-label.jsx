@@ -22,14 +22,14 @@ export class AddEditLabel extends Component {
     colors = ['green', 'yellow', 'orange', 'red', 'purple', 'blue', 'sky', 'lime', 'pink', 'black']
 
     render() {
-        const { onTogglePopover, onSetPage, isAdd } = this.props;
+        const { closeCardPopover, onSetPage, isAdd } = this.props;
         const { title, color } = this.state;
         return (
             <>
                 <section className="popper-header">
                     <button className="back-btn" onClick={() => onSetPage('main')}></button>
                     <div>{isAdd ? 'Create label' : 'Change label'}</div>
-                    <button className="close-btn" onClick={onTogglePopover}></button>
+                    <button className="close-btn" onClick={closeCardPopover}></button>
                 </section>
                 <section className="popper-content add-edit-label flex column">
                     <label htmlFor="name" className="title">Name</label>

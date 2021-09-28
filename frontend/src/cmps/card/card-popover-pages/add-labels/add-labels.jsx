@@ -53,7 +53,7 @@ export class _AddLabels extends Component {
   }
 
   render() {
-    const { card, board, onTogglePopover } = this.props;
+    const { card, board, closeCardPopover } = this.props;
     const { currPage, currEditingLabel, search } = this.state;
     return (
       <>
@@ -61,7 +61,7 @@ export class _AddLabels extends Component {
           <>
             <section className="popper-header">
               <div>Labels</div>
-              <button onClick={onTogglePopover}></button>
+              <button onClick={closeCardPopover}></button>
             </section>
             <section className="popper-content add-labels flex column">
               <input autoCorrect="off" autoComplete="off" type="text" placeholder="Search labels..." value={this.state.search} onChange={this.handleChange} />
@@ -82,11 +82,11 @@ export class _AddLabels extends Component {
         }
         {
           currPage === 'add' &&
-          <AddEditLabel onTogglePopover={onTogglePopover} onSetPage={this.onSetPage} onSaveLabel={this.onSaveLabel} isAdd search={this.isFoundLabel() ? '' : this.state.search} />
+          <AddEditLabel closeCardPopover={closeCardPopover} onSetPage={this.onSetPage} onSaveLabel={this.onSaveLabel} isAdd search={this.isFoundLabel() ? '' : this.state.search} />
         }
         {
           currPage === 'edit' &&
-          <AddEditLabel label={currEditingLabel} onTogglePopover={onTogglePopover} onSetPage={this.onSetPage} onSaveLabel={this.onSaveLabel} />
+          <AddEditLabel label={currEditingLabel} closeCardPopover={closeCardPopover} onSetPage={this.onSetPage} onSaveLabel={this.onSaveLabel} />
         }
         {
           currPage === 'remove' &&

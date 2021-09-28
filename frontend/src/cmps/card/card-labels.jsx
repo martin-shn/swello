@@ -7,11 +7,11 @@ export class CardLabels extends React.Component {
     const { currLabelId } = this.state;
     if (currLabelId && !this.props.card.labelIds.includes(this.state.currLabelId)) {
       this.setState({ currLabelId: null });
-      this.props.onTogglePopover(null, null);
+      this.props.onClosePopover();
     }
   }
   render() {
-    const { card, board, onTogglePopover } = this.props;
+    const { card, board, updateField, onOpenPopover } = this.props;
     if (!card.labelIds || !card.labelIds.length) return <></>;
     return (
       <div className="card-item card-labels flex column">
@@ -22,15 +22,16 @@ export class CardLabels extends React.Component {
               const label = board.labels.find(label => label.id === labelId);
               if (!label) return <></>;
               return (
-                <div
+                <button
                   key={labelId}
+                  name="add-labels"
                   className={'label detail flex justify-center ' + label.color}
                   onClick={ev => {
                     this.setState({ currLabelId: labelId });
-                    onTogglePopover('add-labels', ev.target);
+                    onOpenPopover(ev, { board, card, updateField });
                   }}>
                   {label.title}
-                </div>
+                </button>
               );
             })}
         </div>

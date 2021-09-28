@@ -7,33 +7,33 @@ export class AddDueDate extends Component {
   state = { date: this.date };
 
   get date() {
-    const { dueDate } = this.props.card;
+    const { dueDate } = this.props;
     const date = dueDate?.date ? new Date(dueDate.date).toLocaleString() : new Date();
     return date;
   }
 
   onSave = () => {
     const { date } = this.state;
-    const dueDate = { ...this.props.card.dueDate, date: Date.parse(date) };
+    const dueDate = { ...this.props.dueDate, date: Date.parse(date) };
     this.props.updateField({ dueDate });
-    this.props.onClosePopover();
+    this.props.closeCardPopover();
   };
 
   onRemove = () => {
     this.props.updateField({ dueDate: null });
-    this.props.onClosePopover();
+    this.props.closeCardPopover();
   };
 
   render() {
-    const { onClosePopover } = this.props;
+    const { closeCardPopover } = this.props;
     const { date } = this.state;
     return (
       <div>
         <section className="popper-header">
           <div>Date</div>
-          <button onClick={onClosePopover}></button>
+          <button onClick={closeCardPopover}></button>
         </section>
-        <section className="popper-content add-checklist flex column align-center">
+        <section className="popper-content add-due-date flex column align-center">
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <DatePicker
               autoOk

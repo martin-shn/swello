@@ -94,7 +94,7 @@
   button {
     padding: 6px 12px;
   }
-  button:not(.btn-add),
+  button:not(.btn-add):not(.label),
   .btn {
     &:hover {
       background-color: #091e4214;
