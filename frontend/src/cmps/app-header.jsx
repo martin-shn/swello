@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router';
 import { connect } from 'react-redux';
 import { togglePopover } from '../store/actions/system.actions';
 import { createBoard, loadBoards } from '../store/actions/board.actions';
@@ -182,7 +183,7 @@ class _AppHeader extends Component {
                                 key={board._id}
                                 onClick={ev => {
                                   this.onCloseBoards(ev);
-                                  window.location.href = `/board/${board._id}`;
+                                  this.props.history.push(`/board/${board._id}`)
                                 }}>
                                 <div>
                                   <div
@@ -281,7 +282,7 @@ class _AppHeader extends Component {
                                 key={starredBoard._id}
                                 onClick={ev => {
                                   this.onCloseBoards(ev);
-                                  window.location.href = `/board/${starredBoard._id}`;
+                                  this.props.history.push(`/board/${starredBoard._id}`)
                                 }}>
                                 <div>
                                   <div
@@ -357,4 +358,4 @@ const mapStateToProps = state => {
   };
 };
 
-export const AppHeader = connect(mapStateToProps, mapDispatchToProps)(_AppHeader);
+export const AppHeader = connect(mapStateToProps, mapDispatchToProps)(withRouter(_AppHeader));

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router';
 import { connect } from 'react-redux';
 
 import { createBoard } from '../../store/actions/board.actions';
@@ -73,7 +74,7 @@ class _BoardAdd extends Component {
 
         const newBoard = await this.props.createBoard(boardToAdd);
         console.log('new board:', newBoard);
-        window.location.href = `/board/${newBoard._id}`;
+        this.props.history.push(`/board/${newBoard._id}`)
     };
 
     render(){
@@ -185,4 +186,4 @@ const mapStateToProps = (state) => {
     return {};
 };
 
-export const BoardAdd = connect(mapStateToProps, mapDispatchToProps)(_BoardAdd);
+export const BoardAdd = connect(mapStateToProps, mapDispatchToProps)(withRouter(_BoardAdd));

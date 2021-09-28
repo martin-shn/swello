@@ -84,7 +84,7 @@ export class LocationCard extends Component {
                     </div>
                 </div>
                 <Popper
-                    className='card-popper'
+                    className='inner-card-popper'
                     open={isMenuOpen}
                     anchorEl={this.inputRef.current}
                     role={undefined}

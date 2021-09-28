@@ -239,7 +239,19 @@
     }
 }
 
-.app-header .popper-header {
+.app-header, .popper-header {
+    border-bottom: 1px solid #091e4221;
+    box-sizing: border-box;
+    color: #5e6c84;
+    // display: block;
+    line-height: 40px;
+    margin: 0 12px;
+    overflow: hidden;
+    // padding: 0 32px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    z-index: 1;
+    
     margin-bottom: 8px;
     padding: 0 12px;
     position: relative;
@@ -252,7 +264,7 @@
         font-size: 14px;
         line-height: 20px;
         font-weight: 400;
-        border-bottom: 1px solid rgba(9, 30, 66, 0.13);
+        // border-bottom: 1px solid rgba(9, 30, 66, 0.13);
         color: #5e6c84;
         height: 40px;
         display: block;
@@ -290,7 +302,7 @@
     }
 }
 
-.card-popper {
+.inner-card-popper {
     & .MuiList-root {
         padding: 0;
         max-width: 300px;
@@ -309,7 +321,7 @@
         & div {
             margin: 0 12px;
             padding: 0 32px;
-            border-bottom: 1px solid #091e4221;
+            // border-bottom: 1px solid #091e4221;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -377,6 +389,9 @@
                     text-align: start !important;
                     text-align-last: start !important;
                 }
+                &:hover {
+                    background-color: #091e420a;
+                }
                 cursor: pointer;
                 display: block;
                 font-weight: 400;
@@ -384,6 +399,7 @@
                 padding: 0px 12px;
                 position: relative;
                 text-decoration: none;
+                background-color: transparent;
                 & > button {
                     cursor: pointer;
                     display: block;
@@ -392,19 +408,14 @@
                     padding: 6px 12px;
                     position: relative;
                     text-decoration: none;
-                    background-color: inherit;
+                    background-color: transparent;
                     line-height: rem(20px);
                     font-size: rem(14px);
                     &:active {
                         background-color: #e4f0f6;
                     }
                     &:hover {
-                        background-color: inherit !important;
-                    }
-                }
-                & > span {
-                    &:hover {
-                        background-color: #091e420a;
+                        background-color: transparent !important;
                     }
                 }
             }
