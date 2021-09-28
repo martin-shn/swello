@@ -112,6 +112,7 @@ export class _BoardPage extends Component {
         <AppHeader/>
         <LoaderPage />;
       </>)
+    if (!this.props.board) this.props.history.push('/board')
   
     const { activeList, isAddingList, isCardPageOpen } = this.state;
     const { popoverListId } = this.props;

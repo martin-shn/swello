@@ -1,4 +1,5 @@
 import React from 'react';
+import {withRouter} from 'react-router';
 import { connect } from 'react-redux';
 import { loadBoards } from '../../store/actions/board.actions';
 import { showLoadingPage, hideLoadingPage } from '../../store/actions/system.actions';
@@ -24,8 +25,9 @@ class _UserBoardMain extends React.Component {
   // }
 
   render() {
-    if (this.props.isLoadingPage) return <LoaderPage />;
     const { boards, user } = this.props;
+    if (!boards && !user) this.props.history.push('/')
+    if (this.props.isLoadingPage) return <LoaderPage />;
     const showStarred  = boards.some(board => user.starredBoardsIds.includes(board._id))
 
     if (!boards && !user) return <div>Loading...</div>
@@ -57,4 +59,4 @@ const mapStateToProps = state => {
   };
 };
 
-export const UserBoardMain = connect(mapStateToProps, mapDispatchToProps)(_UserBoardMain);
+export const UserBoardMain = connect(mapStateToProps, mapDispatchToProps)(withRouter(_UserBoardMain));

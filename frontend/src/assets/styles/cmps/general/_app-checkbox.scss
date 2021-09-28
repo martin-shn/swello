@@ -9,9 +9,10 @@
   cursor: pointer;
 
   &.done {
+    // content: url(../../../svg/card/checklist-completed.svg);
+    background-image: url(../../../svg/card/checklist-completed.svg);
     background-color: #0079bf;
     box-shadow: inset 0 0 0 2px #0079bf;
-    content: url(../../../svg/card/checklist-completed.svg);
     opacity: 1;
   }
 }
