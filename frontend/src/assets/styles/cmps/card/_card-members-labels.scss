@@ -2,14 +2,6 @@
   margin: 8px 0 8px 40px;
   gap: 14px;
   .card-item {
-    span {
-      color: #5e6c84;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      line-height: 20px;
-      text-transform: uppercase;
-    }
     &.card-labels {
       gap: 2px;
       .labels-container {
@@ -25,6 +17,14 @@
           width: auto;
         }
       }
+    }
+  }
+  .card-members {
+    .sub-header {
+      margin-bottom: 4px;
+    }
+    .btn-add-member:hover {
+      background-color: #e2e2e2 !important;
     }
   }
 }

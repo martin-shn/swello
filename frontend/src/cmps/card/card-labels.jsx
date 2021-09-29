@@ -15,7 +15,7 @@ export class CardLabels extends React.Component {
     if (!card.labelIds || !card.labelIds.length) return <></>;
     return (
       <div className="card-item card-labels flex column">
-        <span>labels</span>
+        <span className="sub-header">labels</span>
         <div className="labels-container flex">
           {card.labelIds &&
             card.labelIds.map(labelId => {

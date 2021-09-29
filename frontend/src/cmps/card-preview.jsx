@@ -28,9 +28,9 @@ class _CardPreview extends Component {
     return (
       <Draggable draggableId={card.id} index={idx}>
         {(provided, snapshot) => (
-          <>
+          <div className={snapshot.isDragging ? 'dragging' : ''}>
             <div
-              className={`content card-preview${snapshot.isDragging ? ' dragging' : ' '}`}
+              className={`content card-preview`}
               {...provided.draggableProps}
               {...provided.dragHandleProps}
               ref={provided.innerRef}
@@ -44,8 +44,9 @@ class _CardPreview extends Component {
                     return (
                       <div
                         key={labelId}
-                        className={`label ${label.color}${isFullLabels ? ' open' : ''
-                          }${labelsClass}`}>
+                        className={`label ${label.color}${
+                          isFullLabels ? ' open' : ''
+                        }${labelsClass}`}>
                         {isFullLabels ? label.title : ''}
                       </div>
                     );
@@ -56,7 +57,11 @@ class _CardPreview extends Component {
               </button>
               {card.title}
             </div>
+<<<<<<< HEAD
           </>
+=======
+          </div>
+>>>>>>> d2a63e520c0ef4ba20b59b35aa9250a95fc35f99
         )}
       </Draggable>
     );

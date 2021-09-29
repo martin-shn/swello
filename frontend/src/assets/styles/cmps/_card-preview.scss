@@ -1,3 +1,10 @@
+.dragging {
+  transform: rotate(5deg);
+  position: fixed;
+  top: -50px;
+  left: 0;
+}
+
 .card-preview {
   background-color: #fff;
   border-radius: 3px;
@@ -18,10 +25,6 @@
     position: absolute;
     top: 2px;
     right: 2px;
-  }
-
-  &.dragging {
-    // transform: rotate(20deg);
   }
 
   &:hover .edit-icon {

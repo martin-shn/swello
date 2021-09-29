@@ -46,12 +46,12 @@
     "isFullLabels": false,
     "members": [
       {
-        "_id": "u101",
+        "_id": "u102",
         "fullname": "Guest",
         "imgUrl": "https://e7.pngegg.com/pngimages/340/946/png-clipart-avatar-user-computer-icons-software-developer-avatar-child-face-thumbnail.png"
       },
       {
-        "_id": "u102",
+        "_id": "u103",
         "fullname": "Martin",
         "imgUrl": "https://e7.pngegg.com/pngimages/340/946/png-clipart-avatar-user-computer-icons-software-developer-avatar-child-face-thumbnail.png"
       }
@@ -67,17 +67,14 @@
             "style": {
               "bgColor": "#aa0055"
             },
-            "labelIds": [
-              "l101",
-              "l102"
-            ]
+            "labelIds": ["l101", "l102"]
           },
           {
             "id": "c102",
             "title": "location example",
             "location": {
               "title": "אלנבי 84 - תל אביב - מסעדת לה-פון-פון",
-              "lat" : 32.0672452,
+              "lat": 32.0672452,
               "lng": 34.7734203,
               "address": "alenbi 84, tel aviv"
             }
@@ -153,7 +150,7 @@
         "imgUrl": "https://e7.pngegg.com/pngimages/340/946/png-clipart-avatar-user-computer-icons-software-developer-avatar-child-face-thumbnail.png"
       },
       {
-        "_id": "u101",
+        "_id": "u105",
         "fullname": "Aviv",
         "imgUrl": "https://e7.pngegg.com/pngimages/340/946/png-clipart-avatar-user-computer-icons-software-developer-avatar-child-face-thumbnail.png"
       }
@@ -215,16 +212,13 @@
             ],
             "members": [
               {
-                "_id": "u101",
+                "_id": "u106",
                 "username": "guest@guest.com",
                 "fullname": "Guest",
                 "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
               }
             ],
-            "labelIds": [
-              "l101",
-              "l102"
-            ],
+            "labelIds": ["l101", "l102"],
             "createdAt": 1590999730348,
             "dueDate": 16156215211,
             "byMember": {

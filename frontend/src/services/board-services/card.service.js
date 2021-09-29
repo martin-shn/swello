@@ -10,7 +10,11 @@ export const cardService = {
   updateChecklistItem,
   removeChecklistItem,
   getListOfCard,
+<<<<<<< HEAD
   getLocationResults
+=======
+  toggleCardMember,
+>>>>>>> d2a63e520c0ef4ba20b59b35aa9250a95fc35f99
 };
 
 // CARD FUNCTIONS - returns updated board
@@ -41,18 +45,18 @@ export function addCard(board, list, cardTitle, isTopAdd) {
 }
 
 export function moveCard(board, currListId, currCardIdx, newListId, newCardIdx) {
-  const currListIdx = board.lists.findIndex(list => list.id === currListId)
-  const currList = board.lists[currListIdx]
-  const currCard = currList.cards[currCardIdx]
+  const currListIdx = board.lists.findIndex(list => list.id === currListId);
+  const currList = board.lists[currListIdx];
+  const currCard = currList.cards[currCardIdx];
   if (currListId === newListId) {
     if (currCardIdx === newCardIdx) return board;
     currList.cards.splice(currCardIdx, 1);
-    currList.cards.splice(newCardIdx, 0, currCard)
+    currList.cards.splice(newCardIdx, 0, currCard);
   } else {
     currList.cards.splice(currCardIdx, 1);
-    const newListIdx = board.lists.findIndex(list => list.id === newListId)
-    const newList = board.lists[newListIdx]
-    newList.cards.splice(newCardIdx, 0, currCard)
+    const newListIdx = board.lists.findIndex(list => list.id === newListId);
+    const newList = board.lists[newListIdx];
+    newList.cards.splice(newCardIdx, 0, currCard);
   }
   return board;
 }
@@ -148,3 +152,12 @@ async function getLocationResults(search) {
   return await httpService.getFromApi(url)
 }
 
+// Card Members:
+
+function toggleCardMember(member, card) {
+  if (!card.members) card.members = [];
+  const memberIdx = card.members.findIndex(cardMember => cardMember._id === member._id);
+  if (memberIdx !== -1) card.members.splice(memberIdx, 1);
+  else card.members.push(member);
+  return card;
+}
