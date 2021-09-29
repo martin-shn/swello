@@ -6,6 +6,7 @@ var axios = Axios.create({
   withCredentials: true,
 });
 
+
 export const httpService = {
   get(endpoint, data) {
     return ajax(endpoint, 'GET', data);
@@ -19,6 +20,10 @@ export const httpService = {
   delete(endpoint, data) {
     return ajax(endpoint, 'DELETE', data);
   },
+  async getFromApi(endpoint) {
+    const res = await fetch(endpoint)
+    return res.json()
+  }
 };
 
 async function ajax(endpoint, method = 'GET', data = null) {

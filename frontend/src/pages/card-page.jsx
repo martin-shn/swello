@@ -13,7 +13,7 @@ import { CardPopover } from '../cmps/card/card-popover';
 import { CardChecklists } from '../cmps/card/card-checklists';
 import { cardService } from '../services/board-services/card.service';
 import { CardDueDate } from '../cmps/card/card-due-date';
-import { LocationCard } from '../cmps/card/location/location-card';
+import { CardLocation } from '../cmps/card/card-location'
 
 class _CardPage extends Component {
   state = { card: null };
@@ -95,7 +95,7 @@ class _CardPage extends Component {
                   />
                 </section>
                 <CardDescription description={description} updateField={updateField} />
-                <LocationCard location={location} updateField={updateField}/>
+                <CardLocation card={card} updateField={updateField} onOpenPopover={this.onOpenPopover} />
                 <CardChecklists card={card} checklists={checklists} updateField={updateField} />
               </main>
               <aside className="card-sidebar">
@@ -119,7 +119,11 @@ class _CardPage extends Component {
                   Date
                 </button>
                 <button>Attachment</button>
-                <button>Location</button>
+                <button
+                  name="add-location"
+                  onClick={ev => this.onOpenPopover(ev, { card, updateField, currPage: 'save', isFromNav: true })}>
+                  Location
+                </button>
                 <button>Cover</button>
               </aside>
             </div>

@@ -29,35 +29,33 @@ class _CardPreview extends Component {
       <Draggable draggableId={card.id} index={idx}>
         {(provided, snapshot) => (
           <>
-          {console.log(snapshot)}
-          <div
-            className={`content card-preview${snapshot.isDragging ? ' dragging' : ' '}`}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            ref={provided.innerRef}
-            onClick={() =>
-              this.props.history.push(this.props.location.pathname + `/card/${card.id}`)
-            }>
-            <div className="labels-container flex" onClick={this.onToggleFullLabels}>
-              {card.labelIds &&
-                card.labelIds.map(labelId => {
-                  const label = board.labels.find(label => label.id === labelId);
-                  return (
-                    <div
-                      key={labelId}
-                      className={`label ${label.color}${
-                        isFullLabels ? ' open' : ''
-                      }${labelsClass}`}>
-                      {isFullLabels ? label.title : ''}
-                    </div>
-                  );
-                })}
+            <div
+              className={`content card-preview${snapshot.isDragging ? ' dragging' : ' '}`}
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
+              ref={provided.innerRef}
+              onClick={() =>
+                this.props.history.push(this.props.location.pathname + `/card/${card.id}`)
+              }>
+              <div className="labels-container flex" onClick={this.onToggleFullLabels}>
+                {card.labelIds &&
+                  card.labelIds.map(labelId => {
+                    const label = board.labels.find(label => label.id === labelId);
+                    return (
+                      <div
+                        key={labelId}
+                        className={`label ${label.color}${isFullLabels ? ' open' : ''
+                          }${labelsClass}`}>
+                        {isFullLabels ? label.title : ''}
+                      </div>
+                    );
+                  })}
+              </div>
+              <button className="edit-icon">
+                <EditIcon fontSize="small" />
+              </button>
+              {card.title}
             </div>
-            <button className="edit-icon">
-              <EditIcon fontSize="small" />
-            </button>
-            {card.title}
-          </div>
           </>
         )}
       </Draggable>
