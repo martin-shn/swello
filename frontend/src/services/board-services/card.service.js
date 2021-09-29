@@ -10,11 +10,8 @@ export const cardService = {
   updateChecklistItem,
   removeChecklistItem,
   getListOfCard,
-<<<<<<< HEAD
-  getLocationResults
-=======
+  getLocationResults,
   toggleCardMember,
->>>>>>> d2a63e520c0ef4ba20b59b35aa9250a95fc35f99
 };
 
 // CARD FUNCTIONS - returns updated board
@@ -148,7 +145,7 @@ async function getLocationData(locationId) {
 }
 
 async function getLocationResults(search) {
-  const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${search}&key=${key}`;
+  const url = `http://maps.googleapis.com/maps/api/place/autocomplete/json?input=${search}&key=${key}`;
   return await httpService.getFromApi(url)
 }
 

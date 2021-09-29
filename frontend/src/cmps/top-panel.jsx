@@ -16,7 +16,6 @@ export const TopPanel = props => {
           Board
           <KeyboardArrowDownIcon />
         </button>
-
         <h1
           className="board-name content-editable"
           contentEditable

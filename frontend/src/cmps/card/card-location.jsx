@@ -39,7 +39,7 @@ export class CardLocation extends Component {
                                         this.inputRef.current.blur()
                                     }
                                 }}
-                                    onBlur={({ target }) => { this.onUpdate({ ...card.location, title: target.value }) }} />
+                                    onBlur={({ target }) => { this.onSaveLocation({ ...card.location, title: target.value }) }} />
                                 <div
                                     onClick={() => {
                                         this.onAdressClick(mapLink);

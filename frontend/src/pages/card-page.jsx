@@ -13,12 +13,8 @@ import { CardPopover } from '../cmps/card/card-popover';
 import { CardChecklists } from '../cmps/card/card-checklists';
 import { cardService } from '../services/board-services/card.service';
 import { CardDueDate } from '../cmps/card/card-due-date';
-<<<<<<< HEAD
 import { CardLocation } from '../cmps/card/card-location'
-=======
-import { LocationCard } from '../cmps/card/location/location-card';
 import { CardMembers } from '../cmps/card/card-members';
->>>>>>> d2a63e520c0ef4ba20b59b35aa9250a95fc35f99
 
 class _CardPage extends Component {
   state = { card: null };
@@ -66,7 +62,7 @@ class _CardPage extends Component {
 
   render() {
     if (!this.state.card) return <CircularProgress sx={{ position: 'absolute' }} />;
-    const { description, title, checklists, dueDate, 
+    const { description, title, checklists, dueDate,
       // members = [], 
       location } = this.state.card;
     const { card } = this.state;
@@ -139,7 +135,9 @@ class _CardPage extends Component {
                   onClick={ev => this.onOpenPopover(ev, { card, updateField, currPage: 'save', isFromNav: true })}>
                   Location
                 </button>
-                <button>Cover</button>
+                <button name="add-cover"
+                  onClick={ev => this.onOpenPopover(ev, { card, updateField })}>
+                  Cover</button>
               </aside>
             </div>
           </section>
