@@ -28,9 +28,9 @@ class _CardPreview extends Component {
     return (
       <Draggable draggableId={card.id} index={idx}>
         {(provided, snapshot) => (
-          <>
+          <div className={snapshot.isDragging ? 'dragging' : ''}>
             <div
-              className={`content card-preview${snapshot.isDragging ? ' dragging' : ' '}`}
+              className={`content card-preview`}
               {...provided.draggableProps}
               {...provided.dragHandleProps}
               ref={provided.innerRef}
@@ -57,7 +57,7 @@ class _CardPreview extends Component {
               </button>
               {card.title}
             </div>
-          </>
+          </div>
         )}
       </Draggable>
     );

@@ -1,18 +1,18 @@
 .checkbox {
-  background-color: #fafbfc;
-  border-radius: 2px;
-  box-shadow: inset 0 0 0 2px #dfe1e6;
-  height: 16px !important;
-  width: 16px !important;
-  margin: 6px;
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
+    background-color: #fafbfc;
+    border-radius: 2px;
+    box-shadow: inset 0 0 0 2px #dfe1e6;
+    height: 16px !important;
+    width: 16px !important;
+    margin: 6px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
 
-  &.done {
-    // content: url(../../../svg/card/checklist-completed.svg);
-    background-image: url(../../../svg/card/checklist-completed.svg);
-    background-color: #0079bf;
-    box-shadow: inset 0 0 0 2px #0079bf;
-    opacity: 1;
-  }
+    &.done {
+        // content: url(../../../svg/card/checklist-completed.svg);
+        background-image: url(../../../svg/card/checklist-completed.svg);
+        background-color: #0079bf;
+        box-shadow: inset 0 0 0 2px #0079bf;
+        opacity: 1;
+    }
 }
