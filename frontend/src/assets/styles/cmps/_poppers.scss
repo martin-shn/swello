@@ -10,16 +10,19 @@
         box-shadow: 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 0 1px rgba(9, 30, 66, 0.08);
         box-sizing: border-box;
         outline: 0;
-        overflow: hidden;
+        // overflow: hidden;
         width: 304px;
-        will-change: top, left;
+        // will-change: top, left;
         position: relative;
         top: 10px;
-        max-height: 50vh;
+        // min-height: 50vh;
         padding: 0 0 12px 0;
-        overflow-x: hidden;
-        overflow-y: auto;
+        // overflow-x: hidden;
+        // overflow-y: auto;
 
+        &>ul{
+            padding-bottom: 0;
+        }
         & .list-group {
             display: flex;
             flex-direction: column;
@@ -82,7 +85,7 @@
                     overflow: hidden;
                     border-radius: 4px;
                     padding: 8px 6px;
-                    margin: 8px 8px 14px;
+                    margin: 8px 8px 8px;
                     &:hover {
                         background-color: rgba(9, 30, 66, 0.08);
                         color: #091e42;

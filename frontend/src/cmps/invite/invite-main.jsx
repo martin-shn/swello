@@ -51,13 +51,8 @@ class _InviteMain extends Component {
 
     render() {
         const { board, onOpenPopover, cardPopover } = this.props;
-        if (!board) {
-            this.props.history.push('/');
-            return <></>;
-        }
         return (
-            <>
-            {cardPopover.name==='invite-main' && <section className='invite-main cards-popper'>
+            <section className='invite-main cards-popper'>
                 <div className='invite-header popper-header'>
                     <span>Invite to board</span>
                     <button className='close-icon' onClick={this.props.closeCardPopover}></button>
@@ -85,8 +80,7 @@ class _InviteMain extends Component {
                     {this.state.isLink && <div>HERE COMES NEW CMP TO CREATE AND SHOW QRCODE</div>}
                     <button className={this.state.isLink ? 'invite-active' : 'invite-disable'}>Send invitation</button>
                 </div>
-            </section>}
-            </>
+            </section>
         );
     }
 }
