@@ -3,7 +3,6 @@ import { createRef, Component } from 'react';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
 import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
 import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
@@ -13,7 +12,6 @@ export class LocationCard extends Component {
         isMenuOpen: false,
     };
     inputRef = createRef();
-    inputRef2 = createRef();
 
     onClick = () => {
         this.setState({ isMenuOpen: true });
@@ -61,10 +59,10 @@ export class LocationCard extends Component {
                         />
                         <div className='location-desc'>
                             <div className='desc-main'>
-                                <textarea ref={this.inputRef2} dir='auto' defaultValue={title} onKeyDown={(ev)=>{
+                                <textarea ref={this.inputRef} dir='auto' defaultValue={title} onKeyDown={(ev)=>{
                                     if(ev.code==='Enter') {
                                         // this.onUpdate(ev.target.value)
-                                        this.inputRef2.current.blur()
+                                        this.inputRef.current.blur()
                                     }
                                     }} 
                                     onBlur={({target})=>{this.onUpdate(target.value)}}/>
@@ -77,8 +75,8 @@ export class LocationCard extends Component {
                                 </div>
                             </div>
                             <div className='desc-btns'>
-                                <a href={mapLink} target='_blank' className='open-map-btn' title='Open map in google maps'></a>
-                                <button className='open-options-btn' title='Map options' ref={this.inputRef} onClick={this.onClick}></button>
+                                <a href={mapLink} target='_blank' rel="noreferrer" className='open-map-btn' title='Open map in google maps'>{''}</a>
+                                <button className='open-options-btn' title='Map options' onClick={this.onClick}></button>
                             </div>
                         </div>
                     </div>

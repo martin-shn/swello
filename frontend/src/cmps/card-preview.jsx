@@ -23,6 +23,7 @@ class _CardPreview extends Component {
     clearTimeout(this.timeout);
   }
 
+  
   render() {
     const { card, idx, board, isFullLabels, labelsClass } = this.props;
     return (

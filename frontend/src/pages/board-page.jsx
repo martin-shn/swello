@@ -114,7 +114,9 @@ export class _BoardPage extends Component {
       );
     if (!this.props.board) this.props.history.push('/board');
 
-    const { activeList, isAddingList, isCardPageOpen } = this.state;
+    const { activeList, isAddingList, 
+      // isCardPageOpen 
+    } = this.state;
     const { popoverListId } = this.props;
     const { title, members, lists, style } = this.props.board;
 

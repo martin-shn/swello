@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { ListAdd } from './list-add';
 import { ListPreview } from './list-preview';
@@ -29,7 +29,7 @@ export const ListAll = props => {
     let updatedBoard = board;
     if (type === 'list') {
       updatedBoard = boardService.moveList(board, source.index, destination.index)
-    } else if (type == 'card') {
+    } else if (type === 'card') {
       updatedBoard = boardService.moveCard(board, source.droppableId, source.index, destination.droppableId, destination.index)
     }
     updateBoard(updatedBoard)

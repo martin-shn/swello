@@ -57,7 +57,7 @@ class _Signup extends React.Component {
                     <h1>Sign up for your account</h1>
                     <input autoCorrect="off" type="email" name="username" placeholder="Enter email" value={user.username} onChange={this.handleChange} required />
                     <input autoCorrect="off" type="text" name="fullname" placeholder="Enter full name" value={user.fullname} onChange={this.handleChange} required />
-                    <input autoCorrect="off" autoComplete="off" type="password" name="password" placeholder="Enter password" value={user.password} onChange={this.handleChange} autoComplete="suggesed-password" required />
+                    <input autoCorrect="off" type="password" name="password" placeholder="Enter password" value={user.password} onChange={this.handleChange} autoComplete="suggesed-password" required />
                     <button type="submit">Sign up</button>
                     <span>OR</span>
                     <div className="google-btn flex align-center justify-center">
