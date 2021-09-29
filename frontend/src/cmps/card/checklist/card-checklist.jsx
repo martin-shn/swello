@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ChecklistIcon from '@mui/icons-material/CheckBoxOutlined';
 import { ReactComponent as CloseIcon } from '../../../assets/svg/close.svg';
 import { ChecklistItemList } from './checklist-item-list';
-import { cardService } from '../../../services/board-services/card.service';
+// import { cardService } from '../../../services/board-services/card.service';
 
 const initialState = {
   addedItem: { assignedToMemberId: null, dueDate: null, isDone: false, title: '' },
@@ -45,7 +45,9 @@ export class CardChecklist extends Component {
   }
 
   render() {
-    const { onAddingItem, checklist, isAdding, onDeleteChecklist, onUpdateItem } = this.props;
+    const { onAddingItem, checklist, isAdding, onDeleteChecklist, 
+      // onUpdateItem 
+    } = this.props;
     const { addedItem } = this.state;
     return (
       <section className="card-checklist card-section">

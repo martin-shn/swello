@@ -48,7 +48,7 @@ class _Login extends React.Component {
                     </div>}
                     <h1>Log in to Swello</h1>
                     <input autoCorrect="off" type="email" name="username" placeholder="Enter email" value={user.username} onChange={this.handleChange} required />
-                    <input autoCorrect="off" autoComplete="off" type="password" name="password" placeholder="Enter password" value={user.password} onChange={this.handleChange} autoComplete="suggesed-password" required />
+                    <input autoCorrect="off" type="password" name="password" placeholder="Enter password" value={user.password} onChange={this.handleChange} autoComplete="suggesed-password" required />
                     <button type="submit">Log in</button>
                     <span>OR</span>
                     <div className="google-btn flex align-center justify-center">

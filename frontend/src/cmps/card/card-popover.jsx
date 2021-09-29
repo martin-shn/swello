@@ -1,4 +1,4 @@
-import { ClickAwayListener, Grow, MenuList, Paper, Popper } from '@mui/material';
+import { ClickAwayListener, Grow, Paper, Popper } from '@mui/material';
 import React, { Component } from 'react';
 import { AddMembers } from './card-popover-pages/add-members';
 import { AddLabels } from './card-popover-pages/add-labels/add-labels';
@@ -17,8 +17,8 @@ const PopoverCmp = ({ name, props, closeCardPopover }) => {
       return <AddLabels closeCardPopover={closeCardPopover} {...props} />;
     case 'add-checklist':
       return <AddChecklist closeCardPopover={closeCardPopover} {...props} />;
-    case 'add-labels':
-      return <AddLabels closeCardPopover={closeCardPopover} {...props} />;
+    // case 'add-labels':
+    //   return <AddLabels closeCardPopover={closeCardPopover} {...props} />;
     case 'add-due-date':
       return <AddDueDate closeCardPopover={closeCardPopover} {...props} />;
     case 'add-checkitem-due-date':

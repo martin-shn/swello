@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import AddIcon from '@mui/icons-material/Add';
@@ -10,9 +10,9 @@ import { MainPage } from './list-popover-pages/main-page';
 import { CopyPage } from './list-popover-pages/copy-page';
 import { MovePage } from './list-popover-pages/move-page';
 import { ReactComponent as CloseIcon } from '../assets/svg/close.svg';
-import { utilService } from '../services/util.service';
+// import { utilService } from '../services/util.service';
 import { CardList } from './card-list';
-import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { Draggable } from 'react-beautiful-dnd';
 
 export class _ListPreview extends Component {
   state = {
