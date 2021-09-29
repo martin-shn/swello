@@ -99,46 +99,11 @@
         margin: 0 -4px;
         display: grid;
         grid-template-columns: repeat(5, 1fr);
-        .color {
+        .cover {
             border-radius: 3px;
             width: 50px;
             height: 32px;
             cursor: pointer;
-            &:hover {
-                &.green {
-                    background-color: #519839 !important;
-                }
-                &.yellow {
-                    background-color: #d9b51c !important;
-                }
-                &.orange {
-                    background-color: #cd8313 !important;
-                }
-                &.red {
-                    background-color: #b04632 !important;
-                }
-                &.purple {
-                    background-color: #89609e !important;
-                }
-                &.blue {
-                    background-color: #055a8c !important;
-                }
-                &.sky {
-                    background-color: #0098b7 !important;
-                }
-                &.lime {
-                    background-color: #4bbf6b !important;
-                }
-                &.pink {
-                    background-color: #c9558f !important;
-                }
-                &.black {
-                    background-color: #091e42 !important;
-                }
-                &.gray {
-                    background-color: #97a0af !important;
-                }
-            }
         }
     }
     button {

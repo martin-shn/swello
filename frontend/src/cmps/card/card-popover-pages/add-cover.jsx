@@ -10,7 +10,7 @@ export class AddCover extends Component {
     inputRef = React.createRef();
 
     onSetColor = (color) => {
-        this.setState(prevState => ({ cover: { color, size: prevState.size ? prevState.size : 'top-cover' } }), this.updateField)
+        this.setState(prevState => ({ cover: { color, size: prevState.cover.size ? prevState.cover.size : 'top-cover' } }), this.updateField)
     }
     onSetSize = (size) => {
         if (!this.state.cover.color) return;
@@ -68,7 +68,7 @@ export class AddCover extends Component {
                     <div className="sub-header">colors</div>
                     <div className="colors-contanier">
                         {this.colors.map(color => (
-                            <div key={color} className={'color ' + color + (cover.color === color ? ' active' : '')} onClick={() => this.onSetColor(color)}></div>
+                            <div key={color} className={'cover ' + color + (cover.color === color ? ' active' : '')} onClick={() => this.onSetColor(color)}></div>
                         ))}
                     </div>
                     <div className="sub-header">attachments</div>

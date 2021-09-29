@@ -22,10 +22,42 @@
   border-radius: 2px;
   margin: 48px 0 80px;
   padding: 0 8px 8px 16px;
+  position: relative;
 
   .card-cover {
     height: 116px;
     margin: 0 -8px 0 -16px;
+    position: relative;
+    .card-cover-menu {
+      bottom: 0;
+      box-sizing: border-box;
+      justify-content: flex-end;
+      padding: 8px;
+      position: absolute;
+      width: 100%;
+      .add-cover-btn {
+        background-color: #00000014;
+        border-radius: 3px;
+        color: #172b4d;
+        padding: 6px 12px 6px 6px;
+        svg {
+          width: 16px;
+          height: 16px;
+          margin-right: 8px;
+        }
+        &:hover {
+          background-color: #00000029;
+          color: #091e42;
+        }
+        &.light {
+          background-color: #ffffff3d;
+          color: #fff;
+          &:hover {
+            background-color: #ffffff52;
+          }
+        }
+      }
+    }
   }
 
   .data-and-sidebar {
@@ -108,9 +140,10 @@
 // LABELS COLORS
 
 .label,
-.color,
-.card-cover {
-  color: #fff;
+.color {
+  &:not(.card-preview) {
+    color: #fff;
+  }
   &.detail {
     cursor: pointer;
     &:hover {
@@ -222,5 +255,95 @@
   &:active {
     background-color: #e4f0f6;
     color: #0079bf;
+  }
+}
+
+.card-preview {
+  &.full-cover {
+    &.green {
+      &:hover {
+        background-color: #61bd4f;
+      }
+    }
+    &.yellow {
+      &:hover {
+        background-color: #f2d600;
+      }
+    }
+    &.orange {
+      &:hover {
+        background-color: #ff9f1a;
+      }
+    }
+    &.red {
+      &:hover {
+        background-color: #eb5a46;
+      }
+    }
+    &.purple {
+      &:hover {
+        background-color: #c377e0;
+      }
+    }
+    &.blue {
+      &:hover {
+        background-color: #298fca;
+      }
+    }
+    &.sky {
+      &:hover {
+        background-color: #00c2e0;
+      }
+    }
+    &.lime {
+      &:hover {
+        background-color: #51e898;
+      }
+    }
+    &.pink {
+      &:hover {
+        background-color: #ff78cb;
+      }
+    }
+    &.black {
+      &:hover {
+        background-color: #091e42;
+      }
+    }
+  }
+}
+
+.card-cover,
+.card-preview,
+.cover {
+  &.green {
+    background-color: #7bc86c;
+  }
+  &.yellow {
+    background-color: #f5dd29;
+  }
+  &.orange {
+    background-color: #ffaf3f;
+  }
+  &.red {
+    background-color: #ef7564;
+  }
+  &.purple {
+    background-color: #cd8de5;
+  }
+  &.blue {
+    background-color: #5ba4cf;
+  }
+  &.sky {
+    background-color: #29cce5;
+  }
+  &.lime {
+    background-color: #6deca9;
+  }
+  &.pink {
+    background-color: #ff8ed4;
+  }
+  &.black {
+    background-color: #172b4d;
   }
 }

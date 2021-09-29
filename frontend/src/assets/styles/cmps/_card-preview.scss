@@ -10,6 +10,30 @@
   position: relative;
   gap: 3px;
 
+  &.full-cover {
+    min-height: 56px;
+    flex-direction: row;
+    span {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 20px;
+      margin-bottom: 0;
+      padding: 6px 8px 2px;
+      word-wrap: break-word;
+      clear: both;
+      color: #172b4d;
+      margin: 0 0 4px;
+      overflow: hidden;
+      align-self: flex-end;
+    }
+  }
+
+  .card-cover {
+    border-radius: 3px 3px 0 0;
+    height: 32px;
+    margin: -5px -5px 6px -5px;
+  }
+
   .content {
     padding: 6px 8px 2px;
   }

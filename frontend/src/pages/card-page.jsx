@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { CircularProgress } from '@mui/material';
 import Modal from '@mui/material/Modal';
+import VideoLabelIcon from '@mui/icons-material/VideoLabel';
 
 import { cardService } from '../services/board-services/card.service';
 
@@ -32,6 +33,10 @@ class _CardPage extends Component {
       console.log('board changed');
       this.loadCard();
     }
+  }
+
+  componentWillUnmount() {
+    this.onClosePopover();
   }
 
   onCloseCard = () => {
@@ -81,8 +86,15 @@ class _CardPage extends Component {
       <Modal open={true} onClose={this.onCloseCard}>
         <div className="card-page-wrapper">
           {cardPopover.name && cardPopover.anchorEl && <CardPopover />}
-          <section className="card-page">
-            {card.cover && card.cover.color && card.cover.size  === 'top-cover' && <div className={'card-cover ' + card.cover.color}></div>}
+          <section className="card-page" >
+            {card.cover && card.cover.color && card.cover.size &&
+              <div className={'card-cover ' + card.cover.color}>
+                <div className="card-cover-menu flex align-center">
+                  <button name="add-cover" className={'add-cover-btn' + (card.cover?.color === 'black' ? ' light' : '')}
+                    onClick={ev => this.onOpenPopover(ev, { card, updateField })}>
+                    <VideoLabelIcon />Cover</button>
+                </div>
+              </div>}
             <CardHeader
               updateField={updateField}
               title={title}
