@@ -13,12 +13,8 @@ import { CardPopover } from '../cmps/card/card-popover';
 import { CardChecklists } from '../cmps/card/card-checklists';
 import { cardService } from '../services/board-services/card.service';
 import { CardDueDate } from '../cmps/card/card-due-date';
-<<<<<<< HEAD
-import { CardLocation } from '../cmps/card/card-location'
-=======
-import { LocationCard } from '../cmps/card/location/location-card';
+import { CardLocation } from '../cmps/card/card-location';
 import { CardMembers } from '../cmps/card/card-members';
->>>>>>> d2a63e520c0ef4ba20b59b35aa9250a95fc35f99
 
 class _CardPage extends Component {
   state = { card: null };
@@ -66,9 +62,14 @@ class _CardPage extends Component {
 
   render() {
     if (!this.state.card) return <CircularProgress sx={{ position: 'absolute' }} />;
-    const { description, title, checklists, dueDate, 
-      // members = [], 
-      location } = this.state.card;
+    const {
+      description,
+      title,
+      checklists,
+      dueDate,
+      // members = [],
+      location,
+    } = this.state.card;
     const { card } = this.state;
     const { cardPopover, board } = this.props;
     const { updateField } = this;
@@ -102,7 +103,11 @@ class _CardPage extends Component {
                   />
                 </section>
                 <CardDescription description={description} updateField={updateField} />
-                <CardLocation card={card} updateField={updateField} onOpenPopover={this.onOpenPopover} />
+                <CardLocation
+                  card={card}
+                  updateField={updateField}
+                  onOpenPopover={this.onOpenPopover}
+                />
                 <CardChecklists card={card} checklists={checklists} updateField={updateField} />
               </main>
               <aside className="card-sidebar">
@@ -136,7 +141,9 @@ class _CardPage extends Component {
                 <button>Attachment</button>
                 <button
                   name="add-location"
-                  onClick={ev => this.onOpenPopover(ev, { card, updateField, currPage: 'save', isFromNav: true })}>
+                  onClick={ev =>
+                    this.onOpenPopover(ev, { card, updateField, currPage: 'save', isFromNav: true })
+                  }>
                   Location
                 </button>
                 <button>Cover</button>

@@ -30,11 +30,6 @@ export class AddMembers extends Component {
         member?.username?.toLowerCase()?.includes(search.toLowerCase())
     );
     this.setState({ updatedBoardMembers });
-    // this.setState({
-    //   updatedMembers: board.members.filter(
-    //     member => member.fullname.includes(search) || member.username.includes(search)
-    //   ),
-    // });
   };
 
   render() {

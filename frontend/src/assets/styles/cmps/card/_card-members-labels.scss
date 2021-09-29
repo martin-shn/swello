@@ -1,9 +1,12 @@
 .card-members-labels {
   margin: 8px 0 8px 40px;
   gap: 14px;
+
   .card-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     &.card-labels {
-      gap: 2px;
       .labels-container {
         flex-wrap: wrap;
         .label {
@@ -20,9 +23,6 @@
     }
   }
   .card-members {
-    .sub-header {
-      margin-bottom: 4px;
-    }
     .btn-add-member:hover {
       background-color: #e2e2e2 !important;
     }
