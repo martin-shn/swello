@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import { DatePicker } from '@material-ui/pickers';
+import { DateTimePicker } from '@material-ui/pickers';
 
 export class AddDueDate extends Component {
   state = { date: this.date };
@@ -35,12 +35,14 @@ export class AddDueDate extends Component {
         </section>
         <section className="popper-content add-due-date flex column align-center">
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <DatePicker
+            <DateTimePicker
               autoOk
+              hideTabs
+              ampm={false}
               variant="static"
               openTo="date"
               value={date}
-              disableToolbar
+              // disableToolbar
               onChange={date => this.setState({ date })}
             />
           </MuiPickersUtilsProvider>

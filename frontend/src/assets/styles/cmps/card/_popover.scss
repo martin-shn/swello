@@ -1,5 +1,12 @@
 .cards-popper {
     z-index: 12;
+    & .add-due-date{
+        &>div{
+            width: 100%;
+            overflow: unset;
+            min-width: unset;
+        }
+    }
     .popper-content {
         padding: 0 12px 12px;
         overflow: hidden;
