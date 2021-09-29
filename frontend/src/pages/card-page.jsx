@@ -14,6 +14,7 @@ import { CardChecklists } from '../cmps/card/card-checklists';
 import { cardService } from '../services/board-services/card.service';
 import { CardDueDate } from '../cmps/card/card-due-date';
 import { LocationCard } from '../cmps/card/location/location-card';
+import { CardMembers } from '../cmps/card/card-members';
 
 class _CardPage extends Component {
   state = { card: null };
@@ -87,7 +88,7 @@ class _CardPage extends Component {
                     onOpenPopover={this.onOpenPopover}
                     updateField={updateField}
                   />
-                  {/* <CardMembers /> */}
+                  <CardMembers board={board} card={card} updateField={updateField} />
                   <CardDueDate
                     dueDate={dueDate}
                     updateField={updateField}
@@ -99,11 +100,15 @@ class _CardPage extends Component {
                 <CardChecklists card={card} checklists={checklists} updateField={updateField} />
               </main>
               <aside className="card-sidebar">
-                <h3>Add to card</h3>
+                <span className="sub-header">Add to card</span>
                 <button
                   name="add-members"
                   onClick={ev =>
-                    this.onOpenPopover(ev, { boardMembers: board.members, cardMembers: members })
+                    this.onOpenPopover(ev, {
+                      board,
+                      card,
+                      updateField,
+                    })
                   }>
                   Members
                 </button>

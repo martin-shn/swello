@@ -71,9 +71,19 @@ button {
   cursor: pointer;
 }
 
+// Custom classes:
 .avatar {
   width: 32px !important;
   height: 32px !important;
   font-size: 1em !important;
   cursor: pointer !important;
+}
+
+.sub-header {
+  color: #5e6c84;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 20px;
+  text-transform: uppercase;
 }
