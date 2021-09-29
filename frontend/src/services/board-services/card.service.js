@@ -135,8 +135,7 @@ function updateChecklistItem(card, checklistId, updatedItem) {
   return card;
 }
 
-
-// Location 
+// Location
 
 const key = 'AIzaSyDgw0mWmcS4OoFUyLUj5oNbfo4KGzpHiYA';
 async function getLocationData(locationId) {
@@ -145,8 +144,8 @@ async function getLocationData(locationId) {
 }
 
 async function getLocationResults(search) {
-  const url = `http://maps.googleapis.com/maps/api/place/autocomplete/json?input=${search}&key=${key}`;
-  return await httpService.getFromApi(url)
+  const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${search}&key=${key}`;
+  return await httpService.getFromApi(url);
 }
 
 // Card Members:

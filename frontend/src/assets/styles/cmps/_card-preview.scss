@@ -16,6 +16,7 @@
   text-decoration: none;
   padding: 5px;
   position: relative;
+  gap: 3px;
 
   .content {
     padding: 6px 8px 2px;
@@ -31,6 +32,49 @@
   &:hover .edit-icon {
     visibility: visible;
   }
+
+  .card-preview-data {
+    gap: 5px;
+    margin-top: 2px;
+    .card-preview-members {
+      gap: 2px;
+      .avatar {
+        width: 25px !important;
+        height: 25px !important;
+      }
+    }
+    .btn-due-date {
+      padding: 4px;
+      background-color: inherit;
+      border-radius: 3px;
+      font-size: 12px;
+      gap: 4px;
+      .due-date-icon {
+        content: url(../../../assets/svg/card/checklist-due-date.svg);
+        width: 16px;
+        height: 16px;
+        color: inherit;
+      }
+      &.complete {
+        background-color: #61bd4f;
+        color: #fff;
+        .due-date-icon {
+          filter: invert(1);
+        }
+        &:hover {
+          .due-date-icon {
+            content: url(../../../assets/svg/card/checkbox-complete.svg);
+          }
+        }
+      }
+      &:hover {
+        .due-date-icon {
+          content: url(../../../assets/svg/card/checkbox.svg);
+        }
+      }
+    }
+  }
+
   .labels-container {
     flex-wrap: wrap;
     &:hover {
