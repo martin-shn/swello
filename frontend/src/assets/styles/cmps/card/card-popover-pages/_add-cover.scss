@@ -105,24 +105,60 @@
             height: 32px;
             cursor: pointer;
             &:hover {
-                opacity: 0.8;
+                &.green {
+                    background-color: #519839 !important;
+                }
+                &.yellow {
+                    background-color: #d9b51c !important;
+                }
+                &.orange {
+                    background-color: #cd8313 !important;
+                }
+                &.red {
+                    background-color: #b04632 !important;
+                }
+                &.purple {
+                    background-color: #89609e !important;
+                }
+                &.blue {
+                    background-color: #055a8c !important;
+                }
+                &.sky {
+                    background-color: #0098b7 !important;
+                }
+                &.lime {
+                    background-color: #4bbf6b !important;
+                }
+                &.pink {
+                    background-color: #c9558f !important;
+                }
+                &.black {
+                    background-color: #091e42 !important;
+                }
+                &.gray {
+                    background-color: #97a0af !important;
+                }
             }
         }
     }
+    button {
+        padding: 6px 12px;
+        line-height: 20px;
+        width: 100%;
+        background-color: #091e420a;
+        justify-content: center;
+        &:hover {
+            background-color: #091e4214;
+        }
+        &:active {
+            color: #0079bf;
+        }
+    }
+    & > button {
+        margin-top: 8px;
+    }
     .add-attachments {
         position: relative;
-        button {
-            padding: 6px 12px;
-            line-height: 20px;
-            width: 100%;
-            background-color: #091e420a;
-            &:hover {
-                background-color: #091e4214;
-            }
-            &:active {
-                color: #0079bf;
-            }
-        }
         input {
             display: none;
         }

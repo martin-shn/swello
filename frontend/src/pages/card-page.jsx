@@ -78,6 +78,7 @@ class _CardPage extends Component {
         <div className="card-page-wrapper">
           {cardPopover.name && cardPopover.anchorEl && <CardPopover />}
           <section className="card-page">
+            {card.cover && card.cover.color && card.cover.size  === 'top-cover' && <div className={'card-cover ' + card.cover.color}></div>}
             <CardHeader
               updateField={updateField}
               title={title}

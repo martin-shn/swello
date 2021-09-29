@@ -1,23 +1,32 @@
 import React, { Component } from 'react';
 export class AddCover extends Component {
     state = {
-        size: '',
-        color: ''
+        cover: {
+            size: this.props.card.cover?.size || '',
+            color: this.props.card.cover?.color || ''
+        }
     };
     colors = ['green', 'yellow', 'orange', 'red', 'purple', 'blue', 'sky', 'lime', 'pink', 'black']
     inputRef = React.createRef();
 
     onSetColor = (color) => {
-        this.setState(prevState => ({ color, size: prevState.size ? prevState.size : 'top-cover' }))
+        this.setState(prevState => ({ cover: { color, size: prevState.size ? prevState.size : 'top-cover' } }), this.updateField)
     }
     onSetSize = (size) => {
-        if (!this.state.color) return;
-        this.setState({ size })
+        if (!this.state.cover.color) return;
+        this.setState(prevState => ({ cover: { ...prevState.cover, size } }), this.updateField)
+    }
+    onRemoveCover = () => {
+        this.setState({ cover: { size: '', color: '' } }, this.updateField)
+    }
+    updateField = () => {
+        this.props.updateField({ cover: this.state.cover })
     }
     render() {
         const { closeCardPopover } = this.props;
-        const coverClass = this.state.color ? ' color ' + this.state.color : ''
-        const coverStyle = this.state.color ? { backgroundColor: '#5e6c84', opacity: '1' } : {}
+        const { cover } = this.state;
+        const coverClass = cover.color ? ' color ' + cover.color : ''
+        const coverStyle = cover.color ? { backgroundColor: '#5e6c84', opacity: '1' } : {}
         return (
             <>
                 <section className="popper-header">
@@ -28,9 +37,9 @@ export class AddCover extends Component {
                     <div className="sub-header">size</div>
                     <div className="size-container flex">
                         <div
-                            className={'top-cover' + (this.state.size === 'top-cover' ? ' active' : '')}
+                            className={'top-cover' + (cover.size === 'top-cover' ? ' active' : '')}
                             onClick={() => this.onSetSize('top-cover')}
-                            style={{ cursor: this.state.color ? 'pointer' : 'default' }}
+                            style={{ cursor: cover.color ? 'pointer' : 'default' }}
                         >
                             <div className={'cover-header' + coverClass} style={coverStyle}>
 
@@ -45,9 +54,9 @@ export class AddCover extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className={'full-cover' + (this.state.size === 'full-cover' ? ' active' : '') + coverClass}
+                        <div className={'full-cover' + (cover.size === 'full-cover' ? ' active' : '') + coverClass}
                             onClick={() => this.onSetSize('full-cover')}
-                            style={coverStyle}
+                            style={{ ...coverStyle, cursor: cover.color ? 'pointer' : 'default' }}
                         >
                             <div className="rows-container">
                                 <div className="row-1" style={coverStyle}></div>
@@ -55,10 +64,11 @@ export class AddCover extends Component {
                             </div>
                         </div>
                     </div>
+                    {cover && cover.color && cover.size && <button onClick={this.onRemoveCover}>Remove cover</button>}
                     <div className="sub-header">colors</div>
                     <div className="colors-contanier">
                         {this.colors.map(color => (
-                            <div className={'color ' + color + (this.state.color === color ? ' active' : '')} onClick={() => this.onSetColor(color)}></div>
+                            <div key={color} className={'color ' + color + (cover.color === color ? ' active' : '')} onClick={() => this.onSetColor(color)}></div>
                         ))}
                     </div>
                     <div className="sub-header">attachments</div>

@@ -63,7 +63,7 @@ export class AddMembers extends Component {
                   onClick={() => this.toggleCardMember(member)}>
                   <Avatar className="avatar" alt={member.fullname} src={member.imgUrl} />
                   <span className="member-name">
-                    {member.fullname} ({member.username})
+                    {member.fullname}
                   </span>
                   {isMemberInCard && <CheckIcon className="in-list-icon" />}
                 </div>

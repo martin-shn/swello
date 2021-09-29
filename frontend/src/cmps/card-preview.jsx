@@ -11,7 +11,7 @@ export class _CardPreview extends Component {
     return (
       <Draggable draggableId={card.id} index={idx}>
         {(provided, snapshot) => (
-          <div className={snapshot.isDragging ? 'dragging' : ''}>
+         <>
             <div
               className="content card-preview flex column"
               {...provided.draggableProps}
@@ -27,7 +27,7 @@ export class _CardPreview extends Component {
               <span>{card.title}</span>
               <CardPreviewData card={card} />
             </div>
-          </div>
+          </>
         )}
       </Draggable>
     );

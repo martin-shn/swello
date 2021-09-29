@@ -23,6 +23,11 @@
   margin: 48px 0 80px;
   padding: 0 8px 8px 16px;
 
+  .card-cover {
+    height: 116px;
+    margin: 0 -16px;
+  }
+
   .data-and-sidebar {
     gap: 20px;
   }
@@ -53,7 +58,7 @@
     & > .header-icon::before {
       font-family: FA-regular;
       font-size: 1.1rem;
-      content: '\f07b';
+      content: "\f07b";
       color: #42526e;
     }
 
@@ -102,7 +107,9 @@
 
 // LABELS COLORS
 
-.label, .color {
+.label,
+.color,
+.card-cover {
   color: #fff;
   &.detail {
     cursor: pointer;

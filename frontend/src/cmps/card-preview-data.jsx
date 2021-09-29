@@ -10,11 +10,14 @@ import { utilService } from '../services/util.service';
 import { connect } from 'react-redux';
 
 class _CardPreviewData extends Component {
-  toggleDueDate = ev => {
+  toggleDueDate = async ev => {
     ev.stopPropagation();
-    this.props.card.dueDate.isComplete = !this.props.card.dueDate.isComplete;
-    // const updatedBoard = boardService.updateCard(this.props.board, this.props.card);
-    this.props.updateBoard(this.props.board);
+    // this.props.card.dueDate.isComplete = !this.props.card.dueDate.isComplete;
+    const { card } = this.props;
+    const isComplete = !card.dueDate.isComplete;
+    const updatedCard = { ...card, dueDate: { ...card.dueDate, isComplete } }
+    const updatedBoard = boardService.updateCard(this.props.board, updatedCard);
+    await this.props.updateBoard(updatedBoard);
   };
 
   render() {
