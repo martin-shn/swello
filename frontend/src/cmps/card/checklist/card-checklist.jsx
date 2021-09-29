@@ -62,6 +62,7 @@ export class CardChecklist extends Component {
             <h3
               className="section-title content-editable grow"
               onBlur={ev => onUpdateChecklist({ ...checklist, title: ev.target.innerText })}
+              onKeyDown={ev => ev.key === 'Enter' && ev.target.blur()}
               contentEditable
               suppressContentEditableWarning>
               {checklist.title}

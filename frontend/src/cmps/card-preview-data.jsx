@@ -50,10 +50,11 @@ function CardPreviewChecklists({ checklists }) {
       }
     }
   }
-  let statusClassName =
-    oldestNotDone.dueDate < Infinity
-      ? cardService.checkDueDate({ date: oldestNotDone.dueDate, isComplete: oldestNotDone.isDone })
-      : '';
+  const status = cardService.checkDueDate({
+    date: oldestNotDone.dueDate,
+    isComplete: oldestNotDone.isDone,
+  });
+  let statusClassName = oldestNotDone.dueDate < Infinity ? status : '';
   if (notDoneCount === 0 && doneCount > 0) statusClassName = 'complete';
   return (
     <div

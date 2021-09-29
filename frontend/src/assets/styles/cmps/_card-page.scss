@@ -26,6 +26,20 @@
   padding: 0 8px 8px 16px;
   position: relative;
 
+  & button {
+    padding: 6px 12px;
+  }
+  & button:not(.btn-add):not(.label),
+  .btn {
+    &:hover {
+      background-color: #091e4214;
+    }
+    &:active {
+      background-color: #e4f0f6;
+      color: #0079bf;
+    }
+  }
+
   .card-cover {
     height: 116px;
     margin: 0 -8px 0 -16px;
@@ -127,20 +141,6 @@
 
     .section-data {
       margin-left: 38px;
-    }
-  }
-
-  & button {
-    padding: 6px 12px;
-  }
-  & button:not(.btn-add):not(.label),
-  .btn {
-    &:hover {
-      background-color: #091e4214;
-    }
-    &:active {
-      background-color: #e4f0f6;
-      color: #0079bf;
     }
   }
 }
