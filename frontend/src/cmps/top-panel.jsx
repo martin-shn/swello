@@ -1,11 +1,18 @@
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+
 import { ReactComponent as BtnBoardIcon } from '../assets/svg/board-btns/btn-board.svg';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Avatar } from '@mui/material';
 
-export const TopPanel = props => {
-  const { title, members, onUpdateTitle, user, board, onUpdateUser } = props;
+import { InviteMain } from './invite/invite-main';
+import { setCardPopover } from '../store/actions/system.actions';
+import { updateBoard } from '../store/actions/board.actions';
+
+const _TopPanel = props => {
+  const { title, members, onUpdateTitle, user, board, onUpdateUser, setCardPopover, cardPopover } = props;
   const isStar = user.starredBoardsIds.includes(board._id);
 
   return (
@@ -37,8 +44,14 @@ export const TopPanel = props => {
             <Avatar key={member._id} alt={member.fullname} src={member.imgUrl} />
           ))}
         </div>
-        <button>Invite</button>
+        <button 
+        name='invite-main'
+          onClick={(ev)=>{
+            onOpenPopover(ev, setCardPopover);
+          }}
+        >Invite</button>
       </div>
+      <InviteMain/>
       <div>
         <button className="btn-menu">
           <MoreHorizIcon />
@@ -60,3 +73,29 @@ function onStar(user, boardId, onUpdateUser, isStar) {
   // this.setState({starredBoards: this.props.boards.filter((board) => board._id!==boardId &&
   //     this.props.user.starredBoardsIds.includes(board._id))})
 }
+
+function onOpenPopover(ev, setCardPopover) {
+  // const { name } = ev.target;
+  setCardPopover('invite-main', ev.target, { name:'invite-main', isFromNav: false });
+};
+
+function updateField(data){
+  // const { board } = this.props;
+  // const { card } = this.state;
+  // const updatedCard = { ...card, ...data };
+  // const updatedBoard = boardService.updateCard(board, updatedCard);
+  // this.props.updateBoard(updatedBoard);
+};
+
+
+const mapDispatchToProps = {
+  updateBoard,
+  setCardPopover,
+};
+
+const mapStateToProps = (state) => ({
+  board: state.boardModule.board,
+  cardPopover: state.systemModule.cardPopover,
+});
+
+export const TopPanel = withRouter(connect(mapStateToProps, mapDispatchToProps)(withRouter(_TopPanel)));

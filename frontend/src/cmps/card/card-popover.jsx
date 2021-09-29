@@ -8,8 +8,10 @@ import { AddDueDate } from './card-popover-pages/add-due-date';
 import { AddLocation } from './card-popover-pages/add-location/add-location'
 import { setCardPopover, closeCardPopover } from '../../store/actions/system.actions';
 import { connect } from 'react-redux';
+import { InviteMain } from '../invite/invite-main';
 
 const PopoverCmp = ({ name, props, closeCardPopover }) => {
+  console.log(name, props, closeCardPopover);
   switch (name) {
     case 'add-members':
       return <AddMembers closeCardPopover={closeCardPopover} {...props} />;
@@ -25,6 +27,8 @@ const PopoverCmp = ({ name, props, closeCardPopover }) => {
       return <AddCheckitemDueDate closeCardPopover={closeCardPopover} {...props} />;
     case 'add-location':
       return <AddLocation closeCardPopover={closeCardPopover} {...props} />
+    case 'invite-main':
+      return <InviteMain closeCardPopover={closeCardPopover} {...props} />
     default:
       return <div></div>;
   }

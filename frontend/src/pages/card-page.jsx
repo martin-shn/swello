@@ -1,24 +1,25 @@
-import { CircularProgress } from '@mui/material';
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+
+import { CircularProgress } from '@mui/material';
 import Modal from '@mui/material/Modal';
+
+import { cardService } from '../services/board-services/card.service';
+
 import { updateBoard } from '../store/actions/board.actions';
 import { setCardPopover } from '../store/actions/system.actions';
-import { withRouter } from 'react-router';
+
 import { CardDescription } from '../cmps/card/card-description';
 import { CardLabels } from '../cmps/card/card-labels';
 import { CardHeader } from '../cmps/card/card-header';
 import { boardService } from '../services/board.service';
 import { CardPopover } from '../cmps/card/card-popover';
 import { CardChecklists } from '../cmps/card/card-checklists';
-import { cardService } from '../services/board-services/card.service';
 import { CardDueDate } from '../cmps/card/card-due-date';
-<<<<<<< HEAD
 import { CardLocation } from '../cmps/card/card-location'
-=======
-import { LocationCard } from '../cmps/card/location/location-card';
+// import { LocationCard } from '../cmps/card/location/location-card';
 import { CardMembers } from '../cmps/card/card-members';
->>>>>>> d2a63e520c0ef4ba20b59b35aa9250a95fc35f99
 
 class _CardPage extends Component {
   state = { card: null };
@@ -68,7 +69,8 @@ class _CardPage extends Component {
     if (!this.state.card) return <CircularProgress sx={{ position: 'absolute' }} />;
     const { description, title, checklists, dueDate, 
       // members = [], 
-      location } = this.state.card;
+      // location 
+    } = this.state.card;
     const { card } = this.state;
     const { cardPopover, board } = this.props;
     const { updateField } = this;
