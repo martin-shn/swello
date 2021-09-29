@@ -72,10 +72,9 @@ function delay(ms = 1500) {
   });
 }
 
-function getFormattedDate(timestamp) {
+function getFormattedDate(timestamp, isWithTime) {
   if (!timestamp) return '';
-  return new Date(timestamp).toLocaleString('en-US', {
-    month: 'short',
-    day: 'numeric',
-  });
+  let options = { month: 'short', day: 'numeric' };
+  if (isWithTime) options = { ...options, hour: '2-digit', minute: '2-digit' };
+  return new Date(timestamp).toLocaleString('en-US', options).replace(',', ' at');
 }

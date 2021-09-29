@@ -6,9 +6,9 @@
   margin-bottom: 8px;
   min-height: 32px;
   text-decoration: none;
-  padding: 5px;
+  padding: 8px 6px;
   position: relative;
-  gap: 3px;
+  gap: 4px;
 
   &.full-cover {
     min-height: 56px;
@@ -52,40 +52,91 @@
   .card-preview-data {
     gap: 5px;
     margin-top: 2px;
+
+    // Members
+
     .card-preview-members {
-      gap: 2px;
+      gap: 4px;
+      margin-left: auto;
       .avatar {
         width: 25px !important;
         height: 25px !important;
       }
     }
+
+    // Checklists
+    .card-preview-checklists {
+      padding: 2px;
+    }
+
+    .card-preview-checklists,
     .btn-due-date {
-      padding: 4px;
+      font-size: 12px;
       background-color: inherit;
       border-radius: 3px;
-      font-size: 12px;
       gap: 4px;
+
+      &.due-soon {
+        background-color: $clr-due-date-due-soon;
+      }
+      &.overdue {
+        color: #fff;
+        background-color: $clr-due-date-overdue;
+      }
+      &.overdue-recent {
+        color: #fff;
+        background-color: $clr-due-date-overdue-recent;
+      }
+      &.complete {
+        color: #fff;
+        background-color: $clr-due-date-complete;
+      }
+    }
+
+    // Due Date
+    .btn-due-date {
+      padding: 4px;
+
       .due-date-icon {
         content: url(../../../assets/svg/card/checklist-due-date.svg);
         width: 16px;
         height: 16px;
-        color: inherit;
-      }
-      &.complete {
-        background-color: #61bd4f;
-        color: #fff;
-        .due-date-icon {
-          filter: invert(1);
-        }
-        &:hover {
-          .due-date-icon {
-            content: url(../../../assets/svg/card/checkbox-complete.svg);
-          }
-        }
       }
       &:hover {
         .due-date-icon {
           content: url(../../../assets/svg/card/checkbox.svg);
+        }
+      }
+      &.due-soon,
+      &.complete,
+      &.overdue,
+      &.overdue-recent {
+        color: #fff;
+        .due-date-icon {
+          filter: invert(1);
+        }
+      }
+
+      &.due-soon {
+        &:hover {
+          background-color: $clr-due-date-due-soon-hover;
+        }
+      }
+      &.overdue {
+        &:hover {
+          background-color: $clr-due-date-overdue-hover;
+        }
+      }
+      &.overdue-recent {
+        &:hover {
+          background-color: $clr-due-date-overdue-recent-hover;
+        }
+      }
+      &.complete {
+        &:hover {
+          .due-date-icon {
+            content: url(../../../assets/svg/card/checkbox-complete.svg);
+          }
         }
       }
     }
@@ -159,6 +210,7 @@
   }
 }
 
+// animations:
 @keyframes label_text_appear {
   0% {
     min-width: 40px;

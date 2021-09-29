@@ -6,6 +6,16 @@ $clr-primary-blue: #0065ff;
 $clr-light: #ffffff3d;
 $clr-light-2: rgba(255, 255, 255, 0.3);
 
+// Card
+// Dates
+$clr-due-date-complete: #61bd4f;
+$clr-due-date-overdue-recent: #eb5a46;
+$clr-due-date-overdue-recent-hover: #b04632;
+$clr-due-date-overdue: #ec9488;
+$clr-due-date-overdue-hover: #eb5a46;
+$clr-due-date-due-soon: #f2d600;
+$clr-due-date-due-soon-hover: #d9b51c;
+
 // Breakpoints
 $mobile-breakpoint: 460px;
 $narrow-breakpoint: 720px;

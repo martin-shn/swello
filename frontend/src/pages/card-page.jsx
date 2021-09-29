@@ -11,6 +11,7 @@ import { cardService } from '../services/board-services/card.service';
 import { updateBoard } from '../store/actions/board.actions';
 import { setCardPopover } from '../store/actions/system.actions';
 
+import { CardSidebar } from '../cmps/card/card-sidebar'
 import { CardDescription } from '../cmps/card/card-description';
 import { CardLabels } from '../cmps/card/card-labels';
 import { CardHeader } from '../cmps/card/card-header';
@@ -20,6 +21,7 @@ import { CardChecklists } from '../cmps/card/card-checklists';
 import { CardDueDate } from '../cmps/card/card-due-date';
 import { CardLocation } from '../cmps/card/card-location';
 import { CardMembers } from '../cmps/card/card-members';
+
 
 class _CardPage extends Component {
   state = { card: null };
@@ -84,7 +86,10 @@ class _CardPage extends Component {
     const { updateField } = this;
     return (
       <Modal open={true} onClose={this.onCloseCard}>
-        <div className="card-page-wrapper">
+        <div
+          id="card-page-wrapper"
+          className="card-page-wrapper"
+          onClick={ev => ev.target.classList.contains('card-page-wrapper') && this.onCloseCard()}>
           {cardPopover.name && cardPopover.anchorEl && <CardPopover />}
           <section className="card-page" >
             {card.cover && card.cover.color && card.cover.size &&
@@ -127,46 +132,7 @@ class _CardPage extends Component {
                 />
                 <CardChecklists card={card} checklists={checklists} updateField={updateField} />
               </main>
-              <aside className="card-sidebar">
-                <span className="sub-header">Add to card</span>
-                <button
-                  name="add-members"
-                  onClick={ev =>
-                    this.onOpenPopover(ev, {
-                      board,
-                      card,
-                      updateField,
-                    })
-                  }>
-                  Members
-                </button>
-                <button
-                  name="add-labels"
-                  onClick={ev => this.onOpenPopover(ev, { board, card, updateField })}>
-                  Labels
-                </button>
-                <button
-                  name="add-checklist"
-                  onClick={ev => this.onOpenPopover(ev, { card, updateField })}>
-                  Checklist
-                </button>
-                <button
-                  name="add-due-date"
-                  onClick={ev => this.onOpenPopover(ev, { dueDate, updateField })}>
-                  Date
-                </button>
-                <button>Attachment</button>
-                <button
-                  name="add-location"
-                  onClick={ev =>
-                    this.onOpenPopover(ev, { card, updateField, currPage: 'save', isFromNav: true })
-                  }>
-                  Location
-                </button>
-                <button name="add-cover"
-                  onClick={ev => this.onOpenPopover(ev, { card, updateField })}>
-                  Cover</button>
-              </aside>
+              <CardSidebar board={board} card={card} updateField={updateField} onOpenPopover={this.onOpenPopover} dueDate={dueDate}/>
             </div>
           </section>
         </div>

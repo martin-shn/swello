@@ -45,8 +45,13 @@ export class CardChecklist extends Component {
   }
 
   render() {
-    const { onAddingItem, checklist, isAdding, onDeleteChecklist, 
-      // onUpdateItem 
+    const {
+      onAddingItem,
+      checklist,
+      isAdding,
+      onDeleteChecklist,
+      onUpdateChecklist,
+      // onUpdateItem
     } = this.props;
     const { addedItem } = this.state;
     return (
@@ -54,7 +59,13 @@ export class CardChecklist extends Component {
         <div className="section-header">
           <ChecklistIcon />
           <div className="flex space-between">
-            <h3 className="section-title">{checklist.title}</h3>
+            <h3
+              className="section-title content-editable grow"
+              onBlur={ev => onUpdateChecklist({ ...checklist, title: ev.target.innerText })}
+              contentEditable
+              suppressContentEditableWarning>
+              {checklist.title}
+            </h3>
             <button onClick={() => onDeleteChecklist(checklist.id)}>Delete</button>
           </div>
         </div>

@@ -5,6 +5,7 @@ import { AppCheckbox } from '../../general/app-checkbox';
 import { connect } from 'react-redux';
 import { setCardPopover } from '../../../store/actions/system.actions';
 import { utilService } from '../../../services/util.service';
+import { cardService } from '../../../services/board-services/card.service';
 
 const _ChecklistItem = props => {
   // TODO - Finish the remaining add-member and due-date buttons, enable title edit
@@ -12,22 +13,35 @@ const _ChecklistItem = props => {
   const { id, title, isDone, dueDate, assignedTo } = props.item;
   const formattedDate = utilService.getFormattedDate(dueDate);
   const isData = dueDate || assignedTo;
-  // prettier-ignore
+  const status = cardService.checkDueDate({ date: dueDate, isComplete: isDone });
+  const className = `section-header checklist-item ${status} ${isData ? ' is-data' : ''}`;
   return (
-    <div
-      className={`section-header checklist-item${isDone ? ' done' : ''} ${isData ? ' is-data' : ''}`}>
+    <div className={className}>
       <AppCheckbox
         isDone={isDone}
         onClick={() => props.onUpdateItem(props.item, { isDone: !isDone })}
       />
       <div className="item flex space-between">
-        <span className="title">{title}</span>
+        <div
+          className="title content-editable grow"
+          onBlur={ev => props.onUpdateItem(props.item, { title: ev.target.innerText })}
+          contentEditable
+          suppressContentEditableWarning>
+          {title}
+        </div>
         <section className="actions flex">
-          <button className="btn-due-date"
-            onClick={ev => props.setCardPopover('add-checkitem-due-date', ev.target, { item, onUpdateItem }) }
+          <button
+            className="btn-due-date"
+            onClick={ev =>
+              props.setCardPopover('add-checkitem-due-date', ev.target, { item, onUpdateItem })
+            }
             style={{ width: 'auto', gap: '4px' }}>
             <DueDateIcon style={{ width: '15px' }} />
-            {dueDate && <span className="due-date-text" style={{ fontSize: '12px' }}>{formattedDate}</span>}
+            {dueDate && (
+              <span className="due-date-text" style={{ fontSize: '12px' }}>
+                {formattedDate}
+              </span>
+            )}
           </button>
           <button>
             <AddMemberIcon />

@@ -13,6 +13,7 @@ export class AddCheckitemDueDate extends Component {
   }
 
   handleChange = date => {
+    date.setHours(0, 0, 0);
     const dueDate = date ? Date.parse(date) : null;
     this.props.onUpdateItem(this.props.item, { dueDate });
     this.props.closeCardPopover();

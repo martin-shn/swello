@@ -2,7 +2,8 @@ const url = window.location.href;
 let timer=null;
 
 export function QrCode(){
-
+    let tmp=false;
+    console.log(tmp);
     return <div className="qr-code-container">
         <div>
             <input 
@@ -13,7 +14,10 @@ export function QrCode(){
                 readOnly
                 onClick={(ev)=>ev.target.setSelectionRange(0, ev.target.value.length)}
                 />
-            <button onClick={onCopy}>{timer?'Copied':'Copy'}</button>
+            <button onClick={()=>{
+                onCopy()
+                tmp=true;
+                }}>{timer?'Copied':'Copy'}</button>
         </div>
         <div>
             <img src={`https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${url}&format=svg`} />
@@ -55,7 +59,7 @@ function toDataURL(downloadURL) {
 async function download() {
     const a = document.createElement("a");
     a.href = await toDataURL(`https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${url}`);
-    a.download = "trello-board-invite-qr-code.png";
+    a.download = "swello-board-invite-qr-code.png";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
