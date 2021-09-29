@@ -12,8 +12,8 @@ export const CardDueDate = props => {
   if (!dueDate?.date) return <></>;
   const formattedDate = utilService.getFormattedDate(dueDate.date) + ' at 12:15 AM'; // TODO - change to real hour from input
   return (
-    <section className="card-item card-due-date">
-      <span>Due Date</span>
+    <section className="card-item card-due-date flex column">
+      <div className="sub-header">Due Date</div>
       <div className="flex">
         <AppCheckbox onClick={onToggleComplete} isDone={dueDate.isComplete} />
         <button name="add-due-date" onClick={ev => onOpenPopover(ev, { dueDate, updateField })}>

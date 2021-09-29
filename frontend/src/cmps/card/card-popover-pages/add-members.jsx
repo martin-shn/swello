@@ -30,11 +30,6 @@ export class AddMembers extends Component {
         member?.username?.toLowerCase()?.includes(search.toLowerCase())
     );
     this.setState({ updatedBoardMembers });
-    // this.setState({
-    //   updatedMembers: board.members.filter(
-    //     member => member.fullname.includes(search) || member.username.includes(search)
-    //   ),
-    // });
   };
 
   render() {
@@ -68,7 +63,7 @@ export class AddMembers extends Component {
                   onClick={() => this.toggleCardMember(member)}>
                   <Avatar className="avatar" alt={member.fullname} src={member.imgUrl} />
                   <span className="member-name">
-                    {member.fullname} ({member.username})
+                    {member.fullname}
                   </span>
                   {isMemberInCard && <CheckIcon className="in-list-icon" />}
                 </div>

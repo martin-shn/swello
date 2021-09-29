@@ -17,8 +17,7 @@ import { boardService } from '../services/board.service';
 import { CardPopover } from '../cmps/card/card-popover';
 import { CardChecklists } from '../cmps/card/card-checklists';
 import { CardDueDate } from '../cmps/card/card-due-date';
-import { CardLocation } from '../cmps/card/card-location'
-// import { LocationCard } from '../cmps/card/location/location-card';
+import { CardLocation } from '../cmps/card/card-location';
 import { CardMembers } from '../cmps/card/card-members';
 
 class _CardPage extends Component {
@@ -67,9 +66,13 @@ class _CardPage extends Component {
 
   render() {
     if (!this.state.card) return <CircularProgress sx={{ position: 'absolute' }} />;
-    const { description, title, checklists, dueDate, 
-      // members = [], 
-      // location 
+    const {
+      description,
+      title,
+      checklists,
+      dueDate,
+      // members = [],
+      location,
     } = this.state.card;
     const { card } = this.state;
     const { cardPopover, board } = this.props;
@@ -79,6 +82,7 @@ class _CardPage extends Component {
         <div className="card-page-wrapper">
           {cardPopover.name && cardPopover.anchorEl && <CardPopover />}
           <section className="card-page">
+            {card.cover && card.cover.color && card.cover.size  === 'top-cover' && <div className={'card-cover ' + card.cover.color}></div>}
             <CardHeader
               updateField={updateField}
               title={title}
@@ -104,7 +108,11 @@ class _CardPage extends Component {
                   />
                 </section>
                 <CardDescription description={description} updateField={updateField} />
-                <CardLocation card={card} updateField={updateField} onOpenPopover={this.onOpenPopover} />
+                <CardLocation
+                  card={card}
+                  updateField={updateField}
+                  onOpenPopover={this.onOpenPopover}
+                />
                 <CardChecklists card={card} checklists={checklists} updateField={updateField} />
               </main>
               <aside className="card-sidebar">
@@ -138,10 +146,14 @@ class _CardPage extends Component {
                 <button>Attachment</button>
                 <button
                   name="add-location"
-                  onClick={ev => this.onOpenPopover(ev, { card, updateField, currPage: 'save', isFromNav: true })}>
+                  onClick={ev =>
+                    this.onOpenPopover(ev, { card, updateField, currPage: 'save', isFromNav: true })
+                  }>
                   Location
                 </button>
-                <button>Cover</button>
+                <button name="add-cover"
+                  onClick={ev => this.onOpenPopover(ev, { card, updateField })}>
+                  Cover</button>
               </aside>
             </div>
           </section>

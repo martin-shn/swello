@@ -1,11 +1,3 @@
-.dragging {
-  transform: rotate(5deg);
-  position: fixed;
-  top: -50px;
-  left: 0;
-  z-index: 3;
-}
-
 .card-preview {
   background-color: #fff;
   border-radius: 3px;
@@ -16,6 +8,7 @@
   text-decoration: none;
   padding: 5px;
   position: relative;
+  gap: 3px;
 
   .content {
     padding: 6px 8px 2px;
@@ -31,42 +24,85 @@
   &:hover .edit-icon {
     visibility: visible;
   }
+
+  .card-preview-data {
+    gap: 5px;
+    margin-top: 2px;
+    .card-preview-members {
+      gap: 2px;
+      .avatar {
+        width: 25px !important;
+        height: 25px !important;
+      }
+    }
+    .btn-due-date {
+      padding: 4px;
+      background-color: inherit;
+      border-radius: 3px;
+      font-size: 12px;
+      gap: 4px;
+      .due-date-icon {
+        content: url(../../../assets/svg/card/checklist-due-date.svg);
+        width: 16px;
+        height: 16px;
+        color: inherit;
+      }
+      &.complete {
+        background-color: #61bd4f;
+        color: #fff;
+        .due-date-icon {
+          filter: invert(1);
+        }
+        &:hover {
+          .due-date-icon {
+            content: url(../../../assets/svg/card/checkbox-complete.svg);
+          }
+        }
+      }
+      &:hover {
+        .due-date-icon {
+          content: url(../../../assets/svg/card/checkbox.svg);
+        }
+      }
+    }
+  }
+
   .labels-container {
     flex-wrap: wrap;
     &:hover {
       .label {
         &.green {
-          background-color: #519839;
+          background-color: #519839 !important;
         }
         &.yellow {
-          background-color: #d9b51c;
+          background-color: #d9b51c !important;
         }
         &.orange {
-          background-color: #cd8313;
+          background-color: #cd8313 !important;
         }
         &.red {
-          background-color: #b04632;
+          background-color: #b04632 !important;
         }
         &.purple {
-          background-color: #89609e;
+          background-color: #89609e !important;
         }
         &.blue {
-          background-color: #055a8c;
+          background-color: #055a8c !important;
         }
         &.sky {
-          background-color: #0098b7;
+          background-color: #0098b7 !important;
         }
         &.lime {
-          background-color: #4bbf6b;
+          background-color: #4bbf6b !important;
         }
         &.pink {
-          background-color: #c9558f;
+          background-color: #c9558f !important;
         }
         &.black {
-          background-color: #091e42;
+          background-color: #091e42 !important;
         }
         &.gray {
-          background-color: #97a0af;
+          background-color: #97a0af !important;
         }
       }
     }
@@ -101,7 +137,7 @@
 
 @keyframes label_text_appear {
   0% {
-    width: 40px;
+    min-width: 40px;
     height: 8px;
     color: transparent;
   }

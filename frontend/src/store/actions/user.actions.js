@@ -1,11 +1,11 @@
 import { userService } from "../../services/user.service.js";
 import { showErrorMsg } from '../../services/event-bus.service.js'
 
-export function loadUsers() {
+export function loadUsers(filterBy) {
     return async dispatch => {
         try {
             dispatch({ type: 'LOADING_START' })
-            const users = await userService.getUsers()
+            const users = await userService.getUsers(filterBy)
             dispatch({ type: 'SET_USERS', users })
         } catch (err) {
             console.log('UserActions: err in loadUsers', err)

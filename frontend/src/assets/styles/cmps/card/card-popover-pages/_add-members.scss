@@ -1,5 +1,7 @@
-.add-members, .save-location {
+.add-members,
+.save-location {
   .search {
+    margin: 4px 0 12px;
     background-color: #f4f5f7;
     &:hover {
       background-color: #ebecf0;
@@ -34,5 +36,6 @@
     letter-spacing: 0.04em;
     line-height: 16px;
     text-transform: uppercase;
+    margin: 0 0 8px;
   }
 }
