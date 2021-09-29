@@ -1,4 +1,5 @@
 import { utilService } from '../util.service';
+import { httpService } from '../http.service';
 
 export const cardService = {
   getCardById,
@@ -9,7 +10,11 @@ export const cardService = {
   updateChecklistItem,
   removeChecklistItem,
   getListOfCard,
+<<<<<<< HEAD
+  getLocationResults
+=======
   toggleCardMember,
+>>>>>>> d2a63e520c0ef4ba20b59b35aa9250a95fc35f99
 };
 
 // CARD FUNCTIONS - returns updated board
@@ -131,6 +136,20 @@ function updateChecklistItem(card, checklistId, updatedItem) {
     }
   });
   return card;
+}
+
+
+// Location 
+
+const key = 'AIzaSyDgw0mWmcS4OoFUyLUj5oNbfo4KGzpHiYA';
+async function getLocationData(locationId) {
+  // const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${search}&inputtype=textquery&fields=formatted_address%2Cname%2Cgeometry&key=${key}`
+  // return await httpService.getFromApi(url)
+}
+
+async function getLocationResults(search) {
+  const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${search}&key=${key}`;
+  return await httpService.getFromApi(url)
 }
 
 // Card Members:

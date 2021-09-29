@@ -94,7 +94,7 @@
                     text-decoration: none;
                     overflow: hidden;
                     border-radius: 4px;
-                    padding: 0 8px 6px;
+                    padding: 8px 6px;
                     margin: 8px 8px 14px;
                     &:hover {
                         background-color: rgba(9, 30, 66, 0.08);
@@ -253,7 +253,6 @@
     z-index: 1;
     
     margin-bottom: 8px;
-    padding: 0 12px;
     position: relative;
     text-align: center;
     display: grid;

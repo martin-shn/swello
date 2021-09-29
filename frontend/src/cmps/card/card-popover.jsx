@@ -5,6 +5,7 @@ import { AddLabels } from './card-popover-pages/add-labels/add-labels';
 import { AddChecklist } from './card-popover-pages/add-checklist';
 import { AddCheckitemDueDate } from './card-popover-pages/add-checkitem-due-date';
 import { AddDueDate } from './card-popover-pages/add-due-date';
+import { AddLocation } from './card-popover-pages/add-location/add-location'
 import { setCardPopover, closeCardPopover } from '../../store/actions/system.actions';
 import { connect } from 'react-redux';
 
@@ -22,6 +23,8 @@ const PopoverCmp = ({ name, props, closeCardPopover }) => {
       return <AddDueDate closeCardPopover={closeCardPopover} {...props} />;
     case 'add-checkitem-due-date':
       return <AddCheckitemDueDate closeCardPopover={closeCardPopover} {...props} />;
+    case 'add-location':
+      return <AddLocation closeCardPopover={closeCardPopover} {...props} />
     default:
       return <div></div>;
   }
