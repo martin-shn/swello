@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
 import { setCardPopover, closeCardPopover } from '../../store/actions/system.actions';
-import { updateBoard } from '../../store/actions/board.actions';
 import {QrCode} from './qrcode'
 import { userService } from '../../services/user.service';
+import {Avatar} from '@mui/material'
 
 class _InviteMain extends Component {
     state = {
@@ -31,19 +31,8 @@ class _InviteMain extends Component {
     };
 
     onOpenPopover = (ev, props) => {
-        // const { name } = ev.target;
         this.props.setCardPopover('', ev.target, props);
     };
-
-    onInviteClick = (url) => {
-        window.open(url, '_blank');
-    };
-
-    // onSaveLocation = (location) => {
-    //     const { updateField } = this.props;
-    //     updateField({ location });
-    //     this.props.closeCardPopover()
-    // }
 
     onSendInvitation = () => {
         // send invitation with sockets
@@ -90,7 +79,8 @@ class _InviteMain extends Component {
                 {this.state.res.length>0&&<div className="invite-results">
                     <div>
                         {this.state.res.map(user=><div key={user._id} onClick={()=>this.setState({name:user.username, isLink:true, res:[]})}>
-                                <img src={user.imgUrl} alt="user image"/>
+                                {/* <img src={user.imgUrl} alt="user image"/> */}
+                                <Avatar alt={user.fullname} src={user.imgUrl} className="avatar"/>
                                 <span>{user.fullname}</span>
                             </div>)}
                         </div>
@@ -101,13 +91,11 @@ class _InviteMain extends Component {
 }
 
 const mapDispatchToProps = {
-    updateBoard,
     setCardPopover,
     closeCardPopover
 };
 
 const mapStateToProps = (state) => ({
-    board: state.boardModule.board,
     cardPopover: state.systemModule.cardPopover,
 });
 

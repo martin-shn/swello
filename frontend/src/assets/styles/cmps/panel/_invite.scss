@@ -265,22 +265,21 @@
             &:hover {
                 background-color: #091e420a;
             }
-            & > img {
+            & > div {
                 // avatar
+                display: flex;
                 margin-right: 12px;
                 flex-shrink: 0;
                 margin: 0 8px 0 0;
                 background-color: #dfe1e6;
                 border-radius: 25em;
                 color: #172b4d;
-                cursor: pointer;
-                display: block;
+                cursor: pointer!important;
                 float: left;
                 height: 32px;
                 overflow: visible;
                 position: relative;
                 text-decoration: none;
-                user-select: none;
                 width: 32px;
                 z-index: 0;
                 object-fit: cover;
@@ -289,7 +288,7 @@
                 }
             }
 
-            & > div {
+            & > span {
                 // full name
                 flex: 1;
                 text-align: left;
@@ -300,7 +299,7 @@
                 max-width: 180px;
                 overflow: hidden;
                 text-overflow: ellipsis;
-                cursor: not-allowed;
+                // cursor: not-allowed;
             }
         }
     }
