@@ -89,3 +89,16 @@
     background-color: #026aa7;
   }
 }
+
+
+.MuiTypography-h3, 
+.MuiTypography-h4
+{
+  font-size: 2rem!important;
+}
+.MuiTypography-subtitle1{
+  font-size: 0.9rem!important;
+}
+.MuiPickersBasePicker-pickerView{
+  min-width: unset!important;
+}

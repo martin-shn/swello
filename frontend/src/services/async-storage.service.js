@@ -35,8 +35,18 @@ function query(entityType, filterBy, delay = 1200) {
         );
       });
     }
+
     if (filterBy.byBoardId) {
       console.log('filter by board id');
+    }
+
+    if(filterBy.name){
+      entities = entities.filter(entity=>{
+        return(
+          entity.fullname.toLowerCase().includes(filterBy.name.toLowerCase()) ||
+          entity.username.toLowerCase().includes(filterBy.name.toLowerCase()) 
+        )
+      })
     }
   }
 

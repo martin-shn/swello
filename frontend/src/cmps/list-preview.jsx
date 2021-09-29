@@ -17,8 +17,10 @@ import { Draggable } from 'react-beautiful-dnd';
 export class _ListPreview extends Component {
   state = {
     popoverPage: 'main',
-    isDragging: true
+    isDragging: true,
+    listName: this.props.list.title,
   };
+
   bottomAddRef = React.createRef();
   topAddRef = React.createRef();
   title = React.createRef();
@@ -46,6 +48,15 @@ export class _ListPreview extends Component {
     this.setState({ popoverPage: page });
   };
 
+  handleChange = ({target}) => {
+    this.setState({listName: target.value})
+  }
+
+  onUpdateTitle = (ev) => {
+    const updatedBoard = boardService.updateList(this.props.board, {...this.props.list, title:ev.target.value})
+    this.props.updateBoard(updatedBoard)
+  }
+
   render() {
     const {
       idx,
@@ -59,6 +70,7 @@ export class _ListPreview extends Component {
       isTopAdd,
       onCopyList,
       onMoveList,
+      board
     } = this.props;
     const { popoverPage } = this.state;
     return (
@@ -69,7 +81,24 @@ export class _ListPreview extends Component {
             {...provided.draggableProps}
             ref={provided.innerRef}>
             <div className="list-header flex space-between" {...provided.dragHandleProps}>
-              {!this.state.isDragging && <input type="text" autoFocus onBlur={() => { this.setState({ isDragging: true }) }} style={{ width: '100%' }} />}
+              {!this.state.isDragging && <input 
+              type="text" 
+              autoCorrect="off"
+              autoComplete="off"
+              value={this.state.listName}
+              onChange={this.handleChange}
+              autoFocus 
+              onKeyUp= {(ev) =>{
+                  if(ev.key==='Enter'){
+                    ev.target.blur()
+                  }
+              }}
+              onBlur={(ev) => { 
+                this.setState({ isDragging: true }) 
+                this.onUpdateTitle(ev)
+              }} 
+              style={{ width: '100%' }} 
+              />}
               {this.state.isDragging && <h2
                 className="list-title content-editable"
                 onClick={() => {

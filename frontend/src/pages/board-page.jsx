@@ -105,7 +105,7 @@ export class _BoardPage extends Component {
 
   // TODO: add dynamic text color using contrast-js
   render() {
-    if (this.props.isLoadingPage)
+    if (!this.props.board || this.props.isLoadingPage )
       return (
         <>
           <AppHeader />

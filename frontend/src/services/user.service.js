@@ -14,8 +14,8 @@ export const userService = {
 
 window.userService = userService;
 
-function getUsers() {
-  return storageService.query('user');
+function getUsers(filterBy) {
+  return storageService.query('user', filterBy);
   // return httpService.get(`user`)
 }
 

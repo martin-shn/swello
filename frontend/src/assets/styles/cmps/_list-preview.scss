@@ -19,7 +19,7 @@
 
   .btn-more {
     position: relative;
-    z-index: 2;
+    z-index: 11;
   }
 
   button {
@@ -57,6 +57,12 @@
       padding: 4px 5px;
       overflow: hidden;
       overflow-wrap: break-word;
+    }
+    &>input{
+      padding: 0px 5px;
+      height: 28px;
+      font-size: 1em;
+      font-weight: 600;
     }
   }
 

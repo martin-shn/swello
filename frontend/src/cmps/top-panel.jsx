@@ -7,9 +7,9 @@ import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Avatar } from '@mui/material';
 
-import { InviteMain } from './invite/invite-main';
 import { setCardPopover } from '../store/actions/system.actions';
 import { updateBoard } from '../store/actions/board.actions';
+import { CardPopover } from './card/card-popover';
 
 const _TopPanel = props => {
   const { title, members, onUpdateTitle, user, board, onUpdateUser, setCardPopover, cardPopover } = props;
@@ -50,7 +50,7 @@ const _TopPanel = props => {
           }}
         >Invite</button>
       </div>
-      <InviteMain/>
+      {cardPopover.name==='invite-main' && <CardPopover />}
       <div>
         <button className="btn-menu">
           <MoreHorizIcon />
@@ -75,7 +75,7 @@ function onStar(user, boardId, onUpdateUser, isStar) {
 
 function onOpenPopover(ev, setCardPopover) {
   // const { name } = ev.target;
-  setCardPopover('invite-main', ev.target, { name:'invite-main', isFromNav: false });
+  setCardPopover('invite-main', ev.target, null);
 };
 
 function updateField(data){

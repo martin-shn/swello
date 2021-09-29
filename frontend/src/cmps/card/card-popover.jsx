@@ -12,7 +12,6 @@ import { connect } from 'react-redux';
 import { InviteMain } from '../invite/invite-main';
 
 const PopoverCmp = ({ name, props, closeCardPopover }) => {
-  console.log(name, props, closeCardPopover);
   switch (name) {
     case 'add-members':
       return <AddMembers closeCardPopover={closeCardPopover} {...props} />;
