@@ -25,6 +25,7 @@ const _ChecklistItem = props => {
         <div
           className="title content-editable grow"
           onBlur={ev => props.onUpdateItem(props.item, { title: ev.target.innerText })}
+          onKeyDown={ev => ev.key === 'Enter' && ev.target.blur()}
           contentEditable
           suppressContentEditableWarning>
           {title}
