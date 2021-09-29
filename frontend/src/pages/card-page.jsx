@@ -1,17 +1,21 @@
-import { CircularProgress } from '@mui/material';
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+
+import { CircularProgress } from '@mui/material';
 import Modal from '@mui/material/Modal';
+
+import { cardService } from '../services/board-services/card.service';
+
 import { updateBoard } from '../store/actions/board.actions';
 import { setCardPopover } from '../store/actions/system.actions';
-import { withRouter } from 'react-router';
+
 import { CardDescription } from '../cmps/card/card-description';
 import { CardLabels } from '../cmps/card/card-labels';
 import { CardHeader } from '../cmps/card/card-header';
 import { boardService } from '../services/board.service';
 import { CardPopover } from '../cmps/card/card-popover';
 import { CardChecklists } from '../cmps/card/card-checklists';
-import { cardService } from '../services/board-services/card.service';
 import { CardDueDate } from '../cmps/card/card-due-date';
 import { CardLocation } from '../cmps/card/card-location';
 import { CardMembers } from '../cmps/card/card-members';
@@ -78,6 +82,7 @@ class _CardPage extends Component {
         <div className="card-page-wrapper">
           {cardPopover.name && cardPopover.anchorEl && <CardPopover />}
           <section className="card-page">
+            {card.cover && card.cover.color && card.cover.size  === 'top-cover' && <div className={'card-cover ' + card.cover.color}></div>}
             <CardHeader
               updateField={updateField}
               title={title}
@@ -146,7 +151,9 @@ class _CardPage extends Component {
                   }>
                   Location
                 </button>
-                <button>Cover</button>
+                <button name="add-cover"
+                  onClick={ev => this.onOpenPopover(ev, { card, updateField })}>
+                  Cover</button>
               </aside>
             </div>
           </section>

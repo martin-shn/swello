@@ -21,8 +21,8 @@ export const httpService = {
     return ajax(endpoint, 'DELETE', data);
   },
   async getFromApi(endpoint) {
-    const res = await fetch(endpoint)
-    return res.json()
+    const res = await axios.get(endpoint)
+    return res.data
   }
 };
 

@@ -1,5 +1,6 @@
 import { utilService } from '../util.service';
 import { httpService } from '../http.service';
+import _ from 'lodash'
 
 export const cardService = {
   getCardById,
@@ -17,14 +18,15 @@ export const cardService = {
 // CARD FUNCTIONS - returns updated board
 
 export function updateCard(board, updatedCard, activity) {
-  board.lists.forEach(list => {
+  const cloneBoard = _.cloneDeep(board)
+  cloneBoard.lists.forEach(list => {
     if (!list.cards) return;
     list.cards.forEach((card, idx) => {
       if (card.id === updatedCard.id) list.cards[idx] = updatedCard;
     });
   });
   // board.activities.push(activity);
-  return board;
+  return cloneBoard;
 }
 
 export function addCard(board, list, cardTitle, isTopAdd) {

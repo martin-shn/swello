@@ -23,6 +23,11 @@
   margin: 48px 0 80px;
   padding: 0 8px 8px 16px;
 
+  .card-cover {
+    height: 116px;
+    margin: 0 -16px;
+  }
+
   .data-and-sidebar {
     gap: 20px;
   }
@@ -53,7 +58,7 @@
     & > .header-icon::before {
       font-family: FA-regular;
       font-size: 1.1rem;
-      content: '\f07b';
+      content: "\f07b";
       color: #42526e;
     }
 
@@ -102,7 +107,9 @@
 
 // LABELS COLORS
 
-.label {
+.label,
+.color,
+.card-cover {
   color: #fff;
   &.detail {
     cursor: pointer;
@@ -111,7 +118,7 @@
     }
   }
   &.green {
-    background-color: #61bd4f;
+    background-color: #61bd4f !important;
     &.add {
       &:hover {
         box-shadow: -8px 0 #519839;
@@ -124,7 +131,7 @@
     }
   }
   &.yellow {
-    background-color: #f2d600;
+    background-color: #f2d600 !important;
     &.add {
       &:hover {
         box-shadow: -8px 0 #d9b51c;
@@ -132,7 +139,7 @@
     }
   }
   &.orange {
-    background-color: #ff9f1a;
+    background-color: #ff9f1a !important;
     &.add {
       &:hover {
         box-shadow: -8px 0 #cd8313;
@@ -140,7 +147,7 @@
     }
   }
   &.red {
-    background-color: #eb5a46;
+    background-color: #eb5a46 !important;
     &.add {
       &:hover {
         box-shadow: -8px 0 #b04632;
@@ -148,7 +155,7 @@
     }
   }
   &.purple {
-    background-color: #c377e0;
+    background-color: #c377e0 !important;
     &.add {
       &:hover {
         box-shadow: -8px 0 #89609e;
@@ -156,7 +163,7 @@
     }
   }
   &.blue {
-    background-color: #0079bf;
+    background-color: #0079bf !important;
     &.add {
       &:hover {
         box-shadow: -8px 0 #055a8c;
@@ -164,7 +171,7 @@
     }
   }
   &.sky {
-    background-color: #00c2e0;
+    background-color: #00c2e0 !important;
     &.add {
       &:hover {
         box-shadow: -8px 0 #0098b7;
@@ -172,7 +179,7 @@
     }
   }
   &.lime {
-    background-color: #51e898;
+    background-color: #51e898 !important;
     &.add {
       &:hover {
         box-shadow: -8px 0 #4bbf6b;
@@ -180,7 +187,7 @@
     }
   }
   &.pink {
-    background-color: #ff78cb;
+    background-color: #ff78cb !important;
     &.add {
       &:hover {
         box-shadow: -8px 0 #c9558f;
@@ -188,7 +195,7 @@
     }
   }
   &.black {
-    background-color: #344563;
+    background-color: #344563 !important;
     &.add {
       &:hover {
         box-shadow: -8px 0 #091e42;
@@ -196,7 +203,7 @@
     }
   }
   &.gray {
-    background-color: #b3bac5;
+    background-color: #b3bac5 !important;
     &.add {
       &:hover {
         box-shadow: -8px 0 #97a0af;
