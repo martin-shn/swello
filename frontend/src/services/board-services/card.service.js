@@ -1,6 +1,6 @@
 import { utilService } from '../util.service';
 import { httpService } from '../http.service';
-import _ from 'lodash'
+import _ from 'lodash';
 
 export const cardService = {
   getCardById,
@@ -13,12 +13,13 @@ export const cardService = {
   getListOfCard,
   getLocationResults,
   toggleCardMember,
+  checkDueDate,
 };
 
 // CARD FUNCTIONS - returns updated board
 
 export function updateCard(board, updatedCard, activity) {
-  const cloneBoard = _.cloneDeep(board)
+  const cloneBoard = _.cloneDeep(board);
   cloneBoard.lists.forEach(list => {
     if (!list.cards) return;
     list.cards.forEach((card, idx) => {
@@ -158,4 +159,18 @@ function toggleCardMember(member, card) {
   if (memberIdx !== -1) card.members.splice(memberIdx, 1);
   else card.members.push(member);
   return card;
+}
+
+// Due date:
+
+function checkDueDate(dueDate) {
+  const hour = 60 * 60 * 1000;
+  const now = Date.now();
+  if (dueDate.isComplete) return 'complete';
+  if (!dueDate.date) return 'no-date';
+  console.log(utilService.getFormattedDate(dueDate.date, true));
+  if (dueDate.date < now && dueDate.date + 24 * hour > now) return 'overdue-recent'; // less than 24 hours since overdue
+  if (dueDate.date < now) return 'overdue';
+  if (dueDate.date - now < hour) return 'due-soon'; // less than 1 hour until overdue
+  return 'normal';
 }

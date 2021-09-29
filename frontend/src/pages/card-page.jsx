@@ -79,10 +79,15 @@ class _CardPage extends Component {
     const { updateField } = this;
     return (
       <Modal open={true} onClose={this.onCloseCard}>
-        <div className="card-page-wrapper">
+        <div
+          id="card-page-wrapper"
+          className="card-page-wrapper"
+          onClick={ev => ev.target.classList.contains('card-page-wrapper') && this.onCloseCard()}>
           {cardPopover.name && cardPopover.anchorEl && <CardPopover />}
           <section className="card-page">
-            {card.cover && card.cover.color && card.cover.size  === 'top-cover' && <div className={'card-cover ' + card.cover.color}></div>}
+            {card.cover && card.cover.color && card.cover.size === 'top-cover' && (
+              <div className={'card-cover ' + card.cover.color}></div>
+            )}
             <CardHeader
               updateField={updateField}
               title={title}
@@ -151,9 +156,11 @@ class _CardPage extends Component {
                   }>
                   Location
                 </button>
-                <button name="add-cover"
+                <button
+                  name="add-cover"
                   onClick={ev => this.onOpenPopover(ev, { card, updateField })}>
-                  Cover</button>
+                  Cover
+                </button>
               </aside>
             </div>
           </section>

@@ -1,7 +1,10 @@
 .card-due-date {
-  span.label-complete {
+  span,
+  svg {
+    pointer-events: none;
+  }
+  .date-label {
     color: #ffffff;
-    background-color: #61bd4f;
     font-size: 12px;
     line-height: 16px;
     padding: 0 4px;
@@ -9,6 +12,19 @@
     border-radius: 2px;
     margin-left: 8px;
     font-weight: 400;
+    &.label-complete {
+      background-color: $clr-due-date-complete;
+    }
+    &.label-overdue {
+      background-color: $clr-due-date-overdue;
+    }
+    &.label-overdue-recent {
+      background-color: $clr-due-date-overdue-recent;
+    }
+    &.label-due-soon {
+      background-color: $clr-due-date-due-soon;
+      color: $clr-default;
+    }
   }
   .checkbox {
     margin-left: 0;

@@ -1,4 +1,13 @@
 .card-checklists {
+  .section-title {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-right: 5px;
+    &:focus {
+      margin-left: -3px;
+      padding-left: 3px;
+    }
+  }
   .checklist-progress-bar {
     background: #091e4214;
     border-radius: 4px;
@@ -16,7 +25,7 @@
     transition-duration: 0.14s;
     transition-property: width, background;
     transition-timing-function: ease-in;
-    &.done {
+    &.complete {
       background-color: #61bd4f;
     }
   }
@@ -34,23 +43,66 @@
 
   // Each Item:
   .checklist-item {
+    .item .title {
+      &:focus {
+        padding-left: 3px;
+        margin-left: -3px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+      }
+    }
+
     &:hover {
       background-color: #091e420a;
       cursor: pointer;
     }
 
-    &.done {
+    // Due-date checks:
+
+    &.complete {
       .item .title {
         text-decoration: line-through;
       }
       .btn-due-date {
-        background-color: #61bd4f;
+        background-color: $clr-due-date-complete;
         color: #fff;
         &:hover {
-          background-color: unset;
+          background-color: $clr-due-date-complete;
         }
       }
     }
+
+    &.overdue {
+      .btn-due-date {
+        background-color: $clr-due-date-overdue;
+        color: #fff;
+        &:hover {
+          background-color: $clr-due-date-overdue;
+        }
+      }
+    }
+
+    &.due-soon {
+      .btn-due-date {
+        background-color: $clr-due-date-due-soon;
+        color: #fff;
+        &:hover {
+          background-color: $clr-due-date-due-soon;
+        }
+      }
+    }
+
+    &.overdue-recent {
+      .btn-due-date {
+        background-color: $clr-due-date-overdue-recent;
+        color: #fff;
+        &:hover {
+          background-color: $clr-due-date-overdue-recent;
+        }
+      }
+    }
+
+    //
 
     &:not(:hover):not(.is-data) {
       .actions {

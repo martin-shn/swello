@@ -42,7 +42,6 @@ export class AddDueDate extends Component {
               variant="static"
               openTo="date"
               value={date}
-              // disableToolbar
               onChange={date => this.setState({ date })}
             />
           </MuiPickersUtilsProvider>

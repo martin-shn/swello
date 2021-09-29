@@ -37,12 +37,21 @@ export class CardChecklists extends Component {
     this.props.updateField({ checklists });
   };
 
+  onUpdateChecklist = updatedChecklist => {
+    const { checklists } = this.card;
+    const updatedChecklists = checklists.map(checklist =>
+      checklist.id === updatedChecklist.id ? updatedChecklist : checklist
+    );
+    this.props.updateField({ checklists: updatedChecklists });
+  };
+
   // add checklist logic is in "add_checklist" cmp (popover)
 
   render() {
     this.card = this.props.card;
-    const { checklists, 
-      // card 
+    const {
+      checklists,
+      // card
     } = this.props;
     const { addingChecklistId } = this.state;
     if (!checklists) return <></>;
@@ -57,6 +66,7 @@ export class CardChecklists extends Component {
             onAddItem={this.onAddItem}
             onUpdateItem={this.onUpdateItem}
             onRemoveItem={this.onRemoveItem}
+            onUpdateChecklist={this.onUpdateChecklist}
             onDeleteChecklist={this.onDeleteChecklist}
           />
         ))}
