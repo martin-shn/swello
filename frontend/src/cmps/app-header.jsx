@@ -270,13 +270,15 @@ class _AppHeader extends Component {
                         <button onClick={this.onCloseStarredBoards}></button>
                       </div>
                       <div className="starred-boards list-group">
+                        {!starredBoards.length && (
+                          <div className="empty-starred-list">
+                            <StarredImage />
+                            <p className="empty-starred-message">
+                              Star important boards to access them quickly and easily.
+                            </p>
+                          </div>
+                        )}
                         <ul>
-                          {!starredBoards.length && (
-                            <div className="empty-starred-list">
-                              <StarredImage />
-                              <p>Star important boards to access them quickly and easily.</p>
-                            </div>
-                          )}
                           {starredBoards.map(starredBoard => (
                             <MenuItem
                               key={starredBoard._id}
