@@ -1,0 +1,38 @@
+.err-msg {
+  color: #eb5a46;
+}
+
+.add-attachment {
+  hr {
+    background-color: #091e4221;
+    border: 0;
+    height: 1px;
+    margin: 8px 0;
+    padding: 0;
+    width: 100%;
+  }
+  .btn-computer {
+    background-color: transparent;
+    width: 100%;
+    padding: 6px 12px;
+    &:hover {
+      background-color: #091e420a;
+    }
+  }
+  .computer {
+    display: none;
+  }
+  .link-name-header.sub-header-attach {
+    margin-top: 0;
+  }
+
+  .sub-header-attach {
+    color: #5e6c84;
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+    margin-bottom: 4px;
+    margin-top: 12px;
+  }
+}

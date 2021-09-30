@@ -11,7 +11,7 @@ import { cardService } from '../services/board-services/card.service';
 import { updateBoard } from '../store/actions/board.actions';
 import { setCardPopover } from '../store/actions/system.actions';
 
-import { CardSidebar } from '../cmps/card/card-sidebar'
+import { CardSidebar } from '../cmps/card/card-sidebar';
 import { CardDescription } from '../cmps/card/card-description';
 import { CardLabels } from '../cmps/card/card-labels';
 import { CardHeader } from '../cmps/card/card-header';
@@ -21,7 +21,7 @@ import { CardChecklists } from '../cmps/card/card-checklists';
 import { CardDueDate } from '../cmps/card/card-due-date';
 import { CardLocation } from '../cmps/card/card-location';
 import { CardMembers } from '../cmps/card/card-members';
-
+import { CardAttachments } from '../cmps/card/card-attachments';
 
 class _CardPage extends Component {
   state = { card: null };
@@ -73,14 +73,7 @@ class _CardPage extends Component {
 
   render() {
     if (!this.state.card) return <CircularProgress sx={{ position: 'absolute' }} />;
-    const {
-      description,
-      title,
-      checklists,
-      dueDate,
-      // members = [],
-      location,
-    } = this.state.card;
+    const { description, title, checklists, dueDate, location, attachments } = this.state.card;
     const { card } = this.state;
     const { cardPopover, board } = this.props;
     const { updateField } = this;
@@ -91,15 +84,20 @@ class _CardPage extends Component {
           className="card-page-wrapper"
           onClick={ev => ev.target.classList.contains('card-page-wrapper') && this.onCloseCard()}>
           {cardPopover.name && cardPopover.anchorEl && <CardPopover />}
-          <section className="card-page" >
-            {card.cover && card.cover.color && card.cover.size &&
+          <section className="card-page">
+            {card.cover && card.cover.color && card.cover.size && (
               <div className={'card-cover ' + card.cover.color}>
                 <div className="card-cover-menu flex align-center">
-                  <button name="add-cover" className={'add-cover-btn' + (card.cover?.color === 'black' ? ' light' : '')}
+                  <button
+                    name="add-cover"
+                    className={'add-cover-btn' + (card.cover?.color === 'black' ? ' light' : '')}
                     onClick={ev => this.onOpenPopover(ev, { card, updateField })}>
-                    <VideoLabelIcon />Cover</button>
+                    <VideoLabelIcon />
+                    Cover
+                  </button>
                 </div>
-              </div>}
+              </div>
+            )}
             <CardHeader
               updateField={updateField}
               title={title}
@@ -130,9 +128,16 @@ class _CardPage extends Component {
                   updateField={updateField}
                   onOpenPopover={this.onOpenPopover}
                 />
+                <CardAttachments attachments={attachments} />
                 <CardChecklists card={card} checklists={checklists} updateField={updateField} />
               </main>
-              <CardSidebar board={board} card={card} updateField={updateField} onOpenPopover={this.onOpenPopover} dueDate={dueDate}/>
+              <CardSidebar
+                board={board}
+                card={card}
+                updateField={updateField}
+                onOpenPopover={this.onOpenPopover}
+                dueDate={dueDate}
+              />
             </div>
           </section>
         </div>

@@ -1,0 +1,125 @@
+{
+  "predictions": [
+    {
+      "description": "New York, NY, USA",
+      "matched_substrings": [
+        {
+          "length": 8,
+          "offset": 0
+        }
+      ],
+      "place_id": "ChIJOwg_06VPwokRYv534QaPC8g",
+      "reference": "ChIJOwg_06VPwokRYv534QaPC8g",
+      "structured_formatting": {
+        "main_text": "New York",
+        "main_text_matched_substrings": [
+          {
+            "length": 8,
+            "offset": 0
+          }
+        ],
+        "secondary_text": "NY, USA"
+      },
+      "terms": [
+        {
+          "offset": 0,
+          "value": "New York"
+        },
+        {
+          "offset": 10,
+          "value": "NY"
+        },
+        {
+          "offset": 14,
+          "value": "USA"
+        }
+      ],
+      "types": ["locality", "political", "geocode"]
+    },
+    {
+      "description": "New York University, New York, NY, USA",
+      "matched_substrings": [
+        {
+          "length": 8,
+          "offset": 0
+        }
+      ],
+      "place_id": "ChIJwZVT9ZpZwokRBfO1cTF0MNo",
+      "reference": "ChIJwZVT9ZpZwokRBfO1cTF0MNo",
+      "structured_formatting": {
+        "main_text": "New York University",
+        "main_text_matched_substrings": [
+          {
+            "length": 8,
+            "offset": 0
+          }
+        ],
+        "secondary_text": "New York, NY, USA"
+      },
+      "terms": [
+        {
+          "offset": 0,
+          "value": "New York University"
+        },
+        {
+          "offset": 21,
+          "value": "New York"
+        },
+        {
+          "offset": 31,
+          "value": "NY"
+        },
+        {
+          "offset": 35,
+          "value": "USA"
+        }
+      ],
+      "types": ["university", "university", "point_of_interest", "establishment"]
+    },
+    {
+      "description": "New York Botanical Garden, Southern Boulevard, Bronx, NY, USA",
+      "matched_substrings": [
+        {
+          "length": 8,
+          "offset": 0
+        }
+      ],
+      "place_id": "ChIJyRUHuHzzwokRPxVBNKhcP9c",
+      "reference": "ChIJyRUHuHzzwokRPxVBNKhcP9c",
+      "structured_formatting": {
+        "main_text": "New York Botanical Garden",
+        "main_text_matched_substrings": [
+          {
+            "length": 8,
+            "offset": 0
+          }
+        ],
+        "secondary_text": "Southern Boulevard, Bronx, NY, USA"
+      },
+      "terms": [
+        {
+          "offset": 0,
+          "value": "New York Botanical Garden"
+        },
+        {
+          "offset": 27,
+          "value": "Southern Boulevard"
+        },
+        {
+          "offset": 47,
+          "value": "Bronx"
+        },
+        {
+          "offset": 54,
+          "value": "NY"
+        },
+        {
+          "offset": 58,
+          "value": "USA"
+        }
+      ],
+      "types": ["tourist_attraction", "museum", "park", "point_of_interest", "establishment"]
+    }
+  ],
+  "status": "OK"
+}

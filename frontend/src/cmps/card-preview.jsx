@@ -8,6 +8,7 @@ import { CardPreviewData } from './card-preview-data';
 export class _CardPreview extends Component {
   render() {
     const { card, idx } = this.props;
+    // prettier-ignore
     return (
       <Draggable draggableId={card.id} index={idx}>
         {(provided, snapshot) => (
@@ -26,7 +27,7 @@ export class _CardPreview extends Component {
                 <EditIcon fontSize="small" />
               </button>
               <span style={{ color: card.cover?.color === 'black' ? '#fff' : '' }}>{card.title}</span>
-              {card.cover && card.cover.size !== 'full-cover' && <CardPreviewData card={card} />}
+              {(!card.cover || card.cover.size !== 'full-cover') && <CardPreviewData card={card} />}
             </div>
           </>
         )}

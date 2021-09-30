@@ -5,11 +5,12 @@ import { AddLabels } from './card-popover-pages/add-labels/add-labels';
 import { AddChecklist } from './card-popover-pages/add-checklist';
 import { AddCheckitemDueDate } from './card-popover-pages/add-checkitem-due-date';
 import { AddDueDate } from './card-popover-pages/add-due-date';
-import { AddLocation } from './card-popover-pages/add-location/add-location'
-import { AddCover } from './card-popover-pages/add-cover'
+import { AddLocation } from './card-popover-pages/add-location/add-location';
+import { AddCover } from './card-popover-pages/add-cover';
 import { setCardPopover, closeCardPopover } from '../../store/actions/system.actions';
 import { connect } from 'react-redux';
 import { InviteMain } from '../invite/invite-main';
+import { AddAttachment } from './card-popover-pages/add-attachment';
 
 const PopoverCmp = ({ name, props, closeCardPopover }) => {
   switch (name) {
@@ -24,11 +25,13 @@ const PopoverCmp = ({ name, props, closeCardPopover }) => {
     case 'add-checkitem-due-date':
       return <AddCheckitemDueDate closeCardPopover={closeCardPopover} {...props} />;
     case 'add-location':
-      return <AddLocation closeCardPopover={closeCardPopover} {...props} />
+      return <AddLocation closeCardPopover={closeCardPopover} {...props} />;
     case 'invite-main':
-      return <InviteMain closeCardPopover={closeCardPopover} {...props} />
+      return <InviteMain closeCardPopover={closeCardPopover} {...props} />;
     case 'add-cover':
-      return <AddCover closeCardPopover={closeCardPopover} {...props} />
+      return <AddCover closeCardPopover={closeCardPopover} {...props} />;
+    case 'add-attachment':
+      return <AddAttachment closeCardPopover={closeCardPopover} {...props} />;
     default:
       return <div></div>;
   }

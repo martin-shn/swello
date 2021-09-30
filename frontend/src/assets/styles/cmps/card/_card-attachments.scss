@@ -1,0 +1,17 @@
+.card-attachments {
+  gap: 8px;
+  .card-attachment {
+    height: 80px;
+    gap: 8px;
+    .attachment-thumbnail {
+      color: #5e6c84;
+      background-color: #091e420a;
+      background-position: 50%;
+      background-repeat: no-repeat;
+      background-size: contain;
+      border-radius: 3px;
+      text-align: center;
+      width: 112px;
+    }
+  }
+}
