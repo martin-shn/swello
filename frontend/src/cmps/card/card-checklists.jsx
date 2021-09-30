@@ -60,6 +60,7 @@ export class CardChecklists extends Component {
         {checklists.map(checklist => (
           <CardChecklist
             key={checklist.id}
+            card={this.card}
             checklist={checklist}
             isAdding={addingChecklistId === checklist.id}
             onAddingItem={this.onAddingItem}

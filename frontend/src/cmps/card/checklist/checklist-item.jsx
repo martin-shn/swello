@@ -6,13 +6,14 @@ import { connect } from 'react-redux';
 import { setCardPopover } from '../../../store/actions/system.actions';
 import { utilService } from '../../../services/util.service';
 import { cardService } from '../../../services/board-services/card.service';
+import { Avatar } from '@mui/material';
 
 const _ChecklistItem = props => {
   // TODO - Finish the remaining add-member and due-date buttons, enable title edit
-  const { item, onUpdateItem } = props;
-  const { id, title, isDone, dueDate, assignedTo } = props.item;
+  const { item, onUpdateItem, card, board } = props;
+  const { id, title, isDone, dueDate, assignedToMemberId } = props.item;
   const formattedDate = utilService.getFormattedDate(dueDate);
-  const isData = dueDate || assignedTo;
+  const isData = dueDate || assignedToMemberId;
   const status = cardService.checkDueDate({ date: dueDate, isComplete: isDone });
   const className = `section-header checklist-item ${status} ${isData ? ' is-data' : ''}`;
   return (
@@ -30,7 +31,7 @@ const _ChecklistItem = props => {
           suppressContentEditableWarning>
           {title}
         </div>
-        <section className="actions flex">
+        <section className="actions flex align-center">
           <button
             className="btn-due-date"
             onClick={ev =>
@@ -44,9 +45,35 @@ const _ChecklistItem = props => {
               </span>
             )}
           </button>
-          <button>
-            <AddMemberIcon />
-          </button>
+
+          {assignedToMemberId && (
+            <Avatar
+              className="avatar"
+              alt="hello"
+              onClick={ev =>
+                props.setCardPopover('add-checkitem-member', ev.target, {
+                  boardMembers: board.members,
+                  cardMembers: card.members,
+                  item,
+                  onUpdateItem,
+                })
+              }
+            />
+          )}
+          {!assignedToMemberId && (
+            <button
+              className="btn-checkitem-member"
+              onClick={ev =>
+                props.setCardPopover('add-checkitem-member', ev.target, {
+                  boardMembers: board.members,
+                  cardMembers: card.members,
+                  item,
+                  onUpdateItem,
+                })
+              }>
+              <AddMemberIcon className="add-member-icon" />
+            </button>
+          )}
           <button onClick={() => props.onRemoveItem(id)}>
             <DeleteIcon />
           </button>
@@ -60,4 +87,10 @@ const mapDispatchToProps = {
   setCardPopover,
 };
 
-export const ChecklistItem = connect(null, mapDispatchToProps)(_ChecklistItem);
+const mapStateToProps = state => {
+  return {
+    board: state.boardModule.board,
+  };
+};
+
+export const ChecklistItem = connect(mapStateToProps, mapDispatchToProps)(_ChecklistItem);

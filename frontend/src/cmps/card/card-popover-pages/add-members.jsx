@@ -50,8 +50,8 @@ export class AddMembers extends Component {
             onChange={this.handleChange}
             value={search}
           />
-          <span className="title">Board Members</span>
-          <div className="board-members-list">
+          <span className="sub-header">Board Members</span>
+          <div className="members-list">
             {updatedBoardMembers.map(member => {
               const isMemberInCard = updatedMembers.some(
                 cardMember => cardMember._id === member._id
@@ -59,7 +59,7 @@ export class AddMembers extends Component {
               return (
                 <div
                   key={member._id}
-                  className="board-member flex align-center"
+                  className="member flex align-center"
                   onClick={() => this.toggleCardMember(member)}>
                   <Avatar className="avatar" alt={member.fullname} src={member.imgUrl} />
                   <span className="member-name">
