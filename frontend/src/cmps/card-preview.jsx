@@ -22,7 +22,7 @@ export class _CardPreview extends Component {
                 this.props.history.push(this.props.location.pathname + `/card/${card.id}`)
               }>
               {card.cover && card.cover.color && card.cover.size === 'top-cover' && <div className={'card-cover ' + card.cover.color}></div>}
-              {card.cover && card.cover.size !== 'full-cover' && <CardPreviewLabels card={card} />}
+              {(!card.cover || card.cover.size !== 'full-cover') && <CardPreviewLabels card={card} />}
               <button className="edit-icon">
                 <EditIcon fontSize="small" />
               </button>
