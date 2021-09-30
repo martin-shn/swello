@@ -19,11 +19,21 @@ export class _ListPreview extends Component {
     popoverPage: 'main',
     isDragging: true,
     listName: this.props.list.title,
+    class: ''
   };
+
+  componentDidMount() {
+    setTimeout(()=>{
+      this.setState({class:this.elInnerRef.current.scrollHeight > this.elInnerRef.current.clientHeight?' visible-scroll':''})
+    },5)
+
+  }
+  
+  elInnerRef = React.createRef();
 
   bottomAddRef = React.createRef();
   topAddRef = React.createRef();
-  title = React.createRef();
+  title = React.createRef();  
 
   componentDidUpdate = prevProps => {
     if (prevProps.isPopoverOpen !== this.props.isPopoverOpen) {
@@ -73,14 +83,16 @@ export class _ListPreview extends Component {
       // board
     } = this.props;
     const { popoverPage } = this.state;
+    
+    
     return (
       <Draggable draggableId={list.id} index={idx}>
         {provided => (
           <div
-            className="list-preview flex column"
+            className={`list-preview flex column${this.state.class}`}
             {...provided.draggableProps}
             ref={provided.innerRef}>
-            <div className="list-header flex space-between" {...provided.dragHandleProps}>
+            <div className={`list-header flex space-between${this.state.class}`} {...provided.dragHandleProps}>
               {!this.state.isDragging && <input 
               type="text" 
               autoCorrect="off"
@@ -140,7 +152,10 @@ export class _ListPreview extends Component {
                 />
               )}
             </Popover>
-            <div className="cards-container flex column" style={{ gap: isTopAdd ? '10px' : '0' }}>
+            <div ref={this.elInnerRef} className={`cards-container flex column visible-scroll${this.state.class}`} style={{ gap: isTopAdd ? '10px' : '0',
+            // marginRight: this.elRef.current.scrollHeight > this.elRef.current.clientHeight?'-10px':'0px'
+          }}>
+            
               {list.cards && <CardList listId={list.id} cards={list.cards} />}
 
               <div className="add-card" style={{ order: isTopAdd ? '-1' : '0' }}>
