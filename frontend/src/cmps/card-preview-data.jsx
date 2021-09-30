@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ReactComponent as DescriptionIcon } from '../assets/svg/card/description.svg';
-// import { ReactComponent as DueDateIcon } from '../assets/svg/card/checklist-due-date.svg';
+import AttachmentIcon from '@mui/icons-material/AttachFileOutlined';
 import { boardService } from '../services/board.service';
 import { updateBoard } from '../store/actions/board.actions';
 import ChecklistIcon from '@mui/icons-material/CheckBoxOutlined';
@@ -22,12 +22,17 @@ class _CardPreviewData extends Component {
   };
 
   render() {
-    const { checklists, description, dueDate, location, members } = this.props.card;
+    const { checklists, attachments, description, dueDate, location, members } = this.props.card;
     return (
       <section className="card-preview-data flex wrap align-center">
-        <div className="flex align-center" style={{ gap: '12px', flexGrow: '1' }}>
+        <div className="flex align-center wrap" style={{ gap: '12px', flexGrow: '1' }}>
           {dueDate && <CardPreviewDueDate dueDate={dueDate} toggleDueDate={this.toggleDueDate} />}
           {description && <DescriptionIcon />}
+          {attachments?.length && (
+            <div className="flex align-center">
+              <AttachmentIcon /> <span>{attachments.length}</span>
+            </div>
+          )}
           {checklists && <CardPreviewChecklists checklists={checklists} />}
           {location && <LocationIcon />}
         </div>
