@@ -88,3 +88,11 @@ button {
   text-transform: uppercase;
   margin-bottom: 4px;
 }
+
+.link {
+  text-decoration: underline;
+  color: $clr-text-secondary;
+  &:hover {
+    color: $clr-default;
+  }
+}

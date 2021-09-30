@@ -5,7 +5,8 @@ import { cardService } from '../../../../services/board-services/card.service'
 import { boardService } from '../../../../services/board.service';
 import { updateBoard } from '../../../../store/actions/board.actions';
 import { AddEditLabel } from './add-edit-label';
-import { RemoveLabel } from './remove-label';
+import { RemoveItem } from './../remove-item';
+import { constService } from '../../../../services/const.service';
 
 export class _AddLabels extends Component {
   state = {
@@ -42,8 +43,8 @@ export class _AddLabels extends Component {
     this.cleanState()
   }
 
-  onRemoveLabel = (labelId) => {
-    const updatedBoard = boardService.removeLabel(this.props.board, labelId)
+  onRemoveLabel = (label) => {
+    const updatedBoard = boardService.removeLabel(this.props.board, label.id)
     this.props.updateBoard(updatedBoard)
     this.cleanState()
   }
@@ -90,7 +91,7 @@ export class _AddLabels extends Component {
         }
         {
           currPage === 'remove' &&
-          <RemoveLabel label={currEditingLabel} onSetPage={this.onSetPage} onRemoveLabel={this.onRemoveLabel} />
+          <RemoveItem item={currEditingLabel} closeCardPopover={closeCardPopover} onSetPage={this.onSetPage} onRemoveItem={this.onRemoveLabel} msg={constService.MSG_REMOVE_LABEL} itemType='label' />
         }
       </>
 

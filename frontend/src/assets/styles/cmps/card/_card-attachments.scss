@@ -1,10 +1,12 @@
 .card-attachments {
   gap: 8px;
+  margin-bottom: 10px;
+
   .card-attachment {
     box-sizing: content-box;
     height: 80px;
-    gap: 8px;
-    padding: 10px 4px 10px 0;
+    gap: 16px;
+    // padding: 10px 4px 10px 0;
     cursor: pointer;
     border-radius: 3px;
 
@@ -32,9 +34,26 @@
     .attachment-info {
       flex-grow: 1;
       align-self: center;
+      .icon-open::before {
+        font-family: FA-solid;
+        content: '\f35d';
+        font-size: 0.8em;
+      }
       .attachment-name {
         word-wrap: break-word;
         font-weight: 700;
+        gap: 8px;
+      }
+      .attachment-basic-info {
+        margin-bottom: 8px;
+      }
+    }
+
+    .attachment-actions {
+      gap: 6px;
+      svg {
+        width: 16px;
+        height: 16px;
       }
     }
   }

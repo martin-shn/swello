@@ -20,6 +20,7 @@ async function uploadFile(ev) {
     const { name, type } = ev.target.files[0];
     const attachment = {
       id: utilService.makeId(),
+      createdAt: Date.now(),
       url,
       name,
       type: type.split('/')[0],

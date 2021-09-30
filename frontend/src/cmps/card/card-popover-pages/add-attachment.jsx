@@ -31,6 +31,7 @@ export class AddAttachment extends Component {
     }
     const attachment = {
       id: utilService.makeId(),
+      createdAt: Date.now(),
       url,
       name,
     };
