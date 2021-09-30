@@ -6,7 +6,7 @@
   margin-bottom: 8px;
   min-height: 32px;
   text-decoration: none;
-  padding: 8px 6px;
+  padding: 6px;
   position: relative;
   gap: 4px;
 
@@ -28,16 +28,16 @@
     }
   }
 
-
   .card-cover {
     border-radius: 3px 3px 0 0;
     height: 32px;
-    margin: -8px -5px 6px -5px;
+    margin: -6px -6px 6px -6px;
   }
 
-  .content {
-    padding: 6px 8px 2px;
-  }
+  // AVIV: looks useless, commenting this shouldnt cause issues, uncomment this if there are visual bugs
+  // .content {
+  //   padding: 6px 8px 2px;
+  // }
 
   .edit-icon {
     visibility: hidden;
@@ -46,9 +46,9 @@
     right: 2px;
   }
 
-  .card-cover.black{
-    &~.edit-icon{
-      &:hover{
+  .card-cover.black {
+    & ~ .edit-icon {
+      &:hover {
         background-color: #ebecf0;
         opacity: 1;
       }

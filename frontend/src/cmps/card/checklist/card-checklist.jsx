@@ -46,6 +46,7 @@ export class CardChecklist extends Component {
 
   render() {
     const {
+      card,
       onAddingItem,
       checklist,
       isAdding,
@@ -80,6 +81,7 @@ export class CardChecklist extends Component {
         </div>
 
         <ChecklistItemList
+          card={card}
           items={checklist.items}
           onRemoveItem={this.onRemoveItem}
           onUpdateItem={this.onUpdateItem}

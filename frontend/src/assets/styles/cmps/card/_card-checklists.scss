@@ -121,12 +121,16 @@
 
     &:not(:hover):not(.is-data) {
       .actions {
-        display: none;
+        opacity: 0;
       }
     }
 
     .actions {
       gap: 3px;
+      .avatar {
+        width: 23px !important;
+        height: 23px !important;
+      }
       button {
         width: 22px;
         height: 26px;

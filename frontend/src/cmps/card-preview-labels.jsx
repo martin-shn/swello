@@ -23,19 +23,19 @@ export class _CardPreviewLabels extends Component {
 
   render() {
     const { board, card, isFullLabels, labelsClass } = this.props;
+    if (!card.labelIds) return <></>;
     return (
       <div className="labels-container flex" onClick={this.onToggleFullLabels}>
-        {card.labelIds &&
-          card.labelIds.map(labelId => {
-            const label = board.labels.find(label => label.id === labelId);
-            return (
-              <div
-                key={labelId}
-                className={`label ${label.color}${isFullLabels ? ' open' : ''}${labelsClass}`}>
-                {isFullLabels ? label.title : ''}
-              </div>
-            );
-          })}
+        {card.labelIds.map(labelId => {
+          const label = board.labels.find(label => label.id === labelId);
+          return (
+            <div
+              key={labelId}
+              className={`label ${label.color}${isFullLabels ? ' open' : ''}${labelsClass}`}>
+              {isFullLabels ? label.title : ''}
+            </div>
+          );
+        })}
       </div>
     );
   }

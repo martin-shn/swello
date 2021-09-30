@@ -55,6 +55,10 @@
     button:not(.btn-add):hover {
         background-color: #091e4214;
     }
+  // content class makes sure that the content is aligned to the same left vertical line
+  .content {
+    padding-left: 6px;
+  }
 
     svg {
         width: 16px;
