@@ -29,7 +29,7 @@ export function onUpdateUser(user) {
     }
 }
 
-export function onLogin(credentials, showErrorMsg, history) {
+export function onLogin(credentials) {
     return async (dispatch) => {
         try {
             const user = await userService.login(credentials)
@@ -37,15 +37,15 @@ export function onLogin(credentials, showErrorMsg, history) {
                 type: 'SET_USER',
                 user
             })
-            history.push('/board')
+            return user
         } catch (err) {
             console.log('Cannot login', err)
-            showErrorMsg(err)
+            throw err
         }
     }
 }
 
-export function onSignup(credentials, showErrorMsg, history) {
+export function onSignup(credentials) {
     return async (dispatch) => {
         try {
             const user = await userService.signup(credentials)
@@ -53,11 +53,10 @@ export function onSignup(credentials, showErrorMsg, history) {
                 type: 'SET_USER',
                 user
             })
-            history.push('/board')
+            return user;
         }
         catch (err) {
-            showErrorMsg(err)
-            console.log('Cannot signup', err)
+            throw err
         }
 
     }

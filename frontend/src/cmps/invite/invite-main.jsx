@@ -1,31 +1,31 @@
 import { Component } from 'react';
-import {ReactComponent as LinkIcon} from '../../assets/svg/icon-link.svg';
+import { ReactComponent as LinkIcon } from '../../assets/svg/icon-link.svg';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import {DebounceInput} from 'react-debounce-input';
+import { DebounceInput } from 'react-debounce-input';
 
 import { setCardPopover, closeCardPopover } from '../../store/actions/system.actions';
-import {QrCode} from './qrcode'
+import { QrCode } from './qrcode'
 import { userService } from '../../services/user.service';
-import {Avatar} from '@mui/material'
+import { Avatar } from '@mui/material'
 
 class _InviteMain extends Component {
     state = {
         name: '',
         isQrCode: false,
-        isLink:false,
+        isLink: false,
         res: []
     };
 
-    componentDidMount() {}
+    componentDidMount() { }
 
     handleChange = (ev) => {
-        if (!ev.target.value.trim().length){
-            this.setState({ name: '', res:[], isLink: false });
-        }else{
-            this.setState({ name: ev.target.value }, async ()=>{
-                const res = await userService.getUsers({name:this.state.name})
-                this.setState({res},()=>{console.log(this.state);})                
+        if (!ev.target.value.trim().length) {
+            this.setState({ name: '', res: [], isLink: false });
+        } else {
+            this.setState({ name: ev.target.value }, async () => {
+                const res = await userService.getUsers({ name: this.state.name })
+                this.setState({ res }, () => { console.log(this.state); })
             });
         }
     };
@@ -72,19 +72,19 @@ class _InviteMain extends Component {
                             {this.state.isQrCode ? 'Disable link' : 'Create link'}
                         </button>
                     </div>
-                    {this.state.isQrCode && <QrCode />}
+                    {this.state.isQrCode && <QrCode boardId={this.props.board._id} />}
                     <button className={this.state.isLink ? 'invite-active' : 'invite-disable'} onClick={this.onSendInvitation}>Send invitation</button>
                 </div>
 
-                {this.state.res.length>0&&<div className="invite-results">
+                {this.state.res.length > 0 && <div className="invite-results">
                     <div>
-                        {this.state.res.map(user=><div key={user._id} onClick={()=>this.setState({name:user.username, isLink:true, res:[]})}>
-                                {/* <img src={user.imgUrl} alt="user image"/> */}
-                                <Avatar alt={user.fullname} src={user.imgUrl} className="avatar"/>
-                                <span>{user.fullname}</span>
-                            </div>)}
-                        </div>
-                    </div>}
+                        {this.state.res.map(user => <div key={user._id} onClick={() => this.setState({ name: user.username, isLink: true, res: [] })}>
+                            {/* <img src={user.imgUrl} alt="user image"/> */}
+                            <Avatar alt={user.fullname} src={user.imgUrl} className="avatar" />
+                            <span>{user.fullname}</span>
+                        </div>)}
+                    </div>
+                </div>}
             </section>
         );
     }
@@ -97,6 +97,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
     cardPopover: state.systemModule.cardPopover,
+    board: state.boardModule.board
 });
 
 export const InviteMain = withRouter(connect(mapStateToProps, mapDispatchToProps)(withRouter(_InviteMain)));

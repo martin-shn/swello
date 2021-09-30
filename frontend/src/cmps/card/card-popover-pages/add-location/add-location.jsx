@@ -31,7 +31,7 @@ export class AddLocation extends React.Component {
               <button onClick={closeCardPopover}></button>
             </div>
             <div className="popper-menu">
-              <button>Change location</button>
+              <button onClick={() => this.onSetPage('save')}>Change location</button>
               <button onClick={() => this.onSetPage('remove')}>Remove</button>
             </div>
           </section>
