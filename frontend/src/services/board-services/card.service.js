@@ -14,6 +14,8 @@ export const cardService = {
   getLocationResults,
   toggleCardMember,
   checkDueDate,
+  getLocationData,
+  updateCard
 };
 
 // CARD FUNCTIONS - returns updated board
@@ -141,10 +143,11 @@ function updateChecklistItem(card, checklistId, updatedItem) {
 // Location
 
 const key = 'AIzaSyDgw0mWmcS4OoFUyLUj5oNbfo4KGzpHiYA';
-// async function getLocationData(locationId) {
-  // const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${search}&inputtype=textquery&fields=formatted_address%2Cname%2Cgeometry&key=${key}`
-  // return await httpService.getFromApi(url)
-// }
+async function getLocationData(locationId) {
+  // const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${locationId}&inputtype=textquery&fields=formatted_address%2Cname%2Cgeometry&key=${key}`
+  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${locationId}&key=${key}&fields=formatted_address,name,geometry`
+  return await httpService.getFromApi(url)
+}
 
 async function getLocationResults(search) {
   const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${search}&key=${key}`;

@@ -9,7 +9,7 @@ import VideoLabelIcon from '@mui/icons-material/VideoLabel';
 import { cardService } from '../services/board-services/card.service';
 
 import { updateBoard } from '../store/actions/board.actions';
-import { setCardPopover } from '../store/actions/system.actions';
+import { setCardPopover, closeCardPopover } from '../store/actions/system.actions';
 
 import { CardSidebar } from '../cmps/card/card-sidebar';
 import { CardDescription } from '../cmps/card/card-description';
@@ -127,6 +127,7 @@ class _CardPage extends Component {
                   card={card}
                   updateField={updateField}
                   onOpenPopover={this.onOpenPopover}
+                  closeCardPopover={this.props.closeCardPopover}
                 />
                 <CardAttachments attachments={attachments} />
                 <CardChecklists card={card} checklists={checklists} updateField={updateField} />
@@ -149,6 +150,7 @@ class _CardPage extends Component {
 const mapDispatchToProps = {
   updateBoard,
   setCardPopover,
+  closeCardPopover
 };
 
 const mapStateToProps = state => ({

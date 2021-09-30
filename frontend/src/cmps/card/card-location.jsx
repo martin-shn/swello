@@ -34,11 +34,12 @@ export class CardLocation extends Component {
                         />
                         <div className='location-desc'>
                             <div className='desc-main'>
-                                <textarea ref={this.inputRef} dir='auto' defaultValue={title} onKeyDown={(ev) => {
+                                <textarea ref={this.inputRef} dir='auto' value={title} onKeyDown={(ev) => {
                                     if (ev.code === 'Enter') {
                                         this.inputRef.current.blur()
                                     }
                                 }}
+                                    onChange={({ target }) => { this.onSaveLocation({ ...card.location, title: target.value }) }}
                                     onBlur={({ target }) => { this.onSaveLocation({ ...card.location, title: target.value }) }} />
                                 <div
                                     onClick={() => {

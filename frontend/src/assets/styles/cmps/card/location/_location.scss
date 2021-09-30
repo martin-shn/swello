@@ -56,7 +56,7 @@
                         transition-property: background-color, border-color, box-shadow;
                         transition-timing-function: ease;
                         color: #172b4d;
-                        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
+                        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
                         &:focus {
                             background-color: #fff;
                             box-shadow: inset 0 0 0 2px #0079bf;
@@ -67,7 +67,7 @@
                     & div {
                         color: #5e6c84;
                         cursor: pointer;
-                        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
+                        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
                         font-size: 14px;
                         font-weight: 400;
                         line-height: 20px;
@@ -79,7 +79,7 @@
                     display: flex;
                     margin-top: 8px;
                     & a {
-                        &::before{
+                        &::before {
                             font-family: FA-solid;
                             content: '\f35d';
                             color: #42526e;
@@ -102,7 +102,7 @@
                         }
                     }
                     & button {
-                        &::before{
+                        &::before {
                             font-family: FA-solid;
                             content: '\f141';
                             color: #42526e;
@@ -124,6 +124,35 @@
                             background-color: #091e4214;
                             color: #172b4d;
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.save-location {
+    & .address-results {
+        & > ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            & > li {
+                padding-left: 1px;
+                & > div {
+                    cursor: pointer;
+                    display: block;
+                    font-weight: 400;
+                    margin: 0 -12px;
+                    padding: 6px 12px;
+                    position: relative;
+                    text-decoration: none;
+                    &:hover{
+                        background-color: initial;
+                        color: #172b4d;
+                    }
+                    &:active{
+                        background-color: #e4f0f6;
                     }
                 }
             }
