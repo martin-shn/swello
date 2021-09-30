@@ -70,7 +70,7 @@ export class _ListPreview extends Component {
       isTopAdd,
       onCopyList,
       onMoveList,
-      board
+      // board
     } = this.props;
     const { popoverPage } = this.state;
     return (

@@ -1,7 +1,8 @@
-import { createRef, Component } from 'react';
+import { Component } from 'react';
 import {ReactComponent as LinkIcon} from '../../assets/svg/icon-link.svg';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import {DebounceInput} from 'react-debounce-input';
 
 import { setCardPopover, closeCardPopover } from '../../store/actions/system.actions';
 import {QrCode} from './qrcode'
@@ -15,7 +16,6 @@ class _InviteMain extends Component {
         isLink:false,
         res: []
     };
-    // inputRef = createRef();
 
     componentDidMount() {}
 
@@ -24,8 +24,8 @@ class _InviteMain extends Component {
             this.setState({ name: '', res:[], isLink: false });
         }else{
             this.setState({ name: ev.target.value }, async ()=>{
-                const res = await userService.getUsers({name:ev.target.value})
-                this.setState({res})
+                const res = await userService.getUsers({name:this.state.name})
+                this.setState({res},()=>{console.log(this.state);})                
             });
         }
     };
@@ -45,7 +45,6 @@ class _InviteMain extends Component {
     };
 
     render() {
-        const { board, onOpenPopover, cardPopover } = this.props;
         return (
             <section className='invite-main cards-popper'>
                 <div className='invite-header popper-header'>
@@ -53,7 +52,8 @@ class _InviteMain extends Component {
                     <button className='close-icon' onClick={this.props.closeCardPopover}></button>
                 </div>
                 <div className='invite-content popper-content'>
-                    <input
+                    <DebounceInput
+                        debounceTimeout={3000}
                         type='search'
                         autoComplete='off'
                         autoCorrect='off'

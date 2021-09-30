@@ -11,7 +11,9 @@ export class SaveLocation extends React.Component {
     })
   }
   render() {
-    const { card, closeCardPopover, onSetPage, onSaveLocation, isFromNav } = this.props
+    const { card, closeCardPopover, onSetPage, 
+      // onSaveLocation, 
+      isFromNav } = this.props
     const { search } = this.state;
     return (
       <>

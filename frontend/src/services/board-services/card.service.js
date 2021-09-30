@@ -141,10 +141,10 @@ function updateChecklistItem(card, checklistId, updatedItem) {
 // Location
 
 const key = 'AIzaSyDgw0mWmcS4OoFUyLUj5oNbfo4KGzpHiYA';
-async function getLocationData(locationId) {
+// async function getLocationData(locationId) {
   // const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${search}&inputtype=textquery&fields=formatted_address%2Cname%2Cgeometry&key=${key}`
   // return await httpService.getFromApi(url)
-}
+// }
 
 async function getLocationResults(search) {
   const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${search}&key=${key}`;

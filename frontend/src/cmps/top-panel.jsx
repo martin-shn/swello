@@ -78,13 +78,13 @@ function onOpenPopover(ev, setCardPopover) {
   setCardPopover('invite-main', ev.target, null);
 };
 
-function updateField(data){
+// function updateField(data){
   // const { board } = this.props;
   // const { card } = this.state;
   // const updatedCard = { ...card, ...data };
   // const updatedBoard = boardService.updateCard(board, updatedCard);
   // this.props.updateBoard(updatedBoard);
-};
+// };
 
 
 const mapDispatchToProps = {

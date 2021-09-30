@@ -27,6 +27,7 @@ export const CardAttachments = ({ attachments }) => {
               <a
                 href={attachment.url}
                 target="_blank"
+                rel="noreferrer"
                 key={attachment.id}
                 className="card-attachment flex">
                 <div

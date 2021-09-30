@@ -49,7 +49,7 @@ export class CardLocation extends Component {
                                 </div>
                             </div>
                             <div className='desc-btns'>
-                                <a href={mapLink} target='_blank' className='open-map-btn' title='Open map in google maps'></a>
+                                <a href={mapLink} target='_blank' rel="noreferrer" className='open-map-btn' title='Open map in google maps'>{''}</a>
                                 <button className='open-options-btn' name='add-location' title='Map options' onClick={ev => onOpenPopover(ev, { card, updateField, isFromNav: false })}></button>
                             </div>
                         </div>

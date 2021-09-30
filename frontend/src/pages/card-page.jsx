@@ -73,7 +73,7 @@ class _CardPage extends Component {
 
   render() {
     if (!this.state.card) return <CircularProgress sx={{ position: 'absolute' }} />;
-    const { description, title, checklists, dueDate, location, attachments } = this.state.card;
+    const { description, title, checklists, dueDate, attachments } = this.state.card;
     const { card } = this.state;
     const { cardPopover, board } = this.props;
     const { updateField } = this;

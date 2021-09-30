@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateBoard, setFullLabels, setLabelsClass } from '../store/actions/board.actions';
+import { setFullLabels, setLabelsClass } from '../store/actions/board.actions';
 
 export class _CardPreviewLabels extends Component {
   state = {

@@ -20,7 +20,7 @@ export function QrCode(){
                 }}>{timer?'Copied':'Copy'}</button>
         </div>
         <div>
-            <img src={`https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${url}&format=svg`} />
+            <img alt="QR code" src={`https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${url}&format=svg`} />
             <div>
                 <p>Or let anyone scan this QR code to invite them to this board:</p>
                 {/* <a href={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${url}`} 

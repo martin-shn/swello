@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ReactComponent as DescriptionIcon } from '../assets/svg/card/description.svg';
-import { ReactComponent as DueDateIcon } from '../assets/svg/card/checklist-due-date.svg';
+// import { ReactComponent as DueDateIcon } from '../assets/svg/card/checklist-due-date.svg';
 import { boardService } from '../services/board.service';
 import { updateBoard } from '../store/actions/board.actions';
 import ChecklistIcon from '@mui/icons-material/CheckBoxOutlined';
