@@ -66,7 +66,7 @@ export class _AddLabels extends Component {
             </section>
             <section className="popper-content add-labels flex column">
               <input autoCorrect="off" autoComplete="off" type="text" placeholder="Search labels..." value={this.state.search} onChange={this.handleChange} />
-              <span className="title">Labels</span>
+              <span className="sub-header">Labels</span>
               {board.labels.map(label => (
                 label.title.toLowerCase().includes(search.toLowerCase()) &&
                 <div key={label.id} className="label-container flex">
@@ -91,7 +91,7 @@ export class _AddLabels extends Component {
         }
         {
           currPage === 'remove' &&
-          <RemoveItem item={currEditingLabel} closeCardPopover={closeCardPopover} onSetPage={this.onSetPage} onRemoveItem={this.onRemoveLabel} msg={constService.MSG_REMOVE_LABEL} itemType='label' />
+          <RemoveItem item={currEditingLabel} closeCardPopover={closeCardPopover} onBackClick={this.onSetPage} onRemoveItem={this.onRemoveLabel} msg={constService.MSG_REMOVE_LABEL} itemType='label' />
         }
       </>
 

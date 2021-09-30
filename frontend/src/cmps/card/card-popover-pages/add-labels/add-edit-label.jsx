@@ -32,9 +32,9 @@ export class AddEditLabel extends Component {
                     <button className="close-btn" onClick={closeCardPopover}></button>
                 </section>
                 <section className="popper-content add-edit-label flex column">
-                    <label htmlFor="name" className="title">Name</label>
+                    <label htmlFor="name">Name</label>
                     <input autoCorrect="off" autoComplete="off" type="text" name="name" id="name" value={title} onChange={this.handleChange} autoFocus />
-                    <span className="title">Select a color</span>
+                    <label>Select a color</label>
                     <div className="colors-container flex">
                         {this.colors.map(currColor => (
                             <div key={currColor} className={"label label-box flex align-center justify-center " + currColor} onClick={() => this.setState({ color: currColor })}>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Avatar } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
-import { cardService } from '../../../services/board-services/card.service';
 
 export class AddCheckItemMember extends Component {
   state = {

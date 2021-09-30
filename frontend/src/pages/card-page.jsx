@@ -75,7 +75,7 @@ class _CardPage extends Component {
     if (!this.state.card) return <CircularProgress sx={{ position: 'absolute' }} />;
     const { description, title, checklists, dueDate, attachments } = this.state.card;
     const { card } = this.state;
-    const { cardPopover, board } = this.props;
+    const { cardPopover, board, setCardPopover, closeCardPopover } = this.props;
     const { updateField } = this;
     return (
       <Modal open={true} onClose={this.onCloseCard}>
@@ -127,9 +127,15 @@ class _CardPage extends Component {
                   card={card}
                   updateField={updateField}
                   onOpenPopover={this.onOpenPopover}
-                  closeCardPopover={this.props.closeCardPopover}
+                  closeCardPopover={closeCardPopover}
                 />
-                <CardAttachments attachments={attachments} />
+                <CardAttachments
+                  card={card}
+                  attachments={attachments}
+                  setCardPopover={setCardPopover}
+                  closeCardPopover={closeCardPopover}
+                  updateField={updateField}
+                />
                 <CardChecklists card={card} checklists={checklists} updateField={updateField} />
               </main>
               <CardSidebar
@@ -150,7 +156,7 @@ class _CardPage extends Component {
 const mapDispatchToProps = {
   updateBoard,
   setCardPopover,
-  closeCardPopover
+  closeCardPopover,
 };
 
 const mapStateToProps = state => ({
