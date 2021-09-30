@@ -21,7 +21,7 @@ export class CardLocation extends Component {
         const mapLink = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
         const key = 'AIzaSyDgw0mWmcS4OoFUyLUj5oNbfo4KGzpHiYA';
         return (
-            <section className='location-card card-section'>
+            <section className='card-location card-section'>
                 <div className='section-header'>
                     <span className='location-icon'></span>
                     <h3>Location</h3>

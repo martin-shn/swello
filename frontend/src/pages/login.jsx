@@ -23,10 +23,16 @@ class _Login extends React.Component {
         const value = target.value;
         this.setState(prevState => ({ ...prevState, user: { ...prevState.user, [field]: value } }))
     }
-    onLogin = (ev) => {
+    onLogin = async (ev) => {
         ev.preventDefault();
         const { user } = this.state;
-        this.props.onLogin(user, this.showErrorMsg, this.props.history)
+        try {
+            await this.props.onLogin(user, this.showErrorMsg)
+            this.props.history.push('/board')
+        }
+        catch(err) {
+            this.showErrorMsg(err)
+        }
     }
 
     showErrorMsg = (err) => {

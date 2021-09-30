@@ -29,8 +29,9 @@ export class _HomePage extends React.Component {
     this.props.history.push('/signup')
   }
 
-  onGetStarted = () => {
-    this.props.onLogin({ username: 'guest@guest.com', password: '1234' }, (err) => { console.log(err) }, this.props.history)
+  onGetStarted = async () => {
+    await this.props.onLogin({ username: 'guest@guest.com', password: '1234' })
+    this.props.history.push('/board')
   }
 
   render() {

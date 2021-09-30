@@ -28,9 +28,9 @@
 @import 'cmps/card/card-description';
 @import 'cmps/card/card-attachments';
 @import 'cmps/card/card-members-labels';
-@import 'cmps/card/location/location';
 @import 'cmps/card/card-checklists';
 @import 'cmps/card/card-due-date';
+@import 'cmps/card/card-location';
 @import 'cmps/card/popover';
 @import 'cmps/card/card-popover-pages/add-labels/add-labels';
 @import 'cmps/card/card-popover-pages/add-labels/add-edit-label';
@@ -39,6 +39,7 @@
 @import 'cmps/card/card-popover-pages/add-members';
 @import 'cmps/card/card-popover-pages/add-cover';
 @import 'cmps/card/card-popover-pages/add-attachment';
+@import 'cmps/card/card-popover-pages/add.location';
 
 //
 @import 'cmps/home-header';

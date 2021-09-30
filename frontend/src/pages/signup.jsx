@@ -31,10 +31,15 @@ class _Signup extends React.Component {
         const value = target.value;
         this.setState(prevState => ({ ...prevState, user: { ...prevState.user, [field]: value } }))
     }
-    onSignup = (ev) => {
+    onSignup = async (ev) => {
         ev.preventDefault();
         const { user } = this.state;
-        this.props.onSignup(user, this.showErrorMsg, this.props.history)
+        try {
+            await this.props.onSignup(user)
+            this.props.history.push('/board')
+        } catch (err) {
+            this.showErrorMsg(err)
+        }
     }
 
     showErrorMsg = (err) => {

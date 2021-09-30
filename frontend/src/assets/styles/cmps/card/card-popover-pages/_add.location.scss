@@ -1,0 +1,42 @@
+.add-location {
+    .popper-menu > button {
+        background-color: transparent;
+        width: 100%;
+        padding: 6px 12px;
+        &:hover {
+            background-color: #091e420a;
+        }
+    }
+}
+
+.save-location {
+    &.popper-content {
+        padding-bottom: 0;
+    }
+    & .address-results {
+        & > ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            & > li {
+                padding-left: 1px;
+                & > div {
+                    cursor: pointer;
+                    display: block;
+                    font-weight: 400;
+                    margin: 0 -12px;
+                    padding: 6px 12px;
+                    position: relative;
+                    text-decoration: none;
+                    &:hover {
+                        background-color: initial;
+                        color: #172b4d;
+                    }
+                    &:active {
+                        background-color: #e4f0f6;
+                    }
+                }
+            }
+        }
+    }
+}
