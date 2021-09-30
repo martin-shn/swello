@@ -105,7 +105,9 @@ export class CardChecklist extends Component {
                 <button ref={this.addBtnRef} className="btn-add">
                   Add
                 </button>
-                <CloseIcon className="close-icon" onClick={() => onAddingItem(false)} />
+                <button className="btn-close">
+                  <CloseIcon className="close-icon" onClick={() => onAddingItem(false)} />
+                </button>
               </div>
             </form>
           )}

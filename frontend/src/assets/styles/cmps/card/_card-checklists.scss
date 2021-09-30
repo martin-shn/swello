@@ -33,7 +33,21 @@
     text-align: center;
     font-size: 11px;
   }
+
   .checklist-add-item {
+    .add-controls {
+      gap: 1px;
+    }
+    .btn-close {
+      background-color: transparent;
+      &:hover {
+        background-color: transparent !important;
+      }
+    }
+    .close-icon {
+      height: 20px;
+      width: 20px;
+    }
     textarea {
       resize: none;
       padding: 8px 12px;
@@ -43,8 +57,9 @@
 
   // Each Item:
   .checklist-item {
-    .item .title {
-      &:focus {
+    .item {
+      gap: 5px;
+      .title:focus {
         padding-left: 3px;
         margin-left: -3px;
         padding-top: 3px;

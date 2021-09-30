@@ -31,6 +31,12 @@ export class _BoardPage extends Component {
     this.props.hideLoadingPage();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const { boardId } = this.props.match.params;
+    if (prevProps.match.params.boardId !== this.props.match.params.boardId)
+      this.props.loadBoard(boardId);
+  }
+
   componentWillUnmount() {
     this.props.clearBoard();
   }
@@ -105,7 +111,7 @@ export class _BoardPage extends Component {
 
   // TODO: add dynamic text color using contrast-js
   render() {
-    if (!this.props.board || this.props.isLoadingPage )
+    if (!this.props.board || this.props.isLoadingPage)
       return (
         <>
           <AppHeader />
@@ -114,8 +120,10 @@ export class _BoardPage extends Component {
       );
     if (!this.props.board) this.props.history.push('/board');
 
-    const { activeList, isAddingList, 
-      // isCardPageOpen 
+    const {
+      activeList,
+      isAddingList,
+      // isCardPageOpen
     } = this.state;
     const { popoverListId } = this.props;
     const { title, members, lists, style } = this.props.board;
