@@ -1,8 +1,17 @@
 .card-attachments {
   gap: 8px;
   .card-attachment {
+    box-sizing: content-box;
     height: 80px;
     gap: 8px;
+    padding: 10px 4px 10px 0;
+    cursor: pointer;
+    border-radius: 3px;
+
+    &:hover {
+      background-color: #091e420a;
+    }
+
     .attachment-thumbnail {
       color: #5e6c84;
       background-color: #091e420a;
@@ -11,7 +20,22 @@
       background-size: contain;
       border-radius: 3px;
       text-align: center;
-      width: 112px;
+      min-width: 112px;
+      max-width: 112px;
+      span {
+        font-size: 18px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+    }
+
+    .attachment-info {
+      flex-grow: 1;
+      align-self: center;
+      .attachment-name {
+        word-wrap: break-word;
+        font-weight: 700;
+      }
     }
   }
 }

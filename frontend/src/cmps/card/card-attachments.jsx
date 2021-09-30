@@ -1,4 +1,5 @@
 import AttachmentIcon from '@mui/icons-material/AttachFileOutlined';
+import React from 'react';
 import { utilService } from '../../services/util.service';
 
 export const CardAttachments = ({ attachments }) => {
@@ -18,19 +19,33 @@ export const CardAttachments = ({ attachments }) => {
       </div>
       <div className="section-data card-attachments flex column">
         {attachments &&
-          attachments.map(attachment => (
-            <div key={attachment.id} className="card-attachment flex">
-              <div
-                className="attachment-thumbnail flex align-center justify-center"
-                style={{
-                  backgroundImage: !getThumbnailText(attachment)
-                    ? `url(${attachment.url})`
-                    : 'none',
-                }}>
-                {getThumbnailText(attachment)}
-              </div>
-            </div>
-          ))}
+          attachments.map(attachment => {
+            const thumbnailText = getThumbnailText(attachment);
+            const elImg = document.createElement('image');
+            elImg.setAttribute('src', attachment.url);
+            return (
+              <a
+                href={attachment.url}
+                target="_blank"
+                key={attachment.id}
+                className="card-attachment flex">
+                <div
+                  className="attachment-thumbnail flex align-center justify-center"
+                  style={
+                    !thumbnailText
+                      ? {
+                          backgroundImage: `url(${attachment.url})`,
+                        }
+                      : {}
+                  }>
+                  <span>{thumbnailText}</span>
+                </div>
+                <div className="attachment-info">
+                  <span className="attachment-name">{attachment.name || 'Untitled'}</span>
+                </div>
+              </a>
+            );
+          })}
       </div>
     </section>
   );
