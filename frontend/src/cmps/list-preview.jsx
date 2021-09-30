@@ -24,7 +24,7 @@ export class _ListPreview extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      if (this.innerRef?.current) {
+      if (this.elInnerRef?.current) {
         this.setState({ class: this.elInnerRef.current.scrollHeight > this.elInnerRef.current.clientHeight ? ' visible-scroll' : '' })
       }
     }, 10)
