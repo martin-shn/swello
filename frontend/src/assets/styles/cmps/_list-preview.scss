@@ -41,7 +41,7 @@
 
   // content class makes sure that the content is aligned to the same left vertical line
   .content {
-    padding-left: 5px;
+    padding-left: 6px;
   }
 
   .list-header {
@@ -58,7 +58,7 @@
       overflow: hidden;
       overflow-wrap: break-word;
     }
-    &>input{
+    & > input {
       padding: 0px 5px;
       height: 28px;
       font-size: 1em;

@@ -12,6 +12,7 @@ const _ChecklistItem = props => {
   // TODO - Finish the remaining add-member and due-date buttons, enable title edit
   const { item, onUpdateItem, card, board } = props;
   const { id, title, isDone, dueDate, assignedToMemberId } = props.item;
+  const assignedToMember = board.members.find(member => member._id === assignedToMemberId);
   const formattedDate = utilService.getFormattedDate(dueDate);
   const isData = dueDate || assignedToMemberId;
   const status = cardService.checkDueDate({ date: dueDate, isComplete: isDone });
@@ -49,7 +50,8 @@ const _ChecklistItem = props => {
           {assignedToMemberId && (
             <Avatar
               className="avatar"
-              alt="hello"
+              alt={assignedToMember.fullName}
+              src={assignedToMember.imgUrl}
               onClick={ev =>
                 props.setCardPopover('add-checkitem-member', ev.target, {
                   boardMembers: board.members,

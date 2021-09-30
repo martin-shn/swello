@@ -29,7 +29,7 @@ export class AddCheckItemMember extends Component {
 
   render() {
     const { closeCardPopover, item } = this.props;
-    const { boardMembers, cardMembers } = this.state;
+    const { boardMembers = [], cardMembers = [] } = this.state;
     const filteredBoardMembers = boardMembers.filter(boardMember =>
       cardMembers.every(cardMember => cardMember._id !== boardMember._id)
     );

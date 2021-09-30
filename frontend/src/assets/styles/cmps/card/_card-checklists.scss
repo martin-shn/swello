@@ -121,7 +121,7 @@
 
     &:not(:hover):not(.is-data) {
       .actions {
-        display: none;
+        opacity: 0;
       }
     }
 

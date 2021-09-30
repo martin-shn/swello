@@ -23,6 +23,8 @@ class _CardPreviewData extends Component {
 
   render() {
     const { checklists, attachments, description, dueDate, location, members } = this.props.card;
+    if (!checklists && !attachments && !description && !dueDate && !location && !members)
+      return <></>;
     return (
       <section className="card-preview-data flex wrap align-center">
         <div className="flex align-center wrap" style={{ gap: '12px', flexGrow: '1' }}>
