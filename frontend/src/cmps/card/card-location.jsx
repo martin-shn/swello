@@ -18,7 +18,7 @@ export class CardLocation extends Component {
         const { card, onOpenPopover, updateField } = this.props;
         if (!card.location) return <></>;
         const { lat, lng, title, address } = card.location;
-        const mapLink = `https://www.google.com/maps/place/@${lat},${lng},17z/data=!3m1!4b1!4m5!3m4!1s0x151d4c83ad21fce3:0x9b69cc3763d2eef2!8m2!3d32.0672452!4d34.7712316`;
+        const mapLink = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
         const key = 'AIzaSyDgw0mWmcS4OoFUyLUj5oNbfo4KGzpHiYA';
         return (
             <section className='location-card card-section'>

@@ -28,6 +28,7 @@
     }
   }
 
+
   .card-cover {
     border-radius: 3px 3px 0 0;
     height: 32px;
@@ -43,6 +44,15 @@
     position: absolute;
     top: 2px;
     right: 2px;
+  }
+
+  .card-cover.black{
+    &~.edit-icon{
+      &:hover{
+        background-color: #ebecf0;
+        opacity: 1;
+      }
+    }
   }
 
   &:hover .edit-icon {
