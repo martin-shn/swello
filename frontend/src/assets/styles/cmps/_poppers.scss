@@ -1,4 +1,7 @@
 .header-popper-menu {
+  .MuiList-root {
+    padding: 0;
+  }
   & .MuiPaper-root {
     color: #172b4d;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu',
@@ -244,13 +247,14 @@
 
             & > span:first-of-type {
               // starred board name
-              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans',
+                'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
               display: block;
               padding-right: 12px;
               overflow: hidden;
               text-overflow: ellipsis;
               white-space: nowrap;
-              font-size: 12px;
+              font-size: 14px;
               color: #172b4d;
               line-height: 16px;
               font-weight: 500;

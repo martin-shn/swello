@@ -1,89 +1,78 @@
 .add-labels {
-    input {
-        margin: 4px 0 16px;
-        width: 100%;
-        background-color: #fafbfc;
-        border: none;
-        border-radius: 3px;
-        box-shadow: inset 0 0 0 2px #dfe1e6;
-        outline: none;
-        padding: 8px 12px;
-        &::placeholder {
-            color: $clr-default;
-        }
-        &:focus {
-            box-shadow: inset 0 0 0 2px #0079bf;
-        }
+  input {
+    margin: 4px 0 16px;
+    width: 100%;
+    background-color: #fafbfc;
+    border: none;
+    border-radius: 3px;
+    box-shadow: inset 0 0 0 2px #dfe1e6;
+    outline: none;
+    padding: 8px 12px;
+    &::placeholder {
+      color: $clr-default;
     }
-    .title {
-        color: #5e6c84;
-        font-size: 12px;
-        font-weight: 500;
-        letter-spacing: 0.04em;
-        line-height: 16px;
-        text-transform: uppercase;
-        margin-bottom: 8px;
+    &:focus {
+      box-shadow: inset 0 0 0 2px #0079bf;
     }
-    button {
-        width: 100%;
-        padding: 6px 12px;
-        margin: 8px 4px 0 0;
-        justify-content: center;
-        line-height: 20px;
-        background-color: #091e420a;
-        &:hover {
-            background-color: #091e4214;
-        }
-        &:active {
-            background-color: #e4f0f6;
-            color: #0079bf;
-        }
+  }
+  button {
+    width: 100%;
+    padding: 6px 12px;
+    margin: 8px 4px 0 0;
+    justify-content: center;
+    line-height: 20px;
+    background-color: #091e420a;
+    &:hover {
+      background-color: #091e4214;
     }
-    .label-container {
-        justify-content: space-between;
-        gap: 4px;
-        .edit-icon {
-            width: 32px;
-            height: 32px;
-            background-color: transparent;
-            margin: 0;
-            &:hover {
-                background-color: #091e4214;
-            }
-        }
-        .label {
-            flex-grow: 1;
-            height: 32px;
-            border-radius: 3px;
-            cursor: pointer;
-            font-weight: 700;
-            padding: 6px 12px;
-            color: #fff;
-            transition: padding 85ms, margin 85ms, box-shadow 85ms;
-            margin: 0 0 4px;
-            overflow: hidden;
-            white-space: nowrap;
-            justify-content: space-between;
-            span {
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-            }
-            .check-icon {
-                width: 20px;
-                display: none;
-                &::before {
-                    font-family: FA-Solid;
-                    content: "\f00c";
-                    float: right;
-                    font-size: 12px;
-                }
-            }
-            &:hover {
-                margin-left: 4px;
-            }
-        }
+    &:active {
+      background-color: #e4f0f6;
+      color: #0079bf;
     }
+  }
+  .label-container {
+    justify-content: space-between;
+    gap: 4px;
+    .edit-icon {
+      width: 32px;
+      height: 32px;
+      background-color: transparent;
+      margin: 0;
+      &:hover {
+        background-color: #091e4214;
+      }
+    }
+    .label {
+      flex-grow: 1;
+      height: 32px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-weight: 700;
+      padding: 6px 12px;
+      color: #fff;
+      transition: padding 85ms, margin 85ms, box-shadow 85ms;
+      margin: 0 0 4px;
+      overflow: hidden;
+      white-space: nowrap;
+      justify-content: space-between;
+      span {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      .check-icon {
+        width: 20px;
+        display: none;
+        &::before {
+          font-family: FA-Solid;
+          content: '\f00c';
+          float: right;
+          font-size: 12px;
+        }
+      }
+      &:hover {
+        margin-left: 4px;
+      }
+    }
+  }
 }
-
-

@@ -1,9 +1,9 @@
-export function RemoveItem({ item, closeCardPopover, onSetPage, onRemoveItem, msg, itemType }) {
+export function RemoveItem({ item, closeCardPopover, onBackClick, onRemoveItem, msg, itemType }) {
   return (
     <>
       <section className="popper-header">
-        {onSetPage && (
-          <button className="back-btn" onClick={() => onSetPage('edit', item)}></button>
+        {onBackClick && (
+          <button className="back-btn" onClick={() => onBackClick('edit', item)}></button>
         )}
         <div>Delete {itemType || 'item'}?</div>
         <button className="close-btn" onClick={closeCardPopover}></button>
