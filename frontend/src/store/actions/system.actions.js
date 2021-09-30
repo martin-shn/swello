@@ -32,6 +32,12 @@ export function showLoadingPage() {
   };
 }
 
+export function toggleSideMenu() {
+  return async dispatch => {
+    dispatch({ type: 'TOGGLE_SIDE_MENU' });
+  };
+}
+
 export function hideLoadingPage() {
   return async dispatch => {
     dispatch({ type: 'HIDE_LOADING_PAGE' });

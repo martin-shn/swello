@@ -337,7 +337,7 @@ class _AppHeader extends Component {
           <button className="btn-notifications">
             <NotificationsIcon />
           </button>
-          <Avatar className="avatar" alt="Guest User" src="/static/images/avatar/3.jpg" />
+          <Avatar className="avatar" alt={user.fullname} src="/static/images/avatar/3.jpg" />
         </div>
         <BoardAdd isModal={this.state.isModal} onClose={this.onBtnCreate} />
       </header>

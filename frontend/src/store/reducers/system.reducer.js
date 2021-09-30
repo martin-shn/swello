@@ -2,6 +2,7 @@ const initialState = {
   popoverListId: null,
   isLoadingPage: true,
   cardPopover: { name: '', anchorEl: null, props: null },
+  isSideMenuOpen: false,
 };
 
 export function systemReducer(state = initialState, action) {
@@ -18,6 +19,8 @@ export function systemReducer(state = initialState, action) {
       return { ...state, isLoadingPage: true };
     case 'HIDE_LOADING_PAGE':
       return { ...state, isLoadingPage: false };
+    case 'TOGGLE_SIDE_MENU':
+      return { ...state, isSideMenuOpen: !state.isSideMenuOpen };
     default:
       return state;
   }

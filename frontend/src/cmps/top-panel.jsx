@@ -7,7 +7,7 @@ import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Avatar } from '@mui/material';
 
-import { setCardPopover } from '../store/actions/system.actions';
+import { setCardPopover, toggleSideMenu } from '../store/actions/system.actions';
 import { updateBoard } from '../store/actions/board.actions';
 import { CardPopover } from './card/card-popover';
 
@@ -52,7 +52,7 @@ const _TopPanel = props => {
       </div>
       {cardPopover.name==='invite-main' && <CardPopover />}
       <div>
-        <button className="btn-menu">
+        <button className="btn-menu" onClick={props.toggleSideMenu}>
           <MoreHorizIcon />
           Show Menu
         </button>
@@ -90,6 +90,7 @@ function onOpenPopover(ev, setCardPopover) {
 const mapDispatchToProps = {
   updateBoard,
   setCardPopover,
+  toggleSideMenu,
 };
 
 const mapStateToProps = (state) => ({
