@@ -126,7 +126,7 @@ export class _BoardPage extends Component {
       isAddingList,
       // isCardPageOpen
     } = this.state;
-    const { popoverListId } = this.props;
+    const { popoverListId, board } = this.props;
     const { title, members, lists, style } = this.props.board;
 
     return (
@@ -163,7 +163,7 @@ export class _BoardPage extends Component {
           onCopyList={this.onCopyList}
           onMoveList={this.onMoveList}
         />
-        <SideMenu/>
+        <SideMenu />
       </main>
     );
   }

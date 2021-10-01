@@ -1,6 +1,7 @@
 import { utilService } from '../util.service';
 import { httpService } from '../http.service';
 import _ from 'lodash';
+import { boardService } from '../board.service';
 
 export const cardService = {
   getCardById,
@@ -15,7 +16,7 @@ export const cardService = {
   toggleCardMember,
   checkDueDate,
   getLocationData,
-  updateCard
+  updateCard,
 };
 
 // CARD FUNCTIONS - returns updated board
@@ -43,7 +44,12 @@ export function addCard(board, list, cardTitle, isTopAdd) {
   } else {
     board.lists[listIdx].cards.push(card);
   }
-  return board;
+  const updatedBoard = boardService.createActivity(
+    board,
+    card,
+    `Added ${card.title} to ${board.lists[listIdx].title}`
+  );
+  return updatedBoard;
 }
 
 export function moveCard(board, currListId, currCardIdx, newListId, newCardIdx) {
@@ -145,8 +151,8 @@ function updateChecklistItem(card, checklistId, updatedItem) {
 const key = 'AIzaSyDgw0mWmcS4OoFUyLUj5oNbfo4KGzpHiYA';
 async function getLocationData(locationId) {
   // const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${locationId}&inputtype=textquery&fields=formatted_address%2Cname%2Cgeometry&key=${key}`
-  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${locationId}&key=${key}&fields=formatted_address,name,geometry`
-  return await httpService.getFromApi(url)
+  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${locationId}&key=${key}&fields=formatted_address,name,geometry`;
+  return await httpService.getFromApi(url);
 }
 
 async function getLocationResults(search) {
@@ -156,11 +162,23 @@ async function getLocationResults(search) {
 
 // Card Members:
 
-function toggleCardMember(member, card) {
+function toggleCardMember(member, card, board) {
   if (!card.members) card.members = [];
   const memberIdx = card.members.findIndex(cardMember => cardMember._id === member._id);
-  if (memberIdx !== -1) card.members.splice(memberIdx, 1);
-  else card.members.push(member);
+  // let isAdd = false;
+  if (memberIdx !== -1) {
+    card.members.splice(memberIdx, 1);
+  } else {
+    // isAdd = true;
+    card.members.push(member);
+  }
+  // const updatedBoard = boardService.createActivity(
+  //   board,
+  //   card,
+  //   `${isAdd ? 'Added' : 'Removed'} ${member?.fullname || member?.username} ${
+  //     isAdd ? 'to' : 'from'
+  //   } card ${card.title}`
+  // );
   return card;
 }
 

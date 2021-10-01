@@ -86,11 +86,11 @@
     "activities": [
       {
         "id": "a101",
-        "txt": "Changed Color",
-        "createdAt": 154514,
-        "byMember": {
+        "text": "Created this board",
+        "createdAt": 1633047579415,
+        "createdBy": {
           "_id": "u101",
-          "fullname": "Guest",
+          "fullname": "Abi Abambi",
           "imgUrl": "http://some-img"
         },
         "card": {
@@ -238,9 +238,9 @@
     "activities": [
       {
         "id": "a101",
-        "txt": "Changed Color",
-        "createdAt": 154514,
-        "byMember": {
+        "text": "Created this board",
+        "createdAt": 1633047579415,
+        "createdBy": {
           "_id": "u101",
           "fullname": "Abi Abambi",
           "imgUrl": "http://some-img"
