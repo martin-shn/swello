@@ -1,6 +1,4 @@
-import { Avatar } from '@mui/material';
 import { useRef } from 'react';
-import { formatDistance } from 'date-fns';
 import { ActivityDetails } from './activity-details';
 
 export const SideMenuIndex = ({ activities, setPage, isScroll, toggleSideMenu }) => {

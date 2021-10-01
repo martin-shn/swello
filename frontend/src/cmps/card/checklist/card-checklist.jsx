@@ -3,7 +3,6 @@ import ChecklistIcon from '@mui/icons-material/CheckBoxOutlined';
 import { ReactComponent as CloseIcon } from '../../../assets/svg/close.svg';
 import { ChecklistItemList } from './checklist-item-list';
 import { cardService } from '../../../services/board-services/card.service';
-import { boardService } from '../../../services/board.service';
 // import { cardService } from '../../../services/board-services/card.service';
 
 const initialState = {
