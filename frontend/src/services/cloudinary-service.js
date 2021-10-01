@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { utilService } from './util.service';
-export const cloudinaryService = { uploadFile };
+export const cloudinaryService = { uploadFile, uploadImg };
+
+const CLOUD_NAME = 'avivyaari';
+const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
+const UPLOAD_PRESET = 'k9e87w7t';
 
 async function uploadFile(ev) {
-  const CLOUD_NAME = 'avivyaari';
-  const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
-  const UPLOAD_PRESET = 'k9e87w7t';
-
   const formData = new FormData();
   // console.log('target', ev.target);
   formData.append('file', ev.target.files[0]);
@@ -27,6 +27,28 @@ async function uploadFile(ev) {
       suffix: type.split('/')[1],
     };
     return attachment;
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function uploadImg(ev) {
+  const formData = new FormData();
+  // console.log('target', ev.target);
+  formData.append('file', ev.target.files[0]);
+  // console.log('ev.target.files[0]):', ev.target.files[0]);
+  formData.append('upload_preset', UPLOAD_PRESET);
+  // console.log('formData:', formData);
+
+  try {
+    const res = await axios.post(UPLOAD_URL, formData);
+    const { url } = res.data;
+    const img = {
+      id: utilService.makeId(),
+      url,
+      theme: 'light'
+    }
+    return img;
   } catch (err) {
     throw err;
   }

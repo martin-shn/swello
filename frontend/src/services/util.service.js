@@ -90,3 +90,4 @@ function isValidUrl(txt) {
 function isValidImg(filename) {
   return /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(filename);
 }
+

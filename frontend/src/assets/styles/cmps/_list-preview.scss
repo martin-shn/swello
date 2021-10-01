@@ -57,7 +57,7 @@
   }
   // content class makes sure that the content is aligned to the same left vertical line
   .content {
-    padding-left: 6px;
+    padding-left: 8px;
   }
 
   svg {
@@ -70,11 +70,6 @@
     height: 16px;
   }
 
-  // content class makes sure that the content is aligned to the same left vertical line
-  .content {
-    padding-left: 5px;
-  }
-
   .list-header {
     margin-bottom: 8px;
     height: 30px;
@@ -85,12 +80,12 @@
       flex-grow: 1;
       cursor: pointer;
       align-self: center;
-      padding: 4px 5px;
+      padding: 4px 5px 4px 8px;
       overflow: hidden;
       overflow-wrap: break-word;
     }
     & > input {
-      padding: 0px 5px;
+      padding: 0 5px 0 8px;
       height: 28px;
       font-size: 1em;
       font-weight: 600;

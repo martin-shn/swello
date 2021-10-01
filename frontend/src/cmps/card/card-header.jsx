@@ -25,7 +25,10 @@ export const CardHeader = props => {
           in list: {cardService.getListOfCard(board, card.id).title || 'General'}
         </p>
       </div>
-      <button className="btn-close" onClick={props.onCloseCard}>
+      <button className="btn-close" onClick={(ev) => {
+        ev.stopPropagation();
+        props.onCloseCard()
+      }}>
         <CloseIcon />
       </button>
     </header>
