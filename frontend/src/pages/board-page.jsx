@@ -13,6 +13,8 @@ import { CardPage } from './card-page';
 import { Route } from 'react-router';
 import { LoaderPage } from '../cmps/loader/loader-page';
 import { SideMenu } from '../cmps/side-menu/side-menu';
+import { Dashboard } from '../cmps/dashboard/dashboard';
+
 
 export class _BoardPage extends Component {
   state = {
@@ -164,6 +166,7 @@ export class _BoardPage extends Component {
           onMoveList={this.onMoveList}
         />
         <SideMenu />
+        <Dashboard/>
       </main>
     );
   }

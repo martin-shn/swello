@@ -4,6 +4,12 @@ export function togglePopover(popoverListId) {
   };
 }
 
+export function toggleDashboard() {
+  return async dispatch => {
+    dispatch({ type: 'TOGGLE_DASHBOARD' });
+  };
+}
+
 export function setCardPopover(name, anchorEl, props) {
   return dispatch => {
     dispatch({
