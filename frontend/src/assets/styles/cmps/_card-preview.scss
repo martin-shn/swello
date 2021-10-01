@@ -1,3 +1,6 @@
+.card-preview-container {
+  margin-bottom: 8px;
+}
 .card-preview {
   background-color: #fff;
   border-radius: 3px;
@@ -9,45 +12,100 @@
   padding: 6px;
   position: relative;
   gap: 4px;
+  background-size: cover;
+
+  .full-cover-helper {
+    align-self: flex-end;
+    width: 100%;
+    padding: 6px 8px 8px;
+    position: relative;
+    border-radius: 0px 0px 3px 3px;
+    &.theme {
+      ::before {
+        content: "";
+        height: 32px;
+        left: 0;
+        mix-blend-mode: normal;
+        position: absolute;
+        right: 0;
+        top: -32px;
+        width: 100%;
+      }
+      &.light {
+        background: linear-gradient(180deg, #ffffff80, #fff);
+        span {
+          &::before {
+            background: linear-gradient(180deg, #fff0, #ffffff80);
+          }
+        }
+      }
+      &.dark {
+        background: linear-gradient(180deg, #00000080, #000);
+        span {
+          color: #fff;
+          &::before {
+            background: linear-gradient(180deg, #0000, #00000080);
+          }
+        }
+      }
+    }
+  }
 
   &.full-cover {
     min-height: 56px;
     flex-direction: row;
+    padding: 0;
     span {
       font-size: 16px;
       font-weight: 500;
       line-height: 20px;
-      margin-bottom: 0;
-      padding: 6px 8px 2px;
+      padding-bottom: 8px;
       word-wrap: break-word;
       clear: both;
       color: #172b4d;
       margin: 0 0 4px;
       overflow: hidden;
-      align-self: flex-end;
+      width: 100%;
     }
   }
 
   .card-cover {
     border-radius: 3px 3px 0 0;
-    height: 32px;
-    margin: -6px -6px 6px -6px;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 32px;
+    margin: -6px -6px 2px -8px;
   }
 
   // AVIV: looks useless, commenting this shouldnt cause issues, uncomment this if there are visual bugs
-  // .content {
-  //   padding: 6px 8px 2px;
-  // }
+  .content {
+    padding: 6px 8px 2px;
+  }
+
+  &.content {
+    &:hover {
+      background-color: #f4f5f7;
+      border-bottom-color: #091e4240;
+    }
+  }
 
   .edit-icon {
     visibility: hidden;
     position: absolute;
     top: 2px;
     right: 2px;
+    z-index: 1;
   }
 
-  .card-cover.black {
-    & ~ .edit-icon {
+  .card-cover.black,
+  &.black,
+  .card-cover.cover-img,
+  &.cover-img {
+    & ~ .edit-icon,
+    & > .edit-icon {
+      background-color: #f4f5f7;
+      opacity: 0.8;
       &:hover {
         background-color: #ebecf0;
         opacity: 1;

@@ -16,9 +16,9 @@ export class AddAttachment extends Component {
     try {
       const attachment = await cloudinaryService.uploadFile(ev);
       this.onSave(attachment);
-    } catch (error) {
+    } catch (err) {
       this.setState({ errMsg: 'That file size exceeds the 10MB limit' });
-      console.error('upload file error', error);
+      console.error('upload file error', err);
     }
   };
 

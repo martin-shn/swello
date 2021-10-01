@@ -40,10 +40,23 @@
     }
   }
 
+  .cover-img {
+    cursor: pointer;
+    div:hover {
+      opacity: 0.9;
+    }
+  }
+
   .card-cover {
     height: 116px;
     margin: 0 -8px 0 -16px;
     position: relative;
+    background-size: contain;
+    background-origin: content-box;
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: #091e4214;
     .card-cover-menu {
       bottom: 0;
       box-sizing: border-box;
@@ -112,7 +125,7 @@
     & > .header-icon::before {
       font-family: FA-regular;
       font-size: 1.1rem;
-      content: '\f07b';
+      content: "\f07b";
       color: #42526e;
     }
 
@@ -266,57 +279,56 @@
   }
 }
 
-.card-preview {
-  &.full-cover {
-    &.green {
-      &:hover {
-        background-color: #61bd4f;
-      }
+.card-preview.full-cover,
+.cover {
+  &.green {
+    &:hover {
+      background-color: #61bd4f;
     }
-    &.yellow {
-      &:hover {
-        background-color: #f2d600;
-      }
+  }
+  &.yellow {
+    &:hover {
+      background-color: #f2d600;
     }
-    &.orange {
-      &:hover {
-        background-color: #ff9f1a;
-      }
+  }
+  &.orange {
+    &:hover {
+      background-color: #ff9f1a;
     }
-    &.red {
-      &:hover {
-        background-color: #eb5a46;
-      }
+  }
+  &.red {
+    &:hover {
+      background-color: #eb5a46;
     }
-    &.purple {
-      &:hover {
-        background-color: #c377e0;
-      }
+  }
+  &.purple {
+    &:hover {
+      background-color: #c377e0;
     }
-    &.blue {
-      &:hover {
-        background-color: #298fca;
-      }
+  }
+  &.blue {
+    &:hover {
+      background-color: #298fca;
     }
-    &.sky {
-      &:hover {
-        background-color: #00c2e0;
-      }
+  }
+  &.sky {
+    &:hover {
+      background-color: #00c2e0;
     }
-    &.lime {
-      &:hover {
-        background-color: #51e898;
-      }
+  }
+  &.lime {
+    &:hover {
+      background-color: #51e898;
     }
-    &.pink {
-      &:hover {
-        background-color: #ff78cb;
-      }
+  }
+  &.pink {
+    &:hover {
+      background-color: #ff78cb;
     }
-    &.black {
-      &:hover {
-        background-color: #091e42;
-      }
+  }
+  &.black {
+    &:hover {
+      background-color: #091e42;
     }
   }
 }

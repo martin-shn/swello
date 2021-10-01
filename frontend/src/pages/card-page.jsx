@@ -78,6 +78,7 @@ class _CardPage extends Component {
     if (!this.state.card) return <CircularProgress sx={{ position: 'absolute' }} />;
     const { description, title, checklists, dueDate, attachments } = this.state.card;
     const { card } = this.state;
+    const coverImg = card.cover?.imgs?.find(img => img.id === card.cover.bgImgId)
     const { cardPopover, board, setCardPopover, closeCardPopover } = this.props;
     const { updateField } = this;
     return (
@@ -88,19 +89,26 @@ class _CardPage extends Component {
           onClick={ev => ev.target.classList.contains('card-page-wrapper') && this.onCloseCard()}>
           {cardPopover.name && cardPopover.anchorEl && <CardPopover />}
           <section className="card-page">
-            {card.cover && card.cover.color && card.cover.size && (
-              <div className={'card-cover ' + card.cover.color}>
-                <div className="card-cover-menu flex align-center">
-                  <button
-                    name="add-cover"
-                    className={'add-cover-btn' + (card.cover?.color === 'black' ? ' light' : '')}
-                    onClick={ev => this.onOpenPopover(ev, { card, updateField })}>
-                    <VideoLabelIcon />
-                    Cover
-                  </button>
+            {card.cover && (card.cover.color || coverImg) && card.cover.size &&
+              <div onClick={() => coverImg && window.open(coverImg.url, "_blank")} className={coverImg ? 'cover-img' : ''}>
+                <div className={`card-cover${card.cover.color ? ' ' + card.cover.color : ''}`}
+                  style={coverImg ? { backgroundImage: `url(${coverImg.url})`, height: '160px' } : {}}>
+                  <div className="card-cover-menu flex align-center">
+                    <button
+                      name="add-cover"
+                      className={'add-cover-btn' + (card.cover?.color === 'black' ? ' light' : '')}
+                      onClick={ev => {
+                        ev.stopPropagation();
+                        if (cardPopover.name === 'add-cover') this.onClosePopover()
+                        else this.onOpenPopover(ev, { card, updateField })
+                      }}>
+                      <VideoLabelIcon />
+                      Cover
+                    </button>
+                  </div>
                 </div>
               </div>
-            )}
+            }
             <CardHeader
               updateField={updateField}
               title={title}

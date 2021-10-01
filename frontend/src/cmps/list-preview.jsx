@@ -14,7 +14,7 @@ import { ReactComponent as CloseIcon } from '../assets/svg/close.svg';
 import { CardList } from './card-list';
 import { Draggable } from 'react-beautiful-dnd';
 
-export class _ListPreview extends Component {
+export class _ListPreview extends React.Component {
   state = {
     popoverPage: 'main',
     isDragging: true,
@@ -34,6 +34,7 @@ export class _ListPreview extends Component {
       }
     }, 10);
   }
+
 
   elInnerRef = React.createRef();
 
@@ -92,7 +93,6 @@ export class _ListPreview extends Component {
       // board
     } = this.props;
     const { popoverPage } = this.state;
-
     return (
       <Draggable draggableId={list.id} index={idx}>
         {provided => (

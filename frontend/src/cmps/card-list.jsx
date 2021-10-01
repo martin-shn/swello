@@ -10,6 +10,7 @@ export class CardList extends React.Component {
     left: 0,
     right: 0
   }
+
   render() {
     const { cards, listId } = this.props;
     return (
@@ -22,6 +23,7 @@ export class CardList extends React.Component {
                   key={card.id}
                   card={card}
                   idx={idx}
+                  listId={listId}
                   isDraggingOver={snapshot.isDraggingOver}
                 />
               ))}

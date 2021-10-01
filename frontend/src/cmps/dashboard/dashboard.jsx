@@ -41,6 +41,33 @@ class _Dashboard extends React.Component {
                             <div className='graph-content'>GRAPH CONTENT</div>
                         </div>
                     </div>
+                    <div className='graph'>
+                        <div>
+                            <div className='graph-header'>
+                                <span><h4>GRAPH HEADER</h4></span>
+                                <span><button></button></span>
+                            </div>
+                            <div className='graph-content'>GRAPH CONTENT</div>
+                        </div>
+                    </div>
+                    <div className='graph'>
+                        <div>
+                            <div className='graph-header'>
+                                <span><h4>GRAPH HEADER</h4></span>
+                                <span><button></button></span>
+                            </div>
+                            <div className='graph-content'>GRAPH CONTENT</div>
+                        </div>
+                    </div>
+                    <div className='graph'>
+                        <div>
+                            <div className='graph-header'>
+                                <span><h4>GRAPH HEADER</h4></span>
+                                <span><button></button></span>
+                            </div>
+                            <div className='graph-content'>GRAPH CONTENT</div>
+                        </div>
+                    </div>
                 </div>
             </section>
         );

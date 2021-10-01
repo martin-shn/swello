@@ -8,27 +8,30 @@ import { setCardPopover, closeCardPopover } from '../../store/actions/system.act
 import { QrCode } from './qrcode'
 import { userService } from '../../services/user.service';
 import { Avatar } from '@mui/material'
+import { MiniLoader } from '../loader/mini-loader';
 
 class _InviteMain extends Component {
     state = {
         name: '',
         isQrCode: false,
         isLink: false,
-        res: []
+        res: null,
     };
 
-    componentDidMount() { }
-
     handleChange = (ev) => {
+        if (ev.target.value.length > 0) {
+            this.setState({ res: [] })
+        }
         if (!ev.target.value.trim().length) {
-            this.setState({ name: '', res: [], isLink: false });
+            this.setState({ name: '', res: null, isLink: false });
         } else {
             this.setState({ name: ev.target.value }, async () => {
                 const res = await userService.getUsers({ name: this.state.name })
-                this.setState({ res }, () => { console.log(this.state); })
+                this.setState({ res: res.length ? res : null })
             });
         }
-    };
+    }
+
 
     onOpenPopover = (ev, props) => {
         this.props.setCardPopover('', ev.target, props);
@@ -45,6 +48,7 @@ class _InviteMain extends Component {
     };
 
     render() {
+        // console.log(this.state);
         return (
             <section className='invite-main cards-popper'>
                 <div className='invite-header popper-header'>
@@ -53,7 +57,7 @@ class _InviteMain extends Component {
                 </div>
                 <div className='invite-content popper-content'>
                     <DebounceInput
-                        debounceTimeout={3000}
+                        debounceTimeout={500}
                         type='search'
                         autoComplete='off'
                         autoCorrect='off'
@@ -75,8 +79,8 @@ class _InviteMain extends Component {
                     {this.state.isQrCode && <QrCode boardId={this.props.board._id} />}
                     <button className={this.state.isLink ? 'invite-active' : 'invite-disable'} onClick={this.onSendInvitation}>Send invitation</button>
                 </div>
-
-                {this.state.res.length > 0 && <div className="invite-results">
+                {this.state.res?.length === 0 && <div className="invite-results"><MiniLoader /></div>}
+                {this.state.res?.length > 0 && <div className="invite-results">
                     <div>
                         {this.state.res.map(user => <div key={user._id} onClick={() => this.setState({ name: user.username, isLink: true, res: [] })}>
                             {/* <img src={user.imgUrl} alt="user image"/> */}

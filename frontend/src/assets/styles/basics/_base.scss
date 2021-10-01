@@ -3,8 +3,8 @@
 }
 
 html {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans,
-    Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
+    sans-serif;
   color: $clr-default;
   line-height: 1.15;
 }
@@ -13,8 +13,8 @@ html,
 button,
 textarea,
 input {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans,
-    Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
+    sans-serif;
 }
 
 textarea,
@@ -104,4 +104,10 @@ label {
   &:hover {
     color: $clr-default;
   }
+}
+
+.mini-loader {
+  transform: scale(0.6);
+  align-self: center;
+  width: fit-content;
 }
