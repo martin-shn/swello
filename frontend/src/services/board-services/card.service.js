@@ -34,39 +34,41 @@ export function updateCard(board, updatedCard, activity) {
 }
 
 export function addCard(board, list, cardTitle, isTopAdd) {
+  const cloneBoard = _.cloneDeep(board);
   const card = {
     id: utilService.makeId(),
     title: cardTitle,
   };
-  const listIdx = board.lists.findIndex(currList => currList.id === list.id);
+  const listIdx = cloneBoard.lists.findIndex(currList => currList.id === list.id);
   if (isTopAdd) {
-    board.lists[listIdx].cards.unshift(card);
+    cloneBoard.lists[listIdx].cards.unshift(card);
   } else {
-    board.lists[listIdx].cards.push(card);
+    cloneBoard.lists[listIdx].cards.push(card);
   }
   const updatedBoard = boardService.createActivity(
-    board,
+    cloneBoard,
     card,
-    `Added ${card.title} to ${board.lists[listIdx].title}`
+    `Added ${card.title} to ${cloneBoard.lists[listIdx].title}`
   );
   return updatedBoard;
 }
 
 export function moveCard(board, currListId, currCardIdx, newListId, newCardIdx) {
-  const currListIdx = board.lists.findIndex(list => list.id === currListId);
-  const currList = board.lists[currListIdx];
-  const currCard = currList.cards[currCardIdx];
+  const cloneBoard = _.cloneDeep(board);
+  const currListIdx = cloneBoard.lists.findIndex(list => list.id === currListId);
+  const currList = cloneBoard.lists[currListIdx];
+  const currCard = currList.cards[currCardIdx]
   if (currListId === newListId) {
-    if (currCardIdx === newCardIdx) return board;
+    if (currCardIdx === newCardIdx) return cloneBoard;
     currList.cards.splice(currCardIdx, 1);
     currList.cards.splice(newCardIdx, 0, currCard);
   } else {
     currList.cards.splice(currCardIdx, 1);
-    const newListIdx = board.lists.findIndex(list => list.id === newListId);
-    const newList = board.lists[newListIdx];
+    const newListIdx = cloneBoard.lists.findIndex(list => list.id === newListId);
+    const newList = cloneBoard.lists[newListIdx];
     newList.cards.splice(newCardIdx, 0, currCard);
   }
-  return board;
+  return cloneBoard;
 }
 
 // CARD FUNCTIONS - returns updated card

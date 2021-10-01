@@ -166,7 +166,7 @@ export class _BoardPage extends Component {
           onMoveList={this.onMoveList}
         />
         <SideMenu />
-        <Dashboard/>
+        <Dashboard />
       </main>
     );
   }

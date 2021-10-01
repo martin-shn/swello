@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { cloudinaryService, uploadImg } from '../../../services/cloudinary-service'
+import { cloudinaryService } from '../../../services/cloudinary-service'
+import { MiniLoader } from '../../loader/mini-loader';
 export class AddCover extends Component {
     state = {
         cover: {
@@ -8,7 +9,8 @@ export class AddCover extends Component {
             imgs: this.props.card.cover?.imgs || [],
             bgImgId: this.props.card.cover?.bgImgId || ''
         },
-        errMsg: ''
+        errMsg: '',
+        isLoading: false
     };
     colors = ['green', 'yellow', 'orange', 'red', 'purple', 'blue', 'sky', 'lime', 'pink', 'black']
     inputRef = React.createRef();
@@ -43,7 +45,9 @@ export class AddCover extends Component {
     }
     onUploadImg = async (ev) => {
         try {
+            this.setState({ isLoading: true })
             const img = await cloudinaryService.uploadImg(ev);
+            this.setState({ isLoading: false })
             this.onSetBgImg(img)
         } catch (err) {
             this.setState({ errMsg: 'That file size exceeds the 10MB limit' });
@@ -131,6 +135,7 @@ export class AddCover extends Component {
                         ))}
                     </div>
                     <div className="sub-header">attachments</div>
+                    {this.state.isLoading && <MiniLoader />}
                     {cover.imgs && cover.imgs.length > 0 &&
                         <div className="cover-imgs-container">
                             {cover.imgs.map(img => (
