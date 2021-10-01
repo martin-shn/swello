@@ -42,7 +42,9 @@ export class AddAttachment extends Component {
   onSave = attachment => {
     const { attachments = [] } = this.props.card;
     this.props.closeCardPopover();
-    this.props.updateField({ attachments: [...attachments, attachment] });
+    this.props.updateField({ attachments: [...attachments, attachment] }, 'ADD-ATTACHMENT', {
+      attachment,
+    });
   };
 
   render() {

@@ -16,7 +16,7 @@ export class AddLocation extends React.Component {
   onSaveLocation = location => {
     // gets the full location object
     const { updateField } = this.props;
-    updateField({ location });
+    updateField({ location }, 'ADD-LOCATION', { location });
     this.props.closeCardPopover();
   };
   render() {

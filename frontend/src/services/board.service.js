@@ -101,13 +101,12 @@ function removeLabel(board, labelId) {
   return board;
 }
 
-function createActivity(board, card, text) {
-  const { activities = [] } = board;
+function createActivity(card, type, values) {
   const id = utilService.makeId();
   const createdBy = userService.getLoggedinUser();
   const createdAt = Date.now();
-  const activity = { id, createdBy, createdAt, text, card };
-  return { ...board, activities: [...activities, activity] };
+  const activity = { id, type, card, createdBy, createdAt, values };
+  return activity;
 }
 
 // This IIFE functions for Dev purposes
@@ -126,3 +125,5 @@ function createActivity(board, card, text) {
     boards = freshBoards;
   });
 })();
+
+// types: add, remove, update, attached, joined, left

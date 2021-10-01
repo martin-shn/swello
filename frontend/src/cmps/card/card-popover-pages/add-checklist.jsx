@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { cardService } from '../../../services/board-services/card.service';
+import { boardService } from '../../../services/board.service';
 
 export class AddChecklist extends Component {
   state = {};
@@ -15,7 +16,7 @@ export class AddChecklist extends Component {
     const title = ev.target.title.value;
     const updatedCard = cardService.addChecklist(card, title);
     const { checklists } = updatedCard;
-    updateField({ checklists });
+    updateField({ checklists }, 'ADD-CHECKLIST', { title });
     ev.target.reset();
     this.props.closeCardPopover();
   };
