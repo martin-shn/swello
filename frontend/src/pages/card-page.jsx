@@ -54,11 +54,14 @@ class _CardPage extends Component {
     this.setState({ card });
   };
 
-  updateField = data => {
+  updateField = (data, activityType, activityValues) => {
     const { board } = this.props;
     const { card } = this.state;
     const updatedCard = { ...card, ...data };
-    const updatedBoard = boardService.updateCard(board, updatedCard);
+    const activity = activityType
+      ? boardService.createActivity(updatedCard, activityType, activityValues)
+      : null;
+    const updatedBoard = boardService.updateCard(board, updatedCard, activity);
     this.props.updateBoard(updatedBoard);
   };
 

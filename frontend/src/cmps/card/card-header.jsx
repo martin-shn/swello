@@ -4,9 +4,15 @@ import { cardService } from '../../services/board-services/card.service';
 
 export const CardHeader = props => {
   const titleRef = useRef();
+
   useEffect(() => {
     titleRef.current.blur();
   }, []);
+
+  const onUpdateTitle = title => {
+    props.updateField({ title }, 'UPDATE-TITLE', { title });
+  };
+
   const { board, card } = props;
   return (
     <header className="card-section card-header">
@@ -18,7 +24,7 @@ export const CardHeader = props => {
           onKeyDown={ev => ev.key === 'Enter' && ev.target.blur()}
           contentEditable
           suppressContentEditableWarning
-          onBlur={ev => props.updateField({ title: ev.target.innerText })}>
+          onBlur={ev => onUpdateTitle(ev.target.innerText)}>
           {props.title}
         </h2>
         <p className="in-list">

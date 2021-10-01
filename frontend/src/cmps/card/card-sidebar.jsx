@@ -14,8 +14,8 @@ export const CardSidebar = ({ board, card, updateField, onOpenPopover, dueDate }
         name="add-members"
         onClick={ev =>
           onOpenPopover(ev, {
-            board,
             card,
+            board,
             updateField,
           })
         }>
@@ -30,7 +30,7 @@ export const CardSidebar = ({ board, card, updateField, onOpenPopover, dueDate }
         <CheckBoxIcon />
         Checklist
       </button>
-      <button name="add-due-date" onClick={ev => onOpenPopover(ev, { dueDate, updateField })}>
+      <button name="add-due-date" onClick={ev => onOpenPopover(ev, { card, dueDate, updateField })}>
         <DateIcon />
         Date
       </button>

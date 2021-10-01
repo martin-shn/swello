@@ -11,11 +11,11 @@ export class AddMembers extends Component {
   };
 
   toggleCardMember = member => {
-    const { board, card } = this.props;
-    const updatedCard = cardService.toggleCardMember(member, card, board);
+    const { card } = this.props;
+    const { card: updatedCard, activity } = cardService.toggleCardMember(member, card);
     const { members } = updatedCard;
     this.setState({ updatedMembers: members });
-    this.props.updateField({ members });
+    this.props.updateField({ members }, activity.type, activity.values);
   };
 
   handleChange = ev => {

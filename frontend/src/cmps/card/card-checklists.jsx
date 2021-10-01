@@ -19,12 +19,6 @@ export class CardChecklists extends Component {
     this.props.updateField({ checklists });
   };
 
-  onUpdateItem = (checklist, updatedItem) => {
-    const updatedCard = cardService.updateChecklistItem(this.card, checklist.id, updatedItem);
-    const { checklists } = updatedCard;
-    this.props.updateField({ checklists });
-  };
-
   onRemoveItem = (checklist, itemId) => {
     const updatedCard = cardService.removeChecklistItem(this.card, checklist.id, itemId);
     const { checklists } = updatedCard;
@@ -51,6 +45,7 @@ export class CardChecklists extends Component {
     this.card = this.props.card;
     const {
       checklists,
+      updateField,
       // card
     } = this.props;
     const { addingChecklistId } = this.state;
@@ -65,10 +60,10 @@ export class CardChecklists extends Component {
             isAdding={addingChecklistId === checklist.id}
             onAddingItem={this.onAddingItem}
             onAddItem={this.onAddItem}
-            onUpdateItem={this.onUpdateItem}
             onRemoveItem={this.onRemoveItem}
             onUpdateChecklist={this.onUpdateChecklist}
             onDeleteChecklist={this.onDeleteChecklist}
+            updateField={updateField}
           />
         ))}
       </section>

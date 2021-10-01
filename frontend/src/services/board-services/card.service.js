@@ -29,27 +29,25 @@ export function updateCard(board, updatedCard, activity) {
       if (card.id === updatedCard.id) list.cards[idx] = updatedCard;
     });
   });
-  // board.activities.push(activity);
+  if (activity) cloneBoard.activities.unshift(activity);
   return cloneBoard;
 }
 
 export function addCard(board, list, cardTitle, isTopAdd) {
-  const cloneBoard = _.cloneDeep(board);
   const card = {
     id: utilService.makeId(),
     title: cardTitle,
   };
-  const listIdx = cloneBoard.lists.findIndex(currList => currList.id === list.id);
+  const updatedBoard = _.cloneDeep(board);
+  const listIdx = updatedBoard.lists.findIndex(currList => currList.id === list.id);
   if (isTopAdd) {
-    cloneBoard.lists[listIdx].cards.unshift(card);
+    updatedBoard.lists[listIdx].cards.unshift(card);
   } else {
-    cloneBoard.lists[listIdx].cards.push(card);
+    updatedBoard.lists[listIdx].cards.push(card);
   }
-  const updatedBoard = boardService.createActivity(
-    cloneBoard,
-    card,
-    `Added ${card.title} to ${cloneBoard.lists[listIdx].title}`
-  );
+  const activity = boardService.createActivity(card, 'ADD-CARD', { listTitle: list.title });
+  if (!updatedBoard.activities) updatedBoard.activities = [];
+  updatedBoard.activities.unshift(activity);
   return updatedBoard;
 }
 
@@ -164,24 +162,18 @@ async function getLocationResults(search) {
 
 // Card Members:
 
-function toggleCardMember(member, card, board) {
+function toggleCardMember(member, card) {
   if (!card.members) card.members = [];
   const memberIdx = card.members.findIndex(cardMember => cardMember._id === member._id);
-  // let isAdd = false;
+  let isAdd = false;
   if (memberIdx !== -1) {
     card.members.splice(memberIdx, 1);
   } else {
-    // isAdd = true;
+    isAdd = true;
     card.members.push(member);
   }
-  // const updatedBoard = boardService.createActivity(
-  //   board,
-  //   card,
-  //   `${isAdd ? 'Added' : 'Removed'} ${member?.fullname || member?.username} ${
-  //     isAdd ? 'to' : 'from'
-  //   } card ${card.title}`
-  // );
-  return card;
+  const activity = { type: isAdd ? 'ADD-MEMBER' : 'REMOVE-MEMBER', values: { member } };
+  return { card, activity };
 }
 
 // Due date:

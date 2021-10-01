@@ -1,6 +1,7 @@
 import { Avatar } from '@mui/material';
 import { useRef } from 'react';
 import { formatDistance } from 'date-fns';
+import { ActivityDetails } from './activity-details';
 
 export const SideMenuIndex = ({ activities, setPage, isScroll, toggleSideMenu }) => {
   const elInnerRef = useRef();
@@ -48,21 +49,9 @@ function ActivityList({ activities }) {
   return (
     /* Each div contain 3 divs: 1. creator avatar, 2. description, 3. time */
     <section className="side-menu-activities">
-      {activities.map(activity => {
-        const { id, createdBy, createdAt, text, card } = activity;
-        return (
-          <div className="activity">
-            <Avatar key={id} className="avatar" alt={createdBy?.fullname} src={createdBy?.imgUrl} />
-            <span className="text">
-              <span className="created-by">{createdBy?.fullname || createdBy?.username}</span>
-              {text}
-            </span>
-            <span className="created-at">
-              {formatDistance(createdAt, Date.now(), { addSuffix: true })}
-            </span>
-          </div>
-        );
-      })}
+      {activities.map(activity => (
+        <ActivityDetails key={activity.id} activity={activity} />
+      ))}
     </section>
   );
 }
