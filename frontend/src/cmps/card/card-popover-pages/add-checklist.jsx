@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { cardService } from '../../../services/board-services/card.service';
-import { boardService } from '../../../services/board.service';
 
 export class AddChecklist extends Component {
   state = {};

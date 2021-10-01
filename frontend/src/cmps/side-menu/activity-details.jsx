@@ -5,37 +5,38 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import { utilService } from '../../services/util.service';
 
-function _DynamicActivity({ card, type, values, board }) {
-    const cardUrl = `/board/${ board._id }/card/${ card.id }`;
-    const CardLink = () => <Link to={cardUrl} className="link">{card.title}</Link>;
-    const key = 'AIzaSyDgw0mWmcS4OoFUyLUj5oNbfo4KGzpHiYA';
+function _DynamicActivity ({ card, type, values, board }) {
+  const cardUrl = `/board/${ board._id }/card/${ card.id }`;
+  const CardLink = () => <Link to={cardUrl} className="link">{card.title}</Link>;
+  const key = 'AIzaSyDgw0mWmcS4OoFUyLUj5oNbfo4KGzpHiYA';
   switch (type) {
     case 'ADD-CARD':
-        return <span>added <CardLink /> to {values.listTitle}</span>;
+      return <span>added <CardLink /> to {values.listTitle}</span>;
     case 'ADD-MEMBER':
-        return <span>added <span className="created-by">{values.member.fullname || values.member.username}</span> to <CardLink /></span>;
+      return <span>added <span className="created-by">{values.member.fullname || values.member.username}</span> to <CardLink /></span>;
     case 'ADD-CHECKLIST':
-        return <span>added checklist "{values.title}" to <CardLink /></span>;
+      return <span>added checklist "{values.title}" to <CardLink /></span>;
     case 'CHECKLIST-COMPLETE':
-        return <span>completed "{values.title}" on <CardLink /></span>;
+      return <span>completed "{values.title}" on <CardLink /></span>;
     case 'ADD-LOCATION':
-        const { lat, lng } = values.location;
-        return  <div>
-                <div>added location {values.title} to <CardLink /></div>
-                <img src={`https://maps.googleapis.com/maps/api/staticmap?key=${key}&libraries=places&zoom=13&size=225x66&markers=icon%3Ahttps://trello.com/images/location-marker.png%7C${lat},${lng}`}
-                alt='card-location'/>
-                </div>;
-      case 'ADD-ATTACHMENT':
-          const isValidImg = utilService.isValidImg(values.attachment.url);
-          return <div>
-              <div>attached
-                  {isValidImg && <a className="link" target="_blank" download href={values.attachment.url}> {values.attachment.name || _.truncate(values.attachment.url)} </a>}
-                  {!isValidImg && <span> {values.attachment.name || _.truncate(values.attachment.url)} </span>}
-                  to <CardLink /></div>
-              {isValidImg && <img src={values.attachment.url} alt='attachment' style={{maxHeight:'100px'}} />}
-              </div>
+      const { lat, lng } = values.location;
+      return <div>
+        <div>added location {values.title} to <CardLink /></div>
+        <img src={`https://maps.googleapis.com/maps/api/staticmap?key=${ key }&libraries=places&zoom=13&size=225x66&markers=icon%3Ahttps://trello.com/images/location-marker.png%7C${ lat },${ lng }`}
+          alt='card-location' />
+      </div>;
+    case 'ADD-ATTACHMENT':
+      const isValidImg = utilService.isValidImg(values.attachment.url);
+      const AttachmentName = values.attachment.name || _.truncate(values.attachment.url);
+      return <div>
+        <div>attached
+          {isValidImg && <a className="link" target="_blank" rel="noreferrer" download href={values.attachment.url}> {AttachmentName} </a>}
+          {!isValidImg && <span> {AttachmentName} </span>}
+          to <CardLink /></div>
+        {isValidImg && <img src={values.attachment.url} alt='attachment' style={{ maxHeight: '100px' }} />}
+      </div>;
     default:
-          return <span>{card.title}, {type}, {JSON.stringify(values)}</span>; // For development. In production comment this.
+      return <span>{card.title}, {type}, {JSON.stringify(values)}</span>; // For development. In production comment this.
   }
 }
 const mapStateToProps = state => {

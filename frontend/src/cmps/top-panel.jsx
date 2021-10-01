@@ -12,9 +12,9 @@ import { updateBoard } from '../store/actions/board.actions';
 import { CardPopover } from './card/card-popover';
 
 const _TopPanel = props => {
-  const { title, members, onUpdateTitle, user, board, onUpdateUser, setCardPopover, cardPopover } = props;
+  const { title, members, onUpdateTitle, user, board, onUpdateUser, setCardPopover, cardPopover } =
+    props;
   const isStar = user.starredBoardsIds.includes(board._id);
-  let isDash=false;
 
   return (
     <section className="top-panel full flex space-between">
@@ -44,14 +44,15 @@ const _TopPanel = props => {
             <Avatar key={member._id} alt={member.fullname} src={member.imgUrl} />
           ))}
         </div>
-        <button 
-        name='invite-main'
-          onClick={(ev)=>{
+        <button
+          name="invite-main"
+          onClick={ev => {
             onOpenPopover(ev, setCardPopover);
-          }}
-        >Invite</button>
+          }}>
+          Invite
+        </button>
       </div>
-      {cardPopover.name==='invite-main' && <CardPopover />}
+      {cardPopover.name === 'invite-main' && <CardPopover />}
       <div>
         <button className="btn-menu" onClick={props.toggleSideMenu}>
           <MoreHorizIcon />
@@ -64,12 +65,10 @@ const _TopPanel = props => {
 
 function onStar(user, boardId, onUpdateUser, isStar) {
   let newUser = { ...user };
-  if (isStar)
-    newUser.starredBoardsIds = newUser.starredBoardsIds.filter(id => id !== boardId);
-  else
-    newUser.starredBoardsIds.push(boardId);
-  
-    onUpdateUser(newUser);
+  if (isStar) newUser.starredBoardsIds = newUser.starredBoardsIds.filter(id => id !== boardId);
+  else newUser.starredBoardsIds.push(boardId);
+
+  onUpdateUser(newUser);
   // this.setState({starredBoards: this.props.boards.filter((board) => board._id!==boardId &&
   //     this.props.user.starredBoardsIds.includes(board._id))})
 }
@@ -77,16 +76,15 @@ function onStar(user, boardId, onUpdateUser, isStar) {
 function onOpenPopover(ev, setCardPopover) {
   // const { name } = ev.target;
   setCardPopover('invite-main', ev.target, null);
-};
+}
 
 // function updateField(data){
-  // const { board } = this.props;
-  // const { card } = this.state;
-  // const updatedCard = { ...card, ...data };
-  // const updatedBoard = boardService.updateCard(board, updatedCard);
-  // this.props.updateBoard(updatedBoard);
+// const { board } = this.props;
+// const { card } = this.state;
+// const updatedCard = { ...card, ...data };
+// const updatedBoard = boardService.updateCard(board, updatedCard);
+// this.props.updateBoard(updatedBoard);
 // };
-
 
 const mapDispatchToProps = {
   updateBoard,
@@ -95,9 +93,11 @@ const mapDispatchToProps = {
   toggleDashboard,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   board: state.boardModule.board,
   cardPopover: state.systemModule.cardPopover,
 });
 
-export const TopPanel = withRouter(connect(mapStateToProps, mapDispatchToProps)(withRouter(_TopPanel)));
+export const TopPanel = withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(withRouter(_TopPanel))
+);

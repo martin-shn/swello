@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { ReactComponent as DescriptionIcon } from '../../assets/svg/card/description.svg';
 import { ReactComponent as CloseIcon } from '../../assets/svg/close.svg';
-import { boardService } from '../../services/board.service';
 
 export class CardDescription extends Component {
   state = { isEditing: false, description: '' };

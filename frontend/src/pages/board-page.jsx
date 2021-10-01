@@ -15,7 +15,6 @@ import { LoaderPage } from '../cmps/loader/loader-page';
 import { SideMenu } from '../cmps/side-menu/side-menu';
 import { Dashboard } from '../cmps/dashboard/dashboard';
 
-
 export class _BoardPage extends Component {
   state = {
     activeList: {
@@ -128,7 +127,7 @@ export class _BoardPage extends Component {
       isAddingList,
       // isCardPageOpen
     } = this.state;
-    const { popoverListId, board } = this.props;
+    const { popoverListId } = this.props;
     const { title, members, lists, style } = this.props.board;
 
     return (
@@ -166,7 +165,7 @@ export class _BoardPage extends Component {
           onMoveList={this.onMoveList}
         />
         <SideMenu />
-        <Dashboard/>
+        <Dashboard />
       </main>
     );
   }
