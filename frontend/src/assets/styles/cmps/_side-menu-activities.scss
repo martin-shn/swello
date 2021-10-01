@@ -1,0 +1,53 @@
+.side-menu-activity-header {
+  &:hover {
+    background-color: #091e4214;
+    cursor: pointer;
+  }
+  border-radius: 3px;
+  display: flex;
+  min-height: 32px;
+
+  .icon-activities {
+    left: 12px;
+    position: relative;
+    top: 6px;
+    &::before {
+      font-family: FA-solid;
+      content: '\f03a';
+    }
+  }
+
+  .title {
+    font-weight: 700;
+    padding: 6px 6px 6px 40px;
+    position: absolute;
+  }
+}
+
+.side-menu-activities {
+  .activity {
+    margin-left: 40px;
+    min-height: 32px;
+    padding: 8px 0;
+    position: relative;
+    .avatar {
+      // creator avatar
+      left: -40px;
+      position: absolute;
+      top: 8px;
+    }
+    .text {
+      // activity desc
+      word-wrap: break-word;
+      display: block;
+      .created-by {
+        cursor: pointer;
+        font-weight: 700;
+        margin-right: 5px;
+      }
+    }
+    .created-at {
+      color: $clr-text-secondary;
+    }
+  }
+}

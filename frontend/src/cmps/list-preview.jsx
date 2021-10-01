@@ -19,16 +19,20 @@ export class _ListPreview extends Component {
     popoverPage: 'main',
     isDragging: true,
     listName: this.props.list.title,
-    class: ''
+    class: '',
   };
 
   componentDidMount() {
     setTimeout(() => {
       if (this.elInnerRef?.current) {
-        this.setState({ class: this.elInnerRef.current.scrollHeight > this.elInnerRef.current.clientHeight ? ' visible-scroll' : '' })
+        this.setState({
+          class:
+            this.elInnerRef.current.scrollHeight > this.elInnerRef.current.clientHeight
+              ? ' visible-scroll'
+              : '',
+        });
       }
-    }, 10)
-
+    }, 10);
   }
 
   elInnerRef = React.createRef();
@@ -61,13 +65,16 @@ export class _ListPreview extends Component {
   };
 
   handleChange = ({ target }) => {
-    this.setState({ listName: target.value })
-  }
+    this.setState({ listName: target.value });
+  };
 
-  onUpdateTitle = (ev) => {
-    const updatedBoard = boardService.updateList(this.props.board, { ...this.props.list, title: ev.target.value })
-    this.props.updateBoard(updatedBoard)
-  }
+  onUpdateTitle = ev => {
+    const updatedBoard = boardService.updateList(this.props.board, {
+      ...this.props.list,
+      title: ev.target.value,
+    });
+    this.props.updateBoard(updatedBoard);
+  };
 
   render() {
     const {
@@ -86,7 +93,6 @@ export class _ListPreview extends Component {
     } = this.props;
     const { popoverPage } = this.state;
 
-
     return (
       <Draggable draggableId={list.id} index={idx}>
         {provided => (
@@ -94,33 +100,38 @@ export class _ListPreview extends Component {
             className={`list-preview flex column${this.state.class}`}
             {...provided.draggableProps}
             ref={provided.innerRef}>
-            <div className={`list-header flex space-between${this.state.class}`} {...provided.dragHandleProps}>
-              {!this.state.isDragging && <input
-                type="text"
-                autoCorrect="off"
-                autoComplete="off"
-                value={this.state.listName}
-                onChange={this.handleChange}
-                autoFocus
-                onKeyUp={(ev) => {
-                  if (ev.key === 'Enter') {
-                    ev.target.blur()
-                  }
-                }}
-                onBlur={(ev) => {
-                  this.setState({ isDragging: true })
-                  this.onUpdateTitle(ev)
-                }}
-                style={{ width: '100%' }}
-              />}
-              {this.state.isDragging && <h2
-                className="list-title content-editable"
-                onClick={() => {
-                  this.setState({ isDragging: false })
-                }}
-              >
-                {list.title}
-              </h2>}
+            <div
+              className={`list-header flex space-between${this.state.class}`}
+              {...provided.dragHandleProps}>
+              {!this.state.isDragging && (
+                <input
+                  type="text"
+                  autoCorrect="off"
+                  autoComplete="off"
+                  value={this.state.listName}
+                  onChange={this.handleChange}
+                  autoFocus
+                  onKeyUp={ev => {
+                    if (ev.key === 'Enter') {
+                      ev.target.blur();
+                    }
+                  }}
+                  onBlur={ev => {
+                    this.setState({ isDragging: true });
+                    this.onUpdateTitle(ev);
+                  }}
+                  style={{ width: '100%' }}
+                />
+              )}
+              {this.state.isDragging && (
+                <h2
+                  className="list-title content-editable"
+                  onClick={() => {
+                    this.setState({ isDragging: false });
+                  }}>
+                  {list.title}
+                </h2>
+              )}
               <button
                 className="btn-more"
                 onClick={() => onTogglePopover(isPopoverOpen ? null : list.id)}>
@@ -154,11 +165,13 @@ export class _ListPreview extends Component {
                 />
               )}
             </Popover>
-            <div ref={this.elInnerRef} className={`cards-container flex column visible-scroll${this.state.class}`} style={{
-              gap: isTopAdd ? '10px' : '0',
-              // marginRight: this.elRef.current.scrollHeight > this.elRef.current.clientHeight?'-10px':'0px'
-            }}>
-
+            <div
+              ref={this.elInnerRef}
+              className={`cards-container flex column visible-scroll${this.state.class}`}
+              style={{
+                gap: isTopAdd ? '10px' : '0',
+                // marginRight: this.elRef.current.scrollHeight > this.elRef.current.clientHeight?'-10px':'0px'
+              }}>
               {list.cards && <CardList listId={list.id} cards={list.cards} />}
 
               <div className="add-card" style={{ order: isTopAdd ? '-1' : '0' }}>
@@ -191,8 +204,7 @@ export class _ListPreview extends Component {
               </div>
             </div>
           </div>
-        )
-        }
+        )}
       </Draggable>
     );
   }

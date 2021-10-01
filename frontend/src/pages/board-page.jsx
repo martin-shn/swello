@@ -13,6 +13,8 @@ import { CardPage } from './card-page';
 import { Route } from 'react-router';
 import { LoaderPage } from '../cmps/loader/loader-page';
 import { SideMenu } from '../cmps/side-menu/side-menu';
+import { Dashboard } from '../cmps/dashboard/dashboard';
+
 
 export class _BoardPage extends Component {
   state = {
@@ -126,7 +128,7 @@ export class _BoardPage extends Component {
       isAddingList,
       // isCardPageOpen
     } = this.state;
-    const { popoverListId } = this.props;
+    const { popoverListId, board } = this.props;
     const { title, members, lists, style } = this.props.board;
 
     return (
@@ -163,7 +165,8 @@ export class _BoardPage extends Component {
           onCopyList={this.onCopyList}
           onMoveList={this.onMoveList}
         />
-        <SideMenu/>
+        <SideMenu />
+        <Dashboard/>
       </main>
     );
   }

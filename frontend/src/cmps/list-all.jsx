@@ -41,7 +41,7 @@ export const ListAll = props => {
         <Droppable droppableId="all-lists" direction="horizontal" type="list">
           {(provided, snapshot) => (
             <section
-              className="flex lists-container"
+              className={`flex lists-container${snapshot.isDraggingOver?' dragging-over':''}`}
               {...provided.droppableProps}
               ref={provided.innerRef}>
               {lists.map((list, idx) => (

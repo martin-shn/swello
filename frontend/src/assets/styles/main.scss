@@ -22,6 +22,8 @@
 @import 'cmps/list-add';
 @import 'cmps/app-header';
 @import 'cmps/panel/invite';
+@import 'cmps/side-menu';
+@import 'cmps/side-menu-activities';
 
 // Card Page
 @import 'cmps/card/card-header';
@@ -50,8 +52,8 @@
 @import 'cmps/popover';
 @import 'cmps/modal-window';
 @import 'cmps/loader/loader-page';
+@import 'cmps/dashboard';
 @import 'cmps/poppers';
-@import 'cmps/side-menu';
 
 // Pages
 @import 'cmps/card-page';

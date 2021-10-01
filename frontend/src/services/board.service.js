@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { storageService } from './async-storage.service';
 import { userService } from './user.service';
 import { socketService, SOCKET_EVENT_REVIEW_ADDED } from './socket.service';
@@ -19,6 +20,7 @@ export const boardService = {
   copyList,
   updateList,
   moveList,
+  createActivity,
 };
 
 window.bs = boardService;
@@ -97,6 +99,15 @@ function removeLabel(board, labelId) {
     });
   });
   return board;
+}
+
+function createActivity(board, card, text) {
+  const { activities = [] } = board;
+  const id = utilService.makeId();
+  const createdBy = userService.getLoggedinUser();
+  const createdAt = Date.now();
+  const activity = { id, createdBy, createdAt, text, card };
+  return { ...board, activities: [...activities, activity] };
 }
 
 // This IIFE functions for Dev purposes
