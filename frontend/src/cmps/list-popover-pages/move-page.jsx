@@ -1,5 +1,6 @@
 import React from 'react';
-import { ReactComponent as CloseIcon } from '../../assets/svg/close.svg';
+import ArrowBackIcon from '@mui/icons-material/ArrowBackIosNew';
+import CloseIcon from '@mui/icons-material/Close';
 export class MovePage extends React.Component {
     state = {
         idx: this.props.lists.findIndex(currList => currList.id === this.props.list.id)
@@ -13,7 +14,7 @@ export class MovePage extends React.Component {
         return (
             <>
                 <div className="popover-header flex align-center">
-                    <button onClick={() => onMovePage('main')}></button>
+                    <button onClick={() => onMovePage('main')}><ArrowBackIcon /></button>
                     <span>Move list</span>
                     <button onClick={() => {
                         onTogglePopover(null)

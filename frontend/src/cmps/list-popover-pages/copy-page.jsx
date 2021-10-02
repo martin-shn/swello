@@ -1,5 +1,6 @@
 import React from 'react';
-import { ReactComponent as CloseIcon } from '../../assets/svg/close.svg';
+import ArrowBackIcon from '@mui/icons-material/ArrowBackIosNew';
+import CloseIcon from '@mui/icons-material/Close';
 export class CopyPage extends React.Component {
     state = {
         title: this.props.list.title
@@ -12,7 +13,7 @@ export class CopyPage extends React.Component {
         return (
             <>
                 <div className="popover-header flex align-center">
-                    <button onClick={() => onMovePage('main')}></button>
+                    <button onClick={() => onMovePage('main')}><ArrowBackIcon /></button>
                     <span>Copy list</span>
                     <button onClick={() => {
                         onTogglePopover(null)

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { utilService } from '../util.service';
 
 
@@ -37,5 +38,18 @@ export function moveAllCardsToList(board, currListId, newListId) {
     const cardsList = board.lists[currListIdx].cards;
     board.lists[newListIdx].cards.push(...cardsList)
     board.lists[currListIdx].cards = [];
+    return board;
+}
+
+export function sortList(board, list, sortBy) {
+    const listCopy = _.cloneDeep(list)
+    if (sortBy === 'date-new') {
+        listCopy.cards.sort((card1, card2) => card2.createdAt - card1.createdAt)
+    } else if (sortBy === 'date-old') {
+        listCopy.cards.sort((card1, card2) => card1.createdAt - card2.createdAt)
+    } else {
+        listCopy.cards.sort((card1, card2) => card1.title.localeCompare(card2.title))
+    }
+    board.lists = board.lists.map(list => list.id === listCopy.id ? listCopy : list)
     return board;
 }

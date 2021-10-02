@@ -1,9 +1,10 @@
-import { ReactComponent as CloseIcon } from '../../assets/svg/close.svg';
+import ArrowBackIcon from '@mui/icons-material/ArrowBackIosNew';
+import CloseIcon from '@mui/icons-material/Close';
 export function MoveAllCards({ onMovePage, list, lists, onTogglePopover, onMoveAllCardsToList }) {
     return (
         <>
             <div className="popover-header flex align-center">
-                <button onClick={() => onMovePage('main')}></button>
+                <button onClick={() => onMovePage('main')}><ArrowBackIcon/></button>
                 <span>Move all cards in list</span>
                 <button onClick={() => {
                     onTogglePopover(null)

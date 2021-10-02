@@ -2,7 +2,7 @@ import { storageService } from './async-storage.service';
 import { userService } from './user.service';
 import { socketService, SOCKET_EVENT_REVIEW_ADDED } from './socket.service';
 import { utilService } from './util.service';
-import { addList, copyList, updateList, moveList, moveAllCardsToList } from './board-services/list.service';
+import { addList, copyList, updateList, moveList, moveAllCardsToList, sortList } from './board-services/list.service';
 import { updateCard, addCard, moveCard } from './board-services/card.service';
 export const boardService = {
   add,
@@ -21,6 +21,7 @@ export const boardService = {
   moveList,
   moveAllCardsToList,
   createActivity,
+  sortList,
 };
 
 window.bs = boardService;

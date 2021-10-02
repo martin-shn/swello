@@ -1,4 +1,4 @@
-import { ReactComponent as CloseIcon } from '../../assets/svg/close.svg';
+import CloseIcon from '@mui/icons-material/Close';
 export function MainPage({ onMovePage, list, onTogglePopover, onAddingTopCard }) {
     return (
         <>
@@ -14,7 +14,7 @@ export function MainPage({ onMovePage, list, onTogglePopover, onAddingTopCard })
                 </ul>
                 <hr />
                 <ul className="popover-list clean-list">
-                    <li><button className="sort-list">Sort by…</button></li>
+                    <li><button className="sort-list" onClick={() => onMovePage('sort')}>Sort by…</button></li>
                 </ul>
                 <hr />
                 <ul className="popover-list clean-list">

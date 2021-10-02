@@ -37,6 +37,7 @@ export function addCard(board, list, cardTitle, isTopAdd) {
   const card = {
     id: utilService.makeId(),
     title: cardTitle,
+    createdAt: Date.now()
   };
   const updatedBoard = _.cloneDeep(board);
   const listIdx = updatedBoard.lists.findIndex(currList => currList.id === list.id);

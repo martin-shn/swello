@@ -66,24 +66,26 @@ export class _BoardPage extends Component {
   };
 
   // DATA ACTIONS
-  board = this.props.board;
   onAddList = ev => {
     ev.preventDefault();
     const listTitle = ev.target.title.value;
     ev.target.reset();
-    const updatedBoard = boardService.addList(this.board, listTitle);
+    const { board } = this.props;
+    const updatedBoard = boardService.addList(board, listTitle);
     this.props.updateBoard(updatedBoard);
     this.setState({ isAddingList: false });
   };
 
   onCopyList = (list, title) => {
-    const updatedBoard = boardService.copyList(this.board, list, title);
+    const { board } = this.props;
+    const updatedBoard = boardService.copyList(board, list, title);
     this.props.updateBoard(updatedBoard);
   };
 
   onMoveList = (currIdx, newIdx) => {
     if (currIdx === newIdx) return;
-    const updatedBoard = boardService.moveList(this.board, currIdx, newIdx);
+    const { board } = this.props;
+    const updatedBoard = boardService.moveList(board, currIdx, newIdx);
     this.props.updateBoard(updatedBoard);
   };
 
@@ -92,17 +94,26 @@ export class _BoardPage extends Component {
   };
 
   onUpdateTitle = title => {
+    const { board } = this.props;
     const updatedBoard = { ...this.board, title };
     this.props.updateBoard(updatedBoard);
   };
 
   onListUpdated = updatedList => {
-    const updatedBoard = boardService.updateList(this.board, updatedList);
+    const { board } = this.props;
+    const updatedBoard = boardService.updateList(board, updatedList);
     this.props.updateBoard(updatedBoard);
   };
 
   onMoveAllCardsToList = (currListId, newListId) => {
-    const updatedBoard = boardService.moveAllCardsToList(this.board, currListId, newListId)
+    const { board } = this.props;
+    const updatedBoard = boardService.moveAllCardsToList(board, currListId, newListId)
+    this.props.updateBoard(updatedBoard)
+  }
+
+  onSortList = (list, sortBy) => {
+    const { board } = this.props;
+    const updatedBoard = boardService.sortList(board, list, sortBy)
     this.props.updateBoard(updatedBoard)
   }
 
@@ -123,7 +134,6 @@ export class _BoardPage extends Component {
       this.props.history.push('/board');
       return <></>;
     }
-
     const {
       activeList,
       isAddingList,
@@ -167,6 +177,7 @@ export class _BoardPage extends Component {
           onCopyList={this.onCopyList}
           onMoveList={this.onMoveList}
           onMoveAllCardsToList={this.onMoveAllCardsToList}
+          onSortList={this.onSortList}
         />
         <SideMenu />
       </main>

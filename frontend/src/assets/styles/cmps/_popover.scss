@@ -21,26 +21,31 @@
     position: relative;
     button {
       color: #6b778c;
-      padding: 12px;
       position: absolute;
       z-index: 11;
       top: 0;
+      height: 40px;
 
       &:first-child {
         left: 0;
-        &::before {
-          font-family: FA-Solid;
-          font-size: 12px;
-          content: "\f053";
+        svg {
+          width: 14px;
+          height: 14px;
+          margin-left: 4px;
         }
       }
 
       &:last-child {
+        svg {
+          width: 18px;
+          height: 18px;
+          margin-right: 4px;
+        }
         right: 0;
       }
-
       &:hover {
         color: #172b4d;
+        background-color: transparent;
       }
     }
     span {
