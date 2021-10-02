@@ -14,7 +14,6 @@ import { AddAttachment } from './card-popover-pages/add-attachment';
 import { AddCheckItemMember } from './card-popover-pages/add-checkitem-member';
 import { RemoveItem } from './card-popover-pages/remove-item';
 import { EditAttachment } from './card-popover-pages/edit-attachment';
-import { Notification } from './card-popover-pages/notification';
 
 const PopoverCmp = ({ name, props, closeCardPopover }) => {
   switch (name) {
@@ -42,8 +41,6 @@ const PopoverCmp = ({ name, props, closeCardPopover }) => {
       return <AddAttachment closeCardPopover={closeCardPopover} {...props} />;
     case 'edit-attachment':
       return <EditAttachment closeCardPopover={closeCardPopover} {...props} />;
-    case 'notification':
-      return <Notification closeCardPopover={closeCardPopover} {...props} />;
     default:
       return <div></div>;
   }
