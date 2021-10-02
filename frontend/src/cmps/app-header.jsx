@@ -9,8 +9,6 @@ import { Avatar } from '@mui/material';
 import  Tooltip, { tooltipClasses }  from '@mui/material/Tooltip';
 import { ReactComponent as ArrowDownIcon } from '../assets/svg/arrow-down.svg';
 import { ReactComponent as NotificationsIcon } from '../assets/svg/notifications.svg';
-import { ReactComponent as SearchIcon } from '../assets/svg/search.svg';
-import { ReactComponent as CloseIcon } from '../assets/svg/close.svg';
 import { BoardAdd } from './board-list/board-add';
 
 import ClickAwayListener from '@mui/material/ClickAwayListener';
@@ -25,18 +23,13 @@ import MenuList from '@mui/material/MenuList';
 import { PopoverMenu } from './menu/popover-menu';
 
 import { ReactComponent as StarredImage } from '../assets/svg/starred-board.svg';
+import { HeaderSearch } from './header-search';
 
 class _AppHeader extends Component {
     state = {
-        isSearchActive: false,
         isModal: false,
-        // isStarredMenuOpen: false,
-        // isBoardsMenuOpen: false,
         starredBoards: [],
     };
-
-    // starredAnchorRef = React.createRef(null);
-    // boardsAnchorRef = React.createRef(null);
 
     async componentDidMount() {
         let { boards, user } = this.props;
@@ -81,16 +74,8 @@ class _AppHeader extends Component {
 
     // MY BOARDS MENU
     onBoards = (ev, id) => {
-        // this.setState({ isBoardsMenuOpen: !this.state.isBoardsMenuOpen });
         this.props.toggleMenu(true, id, ev.target.parentElement);
     };
-
-    // onCloseBoards = event => {
-    //   if (this.boardsAnchorRef.current && this.boardsAnchorRef.current.contains(event.target)) {
-    //     return;
-    //   }
-    //   this.setState({ isBoardsMenuOpen: false });
-    // };
 
     // remove starred board from app header popper
     onStar = async (ev, boardId) => {
@@ -124,7 +109,6 @@ class _AppHeader extends Component {
 
     render() {
         const { isUserBoardsPage } = this.props;
-        const { isSearchActive } = this.state;
         const { isStarredMenuOpen, isBoardsMenuOpen, starredBoards } = this.state;
         const { boards, board, user } = this.props;
 
@@ -348,24 +332,7 @@ class _AppHeader extends Component {
                     </button>
                 </div>
                 <div>
-                    <div className={'search flex align-center' + (isSearchActive ? ' active' : '')}>
-                        <span>
-                            <SearchIcon />
-                        </span>
-                        <input
-                            autoCorrect='off'
-                            autoComplete='off'
-                            type='text'
-                            placeholder='Search'
-                            onFocus={() => this.setState({ isSearchActive: true })}
-                            onBlur={() => this.setState({ isSearchActive: false })}
-                        />
-                        {isSearchActive && (
-                            <span style={{ height: '16px' }}>
-                                <CloseIcon />
-                            </span>
-                        )}
-                    </div>
+                    <HeaderSearch/>
                     <button
                         className='btn-notifications'
                         onClick={(ev) => {
