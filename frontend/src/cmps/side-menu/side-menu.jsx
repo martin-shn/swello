@@ -45,7 +45,7 @@ class _SideMenu extends React.Component {
               />
             )}
             {currPage === 'search' && (
-              <SideMenuSearch setPage={this.setPage} toggleSideMenu={toggleSideMenu} />
+              <SideMenuSearch setPage={this.setPage} toggleSideMenu={toggleSideMenu} board={board}/>
             )}
           </div>
         </div>

@@ -29,7 +29,10 @@ export function updateCard(board, updatedCard, activity) {
       if (card.id === updatedCard.id) list.cards[idx] = updatedCard;
     });
   });
-  if (activity) cloneBoard.activities.unshift(activity);
+  if (activity) {
+    if (!cloneBoard.activities) cloneBoard.activities=[]
+    cloneBoard.activities.unshift(activity)
+  }
   return cloneBoard;
 }
 
