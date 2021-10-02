@@ -31,7 +31,7 @@ class _PopoverMenu extends React.Component{
             open={isOpen}
             anchorEl={anchor}
             role={undefined}
-            placement="bottom-start"
+            placement={this.props.placement || "bottom-start"}
             transition
             disablePortal>
             {({ TransitionProps, placement }) => (
