@@ -68,27 +68,24 @@ export class _BoardPage extends Component {
   };
 
   // DATA ACTIONS
-
+  board = this.props.board;
   onAddList = ev => {
     ev.preventDefault();
-    const { board } = this.props;
     const listTitle = ev.target.title.value;
     ev.target.reset();
-    const updatedBoard = boardService.addList(board, listTitle);
+    const updatedBoard = boardService.addList(this.board, listTitle);
     this.props.updateBoard(updatedBoard);
     this.setState({ isAddingList: false });
   };
 
   onCopyList = (list, title) => {
-    const { board } = this.props;
-    const updatedBoard = boardService.copyList(board, list, title);
+    const updatedBoard = boardService.copyList(this.board, list, title);
     this.props.updateBoard(updatedBoard);
   };
 
   onMoveList = (currIdx, newIdx) => {
     if (currIdx === newIdx) return;
-    const { board } = this.props;
-    const updatedBoard = boardService.moveList(board, currIdx, newIdx);
+    const updatedBoard = boardService.moveList(this.board, currIdx, newIdx);
     this.props.updateBoard(updatedBoard);
   };
 
@@ -97,16 +94,19 @@ export class _BoardPage extends Component {
   };
 
   onUpdateTitle = title => {
-    const { board } = this.props;
-    const updatedBoard = { ...board, title };
+    const updatedBoard = { ...this.board, title };
     this.props.updateBoard(updatedBoard);
   };
 
   onListUpdated = updatedList => {
-    const { board } = this.props;
-    const updatedBoard = boardService.updateList(board, updatedList);
+    const updatedBoard = boardService.updateList(this.board, updatedList);
     this.props.updateBoard(updatedBoard);
   };
+
+  onMoveAllCardsToList = (currListId, newListId) => {
+    const updatedBoard = boardService.moveAllCardsToList(this.board, currListId, newListId)
+    this.props.updateBoard(updatedBoard)
+  }
 
   onUpdateUser = async user => {
     await this.props.onUpdateUser(user);
@@ -164,6 +164,7 @@ export class _BoardPage extends Component {
           onListUpdated={this.onListUpdated}
           onCopyList={this.onCopyList}
           onMoveList={this.onMoveList}
+          onMoveAllCardsToList={this.onMoveAllCardsToList}
         />
         <SideMenu />
         <Dashboard />

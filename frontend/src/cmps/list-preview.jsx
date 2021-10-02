@@ -9,6 +9,7 @@ import { Popover } from './popover';
 import { MainPage } from './list-popover-pages/main-page';
 import { CopyPage } from './list-popover-pages/copy-page';
 import { MovePage } from './list-popover-pages/move-page';
+import { MoveAllCards } from './list-popover-pages/move-all-cards-page';
 import { ReactComponent as CloseIcon } from '../assets/svg/close.svg';
 // import { utilService } from '../services/util.service';
 import { CardList } from './card-list';
@@ -90,6 +91,7 @@ export class _ListPreview extends React.Component {
       isTopAdd,
       onCopyList,
       onMoveList,
+      onMoveAllCardsToList
       // board
     } = this.props;
     const { popoverPage } = this.state;
@@ -162,6 +164,15 @@ export class _ListPreview extends React.Component {
                   lists={lists}
                   onTogglePopover={onTogglePopover}
                   onMoveList={onMoveList}
+                />
+              )}
+              {popoverPage === 'move-all' && (
+                <MoveAllCards
+                  onMovePage={this.onMovePage}
+                  list={list}
+                  lists={lists}
+                  onTogglePopover={onTogglePopover}
+                  onMoveAllCardsToList={onMoveAllCardsToList}
                 />
               )}
             </Popover>

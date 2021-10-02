@@ -21,6 +21,7 @@ export const ListAll = props => {
     onListUpdated,
     onCopyList,
     onMoveList,
+    onMoveAllCardsToList
   } = props;
 
   // DRAG DROP :
@@ -59,6 +60,7 @@ export const ListAll = props => {
                   onListUpdated={onListUpdated}
                   onCopyList={onCopyList}
                   onMoveList={onMoveList}
+                  onMoveAllCardsToList={onMoveAllCardsToList}
                 />
               ))}
               {provided.placeholder}

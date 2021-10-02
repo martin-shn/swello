@@ -18,7 +18,7 @@ export function MainPage({ onMovePage, list, onTogglePopover, onAddingTopCard })
                 </ul>
                 <hr />
                 <ul className="popover-list clean-list">
-                    <li><button className="move-cards">Move all cards in this list…</button></li>
+                    <li><button className="move-cards" onClick={() => onMovePage('move-all')}>Move all cards in this list…</button></li>
                 </ul>
                 <hr />
                 <ul className="popover-list clean-list">

@@ -31,7 +31,7 @@
         &::before {
           font-family: FA-Solid;
           font-size: 12px;
-          content: '\f053';
+          content: "\f053";
         }
       }
 
@@ -139,6 +139,14 @@
           font-family: inherit;
           font-size: inherit;
         }
+      }
+    }
+    .disabled {
+      background: none;
+      color: #a5adba;
+      cursor: default;
+      &:hover {
+        background-color: unset;
       }
     }
   }

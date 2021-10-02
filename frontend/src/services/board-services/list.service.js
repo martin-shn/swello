@@ -30,3 +30,12 @@ export function updateList(board, updatedList) {
     });
     return board;
 }
+
+export function moveAllCardsToList(board, currListId, newListId) {
+    const currListIdx = board.lists.findIndex(list => list.id === currListId)
+    const newListIdx = board.lists.findIndex(list => list.id === newListId)
+    const cardsList = board.lists[currListIdx].cards;
+    board.lists[newListIdx].cards.push(...cardsList)
+    board.lists[currListIdx].cards = [];
+    return board;
+}
