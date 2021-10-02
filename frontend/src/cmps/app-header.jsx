@@ -8,8 +8,6 @@ import { Link } from 'react-router-dom';
 import { Avatar } from '@mui/material';
 import { ReactComponent as ArrowDownIcon } from '../assets/svg/arrow-down.svg';
 import { ReactComponent as NotificationsIcon } from '../assets/svg/notifications.svg';
-import { ReactComponent as SearchIcon } from '../assets/svg/search.svg';
-import { ReactComponent as CloseIcon } from '../assets/svg/close.svg';
 import { BoardAdd } from './board-list/board-add';
 
 import ClickAwayListener from '@mui/material/ClickAwayListener';
@@ -20,10 +18,10 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 
 import { ReactComponent as StarredImage } from '../assets/svg/starred-board.svg';
+import { HeaderSearch } from './header-search';
 
 class _AppHeader extends Component {
   state = {
-    isSearchActive: false,
     isModal: false,
     isStarredMenuOpen: false,
     isBoardsMenuOpen: false,
@@ -103,7 +101,6 @@ class _AppHeader extends Component {
 
   render() {
     const { isUserBoardsPage } = this.props;
-    const { isSearchActive } = this.state;
     const { isStarredMenuOpen, isBoardsMenuOpen, starredBoards } = this.state;
     const { boards, board, user } = this.props;
 
@@ -111,8 +108,7 @@ class _AppHeader extends Component {
       <header
         onClick={this.closePopover}
         className={
-          'app-header flex align-center full with-main-layout' +
-          (isUserBoardsPage ? ' user-boards-header' : '')
+          'app-header flex align-center full with-main-layout' + (isUserBoardsPage ? ' user-boards-header' : '')
         }>
         <Link to="/board">
           <img className="logo" alt="swello" />
@@ -173,9 +169,7 @@ class _AppHeader extends Component {
                         <ul>
                           {boards
                             .filter(
-                              board =>
-                                board.createdBy._id === user._id &&
-                                !user.starredBoardsIds.includes(board._id)
+                              board => board.createdBy._id === user._id && !user.starredBoardsIds.includes(board._id)
                             )
                             .map(board => (
                               <MenuItem
@@ -316,24 +310,8 @@ class _AppHeader extends Component {
           </button>
         </div>
         <div>
-          <div className={'search flex align-center' + (isSearchActive ? ' active' : '')}>
-            <span>
-              <SearchIcon />
-            </span>
-            <input
-              autoCorrect="off"
-              autoComplete="off"
-              type="text"
-              placeholder="Search"
-              onFocus={() => this.setState({ isSearchActive: true })}
-              onBlur={() => this.setState({ isSearchActive: false })}
-            />
-            {isSearchActive && (
-              <span style={{ height: '16px' }}>
-                <CloseIcon />
-              </span>
-            )}
-          </div>
+          <HeaderSearch />
+
           <button className="btn-notifications">
             <NotificationsIcon />
           </button>
