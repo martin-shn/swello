@@ -36,6 +36,7 @@ export function updateCard(board, updatedCard, activity) {
 export function addCard(board, list, cardTitle, isTopAdd) {
   const card = {
     id: utilService.makeId(),
+    createdAt: Date.now(),
     title: cardTitle,
   };
   const updatedBoard = _.cloneDeep(board);

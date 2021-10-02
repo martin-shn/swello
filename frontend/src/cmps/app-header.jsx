@@ -332,7 +332,7 @@ class _AppHeader extends Component {
                     </button>
                 </div>
                 <div>
-                    <HeaderSearch toggleMenu={this.props.toggleMenu}/>
+                    <HeaderSearch board={this.props.board} menu={this.props.menu} toggleMenu={this.props.toggleMenu}/>
                     <button
                         className='btn-notifications'
                         onClick={(ev) => {
@@ -409,6 +409,7 @@ const mapStateToProps = (state) => {
         boards: state.boardModule.boards,
         board: state.boardModule.board,
         user: state.userModule.user,
+        menu: state.systemModule.menu
     };
 };
 

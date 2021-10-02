@@ -18,6 +18,11 @@
     height: 100%;
     padding-left: 4px;
   }
+
+  .icon-close {
+    padding-right: 4px;
+  }
+
   input {
     height: 100%;
     width: 100%;
@@ -33,9 +38,37 @@
 
 // SEARCH-POPOVER
 .header-search-popper {
-  width: 600px;
+  width: 450px;
   .MuiPaper-root {
     padding: 12px;
     margin-top: 6px;
+  }
+  .card-preview {
+    // width: 250px;
+    max-height: 150px;
+  }
+}
+
+.recent-card-list {
+  gap: 20px;
+}
+
+.search-card {
+  gap: 20px;
+
+  .card-title {
+    font-weight: bold;
+    word-wrap: break-word;
+    padding: 5px 40px 5px 0;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .list-title {
+    color: $clr-text-secondary;
+    span {
+      font-weight: bold;
+    }
   }
 }
