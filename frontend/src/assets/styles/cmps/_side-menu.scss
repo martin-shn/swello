@@ -41,7 +41,6 @@
       & .side-menu-header {
         opacity: 1;
         overflow: visible;
-        box-sizing: border-box;
         flex: 0 0 auto;
         height: 48px;
         padding: 0 6px 0 12px;
@@ -112,7 +111,6 @@
           background-color: rgba($color: #000000, $alpha: 0.15);
         }
 
-        box-sizing: border-box;
         display: flex;
         flex-direction: column;
         flex: 1 1 auto;
@@ -127,9 +125,10 @@
         transition-property: transform, opacity;
         transition-timing-function: ease-in;
         & > ul {
-          margin: 4px 0;
+          margin: 0;
           list-style: none;
-          padding: 0;
+          padding: 0 0 21px 0;
+          border-bottom: 1px solid #091e4221;
           & > li {
             // menu items group
             &:hover {
@@ -191,9 +190,9 @@
             }
           }
         }
-        & > a {
+        .view-all-activity {
           border-radius: 3px;
-          clear: both;
+          text-align: left;
           color: #5e6c84;
           display: block;
           margin-top: 16px;
@@ -215,4 +214,7 @@
   .no-scroll {
     padding-right: 12px !important;
   }
+}
+.side-menu-index {
+  height: 100%;
 }

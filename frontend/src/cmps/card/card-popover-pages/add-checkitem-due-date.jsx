@@ -13,7 +13,6 @@ export class AddCheckitemDueDate extends Component {
   }
 
   handleChange = date => {
-    console.log(date);
     let dueDate = null;
     if (date) {
       date.setHours(0, 0, 0);

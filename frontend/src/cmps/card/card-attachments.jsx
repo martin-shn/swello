@@ -2,16 +2,11 @@ import AttachmentIcon from '@mui/icons-material/AttachFileOutlined';
 import CoverIcon from '@mui/icons-material/VideoLabel';
 import { formatDistance } from 'date-fns';
 import React from 'react';
+import { getCoverImgHeight } from '../../services/cloudinary-service';
 import { constService } from '../../services/const.service';
 import { utilService } from '../../services/util.service';
 
-export const CardAttachments = ({
-  attachments,
-  setCardPopover,
-  card,
-  updateField,
-  closeCardPopover,
-}) => {
+export const CardAttachments = ({ attachments, setCardPopover, card, updateField, closeCardPopover }) => {
   const onRemoveAttachment = attachment => {
     const updatedAttachments = attachments.filter(att => att.id !== attachment.id);
     updateField({ attachments: updatedAttachments });
@@ -20,11 +15,30 @@ export const CardAttachments = ({
 
   const onUpdateAttachment = (attachment, update) => {
     const updatedAttachment = { ...attachment, ...update };
-    const updatedAttachments = attachments.map(att =>
-      att.id === attachment.id ? updatedAttachment : att
-    );
+    const updatedAttachments = attachments.map(att => (att.id === attachment.id ? updatedAttachment : att));
     updateField({ attachments: updatedAttachments });
     closeCardPopover();
+  };
+
+  const onMakeCover = async attachment => {
+    const { url } = attachment;
+    const previewHeight = await getCoverImgHeight(url);
+    const img = {
+      id: utilService.makeId(),
+      url,
+      theme: 'light',
+      previewHeight,
+    };
+    let { cover } = card;
+    if (!cover) cover = { size: 'top-cover', color: '', imgs: [img], bgImgId: img.id };
+    else cover = { ...cover, imgs: [...cover.imgs, img], bgImgId: img.id };
+    updateField({ cover }, 'ADD-COVER', { cover: img });
+  };
+
+  const onRemoveCover = () => {
+    if (!card.cover) return;
+    const cover = { ...card.cover, bgImgId: '' };
+    updateField({ cover }, 'REMOVE-COVER');
   };
 
   if (!attachments) return <></>;
@@ -39,6 +53,9 @@ export const CardAttachments = ({
         setCardPopover={setCardPopover}
         onRemoveAttachment={onRemoveAttachment}
         onUpdateAttachment={onUpdateAttachment}
+        onMakeCover={onMakeCover}
+        onRemoveCover={onRemoveCover}
+        cover={card.cover}
       />
       <div className="section-data">
         <button
@@ -60,6 +77,9 @@ function CardAttachmentList({
   setCardPopover,
   onRemoveAttachment,
   onUpdateAttachment,
+  onMakeCover,
+  onRemoveCover,
+  cover,
 }) {
   const getThumbnailText = attachment => {
     if (!attachment.type) {
@@ -87,16 +107,29 @@ function CardAttachmentList({
     });
   };
 
+  const onMakeCoverClick = (ev, attachment) => {
+    ev.stopPropagation();
+    onMakeCover(attachment);
+  };
+
+  const onRemoveCoverClick = (ev, attachment) => {
+    ev.stopPropagation();
+    onRemoveCover(attachment);
+  };
+
+  const isCardCover = attachment => {
+    if (!cover) return false;
+    const img = cover.imgs?.find(img => img.id === cover.bgImgId);
+    return img && img.url === attachment.url;
+  };
+
   if (!attachments) return <></>;
   return (
     <div className="section-data card-attachments flex column">
       {attachments.map(attachment => {
         const thumbnailText = getThumbnailText(attachment);
         return (
-          <div
-            key={attachment.id}
-            className="card-attachment"
-            onClick={() => window.open(attachment.url, '_blank')}>
+          <div key={attachment.id} className="card-attachment" onClick={() => window.open(attachment.url, '_blank')}>
             <div
               className="attachment-thumbnail flex align-center justify-center"
               style={!thumbnailText ? { backgroundImage: `url(${attachment.url})` } : {}}>
@@ -119,7 +152,20 @@ function CardAttachmentList({
                 </span>
               </div>
               <div className="attachment-actions flex align-center">
-                <CoverIcon /> <span className="link">Make cover</span>
+                {attachment.type === 'image' && (
+                  <>
+                    <CoverIcon />{' '}
+                    {isCardCover(attachment) ? (
+                      <span className="link" onClick={ev => onRemoveCoverClick(ev, attachment)}>
+                        Remove cover
+                      </span>
+                    ) : (
+                      <span className="link" onClick={ev => onMakeCoverClick(ev, attachment)}>
+                        Make cover
+                      </span>
+                    )}
+                  </>
+                )}
               </div>
             </section>
           </div>

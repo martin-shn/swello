@@ -13,8 +13,7 @@ import { CardPage } from './card-page';
 import { Route } from 'react-router';
 import { LoaderPage } from '../cmps/loader/loader-page';
 import { SideMenu } from '../cmps/side-menu/side-menu';
-import { Dashboard } from '../cmps/dashboard/dashboard';
-
+import { Dashboard } from './dashboard/dashboard';
 
 export class _BoardPage extends Component {
   state = {
@@ -36,8 +35,7 @@ export class _BoardPage extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { boardId } = this.props.match.params;
-    if (prevProps.match.params.boardId !== this.props.match.params.boardId)
-      this.props.loadBoard(boardId);
+    if (prevProps.match.params.boardId !== this.props.match.params.boardId) this.props.loadBoard(boardId);
   }
 
   componentWillUnmount() {
@@ -121,14 +119,17 @@ export class _BoardPage extends Component {
           <LoaderPage />;
         </>
       );
-    if (!this.props.board) this.props.history.push('/board');
+    if (!this.props.board || !Object.keys(this.props.board).length) {
+      this.props.history.push('/board');
+      return <></>;
+    }
 
     const {
       activeList,
       isAddingList,
       // isCardPageOpen
     } = this.state;
-    const { popoverListId, board } = this.props;
+    const { popoverListId } = this.props;
     const { title, members, lists, style } = this.props.board;
 
     return (
@@ -149,6 +150,7 @@ export class _BoardPage extends Component {
         />
         <PopoverScreen isOpen={popoverListId} onTogglePopover={this.onTogglePopover} />
         <Route path="/board/:boardId/card/:cardId" component={CardPage} />
+        <Route path="/board/:boardId/dashboard" component={Dashboard} />
         <ListAll
           board={this.props.board}
           updateBoard={this.props.updateBoard}
@@ -167,7 +169,6 @@ export class _BoardPage extends Component {
           onMoveAllCardsToList={this.onMoveAllCardsToList}
         />
         <SideMenu />
-        <Dashboard />
       </main>
     );
   }

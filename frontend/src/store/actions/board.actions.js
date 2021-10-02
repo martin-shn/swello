@@ -26,10 +26,10 @@ export function loadBoard(id) {
   };
 }
 
-export function clearBoard(){
+export function clearBoard() {
   return dispatch => {
-    dispatch({type: 'CLEAR_BOARD'})
-  }
+    dispatch({ type: 'CLEAR_BOARD' });
+  };
 }
 
 export function updateBoard(updatedBoard) {

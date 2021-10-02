@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { storageService } from './async-storage.service';
 import { userService } from './user.service';
 import { socketService, SOCKET_EVENT_REVIEW_ADDED } from './socket.service';

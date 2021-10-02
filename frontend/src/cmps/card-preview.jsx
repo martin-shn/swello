@@ -5,11 +5,14 @@ import { Draggable } from 'react-beautiful-dnd';
 import { CardPreviewLabels } from './card-preview-labels';
 import { CardPreviewData } from './card-preview-data';
 
-export class _CardPreview extends React.Component {
+export class _CardPreview extends Component {
   render() {
     const { card, idx } = this.props;
-    const coverImg = card.cover?.imgs?.find(img => img.id === card.cover.bgImgId)
-    const coverStyle = (coverImg && card.cover.size === 'full-cover') ? { backgroundImage: `url(${coverImg.url})`, height: `${coverImg.previewHeight}px` } : {}
+    const coverImg = card.cover?.imgs?.find(img => img.id === card.cover.bgImgId);
+    const coverStyle =
+      coverImg && card.cover.size === 'full-cover'
+        ? { backgroundImage: `url(${coverImg.url})`, height: `${coverImg.previewHeight}px` }
+        : {};
     // prettier-ignore
     return (
       <Draggable draggableId={card.id} index={idx}>

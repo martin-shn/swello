@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { DateTimePicker } from '@material-ui/pickers';
-import { boardService } from '../../../services/board.service';
 
 export class AddDueDate extends Component {
   state = { date: this.date };
@@ -15,7 +14,6 @@ export class AddDueDate extends Component {
 
   onSave = () => {
     const { date } = this.state;
-    const { card } = this.props;
     const dueDate = { ...this.props.dueDate, date: Date.parse(date) };
     this.props.updateField({ dueDate }, 'ADD-DUE-DATE', { date: dueDate.date });
     this.props.closeCardPopover();

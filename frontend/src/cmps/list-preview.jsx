@@ -15,7 +15,7 @@ import { ReactComponent as CloseIcon } from '../assets/svg/close.svg';
 import { CardList } from './card-list';
 import { Draggable } from 'react-beautiful-dnd';
 
-export class _ListPreview extends React.Component {
+export class _ListPreview extends Component {
   state = {
     popoverPage: 'main',
     isDragging: true,
@@ -35,7 +35,6 @@ export class _ListPreview extends React.Component {
       }
     }, 10);
   }
-
 
   elInnerRef = React.createRef();
 

@@ -21,6 +21,7 @@
 @import 'cmps/card-preview';
 @import 'cmps/list-add';
 @import 'cmps/app-header';
+@import 'cmps/header-search';
 @import 'cmps/panel/invite';
 @import 'cmps/side-menu';
 @import 'cmps/side-menu-activities';
@@ -47,13 +48,11 @@
 @import 'cmps/home-header';
 @import 'cmps/home-footer';
 @import 'cmps/popover';
-@import 'cmps/home-header';
-@import 'cmps/home-footer';
-@import 'cmps/popover';
 @import 'cmps/modal-window';
 @import 'cmps/loader/loader-page';
 @import 'cmps/dashboard';
 @import 'cmps/poppers';
+@import 'cmps/panel/notification';
 
 // Pages
 @import 'cmps/card-page';
