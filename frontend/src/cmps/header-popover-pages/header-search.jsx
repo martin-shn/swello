@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { ReactComponent as SearchIcon } from '../assets/svg/search.svg';
-import { ReactComponent as CloseIcon } from '../assets/svg/close.svg';
-import { PopoverMenu } from './menu/popover-menu';
-import { CardPreviewInfo } from './card-preview';
-import { cardService } from '../services/board-services/card.service';
+import { ReactComponent as SearchIcon } from '../../assets/svg/search.svg';
+import { ReactComponent as CloseIcon } from '../../assets/svg/close.svg';
+import { PopoverMenu } from './popover-menu';
+import { CardPreviewInfo } from '../card-preview';
+import { cardService } from '../../services/board-services/card.service';
 import { withRouter } from 'react-router';
 
 export class HeaderSearch extends Component {
@@ -12,7 +12,7 @@ export class HeaderSearch extends Component {
   toggleMenu = this.props.toggleMenu;
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.board !== this.props.board) this.updateStateCards();
+    if (prevProps.board !== this.props.board && this.props.menu.isOpen) this.updateStateCards();
   }
 
   updateStateCards = () => {
@@ -27,27 +27,27 @@ export class HeaderSearch extends Component {
 
   handleChange = ev => {
     const search = ev.target.value;
-    this.setState({ search });
-    if (!search) return this.toggleMenu(false);
     this.openMenu();
     const searchRegex = new RegExp(search, 'i');
     const cards = [];
     this.props.board.lists.forEach(list =>
       list.cards.forEach(card => searchRegex.test(card.title) && cards.push({ ...card, listTitle: list.title }))
     );
-    this.setState({ cards });
+    this.setState({ cards, search });
   };
 
   get recentCards() {
-    const cards = [];
-    this.props.board && this.props.board.lists.forEach(list => list.cards.forEach(card => cards.push(card)));
-    cards.sort((a, b) => b?.createdAt - a?.createdAt);
+    let cards = [];
+    this.props.board.lists &&
+      this.props.board.lists.forEach(list => list.cards && list.cards.forEach(card => cards.push(card)));
+    cards = cards.sort((a, b) => b?.createdAt - a?.createdAt);
     return cards;
   }
 
   render() {
     const { isActive, cards, search } = this.state;
     const { board } = this.props;
+    if (!board) return <></>;
     return (
       <div ref={this.searchContainerRef} className={'header-search flex align-center' + (isActive ? ' active' : '')}>
         <span>
@@ -60,7 +60,8 @@ export class HeaderSearch extends Component {
           placeholder="Search"
           onClick={this.openMenu}
           onFocus={() => this.setState({ isActive: true })}
-          onBlur={() => this.setState({ isActive: false })}
+          onBlur={ev => this.setState({ isActive: false })}
+          value={search}
           onChange={this.handleChange}
         />
         {isActive && (
@@ -88,11 +89,11 @@ export class HeaderSearch extends Component {
 }
 
 function _SearchCardList({ cards, history, boardId }) {
-  if (!cards.length) return <></>;
+  if (!cards.length) return <div>No cards match your search.</div>;
   return (
     <section className="search-card-list">
       {cards.map(card => (
-        <div className="search-card flex">
+        <div key={card.id} className="search-card flex">
           <CardPreviewInfo key={card.id} card={card} />
           <section>
             <div className="card-title" onClick={() => history.push(`/board/${boardId}/card/${card.id}`)}>
@@ -114,7 +115,7 @@ function RecentCardList({ recentCards }) {
   return (
     <section className="recent-card-list flex column">
       {recentCards.map(card => (
-        <div className="recent-card">
+        <div key={card.id} className="recent-card">
           <CardPreviewInfo key={card.id} card={card} />
         </div>
       ))}
