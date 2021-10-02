@@ -142,7 +142,7 @@ class _AppHeader extends Component {
                     </button>
                 </div>
                 <div>
-                    <HeaderSearch/>
+                    <HeaderSearch toggleMenu={this.props.toggleMenu}/>
                     <button
                         className='btn-notifications'
                         onClick={(ev) => {
