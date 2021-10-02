@@ -35,7 +35,7 @@ export class AddCover extends Component {
                 bgImgId: img.id
             }
         })
-            , this.updateField)
+            , ()=> this.props.updateField({ cover: this.state.cover },'ADD-COVER',{cover: img}))
     }
     onSetTheme = (theme) => {
         const { cover } = this.state;
@@ -55,7 +55,6 @@ export class AddCover extends Component {
         }
     }
     updateField = () => {
-        console.log(this.state.cover);
         this.props.updateField({ cover: this.state.cover })
     }
     render() {

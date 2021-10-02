@@ -1,4 +1,5 @@
 .side-menu-activity-header {
+  margin-top: 21px;
   &:hover {
     background-color: #091e4214;
     cursor: pointer;
@@ -48,6 +49,34 @@
     }
     .created-at {
       color: $clr-text-secondary;
+    }
+    .due-date {
+      font-size: 12px;
+      background-color: inherit;
+      border-radius: 3px;
+
+      &.due-soon {
+        background-color: $clr-due-date-due-soon;
+      }
+      &.overdue {
+        color: #fff;
+        background-color: $clr-due-date-overdue;
+      }
+      &.overdue-recent {
+        color: #fff;
+        background-color: $clr-due-date-overdue-recent;
+      }
+      &.complete {
+        color: #fff;
+        background-color: $clr-due-date-complete;
+      }
+    }
+    .label {
+      padding: 0 4px;
+      border-radius: 3px;
+      min-width: 40px;
+      min-height: 8px;
+      display: inline-block;
     }
   }
 }

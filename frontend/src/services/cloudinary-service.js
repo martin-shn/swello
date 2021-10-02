@@ -43,28 +43,25 @@ async function uploadImg(ev) {
   try {
     const res = await axios.post(UPLOAD_URL, formData);
     const { url } = res.data;
-    const previewHeight = await getCoverImgHeight(url)
+    const previewHeight = await getCoverImgHeight(url);
     const img = {
       id: utilService.makeId(),
       url,
       theme: 'light',
-      previewHeight
-    }
+      previewHeight,
+    };
     return img;
   } catch (err) {
     throw err;
   }
 }
 
-function getCoverImgHeight(url) {
+export function getCoverImgHeight(url) {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.onload = function () {
-      resolve(img.height / img.width * 252)
+      resolve((img.height / img.width) * 252);
     };
     img.src = url;
-
-  })
+  });
 }
-
-

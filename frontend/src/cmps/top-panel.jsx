@@ -12,8 +12,7 @@ import { updateBoard } from '../store/actions/board.actions';
 import { CardPopover } from './card/card-popover';
 
 const _TopPanel = props => {
-  const { title, members, onUpdateTitle, user, board, onUpdateUser, setCardPopover, cardPopover } =
-    props;
+  const { title, members, onUpdateTitle, user, board, onUpdateUser, setCardPopover, cardPopover } = props;
   const isStar = user.starredBoardsIds.includes(board._id);
 
   return (
@@ -46,6 +45,7 @@ const _TopPanel = props => {
         </div>
         <button
           name="invite-main"
+          className="btn-invite"
           onClick={ev => {
             onOpenPopover(ev, setCardPopover);
           }}>
@@ -98,6 +98,4 @@ const mapStateToProps = state => ({
   cardPopover: state.systemModule.cardPopover,
 });
 
-export const TopPanel = withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(withRouter(_TopPanel))
-);
+export const TopPanel = withRouter(connect(mapStateToProps, mapDispatchToProps)(withRouter(_TopPanel)));

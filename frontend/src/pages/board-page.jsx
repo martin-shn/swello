@@ -35,8 +35,7 @@ export class _BoardPage extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { boardId } = this.props.match.params;
-    if (prevProps.match.params.boardId !== this.props.match.params.boardId)
-      this.props.loadBoard(boardId);
+    if (prevProps.match.params.boardId !== this.props.match.params.boardId) this.props.loadBoard(boardId);
   }
 
   componentWillUnmount() {
@@ -120,7 +119,10 @@ export class _BoardPage extends Component {
           <LoaderPage />;
         </>
       );
-    if (!this.props.board) this.props.history.push('/board');
+    if (!this.props.board || !Object.keys(this.props.board).length) {
+      this.props.history.push('/board');
+      return <></>;
+    }
 
     const {
       activeList,

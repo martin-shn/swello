@@ -27,7 +27,6 @@ export class CardChecklist extends Component {
     const updatedItem = { ...item, ...update };
     const updatedCard = cardService.updateChecklistItem(this.props.card, checklist.id, updatedItem);
     const { checklists } = updatedCard;
-    console.log();
     if (Object.keys(update)[0] === 'isDone' && checklist.items.every(checkitem => checkitem.isDone))
       this.props.updateField({ checklists }, 'CHECKLIST-COMPLETE', {
         title: checklist.title,
@@ -96,9 +95,7 @@ export class CardChecklist extends Component {
         />
 
         <div className="section-data checklist-add-item">
-          {!isAdding && (
-            <button onClick={() => onAddingItem(checklist.id, this.inputRef)}>Add an item</button>
-          )}
+          {!isAdding && <button onClick={() => onAddingItem(checklist.id, this.inputRef)}>Add an item</button>}
           {isAdding && (
             <form onSubmit={this.onAddItem}>
               <textarea

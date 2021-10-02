@@ -55,7 +55,7 @@ export function moveCard(board, currListId, currCardIdx, newListId, newCardIdx) 
   const cloneBoard = _.cloneDeep(board);
   const currListIdx = cloneBoard.lists.findIndex(list => list.id === currListId);
   const currList = cloneBoard.lists[currListIdx];
-  const currCard = currList.cards[currCardIdx]
+  const currCard = currList.cards[currCardIdx];
   if (currListId === newListId) {
     if (currCardIdx === newCardIdx) return cloneBoard;
     currList.cards.splice(currCardIdx, 1);
@@ -94,15 +94,17 @@ function getListOfCard(board, cardId) {
 }
 // Labels
 
-function toggleLabel(card, labelId) {
+function toggleLabel(card, label) {
   if (!card.labelIds) card.labelIds = [];
-  const idx = card.labelIds.findIndex(currLabelId => currLabelId === labelId);
+  const idx = card.labelIds.findIndex(currLabelId => currLabelId === label.id);
+  const activity = boardService.createActivity(card, 'ADD-LABEL', { label });
   if (idx === -1) {
-    card.labelIds.push(labelId);
+    card.labelIds.push(label.id);
   } else {
     card.labelIds.splice(idx, 1);
+    activity.type = 'REMOVE-LABEL';
   }
-  return card;
+  return { activity, card };
 }
 
 // Checklists
@@ -183,7 +185,6 @@ function checkDueDate(dueDate) {
   const now = Date.now();
   if (dueDate.isComplete) return 'complete';
   if (!dueDate.date) return 'no-date';
-  console.log(utilService.getFormattedDate(dueDate.date, true));
   if (dueDate.date < now && dueDate.date + 24 * hour > now) return 'overdue-recent'; // less than 24 hours since overdue
   if (dueDate.date < now) return 'overdue';
   if (dueDate.date - now < hour) return 'due-soon'; // less than 1 hour until overdue

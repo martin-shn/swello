@@ -26,17 +26,14 @@ export const SideMenuIndex = ({ activities, setPage, isScroll, toggleSideMenu })
             <div>Search cards</div>
           </li>
         </ul>
-        <hr />
         <div className="side-menu-activity-header">
           <span className="icon-activities"></span>
           <span className="title">Activity</span>
         </div>
-        {/* HERE COMES THE MAP FOR ACTIVITIES - RETURNES DIV's */}
-        {<ActivityList activities={activities} />}
-        <a href="#" className="side-menu-show-all-activity">
-          View all activity...
-        </a>
+        {<ActivityList activities={activities.slice(0, 15)} />}
       </div>
+      <button className="view-all-activity">View all activity...</button>
+      {/* This button is not showing :( whyyy */}
     </section>
   );
 };
