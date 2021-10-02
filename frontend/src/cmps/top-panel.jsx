@@ -7,7 +7,7 @@ import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Avatar } from '@mui/material';
 
-import { setCardPopover, toggleSideMenu, toggleDashboard } from '../store/actions/system.actions';
+import { setCardPopover, toggleSideMenu } from '../store/actions/system.actions';
 import { updateBoard } from '../store/actions/board.actions';
 import { CardPopover } from './card/card-popover';
 
@@ -18,7 +18,9 @@ const _TopPanel = props => {
   return (
     <section className="top-panel full flex space-between">
       <div className="flex align-center">
-        <button onClick={props.toggleDashboard}>
+        <button onClick={()=>{
+          props.history.push(`/board/${board._id}/dashboard`)
+        }}>
           <BtnBoardIcon />
           Board
           <KeyboardArrowDownIcon />
@@ -90,7 +92,6 @@ const mapDispatchToProps = {
   updateBoard,
   setCardPopover,
   toggleSideMenu,
-  toggleDashboard,
 };
 
 const mapStateToProps = state => ({

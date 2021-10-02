@@ -1,12 +1,12 @@
-export function togglePopover(popoverListId) {
+export function toggleMenu(isOpen, id, anchor) {
   return async dispatch => {
-    dispatch({ type: 'SET_POPOVER', popoverListId });
+    dispatch({ type: 'TOGGLE_MENU', menu: {isOpen, id, anchor} });
   };
 }
 
-export function toggleDashboard() {
+export function togglePopover(popoverListId) {
   return async dispatch => {
-    dispatch({ type: 'TOGGLE_DASHBOARD' });
+    dispatch({ type: 'SET_POPOVER', popoverListId });
   };
 }
 
