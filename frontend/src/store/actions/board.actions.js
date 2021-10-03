@@ -76,3 +76,20 @@ export function setLabelsClass(labelsClass) {
     });
   };
 }
+
+export function setFilter(filterBy) {
+  return dispatch => {
+    dispatch({
+      type: 'SET_FILTER',
+      filterBy,
+    });
+  };
+}
+
+export function clearFilter() {
+  return dispatch => {
+    dispatch({
+      type: 'CLEAR_FILTER',
+    });
+  };
+}

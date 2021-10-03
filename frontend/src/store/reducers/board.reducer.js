@@ -3,6 +3,7 @@ const initialState = {
   board: null,
   isFullLabels: false,
   labelsClass: '',
+  filterBy: { text: '', memberIds: [], labelIds: [], dueDate: { diff: Infinity, isComplete: null } },
 };
 
 export function boardReducer(state = initialState, action) {
@@ -12,11 +13,16 @@ export function boardReducer(state = initialState, action) {
     case 'SET_BOARDS':
       return { ...state, boards: action.boards };
     case 'CLEAR_BOARD':
-      return {...state, board: null};
+      return { ...state, board: null };
     case 'SET_FULL_LABELS':
       return { ...state, isFullLabels: action.isFullLabels };
     case 'SET_LABELS_CLASS':
       return { ...state, labelsClass: action.labelsClass };
+    case 'SET_FILTER':
+      return { ...state, filterBy: action.filterBy };
+    case 'CLEAR_FILTER':
+      console.log('clear');
+      return { ...state, filterBy: initialState.filterBy };
     default:
       return state;
   }

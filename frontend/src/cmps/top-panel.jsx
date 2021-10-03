@@ -18,9 +18,10 @@ const _TopPanel = props => {
   return (
     <section className="top-panel full flex space-between">
       <div className="flex align-center">
-        <button onClick={()=>{
-          props.history.push(`/board/${board._id}/dashboard`)
-        }}>
+        <button
+          onClick={() => {
+            props.history.push(`/board/${board._id}/dashboard`);
+          }}>
           <BtnBoardIcon />
           Board
           <KeyboardArrowDownIcon />
@@ -41,7 +42,7 @@ const _TopPanel = props => {
           <StarOutlineIcon />
         </button>
         <div className="members flex">
-          {members.map(member => (
+          {members?.map(member => (
             <Avatar key={member._id} alt={member.fullname} src={member.imgUrl} />
           ))}
         </div>

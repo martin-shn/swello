@@ -44,7 +44,6 @@
     margin-top: 6px;
   }
   .card-preview {
-    // width: 250px;
     max-height: 150px;
   }
 }
@@ -55,6 +54,9 @@
 
 .search-card {
   gap: 20px;
+  .card-preview {
+    width: 250px;
+  }
 
   .card-title {
     font-weight: bold;
