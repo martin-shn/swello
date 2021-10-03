@@ -16,11 +16,7 @@ class _SideMenuSearch extends Component {
     return (
       <div>
         <div className={`side-menu-header visible-scroll`}>
-          <span
-            className="back"
-            onClick={() => {
-              setPage('index');
-            }}></span>
+          <span className="back" onClick={() => setPage('index')}></span>
           <h3>Menu</h3>
           <button className="close-side-menu" onClick={toggleSideMenu}></button>
         </div>

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
-import { toggleMenu } from '../../store/actions/system.actions';
+import { toggleMenu } from '../../../store/actions/system.actions';
 
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
@@ -11,7 +11,7 @@ import Popper from '@mui/material/Popper';
 // import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 
-class _PopoverMenu extends React.Component{
+class _MainCardMenu extends React.Component{
     state={}
 
     onClose =(event)=>{
@@ -24,12 +24,13 @@ class _PopoverMenu extends React.Component{
     render(){
         const {isOpen, id, anchor} = this.props.menu
         // console.log(anchor, id, this.props.id, !isOpen || id!==this.props.id );
-        if (!isOpen || id!==this.props.id) return <></>
+        // if (!isOpen || id!==this.props.id) return <></>
         return(
             <Popper
             className={this.props.classNames}
-            open={isOpen}
+            open={id===this.props.id}
             anchorEl={anchor}
+            // style={{position:'fixed', top:`${anchor.pageY}px`, left:`${anchor.pageX}px`, transform: 'translate(33px, -66px)'}}
             role={undefined}
             placement={this.props.placement || "bottom-start"}
             transition
@@ -38,7 +39,7 @@ class _PopoverMenu extends React.Component{
               <Grow
                 {...TransitionProps}
                 style={{
-                  transformOrigin: placement === 'bottom-start' ? 'left top' : 'right top',
+                  transformOrigin: placement === 'bottom-start' ? 'left top' : 'left bottom',
                 }}>
                 <Paper>
                   <ClickAwayListener onClickAway={this.onClose}>
@@ -71,5 +72,5 @@ const mapDispatchToProps = {
     };
   };
   
-  export const PopoverMenu = connect(mapStateToProps, mapDispatchToProps)(withRouter(_PopoverMenu));
+  export const MainCardMenu = connect(mapStateToProps, mapDispatchToProps)(withRouter(_MainCardMenu));
   

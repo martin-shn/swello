@@ -211,6 +211,7 @@ export class _ListPreview extends Component {
                       }}>
                       <textarea
                         name="title"
+                        autoFocus
                         placeholder="Enter a title for this card..."
                         onKeyDown={ev => ev.key === 'Enter' && this.bottomAddRef.current.click()}
                       />

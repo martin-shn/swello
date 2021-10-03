@@ -14,7 +14,7 @@ export const ListAdd = props => {
       {isAddingList && (
         <form onSubmit={onAddList} className="flex column">
           <div>
-            <input autoCorrect="off" autoComplete="off" name="title" placeholder="Enter list title..." />
+            <input autoFocus autoCorrect="off" autoComplete="off" name="title" placeholder="Enter list title..." />
           </div>
           <div className="add-controls">
             <button className="btn-add">Add List</button>
