@@ -65,15 +65,11 @@ class _BoardAdd extends Component {
         const boardToAdd = {
             title: this.state.boardName,
             style: {},
-            members: [],
         };
         this.state.markedId < 4
             ? (boardToAdd.style.imgUrl = this.bgcs[this.state.markedId].bgc.substring(0, this.bgcs[this.state.markedId].bgc.length - 6))
             : (boardToAdd.style.bgColor = this.bgcs[this.state.markedId].bgc);
-        console.log('create new board in data, board is:', boardToAdd);
-
         const newBoard = await this.props.createBoard(boardToAdd);
-        console.log('new board:', newBoard);
         this.props.history.push(`/board/${newBoard._id}`)
     };
 

@@ -98,9 +98,27 @@
     z-index: 1;
   }
 
+  .card-cover.green,
+  .card-cover.yellow,
+  .card-cover.orange,
+  .card-cover.red,
+  .card-cover.purple,
+  .card-cover.blue,
+  .card-cover.sky,
+  .card-cover.lime,
+  .card-cover.pink,
   .card-cover.black,
-  &.black,
   .card-cover.cover-img,
+  &.green,
+  &.yellow,
+  &.orange,
+  &.red,
+  &.purple,
+  &.blue,
+  &.sky,
+  &.lime,
+  &.pink,
+  &.black,
   &.cover-img {
     & ~ .edit-icon,
     & > .edit-icon {

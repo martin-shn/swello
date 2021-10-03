@@ -4,11 +4,12 @@ import { socketService, SOCKET_EVENT_REVIEW_ADDED } from './socket.service';
 import { utilService } from './util.service';
 import { addList, copyList, updateList, moveList, moveAllCardsToList, sortList, archiveList, unarchiveList } from './board-services/list.service';
 import { updateCard, addCard, moveCard, archiveCard, unarchiveCard, removeCard, copyCard } from './board-services/card.service';
+import { httpService } from './http.service';
 export const boardService = {
   add,
   query,
   update,
-  remove,
+  // remove,
   getById,
   saveLabel,
   removeLabel,
@@ -32,39 +33,41 @@ export const boardService = {
 
 window.bs = boardService;
 
-function query(filterBy) {
+function query() {
   // var queryStr = (!filterBy) ? '' : `?byUser=${filterBy.byUser}`
-  // return httpService.get(`board${queryStr}`)
-  return storageService.query('board', filterBy);
+  return httpService.get(`board`)
+  // return storageService.query('board', filterBy);
 }
 
 function getById(boardId) {
-  return storageService.get('board', boardId);
+  return httpService.get(`board/${boardId}`)
+  // return storageService.get('board', boardId);
 }
 
-function remove(boardId) {
-  // return httpService.delete(`board/${boardId}`)
-  return storageService.remove('board', boardId);
-}
+// function remove(boardId) {
+//   // return httpService.delete(`board/${boardId}`)
+//   return storageService.remove('board', boardId);
+// }
 
 async function add(board) {
-  // const addedBoard = await httpService.post(`board`, board)
-  board._id = utilService.makeId();
-  board.createdBy = userService.getLoggedinUser();
-  board.labels = [
-    { id: utilService.makeId(), title: '', color: 'green' },
-    { id: utilService.makeId(), title: '', color: 'yellow' },
-    { id: utilService.makeId(), title: '', color: 'orange' },
-    { id: utilService.makeId(), title: '', color: 'red' },
-    { id: utilService.makeId(), title: '', color: 'purple' },
-    { id: utilService.makeId(), title: '', color: 'blue' },
-  ];
-  board.isFullLabels = false;
-  board.lists = [];
-  board.members.push(board.createdBy);
-  board.createdAt = Date.now();
-  board.archive = { lists: [], cards: [] }
-  const addedBoard = storageService.post('board', board);
+  const addedBoard = await httpService.post(`board`, board)
+  // board._id = utilService.makeId();
+  // board.createdBy = userService.getLoggedinUser();
+  // board.labels = [
+  //   { id: utilService.makeId(), title: '', color: 'green' },
+  //   { id: utilService.makeId(), title: '', color: 'yellow' },
+  //   { id: utilService.makeId(), title: '', color: 'orange' },
+  //   { id: utilService.makeId(), title: '', color: 'red' },
+  //   { id: utilService.makeId(), title: '', color: 'purple' },
+  //   { id: utilService.makeId(), title: '', color: 'blue' },
+  // ];
+  // // members
+  // board.isFullLabels = false;
+  // board.lists = [];
+  // board.members.push(board.createdBy);
+  // board.createdAt = Date.now();
+  // board.archive = { lists: [], cards: [] }
+  // const addedBoard = storageService.post('board', board);
   return addedBoard;
 }
 
@@ -80,7 +83,8 @@ async function update(updatedBoard) {
   //   }, 1000);
   // });
   //
-  const board = await storageService.put('board', updatedBoard);
+  // const board = await storageService.put('board', updatedBoard);
+  const board = await httpService.put(`board/${updatedBoard._id}`, updatedBoard)
   return board;
 }
 
