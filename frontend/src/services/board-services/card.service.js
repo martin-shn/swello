@@ -32,12 +32,12 @@ export function updateCard(board, updatedCard, activity, isArchived) {
       });
     });
   } else {
-    const idx = cloneBoard.archive.cards.findIndex(archivedCard => archivedCard.card.id === updatedCard.id)
-    cloneBoard.archive.cards[idx].card = updatedCard
+    const idx = cloneBoard.archive.cards.findIndex(archivedCard => archivedCard.card.id === updatedCard.id);
+    cloneBoard.archive.cards[idx].card = updatedCard;
   }
   if (activity) {
-    if (!cloneBoard.activities) cloneBoard.activities = []
-    cloneBoard.activities.unshift(activity)
+    if (!cloneBoard.activities) cloneBoard.activities = [];
+    cloneBoard.activities.unshift(activity);
   }
   return cloneBoard;
 }
@@ -46,7 +46,7 @@ export function addCard(board, list, cardTitle, isTopAdd) {
   const card = {
     id: utilService.makeId(),
     title: cardTitle,
-    createdAt: Date.now()
+    createdAt: Date.now(),
   };
   const updatedBoard = _.cloneDeep(board);
   const listIdx = updatedBoard.lists.findIndex(currList => currList.id === list.id);
@@ -80,36 +80,38 @@ export function moveCard(board, currListId, currCardIdx, newListId, newCardIdx) 
 }
 
 export function copyCard(board, card, listId, idx, title, keep) {
-  const cardToCopy = { ...card, title, id: utilService.makeId() }
-  if (!keep.checklists) delete cardToCopy.checklists
-  if (!keep.label) delete cardToCopy.labelIds
-  if (!keep.members) delete cardToCopy.members
-  if (!keep.attachments) delete cardToCopy.attachments
+  const cardToCopy = { ...card, title, id: utilService.makeId() };
+  if (!keep.checklists) delete cardToCopy.checklists;
+  if (!keep.label) delete cardToCopy.labelIds;
+  if (!keep.members) delete cardToCopy.members;
+  if (!keep.attachments) delete cardToCopy.attachments;
   const listIdx = board.lists.findIndex(list => list.id === listId);
-  board.lists[listIdx].cards.splice(idx, 0, cardToCopy)
+  board.lists[listIdx].cards.splice(idx, 0, cardToCopy);
   return board;
 }
 
 export function archiveCard(board, card) {
-  const listIdx = board.lists.findIndex(list => list.cards.some(currCard => currCard.id === card.id))
-  const cardIdx = board.lists[listIdx].cards.findIndex(currCard => currCard.id === card.id)
+  const listIdx = board.lists.findIndex(list => list.cards.some(currCard => currCard.id === card.id));
+  const cardIdx = board.lists[listIdx].cards.findIndex(currCard => currCard.id === card.id);
   board.lists[listIdx].cards.splice(cardIdx, 1);
-  board.archive.cards.push({ listId: board.lists[listIdx].id, idx: cardIdx, card })
+  board.archive.cards.push({ listId: board.lists[listIdx].id, idx: cardIdx, card });
   return board;
 }
 
 export function unarchiveCard(board, cardId) {
-  const archivedCard = board.archive.cards.find(archivedCard => archivedCard.card.id === cardId)
+  const archivedCard = board.archive.cards.find(archivedCard => archivedCard.card.id === cardId);
   const listIdx = board.lists.findIndex(list => list.id === archivedCard.listId);
-  const archivedCardIdx = board.archive.cards.findIndex(currArchivedCard => currArchivedCard.card.id === archivedCard.card.id);
-  board.archive.cards.splice(archivedCardIdx, 1)
-  board.lists[listIdx].cards.splice(archivedCard.idx, 0, archivedCard.card)
+  const archivedCardIdx = board.archive.cards.findIndex(
+    currArchivedCard => currArchivedCard.card.id === archivedCard.card.id
+  );
+  board.archive.cards.splice(archivedCardIdx, 1);
+  board.lists[listIdx].cards.splice(archivedCard.idx, 0, archivedCard.card);
   return board;
 }
 
 export function removeCard(board, cardId) {
-  const idx = board.archive.cards.findIndex(archivedCard => archivedCard.id === cardId)
-  board.archive.cards.splice(idx, 1)
+  const idx = board.archive.cards.findIndex(archivedCard => archivedCard.id === cardId);
+  board.archive.cards.splice(idx, 1);
   return board;
 }
 
@@ -126,7 +128,7 @@ function getCardById(board, cardId) {
 }
 
 function getCardFromArchive(board, cardId) {
-  return board.archive.cards.find(archivedCard => archivedCard.card.id === cardId)
+  return board.archive.cards.find(archivedCard => archivedCard.card.id === cardId);
 }
 
 // General
@@ -138,13 +140,13 @@ function getListOfCard(board, cardId) {
       if (card.id === cardId) return list;
     }
   }
-  // finding the card if it's archived 
-  const archivedCard = board.archive.cards.find(archivedCard => archivedCard.card.id === cardId)
+  // finding the card if it's archived
+  const archivedCard = board.archive.cards.find(archivedCard => archivedCard.card.id === cardId);
   if (archivedCard) {
-    const list = board.lists.find(list => list.id === archivedCard.listId)
-    return list
+    const list = board.lists.find(list => list.id === archivedCard.listId);
+    return list;
   }
-  return null
+  return null;
 }
 // Labels
 
@@ -204,7 +206,8 @@ function updateChecklistItem(card, checklistId, updatedItem) {
 
 // Location
 
-const googleKey = 'AIzaSyDgw0mWmcS4OoFUyLUj5oNbfo4KGzpHiYA';
+const googleKey = process.env.REACT_APP_GOOGLE_API;
+console.log(googleKey);
 async function getLocationData(locationId) {
   // const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${locationId}&inputtype=textquery&fields=formatted_address%2Cname%2Cgeometry&key=${key}`
   const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${locationId}&key=${googleKey}&fields=formatted_address,name,geometry`;

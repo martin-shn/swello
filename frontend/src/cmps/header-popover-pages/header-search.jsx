@@ -41,7 +41,7 @@ export class HeaderSearch extends Component {
     this.props.board.lists &&
       this.props.board.lists.forEach(list => list.cards && list.cards.forEach(card => cards.push(card)));
     cards = cards.sort((a, b) => b?.createdAt - a?.createdAt);
-    return cards;
+    return cards.slice(0, 5);
   }
 
   render() {
