@@ -1,8 +1,9 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { ActivityDetails } from './activity-details';
 
 export const SideMenuIndex = ({ activities, setPage, isScroll, toggleSideMenu }) => {
   const elInnerRef = useRef();
+  const [actsCount, setActsCount] = useState(15);
   const currClass = isScroll ? 'visible-scroll' : 'no-scroll';
   return (
     <section className="side-menu-index">
@@ -35,9 +36,14 @@ export const SideMenuIndex = ({ activities, setPage, isScroll, toggleSideMenu })
           <span className="icon-activities"></span>
           <span className="title">Activity</span>
         </div>
-        {activities&&<ActivityList activities={activities.slice(0, 15)} />}
+        {activities && <ActivityList activities={activities.slice(0, actsCount)} />}
+        {actsCount < activities.length && (
+          <button className="view-all-activity" onClick={() => setActsCount(prevCount => prevCount + 15)}>
+            View all activity...
+          </button>
+        )}
       </div>
-      <button className="view-all-activity">View all activity...</button>
+
       {/* This button is not showing :( whyyy */}
     </section>
   );

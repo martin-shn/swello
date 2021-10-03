@@ -39,7 +39,7 @@ function filterLists(lists, filterBy) {
     // after filter is done:
     return { ...list, cards: filteredCards };
   });
-  // return filteredLists.filter(list => list.cards.length > 0); // remove empty lists
+  // return filteredLists.filter(list => list.cards.length > 0); // remove empty lists - removed this line because it will always filter out empty lists
   return filteredLists;
 }
 
@@ -51,11 +51,11 @@ export function addList(board, listTitle) {
 }
 
 export function copyList(board, list, listTitle) {
-  const copiedList = _.cloneDeep(list)
+  const copiedList = _.cloneDeep(list);
   copiedList.title = listTitle;
   copiedList.id = utilService.makeId();
   const listIdx = board.lists.findIndex(currList => currList.id === list.id);
-  board.lists.splice(listIdx + 1, 0, copiedList)
+  board.lists.splice(listIdx + 1, 0, copiedList);
   return board;
 }
 
@@ -74,39 +74,41 @@ export function updateList(board, updatedList) {
 }
 
 export function moveAllCardsToList(board, currListId, newListId) {
-  const currListIdx = board.lists.findIndex(list => list.id === currListId)
-  const newListIdx = board.lists.findIndex(list => list.id === newListId)
+  const currListIdx = board.lists.findIndex(list => list.id === currListId);
+  const newListIdx = board.lists.findIndex(list => list.id === newListId);
   const cardsList = board.lists[currListIdx].cards;
-  board.lists[newListIdx].cards.push(...cardsList)
+  board.lists[newListIdx].cards.push(...cardsList);
   board.lists[currListIdx].cards = [];
   return board;
 }
 
 export function sortList(board, list, sortBy) {
-  const listCopy = _.cloneDeep(list)
+  const listCopy = _.cloneDeep(list);
   if (sortBy === 'date-new') {
-    listCopy.cards.sort((card1, card2) => card2.createdAt - card1.createdAt)
+    listCopy.cards.sort((card1, card2) => card2.createdAt - card1.createdAt);
   } else if (sortBy === 'date-old') {
-    listCopy.cards.sort((card1, card2) => card1.createdAt - card2.createdAt)
+    listCopy.cards.sort((card1, card2) => card1.createdAt - card2.createdAt);
   } else {
-    listCopy.cards.sort((card1, card2) => card1.title.localeCompare(card2.title))
+    listCopy.cards.sort((card1, card2) => card1.title.localeCompare(card2.title));
   }
-  board.lists = board.lists.map(list => list.id === listCopy.id ? listCopy : list)
+  board.lists = board.lists.map(list => (list.id === listCopy.id ? listCopy : list));
   return board;
 }
 
 export function archiveList(board, list) {
-  const listIdx = board.lists.findIndex(currList => currList.id === list.id)
-  board.lists.splice(listIdx, 1)
-  if (!board.archive) board.archive=[]
-  if (!board.archive.lists) board.archive.lists=[]
-  board.archive.lists.push({ idx: listIdx, list })
+  const listIdx = board.lists.findIndex(currList => currList.id === list.id);
+  board.lists.splice(listIdx, 1);
+  if (!board.archive) board.archive = [];
+  if (!board.archive.lists) board.archive.lists = [];
+  board.archive.lists.push({ idx: listIdx, list });
   return board;
 }
 
 export function unarchiveList(board, archivedList) {
-  const archivedListIdx = board.archive.lists.findIndex(currArchivedList => currArchivedList.list.id === archivedList.list.id)
-  board.archive.lists.splice(archivedListIdx, 1)
-  board.lists.splice(archivedList.idx, 0, archivedList.list)
+  const archivedListIdx = board.archive.lists.findIndex(
+    currArchivedList => currArchivedList.list.id === archivedList.list.id
+  );
+  board.archive.lists.splice(archivedListIdx, 1);
+  board.lists.splice(archivedList.idx, 0, archivedList.list);
   return board;
 }
