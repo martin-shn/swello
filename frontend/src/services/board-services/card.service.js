@@ -101,9 +101,14 @@ export function archiveCard(board, card) {
 export function unarchiveCard(board, cardId) {
   const archivedCard = board.archive.cards.find(archivedCard => archivedCard.card.id === cardId)
   const listIdx = board.lists.findIndex(list => list.id === archivedCard.listId);
+  if (listIdx === -1) {
+    const archivedListIdx = board.archive.lists.findIndex(archivedList => archivedList.list.id === archivedCard.listId);
+    board.archive.lists[archivedListIdx].list.cards.splice(archivedCard.idx, 0, archivedCard.card)
+  } else {
+    board.lists[listIdx].cards.splice(archivedCard.idx, 0, archivedCard.card)
+  }
   const archivedCardIdx = board.archive.cards.findIndex(currArchivedCard => currArchivedCard.card.id === archivedCard.card.id);
   board.archive.cards.splice(archivedCardIdx, 1)
-  board.lists[listIdx].cards.splice(archivedCard.idx, 0, archivedCard.card)
   return board;
 }
 
