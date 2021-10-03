@@ -20,6 +20,9 @@ export function boardReducer(state = initialState, action) {
       return { ...state, labelsClass: action.labelsClass };
     case 'SET_FILTER':
       return { ...state, filterBy: action.filterBy };
+    case 'CLEAR_FILTER':
+      console.log('clear');
+      return { ...state, filterBy: initialState.filterBy };
     default:
       return state;
   }

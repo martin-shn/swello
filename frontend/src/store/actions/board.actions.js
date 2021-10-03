@@ -85,3 +85,11 @@ export function setFilter(filterBy) {
     });
   };
 }
+
+export function clearFilter() {
+  return dispatch => {
+    dispatch({
+      type: 'CLEAR_FILTER',
+    });
+  };
+}

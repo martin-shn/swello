@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { LabelFilters } from './label-filters';
 import { connect } from 'react-redux';
-import { setFilter } from '../../store/actions/board.actions';
+import { setFilter, clearFilter } from '../../store/actions/board.actions';
 import { MemberFilters } from './member-filters';
 import { DateFilters } from './date-filters';
 
@@ -12,7 +12,7 @@ class _SideMenuSearch extends Component {
   };
 
   render() {
-    const { setPage, board, toggleSideMenu, filterBy } = this.props;
+    const { setPage, board, toggleSideMenu, filterBy, clearFilter } = this.props;
     return (
       <div>
         <div className={`side-menu-header visible-scroll`}>
@@ -51,7 +51,7 @@ class _SideMenuSearch extends Component {
               <DateFilters filterDate={filterBy.dueDate} boardDate={board.dueDate} updateFilter={this.updateFilter} />
               <hr />
               <ul className="bottom">
-                <li>
+                <li onClick={clearFilter}>
                   <button>Clear search</button>
                 </li>
               </ul>
@@ -65,6 +65,7 @@ class _SideMenuSearch extends Component {
 
 const mapDispatchToProps = {
   setFilter,
+  clearFilter,
 };
 
 const mapStateToProps = state => {
