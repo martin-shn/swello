@@ -94,8 +94,6 @@ export function archiveCard(board, card) {
   const listIdx = board.lists.findIndex(list => list.cards.some(currCard => currCard.id === card.id))
   const cardIdx = board.lists[listIdx].cards.findIndex(currCard => currCard.id === card.id)
   board.lists[listIdx].cards.splice(cardIdx, 1);
-  if (!board.archive) board.archive=[]
-  if (!board.archive.cards) board.archive.cards=[]
   board.archive.cards.push({ listId: board.lists[listIdx].id, idx: cardIdx, card })
   return board;
 }
@@ -206,15 +204,15 @@ function updateChecklistItem(card, checklistId, updatedItem) {
 
 // Location
 
-const key = 'AIzaSyDgw0mWmcS4OoFUyLUj5oNbfo4KGzpHiYA';
+const googleKey = 'AIzaSyDgw0mWmcS4OoFUyLUj5oNbfo4KGzpHiYA';
 async function getLocationData(locationId) {
   // const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${locationId}&inputtype=textquery&fields=formatted_address%2Cname%2Cgeometry&key=${key}`
-  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${locationId}&key=${key}&fields=formatted_address,name,geometry`;
+  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${locationId}&key=${googleKey}&fields=formatted_address,name,geometry`;
   return await httpService.getFromApi(url);
 }
 
 async function getLocationResults(search) {
-  const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${search}&key=${key}`;
+  const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${search}&key=${googleKey}`;
   return await httpService.getFromApi(url);
 }
 

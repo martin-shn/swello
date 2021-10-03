@@ -98,8 +98,6 @@ export function sortList(board, list, sortBy) {
 export function archiveList(board, list) {
   const listIdx = board.lists.findIndex(currList => currList.id === list.id)
   board.lists.splice(listIdx, 1)
-  if (!board.archive) board.archive=[]
-  if (!board.archive.lists) board.archive.lists=[]
   board.archive.lists.push({ idx: listIdx, list })
   return board;
 }

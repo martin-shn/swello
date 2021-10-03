@@ -26,7 +26,6 @@ export class CardPreview extends Component {
               >
               <CardPreviewInfo card={card} toggleMenu={toggleMenu}/>
             </div>
-              <MainCardMenu id={card.id} header="test" classNames="main-card-menu"/>
           </>
         )}
       </Draggable>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import { CardPreview } from './card-preview';
+import { MainCardMenu } from './card/card-popover-pages/main-card-menu';
 
 export class CardList extends React.Component {
   style = {
@@ -19,6 +20,7 @@ export class CardList extends React.Component {
           <>
             <section className="card-list" ref={provided.innerRef} {...provided.droppableProps} style={cards.length ? {} : this.style}>
               {cards.map((card, idx) => (
+                <div key={card.id}>
                 <CardPreview
                   key={card.id}
                   card={card}
@@ -26,6 +28,8 @@ export class CardList extends React.Component {
                   listId={listId}
                   isDraggingOver={snapshot.isDraggingOver}
                 />
+                <MainCardMenu id={card.id} header="test" classNames="main-card-menu" placement="right"/>
+                </div>
               ))}
             </section>
             {provided.placeholder}
