@@ -34,7 +34,7 @@ async function query(boardId = null) {
                 }
             },
             {
-                $project: { 'createdBy.password': 0, 'members.password': 0 }
+                $project: { 'createdBy.password': 0, 'createdBy.starredBoardsIds': 0, 'members.password': 0, 'members.starredBoardsIds': 0 }
             }
         ]).toArray()
         return boards
@@ -75,7 +75,8 @@ async function add(board) {
             ],
             isFullLabels: false,
             lists: [],
-            archive: { lists: [], cards: [] }
+            archive: { lists: [], cards: [] },
+            activities: []
         }
         const collection = await dbService.getCollection('board')
         await collection.insertOne(boardToAdd)
@@ -92,7 +93,7 @@ async function update(board) {
             ...board,
             createdBy: ObjectId(board.createdBy._id),
             members: board.members.map(member => ObjectId(member._id)),
-            id: ObjectId(board._id)
+            _id: ObjectId(board._id)
         };
         const collection = await dbService.getCollection('board')
         await collection.updateOne({ _id: boardToSave._id }, { $set: boardToSave })

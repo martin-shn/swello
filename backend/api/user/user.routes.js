@@ -8,7 +8,7 @@ const router = express.Router()
 
 router.get('/', requireAuth, getUsers)
 router.get('/:id', requireAuth, getUser)
-// router.put('/:id', requireAuth,  updateUser)
+router.put('/:id', requireAuth,  updateUser)
 
 // router.put('/:id',  requireAuth, updateUser)
 // router.delete('/:id',  requireAuth, requireAdmin, deleteUser)

@@ -7,7 +7,7 @@ module.exports = {
     getById,
     getByUsername,
     // remove,
-    // update,
+    update,
     add
 }
 
@@ -62,23 +62,22 @@ async function getByUsername(username) {
 //     }
 // }
 
-// async function update(user) {
-//     try {
-//         // peek only updatable fields!
-//         const userToSave = {
-//             _id: ObjectId(user._id), // needed for the returnd obj
-//             username: user.username,
-//             fullname: user.fullname,
-//             score: user.score,
-//         }
-//         const collection = await dbService.getCollection('user')
-//         await collection.updateOne({ _id: userToSave._id }, { $set: userToSave })
-//         return userToSave;
-//     } catch (err) {
-//         logger.error(`cannot update user ${user._id}`, err)
-//         throw err
-//     }
-// }
+async function update(user) {
+    try {
+        // peek only updatable fields!
+        const userToSave = {
+            ...user, 
+            _id: ObjectId(user._id), // needed for the returnd obj
+            starredBoardsIds: user.starredBoardsIds
+        }
+        const collection = await dbService.getCollection('user')
+        await collection.updateOne({ _id: userToSave._id }, { $set: userToSave })
+        return userToSave;
+    } catch (err) {
+        logger.error(`cannot update user ${user._id}`, err)
+        throw err
+    }
+}
 
 async function add(user) {
     try {
@@ -87,6 +86,9 @@ async function add(user) {
             username: user.username,
             password: user.password,
             fullname: user.fullname,
+            imgUrl: user.imgUrl || '',
+            mentions: [],
+            starredBoardsIds: [],
         }
         const collection = await dbService.getCollection('user')
         await collection.insertOne(userToAdd)

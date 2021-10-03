@@ -16,8 +16,8 @@ async function getBoards(req, res) {
 async function getById(req, res) {
     try {
         const boardId = req.params.id;
-        const res = await boardService.query(boardId)
-        const board = res[0];
+        const result = await boardService.query(boardId)
+        const board = result[0];
         res.send(board)
     } catch (err) {
         logger.error('Failed to get board')
