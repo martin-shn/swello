@@ -38,7 +38,7 @@ class _PopoverMenu extends React.Component{
               <Grow
                 {...TransitionProps}
                 style={{
-                  transformOrigin: placement === 'bottom-start' ? 'left top' : 'left bottom',
+                  transformOrigin: placement === 'bottom-start' ? 'left top' : 'right top',
                 }}>
                 <Paper>
                   <ClickAwayListener onClickAway={this.onClose}>
