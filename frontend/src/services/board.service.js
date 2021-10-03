@@ -63,6 +63,7 @@ async function add(board) {
   board.lists = [];
   board.members.push(board.createdBy);
   board.createdAt = Date.now();
+  board.archive = { lists: [], cards: [] }
   const addedBoard = storageService.post('board', board);
   return addedBoard;
 }
@@ -105,6 +106,11 @@ function removeLabel(board, labelId) {
       }
     });
   });
+  board.archive.cards.forEach(archivedCard => {
+    if (archivedCard.card.labelIds) {
+      archivedCard.card.labelIds = archivedCard.card.labelIds.filter(id => id !== labelId)
+    }
+  })
   return board;
 }
 
