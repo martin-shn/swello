@@ -14,6 +14,7 @@ import { Route } from 'react-router';
 import { LoaderPage } from '../cmps/loader/loader-page';
 import { SideMenu } from '../cmps/side-menu/side-menu';
 import { Dashboard } from './dashboard/dashboard';
+import { listService } from '../services/board-services/list.service';
 
 export class _BoardPage extends Component {
   state = {
@@ -129,7 +130,7 @@ export class _BoardPage extends Component {
       isAddingList,
       // isCardPageOpen
     } = this.state;
-    const { popoverListId } = this.props;
+    const { popoverListId, filterBy } = this.props;
     const { title, members, lists, style } = this.props.board;
 
     return (
@@ -154,7 +155,7 @@ export class _BoardPage extends Component {
         <ListAll
           board={this.props.board}
           updateBoard={this.props.updateBoard}
-          lists={lists}
+          lists={listService.filterLists(lists, filterBy)}
           activeList={activeList}
           popoverListId={popoverListId}
           onTogglePopover={this.onTogglePopover}
@@ -186,6 +187,7 @@ const mapDispatchToProps = {
 const mapStateToProps = state => {
   return {
     board: state.boardModule.board,
+    filterBy: state.boardModule.filterBy,
     popoverListId: state.systemModule.popoverListId,
     isLoadingPage: state.systemModule.isLoadingPage,
     user: state.userModule.user,

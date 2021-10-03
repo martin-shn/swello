@@ -4,7 +4,6 @@ import _ from 'lodash';
 import { boardService } from '../board.service';
 
 export const cardService = {
-  query,
   getCardById,
   toggleLabel,
   addChecklist,
@@ -21,20 +20,6 @@ export const cardService = {
 };
 
 // CARD FUNCTIONS - returns updated board
-
-async function query(board, criteria) {
-  // move this logic to backend later
-  const { labelIds = [] } = criteria;
-  const filteredLists = board.lists.map(list => {
-    const filteredCards = list.cards.filter(
-      card => !labelIds.length || (card.labelIds && card.labelIds.some(labelId => criteria.labelIds.includes(labelId)))
-    );
-    return { ...list, cards: filteredCards };
-  });
-  const updatedBoard = _.cloneDeep(board);
-  updatedBoard.lists = filteredLists.filter(list => list.cards.length > 0); // remove empty lists
-  return updatedBoard;
-}
 
 export function updateCard(board, updatedCard, activity) {
   const cloneBoard = _.cloneDeep(board);

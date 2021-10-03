@@ -76,3 +76,12 @@ export function setLabelsClass(labelsClass) {
     });
   };
 }
+
+export function setFilter(filterBy) {
+  return dispatch => {
+    dispatch({
+      type: 'SET_FILTER',
+      filterBy,
+    });
+  };
+}

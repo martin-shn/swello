@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import { Avatar } from '@mui/material';
-import { LabelList } from './label-list';
+import { LabelFilters } from './label-filters';
+import { connect } from 'react-redux';
+import { setFilter } from '../../store/actions/board.actions';
+import { MemberFilters } from './member-filters';
+import { DateFilters } from './date-filters';
 
-export class SideMenuSearch extends Component {
-  state = { criteria: null };
-
-  updateCriteria = field => {
-    this.setState(prevState => {
-      const criteria = { ...prevState.criteria, ...field };
-      return { criteria };
-    });
+class _SideMenuSearch extends Component {
+  updateFilter = field => {
+    const filterBy = { ...this.props.filterBy, ...field };
+    this.props.setFilter(filterBy);
   };
 
   render() {
-    const { setPage, board, toggleSideMenu } = this.props;
+    const { setPage, board, toggleSideMenu, filterBy } = this.props;
     return (
       <div>
         <div className={`side-menu-header visible-scroll`}>
@@ -28,71 +27,28 @@ export class SideMenuSearch extends Component {
         <hr style={{ width: 'calc(100% - 18px)', margin: '0px auto 4px' }} />
         <div className="search-container">
           <div className="search-content">
-            <input className="search" type="text" />
+            <input
+              className="search"
+              type="text"
+              value={filterBy.text}
+              onChange={ev => this.updateFilter({ text: ev.target.value })}
+            />
             <div className="filter">
               <p>Search by term, label, member, or due time.</p>
               <hr />
-              <LabelList labels={board.labels} updateCriteria={this.updateCriteria} />
+              <LabelFilters
+                filterLabelIds={filterBy.labelIds}
+                boardLabels={board.labels}
+                updateFilter={this.updateFilter}
+              />
               <hr />
-              <ul className="member-list">
-                {/* map all members */}
-                <li>
-                  <button>
-                    <span>?</span>
-                    <span>No members</span>
-                    <span></span>
-                  </button>
-                </li>
-                <li>
-                  <button>
-                    <span>
-                      <Avatar />
-                    </span>
-                    <span>Guest</span>
-                    <span className="checkmark"></span>
-                  </button>
-                </li>
-                <li>
-                  <button>
-                    <span>
-                      <Avatar alt="M">M</Avatar>
-                    </span>
-                    <span>Martin Sh</span>
-                    <span className="checkmark"></span>
-                  </button>
-                </li>
-              </ul>
+              <MemberFilters
+                filterMemberIds={filterBy.memberIds}
+                boardMembers={board.members}
+                updateFilter={this.updateFilter}
+              />
               <hr />
-              <ul className="date-filters">
-                <li>
-                  <button>Has no due date</button>
-                  <span className="checkmark"></span>
-                </li>
-                <li>
-                  <button>Due in the next day</button>
-                  <span className="checkmark"></span>
-                </li>
-                <li>
-                  <button>Due in the next week</button>
-                  <span></span>
-                </li>
-                <li>
-                  <button>Due in the next month</button>
-                  <span></span>
-                </li>
-                <li>
-                  <button>Overdue</button>
-                  <span></span>
-                </li>
-                <li>
-                  <button>Marked as complete</button>
-                  <span></span>
-                </li>
-                <li>
-                  <button>Marked as incomplete</button>
-                  <span></span>
-                </li>
-              </ul>
+              <DateFilters filterDate={filterBy.dueDate} boardDate={board.dueDate} updateFilter={this.updateFilter} />
               <hr />
               <ul className="bottom">
                 <li>
@@ -106,3 +62,15 @@ export class SideMenuSearch extends Component {
     );
   }
 }
+
+const mapDispatchToProps = {
+  setFilter,
+};
+
+const mapStateToProps = state => {
+  return {
+    filterBy: state.boardModule.filterBy,
+  };
+};
+
+export const SideMenuSearch = connect(mapStateToProps, mapDispatchToProps)(_SideMenuSearch);

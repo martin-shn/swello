@@ -36,10 +36,10 @@
       & span.checkmark {
         background-clip: content-box;
         background-origin: content-box;
-        display: none;
+        // display: none;
         padding: 11px;
         position: absolute;
-        right: 0;
+        right: 10px;
         top: 0;
         color: #42526e;
         font-size: 16px;
@@ -63,15 +63,14 @@
         padding: 0;
         & > li {
           margin-bottom: 2px;
+          position: relative;
           & > button {
             display: flex;
             align-items: center;
             border-radius: 3px;
-            // height: 30px;
             line-height: 30px;
             overflow: hidden;
-            // padding: 4px 4px 4px 42px;
-            position: relative;
+            // position: relative;
             text-decoration: none;
             text-overflow: ellipsis;
             white-space: nowrap;
