@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { createApi } from 'unsplash-js';
 import { ActivityDetails } from './activity-details';
 
