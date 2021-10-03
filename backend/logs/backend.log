@@ -1,0 +1,75 @@
+3.10.2021, 15:46:10 - INFO - Server is running on port: 3030 
+3.10.2021, 15:46:18 - DEBUG - auth.service - signup with username: undefined, fullname: undefined (sid: fyR5_bx1K091S4WGjDmDjV0xW0rSdvf7)
+3.10.2021, 15:46:18 - ERROR - Failed to signup fullname, username and password are required! (sid: fyR5_bx1K091S4WGjDmDjV0xW0rSdvf7)
+3.10.2021, 15:46:47 - DEBUG - auth.service - signup with username: guest@guest.com, fullname: Guest (sid: fyR5_bx1K091S4WGjDmDjV0xW0rSdvf7)
+3.10.2021, 15:46:48 - DEBUG - auth.route - new account created: {"username":"guest@guest.com","password":"$2b$10$eTYWkL4LzIJOorwUXazjfOd.QLOgQega7xnG/1YK.qug2OAAMPNvG","fullname":"Guest","_id":"6159a63800f13c0dc0101423"} (sid: fyR5_bx1K091S4WGjDmDjV0xW0rSdvf7)
+3.10.2021, 15:46:48 - DEBUG - auth.service - login with username: guest@guest.com (sid: fyR5_bx1K091S4WGjDmDjV0xW0rSdvf7)
+3.10.2021, 15:49:52 - INFO - Req from: Guest (sid: fyR5_bx1K091S4WGjDmDjV0xW0rSdvf7)
+3.10.2021, 15:51:15 - INFO - Server is running on port: 3030 
+3.10.2021, 15:52:07 - DEBUG - auth.service - login with username: guest@guest.com (sid: EoGjNGWqp-muxE0OzKJGKUxQn972Fwrx)
+3.10.2021, 15:52:08 - ERROR - Failed to Login Invalid username or password (sid: EoGjNGWqp-muxE0OzKJGKUxQn972Fwrx)
+3.10.2021, 15:52:12 - DEBUG - auth.service - login with username: guest@guest.com (sid: EoGjNGWqp-muxE0OzKJGKUxQn972Fwrx)
+3.10.2021, 15:52:20 - INFO - Req from: Guest (sid: EoGjNGWqp-muxE0OzKJGKUxQn972Fwrx)
+3.10.2021, 17:12:00 - INFO - Server is running on port: 3030 
+3.10.2021, 17:12:45 - DEBUG - auth.service - login with username: guest@guest.com (sid: Rt0tejIxzxW605CLA3Aqv01QRt0H7qN9)
+3.10.2021, 17:12:53 - INFO - Req from: Guest (sid: Rt0tejIxzxW605CLA3Aqv01QRt0H7qN9)
+3.10.2021, 17:13:14 - INFO - Server is running on port: 3030 
+3.10.2021, 17:13:20 - DEBUG - auth.service - login with username: guest@guest.com (sid: 1WWWji-1gJnbWJwAX-GPMLiS_iG0hUL4)
+3.10.2021, 17:13:24 - INFO - Req from: Guest (sid: 1WWWji-1gJnbWJwAX-GPMLiS_iG0hUL4)
+3.10.2021, 17:14:05 - INFO - Server is running on port: 3030 
+3.10.2021, 17:14:53 - INFO - Server is running on port: 3030 
+3.10.2021, 17:14:54 - DEBUG - auth.service - login with username: guest@guest.com (sid: eJTe9xg6cd8Riytd4PVsKJnUYflr_-Oj)
+3.10.2021, 17:14:58 - INFO - Req from: Guest (sid: eJTe9xg6cd8Riytd4PVsKJnUYflr_-Oj)
+3.10.2021, 17:16:22 - INFO - Server is running on port: 3030 
+3.10.2021, 17:16:35 - INFO - Server is running on port: 3030 
+3.10.2021, 17:16:48 - DEBUG - auth.service - login with username: guest@guest.com (sid: _s1A6N5_uvC1oIvJ1lNSfvH6NqwSAJ6Q)
+3.10.2021, 17:16:51 - INFO - Req from: Guest (sid: _s1A6N5_uvC1oIvJ1lNSfvH6NqwSAJ6Q)
+3.10.2021, 17:19:47 - INFO - Server is running on port: 3030 
+3.10.2021, 17:19:50 - DEBUG - auth.service - login with username: guest@guest.com (sid: q79ZpbsamJzaKAQE-KQ9WNPC0gOQnwTd)
+3.10.2021, 17:19:54 - INFO - Req from: Guest (sid: q79ZpbsamJzaKAQE-KQ9WNPC0gOQnwTd)
+3.10.2021, 17:25:11 - INFO - Server is running on port: 3030 
+3.10.2021, 17:25:34 - DEBUG - auth.service - login with username: guest@guest.com (sid: f4AAgbljQzz4v3UOlMWmBBw3bamVDTNF)
+3.10.2021, 17:25:38 - INFO - Req from: Guest (sid: f4AAgbljQzz4v3UOlMWmBBw3bamVDTNF)
+3.10.2021, 17:26:46 - DEBUG - auth.service - signup with username: puki@gmail.com, fullname: Puki Da (sid: f4AAgbljQzz4v3UOlMWmBBw3bamVDTNF)
+3.10.2021, 17:26:46 - DEBUG - auth.route - new account created: {"username":"puki@gmail.com","password":"$2b$10$wvmFroV5YpGvNNKqXiY0Y.WfMB52Rb3Cy66sRvH64W/c6PhkPNKd.","fullname":"Puki Da","_id":"6159bda6a208e02c380401c6"} (sid: f4AAgbljQzz4v3UOlMWmBBw3bamVDTNF)
+3.10.2021, 17:26:46 - DEBUG - auth.service - login with username: puki@gmail.com (sid: f4AAgbljQzz4v3UOlMWmBBw3bamVDTNF)
+3.10.2021, 17:28:27 - INFO - Req from: Puki Da (sid: f4AAgbljQzz4v3UOlMWmBBw3bamVDTNF)
+3.10.2021, 17:28:59 - DEBUG - auth.service - login with username: guest@guest.com (sid: f4AAgbljQzz4v3UOlMWmBBw3bamVDTNF)
+3.10.2021, 17:29:02 - INFO - Req from: Guest (sid: f4AAgbljQzz4v3UOlMWmBBw3bamVDTNF)
+3.10.2021, 17:30:56 - INFO - Server is running on port: 3030 
+3.10.2021, 17:30:59 - DEBUG - auth.service - login with username: guest@guest.com (sid: NsCw3VcUFshJUrKot4xSGgo0nhp111AB)
+3.10.2021, 17:31:03 - INFO - Req from: Guest (sid: NsCw3VcUFshJUrKot4xSGgo0nhp111AB)
+3.10.2021, 17:31:42 - INFO - Server is running on port: 3030 
+3.10.2021, 17:31:44 - DEBUG - auth.service - login with username: guest@guest.com (sid: tFbVdxfUSN6l0gnVrZY4QktZRPwa8bYb)
+3.10.2021, 17:31:47 - INFO - Req from: Guest (sid: tFbVdxfUSN6l0gnVrZY4QktZRPwa8bYb)
+3.10.2021, 17:32:56 - INFO - Server is running on port: 3030 
+3.10.2021, 17:33:01 - DEBUG - auth.service - login with username: guest@guest.com (sid: aWYU4gDGI5ve6kXCSlX4abobjLzC-VBb)
+3.10.2021, 17:33:05 - INFO - Req from: Guest (sid: aWYU4gDGI5ve6kXCSlX4abobjLzC-VBb)
+3.10.2021, 17:33:28 - INFO - Server is running on port: 3030 
+3.10.2021, 17:35:43 - INFO - Server is running on port: 3030 
+3.10.2021, 17:37:22 - INFO - Server is running on port: 3030 
+3.10.2021, 17:37:50 - INFO - Server is running on port: 3030 
+3.10.2021, 17:39:01 - INFO - Server is running on port: 3030 
+3.10.2021, 17:42:09 - INFO - Server is running on port: 3030 
+3.10.2021, 17:51:31 - INFO - Server is running on port: 3030 
+3.10.2021, 17:51:47 - DEBUG - auth.service - login with username: guest@guest.com (sid: hv4NQjxLml6CPGPiTeK9Lg6OGRtq2i18)
+3.10.2021, 17:51:54 - INFO - Req from: Guest (sid: hv4NQjxLml6CPGPiTeK9Lg6OGRtq2i18)
+3.10.2021, 17:52:25 - INFO - Server is running on port: 3030 
+3.10.2021, 17:53:10 - INFO - Server is running on port: 3030 
+3.10.2021, 17:53:28 - DEBUG - auth.service - login with username: guest@guest.com (sid: z2NxxNOSd6wgBOoHTx2YYi1_y4C3GHpa)
+3.10.2021, 17:53:35 - INFO - Req from: Guest (sid: z2NxxNOSd6wgBOoHTx2YYi1_y4C3GHpa)
+3.10.2021, 17:56:40 - INFO - Server is running on port: 3030 
+3.10.2021, 17:56:47 - DEBUG - auth.service - login with username: guest@guest.com (sid: xexfBBxx2biw4GOIS4fDlKrGCMmUWKhi)
+3.10.2021, 17:56:56 - INFO - Req from: Guest (sid: xexfBBxx2biw4GOIS4fDlKrGCMmUWKhi)
+3.10.2021, 17:57:28 - INFO - Server is running on port: 3030 
+3.10.2021, 18:03:52 - INFO - Server is running on port: 3030 
+3.10.2021, 18:05:19 - INFO - Server is running on port: 3030 
+3.10.2021, 18:05:36 - INFO - Server is running on port: 3030 
+3.10.2021, 18:06:44 - DEBUG - auth.service - login with username: guest@guest.com (sid: 6qrnwZ21KmkCNU3P47I1vjTuQt3A88DC)
+3.10.2021, 18:07:12 - INFO - Server is running on port: 3030 
+3.10.2021, 18:07:14 - DEBUG - auth.service - login with username: guest@guest.com (sid: kNAd7cpWaP4ebgR6okjV7Iuj9Uj3IvPj)
+3.10.2021, 18:08:06 - INFO - Server is running on port: 3030 
+3.10.2021, 18:08:10 - DEBUG - auth.service - login with username: guest@guest.com (sid: eU7rsM6QrAwYPDQFJkzd58WMC16jh77N)
+3.10.2021, 18:08:35 - INFO - Server is running on port: 3030 
+3.10.2021, 18:09:47 - INFO - Server is running on port: 3030 
+3.10.2021, 18:09:56 - DEBUG - auth.service - login with username: guest@guest.com (sid: BHtRPKzODfGuK-NDJmZqW80TrFL1Xhvi)
