@@ -7,6 +7,7 @@ export const SideMenuIndex = ({ activities, setPage, isScroll, toggleSideMenu })
   return (
     <section className="side-menu-index">
       <div className={`side-menu-header ${currClass}`}>
+        <span></span>
         <h3>Menu</h3>
         <button className="close-side-menu" onClick={toggleSideMenu}></button>
       </div>
@@ -25,12 +26,16 @@ export const SideMenuIndex = ({ activities, setPage, isScroll, toggleSideMenu })
             <span></span>
             <div>Search cards</div>
           </li>
+          <li onClick={() => setPage('archive')}>
+            <span></span>
+            <div>Archive items</div>
+          </li>
         </ul>
         <div className="side-menu-activity-header">
           <span className="icon-activities"></span>
           <span className="title">Activity</span>
         </div>
-        {<ActivityList activities={activities.slice(0, 15)} />}
+        {activities&&<ActivityList activities={activities.slice(0, 15)} />}
       </div>
       <button className="view-all-activity">View all activity...</button>
       {/* This button is not showing :( whyyy */}

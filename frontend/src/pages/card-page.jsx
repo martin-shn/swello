@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { CircularProgress } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import VideoLabelIcon from '@mui/icons-material/VideoLabel';
+import { ReactComponent as ArchiveIcon } from '../assets/svg/archive-icon.svg';
 
 import { cardService } from '../services/board-services/card.service';
 
@@ -24,7 +25,7 @@ import { CardMembers } from '../cmps/card/card-members';
 import { CardAttachments } from '../cmps/card/card-attachments';
 
 class _CardPage extends Component {
-  state = { card: null };
+  state = { card: null, isArchived: false };
 
   componentDidMount() {
     this.loadCard();
@@ -50,18 +51,24 @@ class _CardPage extends Component {
     const { board } = this.props;
     const { cardId } = this.props.match.params;
     const card = cardService.getCardById(board, cardId);
-    if (!card) this.props.history.replace('/board/' + board._id);
+    let archivedCard;
+    if (!card) {
+      archivedCard = cardService.getCardFromArchive(board, cardId)
+      this.setState({ card: archivedCard.card, isArchived: true })
+      return
+    }
+    if (!card && !archivedCard) this.props.history.replace('/board/' + board._id);
     this.setState({ card });
   };
 
   updateField = (data, activityType, activityValues) => {
     const { board } = this.props;
-    const { card } = this.state;
+    const { card, isArchived } = this.state;
     const updatedCard = { ...card, ...data };
     const activity = activityType
       ? boardService.createActivity(updatedCard, activityType, activityValues)
       : null;
-    const updatedBoard = boardService.updateCard(board, updatedCard, activity);
+    const updatedBoard = boardService.updateCard(board, updatedCard, activity, isArchived);
     this.props.updateBoard(updatedBoard);
   };
 
@@ -74,10 +81,28 @@ class _CardPage extends Component {
     this.props.setCardPopover(null, null, null);
   };
 
+  onArchiveCard = () => {
+    const updatedBoard = boardService.archiveCard(this.props.board, this.state.card)
+    this.props.updateBoard(updatedBoard)
+    this.setState({ isArchived: true })
+  }
+
+  onUnarchivedCard = () => {
+    const updatedBoard = boardService.unarchiveCard(this.props.board, this.state.card.id)
+    this.props.updateBoard(updatedBoard)
+    this.setState({ isArchived: false })
+  }
+
+  onRemoveCard = () => {
+    const updatedBoard = boardService.removeCard(this.props.board, this.state.card.id)
+    this.props.updateBoard(updatedBoard)
+    this.onCloseCard();
+  }
+
   render() {
     if (!this.state.card) return <CircularProgress sx={{ position: 'absolute' }} />;
     const { description, title, checklists, dueDate, attachments } = this.state.card;
-    const { card } = this.state;
+    const { card, isArchived } = this.state;
     const coverImg = card.cover?.imgs?.find(img => img.id === card.cover.bgImgId)
     const { cardPopover, board, setCardPopover, closeCardPopover } = this.props;
     const { updateField } = this;
@@ -109,6 +134,10 @@ class _CardPage extends Component {
                 </div>
               </div>
             }
+            {isArchived && <div className="archive-banner flex align-center">
+              <ArchiveIcon />
+              <p>This card is archived.</p>
+            </div>}
             <CardHeader
               updateField={updateField}
               title={title}
@@ -155,6 +184,10 @@ class _CardPage extends Component {
                 updateField={updateField}
                 onOpenPopover={this.onOpenPopover}
                 dueDate={dueDate}
+                isArchived={isArchived}
+                onArchiveCard={this.onArchiveCard}
+                onUnarchivedCard={this.onUnarchivedCard}
+                onRemoveCard={this.onRemoveCard}
               />
             </div>
           </section>

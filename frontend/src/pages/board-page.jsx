@@ -95,7 +95,7 @@ export class _BoardPage extends Component {
 
   onUpdateTitle = title => {
     const { board } = this.props;
-    const updatedBoard = { ...this.board, title };
+    const updatedBoard = { ...board, title };
     this.props.updateBoard(updatedBoard);
   };
 
@@ -116,7 +116,11 @@ export class _BoardPage extends Component {
     const updatedBoard = boardService.sortList(board, list, sortBy)
     this.props.updateBoard(updatedBoard)
   }
-
+  onArchiveList = (list) => {
+    const { board } = this.props;
+    const updatedBoard = boardService.archiveList(board, list)
+    this.props.updateBoard(updatedBoard)
+  }
   onUpdateUser = async user => {
     await this.props.onUpdateUser(user);
   };
@@ -178,6 +182,7 @@ export class _BoardPage extends Component {
           onMoveList={this.onMoveList}
           onMoveAllCardsToList={this.onMoveAllCardsToList}
           onSortList={this.onSortList}
+          onArchiveList={this.onArchiveList}
         />
         <SideMenu />
       </main>

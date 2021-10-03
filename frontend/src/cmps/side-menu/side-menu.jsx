@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { SideMenuIndex } from './side-menu-index';
 import { toggleSideMenu } from '../../store/actions/system.actions';
+import { updateBoard } from '../../store/actions/board.actions';
 import { SideMenuSearch } from './side-menu-search';
+import { SideMenuArchive } from './side-menu-archive'
 
 class _SideMenu extends React.Component {
   state = {
@@ -31,7 +33,7 @@ class _SideMenu extends React.Component {
 
   render() {
     const { currPage, isScroll } = this.state;
-    const { board, toggleSideMenu } = this.props;
+    const { board, toggleSideMenu, updateBoard } = this.props;
     return (
       <aside className={`side-menu${this.props.isSideMenuOpen ? ' open' : ''}${this.state.class}`}>
         <div className="side-menu-container">
@@ -45,7 +47,10 @@ class _SideMenu extends React.Component {
               />
             )}
             {currPage === 'search' && (
-              <SideMenuSearch setPage={this.setPage} toggleSideMenu={toggleSideMenu} />
+              <SideMenuSearch setPage={this.setPage} toggleSideMenu={toggleSideMenu} board={board} />
+            )}
+            {currPage === 'archive' && (
+              <SideMenuArchive setPage={this.setPage} toggleSideMenu={toggleSideMenu} board={board} updateBoard={updateBoard} />
             )}
           </div>
         </div>
@@ -56,6 +61,7 @@ class _SideMenu extends React.Component {
 
 const mapDispatchToProps = {
   toggleSideMenu,
+  updateBoard
 };
 
 const mapStateToProps = state => ({

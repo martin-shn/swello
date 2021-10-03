@@ -10,7 +10,7 @@ export function addList(board, listTitle) {
 }
 
 export function copyList(board, list, listTitle) {
-    const copiedList = JSON.parse(JSON.stringify(list));
+    const copiedList = _.cloneDeep(list)
     copiedList.title = listTitle;
     copiedList.id = utilService.makeId();
     const listIdx = board.lists.findIndex(currList => currList.id === list.id);
@@ -51,5 +51,19 @@ export function sortList(board, list, sortBy) {
         listCopy.cards.sort((card1, card2) => card1.title.localeCompare(card2.title))
     }
     board.lists = board.lists.map(list => list.id === listCopy.id ? listCopy : list)
+    return board;
+}
+
+export function archiveList(board, list) {
+    const listIdx = board.lists.findIndex(currList => currList.id === list.id)
+    board.lists.splice(listIdx, 1)
+    board.archive.lists.push({ idx: listIdx, list })
+    return board;
+}
+
+export function unarchiveList(board, archivedList) {
+    const archivedListIdx = board.archive.lists.findIndex(currArchivedList => currArchivedList.list.id === archivedList.list.id)
+    board.archive.lists.splice(archivedListIdx, 1)
+    board.lists.splice(archivedList.idx, 0, archivedList.list)
     return board;
 }

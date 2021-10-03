@@ -89,6 +89,32 @@
     }
   }
 
+  .archive-banner {
+    height: 54px;
+    margin: 0 -8px 0 -16px;
+    padding: 12px;
+    gap: 14px;
+    background-color: #fdfae5;
+    background-image: linear-gradient(
+      to bottom right,
+      rgba(0, 0, 0, 0.05) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(0, 0, 0, 0.05) 50%,
+      rgba(0, 0, 0, 0.05) 75%,
+      transparent 75%,
+      transparent
+    );
+    background-size: 14px 14px;
+    p {
+      font-size: 16px;
+      line-height: 30px;
+    }
+    svg {
+      color: rgb(66, 82, 110);
+    }
+  }
+
   .data-and-sidebar {
     gap: 20px;
   }
@@ -100,6 +126,7 @@
   .card-sidebar {
     min-width: 192px;
     padding-right: 8px;
+    margin-bottom: 24px;
     > * {
       width: 100%;
     }
@@ -112,6 +139,28 @@
         margin: 0 6px 0 -6px;
         pointer-events: none;
       }
+      &[name="add-members"],
+      &[name="copy-card"],
+      &[name="unarchive-card"] {
+        margin-top: 0;
+      }
+      &[name="archive-card"]::before {
+        font-family: FA-solid;
+        content: "\f187";
+        margin: 0 6px 0 -6px;
+        height: 16px;
+        width: 16px;
+      }
+      &[name="remove-item"] {
+        color: #fff;
+        background-color: #b04632;
+        &:hover {
+          background-color: #933b27;
+        }
+      }
+    }
+    .actions {
+      margin-top: 24px;
     }
   }
 
@@ -278,6 +327,8 @@
     color: #0079bf;
   }
 }
+
+// COVER COLORS
 
 .card-preview.full-cover,
 .cover {

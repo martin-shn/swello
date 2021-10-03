@@ -64,16 +64,19 @@
           {
             "id": "c101",
             "title": "Replace logo",
-            "createdAt" : 1589983468418,
+            "createdAt": 1633188020710,
             "style": {
               "bgColor": "#aa0055"
             },
-            "labelIds": ["l101", "l102"]
+            "labelIds": [
+              "l101",
+              "l102"
+            ]
           },
           {
             "id": "c102",
             "title": "location example",
-            "createdAt" : 1589983468418,
+            "createdAt": 1633183120710,
             "location": {
               "title": "אלנבי 84 - תל אביב - מסעדת לה-פון-פון",
               "lat": 32.0672452,
@@ -97,10 +100,15 @@
         },
         "card": {
           "id": "c101",
-          "title": "Replace Logo"
+          "title": "Replace Logo",
+          "createdAt": 1633178120710
         }
       }
-    ]
+    ],
+    "archive": {
+      "lists": [],
+      "cards": []
+    }
   },
   {
     "_id": "b102",
@@ -164,11 +172,13 @@
         "cards": [
           {
             "id": "c101",
-            "title": "Replace logo"
+            "title": "Replace logo",
+            "createdAt": 1633188120710
           },
           {
             "id": "c102",
-            "title": "Add Samples"
+            "title": "Add Samples",
+            "createdAt": 1633188100710
           }
         ],
         "style": {}
@@ -180,12 +190,12 @@
           {
             "id": "c103",
             "title": "Do that",
-            "createdAt" : 1589983468418
+            "createdAt": 1633088120710
           },
           {
             "id": "c104",
             "title": "Help me",
-            "createdAt" : 1589983468418,
+            "createdAt": 1633008120710,
             "description": "description",
             "comments": [
               {
@@ -222,7 +232,10 @@
                 "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
               }
             ],
-            "labelIds": ["l101", "l102"],
+            "labelIds": [
+              "l101",
+              "l102"
+            ],
             "createdAt": 1590999730348,
             "dueDate": 16156215211,
             "byMember": {
@@ -251,9 +264,14 @@
         },
         "card": {
           "id": "c101",
-          "title": "Replace Logo"
+          "title": "Replace Logo",
+          "createdAt": 1633183120710
         }
       }
-    ]
+    ],
+    "archive": {
+      "lists": [],
+      "cards": []
+    }
   }
 ]

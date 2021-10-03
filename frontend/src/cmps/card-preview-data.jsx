@@ -32,12 +32,12 @@ class _CardPreviewData extends Component {
         <div className="flex align-center wrap" style={{ gap: '12px', flexGrow: '1' }}>
           {dueDate && <CardPreviewDueDate dueDate={dueDate} toggleDueDate={this.toggleDueDate} />}
           {description && <DescriptionIcon />}
-          {attachments?.length && (
+          {attachments?.length > 0 && (
             <div className="flex align-center">
               <AttachmentIcon /> <span>{attachments.length}</span>
             </div>
           )}
-          {checklists && <CardPreviewChecklists checklists={checklists} />}
+          {checklists?.length > 0 && <CardPreviewChecklists checklists={checklists} />}
           {location && <LocationIcon />}
         </div>
         {members?.length > 0 && <CardPreviewMembers members={members} />}

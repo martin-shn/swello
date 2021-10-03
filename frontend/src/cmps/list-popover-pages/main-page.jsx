@@ -1,5 +1,5 @@
 import CloseIcon from '@mui/icons-material/Close';
-export function MainPage({ onMovePage, list, onTogglePopover, onAddingTopCard }) {
+export function MainPage({ onMovePage, list, onTogglePopover, onAddingTopCard, onArchiveList }) {
     return (
         <>
             <div className="popover-header flex align-center">
@@ -22,7 +22,7 @@ export function MainPage({ onMovePage, list, onTogglePopover, onAddingTopCard })
                 </ul>
                 <hr />
                 <ul className="popover-list clean-list">
-                    <li><button className="archive-list">Archive this list</button></li>
+                    <li><button className="archive-list" onClick={() => { onArchiveList(list); onTogglePopover(null) }}>Archive this list</button></li>
                 </ul>
             </div>
         </>

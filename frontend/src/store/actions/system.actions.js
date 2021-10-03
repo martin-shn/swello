@@ -1,6 +1,6 @@
 export function toggleMenu(isOpen, id, anchor) {
-  return async dispatch => {
-    dispatch({ type: 'TOGGLE_MENU', menu: {isOpen, id, anchor} });
+  return dispatch => {
+    dispatch({ type: 'TOGGLE_MENU', menu: { isOpen, id, anchor } });
   };
 }
 

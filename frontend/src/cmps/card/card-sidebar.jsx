@@ -5,10 +5,17 @@ import LocationIcon from '@mui/icons-material/Room';
 import DateIcon from '@mui/icons-material/Schedule';
 import AttachmentIcon from '@mui/icons-material/AttachFileOutlined';
 import LabelIcon from '@mui/icons-material/LabelOutlined';
+import CopyIcon from '@mui/icons-material/ContentCopy';
+import MoveIcon from '@mui/icons-material/ArrowForward';
+import RefreshIcon from '@mui/icons-material/Replay';
+import RemoveIcon from '@mui/icons-material/Remove';
 
-export const CardSidebar = ({ board, card, updateField, onOpenPopover, dueDate }) => {
+import { constService } from '../../services/const.service';
+
+export const CardSidebar = (props) => {
+  const { board, card, updateField, onOpenPopover, dueDate, isArchived, onArchiveCard, onUnarchivedCard, onRemoveCard } = props;
   return (
-    <aside className="card-sidebar">
+    <aside className="card-sidebar flex column">
       <span className="sub-header">Add to card</span>
       <button
         name="add-members"
@@ -48,6 +55,29 @@ export const CardSidebar = ({ board, card, updateField, onOpenPopover, dueDate }
         <CoverIcon />
         Cover
       </button>
-    </aside>
+
+      <span className="sub-header actions">Actions</span>
+      {!isArchived &&
+        <>
+          <button name="copy-card" onClick={ev => onOpenPopover(ev, { board, card })}>
+            <CopyIcon />
+            Copy
+          </button>
+          <button name="move-card" onClick={ev => onOpenPopover(ev, { board, card })}>
+            <MoveIcon />
+            Move
+          </button>
+          <button name="archive-card" onClick={onArchiveCard}>
+            Archive
+          </button>
+        </>
+      }
+      {isArchived &&
+        <>
+          <button name="unarchive-card" onClick={onUnarchivedCard}><RefreshIcon /> Send to board</button>
+          <button name="remove-item" onClick={ev => onOpenPopover(ev, { item: card, onRemoveItem: onRemoveCard, msg: constService.MSG_REMOVE_CARD, itemType: 'card' })}><RemoveIcon /> Delete</button>
+        </>
+      }
+    </aside >
   );
 };

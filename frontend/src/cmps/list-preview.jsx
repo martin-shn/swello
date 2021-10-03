@@ -92,7 +92,8 @@ export class _ListPreview extends Component {
       onCopyList,
       onMoveList,
       onMoveAllCardsToList,
-      onSortList
+      onSortList,
+      onArchiveList
       // board
     } = this.props;
     const { popoverPage } = this.state;
@@ -148,6 +149,7 @@ export class _ListPreview extends Component {
                   list={list}
                   onTogglePopover={onTogglePopover}
                   onAddingTopCard={onAddingTopCard}
+                  onArchiveList={onArchiveList}
                 />
               )}
               {popoverPage === 'copy' && (

@@ -11,18 +11,15 @@ import { ReactComponent as ArrowDownIcon } from '../assets/svg/arrow-down.svg';
 import { ReactComponent as NotificationsIcon } from '../assets/svg/notifications.svg';
 import { BoardAdd } from './board-list/board-add';
 
-import ClickAwayListener from '@mui/material/ClickAwayListener';
 import { styled } from '@mui/material/styles';
-import Grow from '@mui/material/Grow';
 import Fade from '@mui/material/Fade';
-import Paper from '@mui/material/Paper';
-import Popper from '@mui/material/Popper';
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
+// import MenuItem from '@mui/material/MenuItem';
 
-import { PopoverMenu } from './menu/popover-menu';
+import { PopoverMenu } from './header-popover-pages/popover-menu';
+import {BoardsMenuContent} from './header-popover-pages/boards-menu-content'
+import {StarredBoardsMenuContent} from './header-popover-pages/starredboards-menu-content'
 
-import { ReactComponent as StarredImage } from '../assets/svg/starred-board.svg';
+// import { ReactComponent as StarredImage } from '../assets/svg/starred-board.svg';
 import { HeaderSearch } from './header-search';
 
 class _AppHeader extends Component {
@@ -60,28 +57,20 @@ class _AppHeader extends Component {
         this.setState({ isModal: !this.state.isModal });
     };
 
-    // STARRED BOARDS MENU
-    onStarredBoards = () => {
-        this.setState({ isStarredMenuOpen: !this.state.isStarredMenuOpen });
-    };
-
-    onCloseStarredBoards = (event) => {
-        if (this.starredAnchorRef.current && this.starredAnchorRef.current.contains(event.target)) {
-            return;
-        }
-        this.setState({ isStarredMenuOpen: false });
-    };
-
     // MY BOARDS MENU
     onBoards = (ev, id) => {
         this.props.toggleMenu(true, id, ev.target.parentElement);
     };
 
+    onClose =()=>{
+      this.props.toggleMenu(false)
+    }
+
     // remove starred board from app header popper
     onStar = async (ev, boardId) => {
         ev.preventDefault();
         ev.stopPropagation();
-        this.onCloseStarredBoards(ev);
+        this.onClose();
         let newUser = { ...this.props.user };
         newUser.starredBoardsIds = newUser.starredBoardsIds.filter((id) => id !== boardId);
         await this.props.onUpdateUser(newUser);
@@ -97,19 +86,14 @@ class _AppHeader extends Component {
       [`& .${tooltipClasses.tooltip}`]: {
           backgroundColor: 'rgb(23, 43, 77)',
           color: 'rgb(224, 226, 231)',
-          // position: 'absolute',
-          // top: 'calc(100% + 8px)',
-          // left: '-11px',
-          // borderRadius: '3px',
-          // whiteSpace: 'nowrap',
-          padding: '4px 8px',
-          fontSize: '0.8rem'
+          padding: '4px 6px',
+          fontSize: '0.7rem',
           }
         }));
 
     render() {
         const { isUserBoardsPage } = this.props;
-        const { isStarredMenuOpen, isBoardsMenuOpen, starredBoards } = this.state;
+        const { isStarredMenuOpen, starredBoards } = this.state;
         const { boards, board, user } = this.props;
 
         return (
@@ -123,7 +107,6 @@ class _AppHeader extends Component {
                 </Link>
                 <div className='actions'>
                     <button
-                        // ref={this.boardsAnchorRef}
                         id='composition-button'
                         aria-controls={isStarredMenuOpen ? 'composition-menu' : undefined}
                         aria-expanded={isStarredMenuOpen ? 'true' : undefined}
@@ -136,113 +119,7 @@ class _AppHeader extends Component {
                         <ArrowDownIcon />
                     </button>
                     <PopoverMenu id='boards' header='Boards' classNames='borads-popper header-popper-menu'>
-                        {/* <Popper
-            className="borads-popper header-popper-menu"
-            open={isBoardsMenuOpen}
-            anchorEl={this.boardsAnchorRef.current}
-            role={undefined}
-            placement="bottom-start"
-            transition
-            disablePortal>
-            {({ TransitionProps, placement }) => (
-              <Grow
-                {...TransitionProps}
-                style={{
-                  transformOrigin: placement === 'bottom-start' ? 'left top' : 'left bottom',
-                }}>
-                <Paper>
-                  <ClickAwayListener onClickAway={this.onCloseBoards}>
-                    <MenuList
-                      autoFocusItem={isBoardsMenuOpen}
-                      id="composition-menu"
-                      aria-labelledby="composition-button">
-                      <div className="popper-header">
-                        <div>Boards</div>
-                        <button onClick={this.onCloseBoards}></button>
-                      </div> */}
-                        {board && (
-                            <div className='current-board list-group'>
-                                <div>CURRENT BOARD</div>
-                                <div>
-                                    <div
-                                        style={{
-                                            backgroundImage: `url(${board?.style?.imgUrl}&w=400)`,
-                                            backgroundColor: `${board?.style?.bgColor}`,
-                                        }}
-                                    >
-                                        {board.createdBy.fullname.charAt(0)}
-                                    </div>
-                                    <span>{board.title}</span>
-                                </div>
-                            </div>
-                        )}
-                        <div className='your-boards list-group'>
-                            <div>YOUR BOARDS</div>
-                            <ul>
-                                {boards
-                                    .filter((board) => board.createdBy._id === user._id && !user.starredBoardsIds.includes(board._id))
-                                    .map((board) => (
-                                        <MenuItem
-                                            key={board._id}
-                                            onClick={(ev) => {
-                                                this.onCloseBoards(ev);
-                                                this.props.history.push(`/board/${board._id}`);
-                                            }}
-                                        >
-                                            <div>
-                                                <div
-                                                    style={{
-                                                        backgroundImage: `url(${board?.style?.imgUrl}&w=400)`,
-                                                        backgroundColor: `${board?.style?.bgColor}`,
-                                                    }}
-                                                >
-                                                    {board.createdBy.fullname.charAt(0)}
-                                                </div>
-                                                <span>{board.title}</span>
-                                            </div>
-                                        </MenuItem>
-                                    ))}
-                            </ul>
-                        </div>
-                        <div className='guest-boards your-boards list-group'>
-                            <div>GUEST BOARDS</div>
-                            <ul>
-                                {boards
-                                    .filter(
-                                        (board) =>
-                                            board.members.some((member) => member._id === user._id) &&
-                                            !user.starredBoardsIds.includes(board._id) &&
-                                            board.createdBy._id !== user._id
-                                    )
-                                    .map((board) => (
-                                        <MenuItem
-                                            key={board._id}
-                                            onClick={(ev) => {
-                                                this.onCloseBoards(ev);
-                                                window.location.href = `/board/${board._id}`;
-                                            }}
-                                        >
-                                            <div>
-                                                <div
-                                                    style={{
-                                                        backgroundImage: `url(${board?.style?.imgUrl}&w=400)`,
-                                                        backgroundColor: `${board?.style?.bgColor}`,
-                                                    }}
-                                                >
-                                                    {board.createdBy.fullname.charAt(0)}
-                                                </div>
-                                                <span>{board.title}</span>
-                                            </div>
-                                        </MenuItem>
-                                    ))}
-                            </ul>
-                        </div>
-                        {/* </MenuList>
-                  </ClickAwayListener>
-                </Paper>
-              </Grow>
-            )}
-          </Popper> */}
+                        {boards&&<BoardsMenuContent boards={boards} board={board} user={user} onClose={this.onClose}/>}
                     </PopoverMenu>
                     <button
                         // ref={this.starredAnchorRef}
@@ -250,7 +127,6 @@ class _AppHeader extends Component {
                         aria-controls={isStarredMenuOpen ? 'composition-menu' : undefined}
                         aria-expanded={isStarredMenuOpen ? 'true' : undefined}
                         aria-haspopup='true'
-                        // onClick={this.onStarredBoards}>
                         onClick={(ev) => {
                             this.onBoards(ev, 'starred');
                         }}
@@ -259,80 +135,14 @@ class _AppHeader extends Component {
                         <ArrowDownIcon />
                     </button>
                     <PopoverMenu id='starred' header='Starred boards' classNames='starred-borads-popper header-popper-menu'>
-                        {/* <Popper
-            className="starred-borads-popper header-popper-menu"
-            open={isStarredMenuOpen}
-            anchorEl={this.starredAnchorRef.current}
-            role={undefined}
-            placement="bottom-start"
-            transition
-            disablePortal>
-            {({ TransitionProps, placement }) => (
-              <Grow
-                {...TransitionProps}
-                style={{
-                  transformOrigin: placement === 'bottom-start' ? 'left top' : 'left bottom',
-                }}>
-                <Paper>
-                  <ClickAwayListener onClickAway={this.onCloseStarredBoards}>
-                    <MenuList
-                      autoFocusItem={isStarredMenuOpen}
-                      id="composition-menu"
-                      aria-labelledby="composition-button">
-                      <div className="popper-header">
-                        <div>Starred boards</div>
-                        <button onClick={this.onCloseStarredBoards}></button>
-                      </div> */}
-                        <div className='starred-boards list-group'>
-                            {!starredBoards.length && (
-                                <div className='empty-starred-list'>
-                                    <StarredImage />
-                                    <p className='empty-starred-message'>Star important boards to access them quickly and easily.</p>
-                                </div>
-                            )}
-                            <ul>
-                                {starredBoards.map((starredBoard) => (
-                                    <MenuItem
-                                        key={starredBoard._id}
-                                        onClick={(ev) => {
-                                            this.onCloseBoards(ev);
-                                            this.props.history.push(`/board/${starredBoard._id}`);
-                                        }}
-                                    >
-                                        <div>
-                                            <div
-                                                style={{
-                                                    backgroundImage: `url(${starredBoard?.style?.imgUrl}&w=400)`,
-                                                    backgroundColor: `${starredBoard?.style?.bgColor}`,
-                                                }}
-                                            >
-                                                {/* {starredBoard.createdBy.fullname.charAt(0)} */}
-                                            </div>
-                                            <span>{starredBoard.title}</span>
-                                            <span
-                                                onClick={(ev) => {
-                                                    this.onStar(ev, starredBoard._id);
-                                                }}
-                                                title='Click to unstar this board. It will be removed from your starred list.'
-                                            ></span>
-                                        </div>
-                                    </MenuItem>
-                                ))}
-                            </ul>
-                        </div>
-                        {/* </MenuList>
-                  </ClickAwayListener>
-                </Paper>
-              </Grow>
-            )}
-          </Popper> */}
+                       <StarredBoardsMenuContent starredBoards={starredBoards} onClose={this.onClose} onStar={this.onStar}/>
                     </PopoverMenu>
                     <button className='btn-create' onClick={this.onBtnCreate}>
                         Create
                     </button>
                 </div>
                 <div>
-                    <HeaderSearch toggleMenu={this.props.toggleMenu}/>
+                    <HeaderSearch board={this.props.board} menu={this.props.menu} toggleMenu={this.props.toggleMenu}/>
                     <button
                         className='btn-notifications'
                         onClick={(ev) => {
@@ -360,7 +170,7 @@ class _AppHeader extends Component {
                                             </div>
                                             <div className='notification-inner-header'>
                                                 <div>
-                                                    <img alt />
+                                                    <img alt="img" />
                                                 </div>
                                                 <span>notification title</span>
                                             </div>
@@ -409,6 +219,7 @@ const mapStateToProps = (state) => {
         boards: state.boardModule.boards,
         board: state.boardModule.board,
         user: state.userModule.user,
+        menu: state.systemModule.menu
     };
 };
 

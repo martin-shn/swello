@@ -1,0 +1,67 @@
+.move-card, .copy-card {
+    form {
+        .select-container {
+            gap: 8px;
+            margin-bottom: 8px;
+            .select {
+                height: 48px;
+                position: relative;
+                background-color: #091e420a;
+                border: none;
+                border-radius: 3px;
+                padding: 6px 12px;
+
+                &:first-child {
+                    flex: 3;
+                }
+                &:last-child {
+                    width: 80px;
+                }
+                &:hover {
+                    background-color: #091e4214;
+                    cursor: pointer;
+                }
+                span {
+                    &:first-child {
+                        color: #5e6c84;
+                        font-size: 12px;
+                        line-height: 16px;
+                    }
+                    &:last-child {
+                        font-size: 14px;
+                        line-height: 20px;
+                    }
+                }
+                label {
+                    display: none;
+                }
+                select {
+                    border: none;
+                    cursor: pointer;
+                    height: 50px;
+                    left: 0;
+                    margin: 0;
+                    opacity: 0;
+                    position: absolute;
+                    top: 0;
+                    width: 100%;
+                    z-index: 11;
+                    font-family: inherit;
+                    font-size: inherit;
+                }
+            }
+        }
+        button {
+            align-self: flex-start;
+            padding: 6px 24px;
+            color: #fff;
+            background-color: #0079bf;
+            margin-top: 6px;
+            margin-bottom: -6px;
+            line-height: 20px;
+            &:hover {
+                background-color: #026aa7;
+            }
+        }
+    }
+}

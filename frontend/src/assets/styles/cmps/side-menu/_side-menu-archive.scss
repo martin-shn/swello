@@ -1,0 +1,95 @@
+.archive-container {
+    padding: 12px 6px 12px 12px;
+    color: #172b4d;
+    margin-bottom: 12px;
+    .archive-btn {
+        padding: 6px 12px;
+        background-color: #091e420a;
+        white-space: nowrap;
+        &:hover {
+            background-color: #091e4214;
+        }
+        &:active {
+            background-color: #e4f0f6;
+            color: #0079bf;
+        }
+    }
+    .search {
+        margin-bottom: 12px;
+        input {
+            flex: 1 1 auto;
+            margin: 0 6px 0 0;
+            background-color: #fafbfc;
+            box-shadow: inset 0 0 0 2px #dfe1e6;
+            &::placeholder {
+                color: inherit;
+            }
+            &:focus {
+                background-color: #fff;
+                box-shadow: inset 0 0 0 2px #0079bf;
+            }
+        }
+        button {
+            margin: 2px 0;
+        }
+    }
+    .items-container {
+        .empty-list {
+            border-radius: 6px;
+            padding: 24px 12px;
+            background-color: #091e420a;
+            text-align: center;
+            color: #5e6c84;
+        }
+        .archive-list {
+            border-bottom: 1px solid #091e4221;
+            padding: 2px 0;
+            justify-content: space-between;
+            .item-name {
+                padding: 8px;
+            }
+            button {
+                margin: 6px 0;
+                gap: 6px;
+                svg {
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+        }
+        .archive-card {
+            margin: 8px auto 16px;
+            max-width: 260px;
+            .card-preview {
+                &:hover {
+                    background-color: #fff;
+                }
+                .edit-icon {
+                    display: none;
+                }
+            }
+            .card-cover {
+                margin: -6px -6px 2px -6px;
+            }
+            svg {
+                width: 16px;
+                height: 16px;
+            }
+            .options {
+                color: #5e6c84;
+                p {
+                    margin-left: 8px;
+                }
+                button {
+                    display: inline;
+                    background-color: transparent;
+                    text-decoration: underline;
+                    &:hover {
+                        color: #172b4d;
+                        background-color: transparent;
+                    }
+                }
+            }
+        }
+    }
+}

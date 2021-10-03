@@ -2,8 +2,8 @@ import { storageService } from './async-storage.service';
 import { userService } from './user.service';
 import { socketService, SOCKET_EVENT_REVIEW_ADDED } from './socket.service';
 import { utilService } from './util.service';
-import { addList, copyList, updateList, moveList, moveAllCardsToList, sortList } from './board-services/list.service';
-import { updateCard, addCard, moveCard } from './board-services/card.service';
+import { addList, copyList, updateList, moveList, moveAllCardsToList, sortList, archiveList, unarchiveList } from './board-services/list.service';
+import { updateCard, addCard, moveCard, archiveCard, unarchiveCard, removeCard, copyCard } from './board-services/card.service';
 export const boardService = {
   add,
   query,
@@ -15,6 +15,10 @@ export const boardService = {
   updateCard,
   addCard,
   moveCard,
+  copyCard,
+  archiveCard,
+  unarchiveCard,
+  removeCard,
   addList,
   copyList,
   updateList,
@@ -22,6 +26,8 @@ export const boardService = {
   moveAllCardsToList,
   createActivity,
   sortList,
+  archiveList,
+  unarchiveList
 };
 
 window.bs = boardService;
