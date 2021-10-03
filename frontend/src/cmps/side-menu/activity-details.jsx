@@ -41,10 +41,10 @@ function _DynamicActivity ({createdBy, card, type, values, board }) {
         {isValidImg && <img src={values.attachment.url} alt='attachment' style={{ maxHeight: '100px' }} />}
       </div>;
     case 'ADD-DUE-DATE':
-      return <span>set the due date on <CardLink /> to
+      return <span>set the due date on <CardLink /> to {' '}
         <span className={`due-date ${ cardService.checkDueDate({ date: values.date, isComplete: false }) }`}>
           <span className="due-date-icon"></span>
-          <span> {utilService.getFormattedDate(values.date, true)}</span>
+          <span>{utilService.getFormattedDate(values.date, true)}</span>
         </span>
       </span>;
     case 'MARK-DUE-DATE':

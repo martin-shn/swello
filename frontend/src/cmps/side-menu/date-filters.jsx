@@ -7,8 +7,7 @@ export const DateFilters = ({ updateFilter, filterDate }) => {
 
   const onToggleComplete = isCompleteInput => {
     const diff = filterDate.diff === 'NONE' ? Infinity : filterDate.diff; // reset no due date filter if choosing iscomplete filter
-    const isComplete =
-      filterDate.isComplete === !isCompleteInput || filterDate.isComplete === null ? isCompleteInput : null;
+    const isComplete = filterDate.isComplete !== isCompleteInput ? isCompleteInput : null;
     updateFilter({ dueDate: { ...filterDate, diff, isComplete } });
   };
 
