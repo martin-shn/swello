@@ -94,6 +94,8 @@ export function archiveCard(board, card) {
   const listIdx = board.lists.findIndex(list => list.cards.some(currCard => currCard.id === card.id))
   const cardIdx = board.lists[listIdx].cards.findIndex(currCard => currCard.id === card.id)
   board.lists[listIdx].cards.splice(cardIdx, 1);
+  if (!board.archive) board.archive=[]
+  if (!board.archive.cards) board.archive.cards=[]
   board.archive.cards.push({ listId: board.lists[listIdx].id, idx: cardIdx, card })
   return board;
 }

@@ -58,7 +58,7 @@ export class SideMenuArchive extends React.Component {
                     <div className="items-container flex column">
                         {currItem === 'cards' &&
                             <>
-                                {!board.archive.cards.length ?
+                                {!board.archive?.cards?.length ?
                                     <p className="empty-list">No archived cards</p>
                                     : <ul className="clean-list">
                                         {board.archive.cards.map(archivedCard => {
@@ -79,7 +79,7 @@ export class SideMenuArchive extends React.Component {
                         }
                         {currItem === 'lists' &&
                             <>
-                                {!board.archive.lists.length ?
+                                {!board.archive?.lists?.length ?
                                     <p className="empty-list">No archived lists</p>
                                     : <ul className="clean-list">
                                         {board.archive.lists.map(archivedList => {

@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import EditIcon from '@mui/icons-material/Edit';
 import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
+
+import EditIcon from '@mui/icons-material/Edit';
 import { Draggable } from 'react-beautiful-dnd';
 import { CardPreviewLabels } from './card-preview-labels';
 import { CardPreviewData } from './card-preview-data';
+import { MainCardMenu } from './card/card-popover-pages/main-card-menu';
+import { toggleMenu } from '../store/actions/system.actions';
 
 export class CardPreview extends Component {
   render() {
-    const { card, idx } = this.props;
+    const { card, idx , toggleMenu} = this.props;
 
     // prettier-ignore
     return (
@@ -20,8 +24,9 @@ export class CardPreview extends Component {
               {...provided.dragHandleProps}
               ref={provided.innerRef}
               >
-              <CardPreviewInfo card={card}/>
+              <CardPreviewInfo card={card} toggleMenu={toggleMenu}/>
             </div>
+              <MainCardMenu id={card.id} header="test" classNames="main-card-menu"/>
           </>
         )}
       </Draggable>
@@ -29,7 +34,7 @@ export class CardPreview extends Component {
   }
 }
 
-function _CardPreviewInfo({ card, history, location }) {
+function _CardPreviewInfo({ card, history, location , toggleMenu}) {
   const coverImg = card.cover?.imgs?.find(img => img.id === card.cover.bgImgId);
   const coverStyle =
     coverImg && card.cover.size === 'full-cover'
@@ -53,7 +58,10 @@ function _CardPreviewInfo({ card, history, location }) {
           }></div>
       )}
       {(!card.cover || card.cover.size !== 'full-cover') && <CardPreviewLabels card={card} />}
-      <button className="edit-icon">
+      <button className="edit-icon" onClick={(ev)=>{
+        ev.stopPropagation()
+        toggleMenu(false, card.id, ev.target.parentElement)
+      }}>
         <EditIcon fontSize="small" />
       </button>
       <div
@@ -68,4 +76,13 @@ function _CardPreviewInfo({ card, history, location }) {
     </div>
   );
 }
-export const CardPreviewInfo = withRouter(_CardPreviewInfo);
+
+const mapDispatchToProps = {
+  toggleMenu,
+};
+
+// const mapStateToProps = state => ({
+// });
+
+
+export const CardPreviewInfo = connect(null, mapDispatchToProps)(withRouter(_CardPreviewInfo));
