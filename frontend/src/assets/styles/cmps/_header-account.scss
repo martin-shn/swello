@@ -1,0 +1,26 @@
+.header-account {
+  display: flex;
+  flex-direction: column;
+  .user-info {
+    padding: 12px;
+    gap: 8px;
+    .avatar {
+      height: 40px !important;
+      width: 40px !important;
+    }
+    .username {
+      font-size: 9pt;
+      color: #b3bac5;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+  .btn-logout {
+    margin-top: 2px;
+    padding: 6px 12px;
+    width: 100%;
+    &:hover {
+      background: rgba(9, 30, 66, 0.04);
+    }
+  }
+}

@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { togglePopover, setCardPopover, toggleMenu } from '../store/actions/system.actions';
 import { createBoard, loadBoards } from '../store/actions/board.actions';
-import { onUpdateUser } from '../store/actions/user.actions';
+import { onUpdateUser, onLogout } from '../store/actions/user.actions';
 import { Link } from 'react-router-dom';
 
 import { ReactComponent as ArrowDownIcon } from '../assets/svg/arrow-down.svg';
@@ -20,7 +20,7 @@ import { StarredBoardsMenuContent } from './header-popover-pages/starredboards-m
 import { HeaderSearch } from './header-popover-pages/header-search';
 import { AppAvatar } from './general/app-avatar';
 import { HeaderNotifications } from './header-popover-pages/header-notifications';
-import { HeaderUser } from './header-popover-pages/header-user';
+import { HeaderAccount } from './header-popover-pages/header-account';
 
 class _AppHeader extends Component {
   state = {
@@ -82,9 +82,8 @@ class _AppHeader extends Component {
   };
 
   render() {
-    const { isUserBoardsPage } = this.props;
     const { isStarredMenuOpen, starredBoards } = this.state;
-    const { boards, board, user } = this.props;
+    const { isUserBoardsPage, boards, board, user, onLogout } = this.props;
     console.log(user);
     return (
       <header
@@ -140,8 +139,8 @@ class _AppHeader extends Component {
             <NotificationsIcon />
           </button>
           <HeaderNotifications />
-          {user && <AppAvatar onClick={ev => this.onBoards(ev, 'user')} member={user} />}
-          <HeaderUser />
+          {user && <AppAvatar onClick={ev => this.onBoards(ev, 'account')} member={user} />}
+          <HeaderAccount user={user} onLogout={onLogout} history={this.props.history} />
         </div>
         <BoardAdd isModal={this.state.isModal} onClose={this.onBtnCreate} />
       </header>
@@ -156,6 +155,7 @@ const mapDispatchToProps = {
   onUpdateUser,
   setCardPopover,
   toggleMenu,
+  onLogout,
 };
 
 const mapStateToProps = state => {

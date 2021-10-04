@@ -22,6 +22,7 @@
 @import 'cmps/list-add';
 @import 'cmps/app-header';
 @import 'cmps/header-search';
+@import 'cmps/header-account';
 @import 'cmps/panel/invite';
 @import 'cmps/side-menu/side-menu';
 @import 'cmps/side-menu/side-menu-activities';
@@ -30,25 +31,25 @@
 @import 'cmps/side-menu/side-menu-archive';
 
 // Card Page
-@import "cmps/card/card-header";
-@import "cmps/card/card-description";
-@import "cmps/card/card-attachments";
-@import "cmps/card/card-members-labels";
-@import "cmps/card/card-checklists";
-@import "cmps/card/card-due-date";
-@import "cmps/card/card-location";
-@import "cmps/card/popover";
-@import "cmps/card/card-popover-pages/add-labels/add-labels";
-@import "cmps/card/card-popover-pages/add-labels/add-edit-label";
-@import "cmps/card/card-popover-pages/add-labels/remove-label";
-@import "cmps/card/card-popover-pages/add-checklist";
-@import "cmps/card/card-popover-pages/add-members";
-@import "cmps/card/card-popover-pages/add-cover";
-@import "cmps/card/card-popover-pages/add-attachment";
-@import "cmps/card/card-popover-pages/add-location";
-@import "cmps/card/card-popover-pages/copy-card";
-@import "cmps/card/card-popover-pages/move-card.scss";
-@import "cmps/card/card-quick-edit";
+@import 'cmps/card/card-header';
+@import 'cmps/card/card-description';
+@import 'cmps/card/card-attachments';
+@import 'cmps/card/card-members-labels';
+@import 'cmps/card/card-checklists';
+@import 'cmps/card/card-due-date';
+@import 'cmps/card/card-location';
+@import 'cmps/card/popover';
+@import 'cmps/card/card-popover-pages/add-labels/add-labels';
+@import 'cmps/card/card-popover-pages/add-labels/add-edit-label';
+@import 'cmps/card/card-popover-pages/add-labels/remove-label';
+@import 'cmps/card/card-popover-pages/add-checklist';
+@import 'cmps/card/card-popover-pages/add-members';
+@import 'cmps/card/card-popover-pages/add-cover';
+@import 'cmps/card/card-popover-pages/add-attachment';
+@import 'cmps/card/card-popover-pages/add-location';
+@import 'cmps/card/card-popover-pages/copy-card';
+@import 'cmps/card/card-popover-pages/move-card.scss';
+@import 'cmps/card/card-quick-edit';
 
 //
 @import 'cmps/home-header';
