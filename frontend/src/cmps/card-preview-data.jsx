@@ -96,7 +96,7 @@ function CardPreviewMembers({ members }) {
   return (
     <div className="card-preview-members flex align-center">
       {members.map(member => (
-        <Avatar key={member._id} className="avatar" alt={member?.fullname} src={member?.imgUrl} />
+        <Avatar key={member._id} className="avatar" alt={member?.fullname} src={member?.imgUrl || '/static/images/avatar/3.jpg'} />
       ))}
     </div>
   );

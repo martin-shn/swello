@@ -1,0 +1,64 @@
+.editor-screen {
+    background: #0009;
+    color: #fff;
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    pointer-events: auto;
+    .close-icon {
+        color: #fff9;
+        padding: 15px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition-duration: 0.15s;
+        transition-property: transform, color;
+        width: 60px;
+        height: 60px;
+        &:hover {
+            color: #fff;
+            cursor: pointer;
+            transform: scale(1.2);
+        }
+    }
+    svg {
+        height: 16px;
+        width: 16px;
+        margin-right: 4px;
+    }
+    .card-quick-edit {
+        position: absolute;
+        width: 240px;
+        transform: translateX(-20px);
+        transition: opacity 85ms ease-in, transform 85ms ease-in;
+        opacity: 0;
+        &.fade-in {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        a,
+        button {
+            background: #0009;
+            border-radius: 3px;
+            clear: both;
+            color: #e6e6e6;
+            display: block;
+            float: left;
+            margin: 0 0 4px 8px;
+            padding: 6px 12px 6px 8px;
+            text-decoration: none;
+            transition: transform 85ms ease-in;
+            position: relative;
+            z-index: 21;
+            div {
+                align-items: center;
+                height: 20px;
+            }
+            &:hover {
+                background: #000c;
+                color: #fff;
+                transform: translateX(5px);
+            }
+        }
+    }
+}
