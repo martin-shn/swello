@@ -1,10 +1,10 @@
-import { Avatar } from '@mui/material';
 import { formatDistance } from 'date-fns';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { utilService } from '../../services/util.service';
 import { cardService } from '../../services/board-services/card.service';
+import { AppAvatar } from '../general/app-avatar';
 
 function _DynamicActivity ({createdBy, card, type, values, board }) {
   const cardUrl = `/board/${ board._id }/card/${ card.id }`;
@@ -76,7 +76,7 @@ export const ActivityDetails = ({ activity }) => {
   const { id, type, card, createdBy, createdAt, values } = activity;
   return (
     <div className="activity">
-      <Avatar key={id} className="avatar" alt={createdBy?.fullname} src={createdBy?.imgUrl} />
+      <AppAvatar key={id} member={createdBy} />
       <span className="text">
         <span className="created-by">{createdBy?.fullname || createdBy?.username}</span>
         <DynamicActivity createdBy={createdBy} card={card} type={type} values={values} />

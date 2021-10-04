@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Avatar } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
 
 import { cardService } from '../../../services/board-services/card.service';
 import { userService } from '../../../services/user.service';
 import {onUpdateUser} from '../../../store/actions/user.actions'
+import { AppAvatar } from '../../general/app-avatar';
 
 export class _AddMembers extends Component {
   state = {
@@ -71,7 +71,7 @@ export class _AddMembers extends Component {
                   key={member._id}
                   className="member flex align-center"
                   onClick={() => this.toggleCardMember(member)}>
-                  <Avatar className="avatar" alt={member.fullname} src={member.imgUrl} />
+                  <AppAvatar member={member} />
                   <span className="member-name">
                     {member.fullname}
                   </span>

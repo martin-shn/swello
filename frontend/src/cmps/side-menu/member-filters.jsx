@@ -1,4 +1,4 @@
-import { Avatar } from '@mui/material';
+import { AppAvatar } from '../general/app-avatar';
 
 export const MemberFilters = ({ filterMemberIds, boardMembers, updateFilter }) => {
   const toggleMember = memberId => {
@@ -35,7 +35,7 @@ export const MemberFilters = ({ filterMemberIds, boardMembers, updateFilter }) =
         <li key={member._id} onClick={() => toggleMember(member._id)}>
           <button>
             <span>
-              <Avatar src={member.imgUrl} alt={member.fullname} />
+              <AppAvatar member={member} />
             </span>
             <span>Guest</span>
             {filterMemberIds.includes(member._id) && <span className="checkmark"></span>}

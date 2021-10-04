@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { createApi } from 'unsplash-js';
 import { AppBtn } from '../general/app-btn';
 import DUMMY_DATA from '../../data/unsplash.json';
-import HeartIcon from '@mui/icons-material/Favorite';
 import _ from 'lodash';
 
 const COLORS = [
@@ -22,9 +21,12 @@ export class SideMenuChangeBg extends Component {
     const { setPage, toggleSideMenu, updateBoard, board } = this.props;
     const { colorOrImg } = this.state;
     return (
-      <section className="side-menu-change-bg">
+      <section className="side-menu-change-bg flex column">
         <div className="side-menu-header">
-          <span className="back" onClick={() => (colorOrImg ? this.setState({ colorOrImg:null}) : setPage('index'))} />
+          <span
+            className="back"
+            onClick={() => (colorOrImg ? this.setState({ colorOrImg: null }) : setPage('index'))}
+          />
           <h3>{colorOrImg === 'img' ? 'Photos by Unsplash' : 'Change Background'}</h3>
           <button className="close-side-menu" onClick={() => toggleSideMenu(false)}></button>
         </div>

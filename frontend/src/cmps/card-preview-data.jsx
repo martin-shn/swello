@@ -6,10 +6,10 @@ import { updateBoard } from '../store/actions/board.actions';
 import ChecklistIcon from '@mui/icons-material/CheckBoxOutlined';
 import LocationIcon from '@mui/icons-material/LocationOn';
 import { ReactComponent as ArchiveIcon } from '../assets/svg/archive-icon.svg';
-import { Avatar } from '@mui/material';
 import { utilService } from '../services/util.service';
 import { connect } from 'react-redux';
 import { cardService } from '../services/board-services/card.service';
+import { AppAvatar } from './general/app-avatar';
 
 class _CardPreviewData extends Component {
   toggleDueDate = async ev => {
@@ -27,8 +27,7 @@ class _CardPreviewData extends Component {
   render() {
     const { checklists, attachments, description, dueDate, location, members } = this.props.card;
     const isArchived = cardService.getCardFromArchive(this.props.board, this.props.card.id);
-    if (!checklists && !attachments && !description && !dueDate && !location && !members && !isArchived)
-      return <></>;
+    if (!checklists && !attachments && !description && !dueDate && !location && !members && !isArchived) return <></>;
     return (
       <section className="card-preview-data flex wrap align-center">
         <div className="flex align-center wrap" style={{ gap: '12px', flexGrow: '1' }}>
@@ -40,11 +39,11 @@ class _CardPreviewData extends Component {
             </div>
           )}
           {checklists?.length > 0 && <CardPreviewChecklists checklists={checklists} />}
-          {isArchived &&
+          {isArchived && (
             <div className="flex align-center">
               <ArchiveIcon /> <span style={{ fontSize: '12px', marginLeft: '4px' }}>Archived</span>
             </div>
-          }
+          )}
           {location && <LocationIcon />}
         </div>
         {members?.length > 0 && <CardPreviewMembers members={members} />}
@@ -73,16 +72,13 @@ function CardPreviewChecklists({ checklists }) {
   let statusClassName = oldestNotDone.dueDate < Infinity ? status : '';
   if (notDoneCount === 0 && doneCount > 0) statusClassName = 'complete';
   return (
-    <div
-      className={'card-preview-checklists flex align-center ' + statusClassName}
-      style={{ gap: '4px' }}>
+    <div className={'card-preview-checklists flex align-center ' + statusClassName} style={{ gap: '4px' }}>
       {(notDoneCount > 0 || doneCount > 0) && (
         <>
           <ChecklistIcon />
           <span>
             {doneCount}/{notDoneCount + doneCount}
-            {oldestNotDone.dueDate < Infinity &&
-              ' • ' + utilService.getFormattedDate(oldestNotDone.dueDate)}
+            {oldestNotDone.dueDate < Infinity && ' • ' + utilService.getFormattedDate(oldestNotDone.dueDate)}
           </span>
         </>
       )}
@@ -103,7 +99,7 @@ function CardPreviewMembers({ members }) {
   return (
     <div className="card-preview-members flex align-center">
       {members.map(member => (
-        <Avatar key={member._id} className="avatar" alt={member?.fullname} src={member?.imgUrl || '/static/images/avatar/3.jpg'} />
+        <AppAvatar key={member._id} member={member} />
       ))}
     </div>
   );

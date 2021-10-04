@@ -5,11 +5,12 @@ import { ReactComponent as BtnBoardIcon } from '../assets/svg/board-btns/btn-boa
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { Avatar } from '@mui/material';
 
 import { setCardPopover, toggleSideMenu } from '../store/actions/system.actions';
 import { updateBoard } from '../store/actions/board.actions';
 import { CardPopover } from './card/card-popover';
+import { AppAvatar } from './general/app-avatar';
+import { AvatarGroup } from '@mui/material';
 
 const _TopPanel = props => {
   const { title, members, onUpdateTitle, user, board, onUpdateUser, setCardPopover, cardPopover } = props;
@@ -41,11 +42,11 @@ const _TopPanel = props => {
           }}>
           <StarOutlineIcon />
         </button>
-        <div className="members flex">
+        <AvatarGroup max={4} spacing={3}>
           {members?.map(member => (
-            <Avatar key={member._id} alt={member.fullname} src={member.imgUrl} />
+            <AppAvatar key={member._id} member={member} style={{ border: 'none' }} />
           ))}
-        </div>
+        </AvatarGroup>
         <button
           name="invite-main"
           className="btn-invite"

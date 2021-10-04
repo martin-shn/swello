@@ -9,7 +9,8 @@
   margin-bottom: 8px;
   min-height: 32px;
   text-decoration: none;
-  padding: 8px 6px;
+  // padding: 8px 6px;
+  padding: 6px;
   position: relative;
   gap: 4px;
   background-size: cover;
@@ -58,7 +59,7 @@
     border-radius: 0px 0px 3px 3px;
     &.theme {
       ::before {
-        content: "";
+        content: '';
         height: 32px;
         left: 0;
         mix-blend-mode: normal;
@@ -171,7 +172,7 @@
 
   .card-preview-data {
     gap: 5px;
-    margin-top: 2px;
+    margin-top: 6px;
 
     // Members
 

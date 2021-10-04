@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Avatar } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
+import { AppAvatar } from '../../general/app-avatar';
 
 export class AddCheckItemMember extends Component {
   state = {
@@ -51,11 +51,7 @@ export class AddCheckItemMember extends Component {
           {cardMembers.length > 0 && (
             <>
               <span className="sub-header">Card Members</span>
-              <MembersList
-                members={cardMembers}
-                itemMemberId={itemMemberId}
-                toggleMember={this.toggleMember}
-              />
+              <MembersList members={cardMembers} itemMemberId={itemMemberId} toggleMember={this.toggleMember} />
             </>
           )}
           {filteredBoardMembers.length > 0 && (
@@ -79,11 +75,8 @@ function MembersList({ members, itemMemberId, toggleMember }) {
   return (
     <div className="members-list">
       {members.map(member => (
-        <div
-          key={member._id}
-          className="member flex align-center"
-          onClick={() => toggleMember(member)}>
-          <Avatar className="avatar" alt={member.fullname} src={member.imgUrl} />
+        <div key={member._id} className="member flex align-center" onClick={() => toggleMember(member)}>
+          <AppAvatar member={member} />
           <span className="member-name">{member.fullname}</span>
           {itemMemberId === member._id && <CheckIcon className="in-list-icon" />}
         </div>

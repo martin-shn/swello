@@ -3,16 +3,13 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { togglePopover, setCardPopover, toggleMenu } from '../store/actions/system.actions';
 import { createBoard, loadBoards } from '../store/actions/board.actions';
-import { onUpdateUser } from '../store/actions/user.actions';
+import { onUpdateUser, onLogout } from '../store/actions/user.actions';
 import { Link } from 'react-router-dom';
-import { Avatar } from '@mui/material';
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+
 import { ReactComponent as ArrowDownIcon } from '../assets/svg/arrow-down.svg';
 import { ReactComponent as NotificationsIcon } from '../assets/svg/notifications.svg';
 import { BoardAdd } from './board-list/board-add';
 
-import { styled } from '@mui/material/styles';
-import Fade from '@mui/material/Fade';
 // import MenuItem from '@mui/material/MenuItem';
 
 import { PopoverMenu } from './header-popover-pages/popover-menu';
@@ -21,6 +18,9 @@ import { StarredBoardsMenuContent } from './header-popover-pages/starredboards-m
 
 // import { ReactComponent as StarredImage } from '../assets/svg/starred-board.svg';
 import { HeaderSearch } from './header-popover-pages/header-search';
+import { AppAvatar } from './general/app-avatar';
+import { HeaderNotifications } from './header-popover-pages/header-notifications';
+import { HeaderAccount } from './header-popover-pages/header-account';
 
 class _AppHeader extends Component {
   state = {
@@ -81,22 +81,10 @@ class _AppHeader extends Component {
     });
   };
 
-  tooltip = styled(({ className, ...props }) => <Tooltip {...props} classes={{ popper: className }} />)(
-    ({ theme }) => ({
-      [`& .${tooltipClasses.tooltip}`]: {
-        backgroundColor: 'rgb(23, 43, 77)',
-        color: 'rgb(224, 226, 231)',
-        padding: '4px 6px',
-        fontSize: '0.7rem',
-      },
-    })
-  );
-
   render() {
-    const { isUserBoardsPage } = this.props;
     const { isStarredMenuOpen, starredBoards } = this.state;
-    const { boards, board, user } = this.props;
-    // console.log(user);
+    const { isUserBoardsPage, boards, board, user, onLogout } = this.props;
+    console.log(user);
     return (
       <header
         onClick={this.closePopover}
@@ -150,56 +138,9 @@ class _AppHeader extends Component {
             }}>
             <NotificationsIcon />
           </button>
-          <PopoverMenu id="notification" header="Notification" classNames="notification-menu header-popper-menu">
-            <div className="notification-container">
-              <div className="notification-header">
-                <button className="notification-header-link">View all</button>
-                <button className="notification-header-link">Mark all as read</button>
-              </div>
-              <div className="notification-content-main">
-                <div className="notification-content">
-                  {/* HERE COMES THE MAP RETURN DIVs */}
-                  <div className="notification">
-                    <div className="notification-inner">
-                      <div className="notification-read-btn">
-                        {/* this btn have a before with icon */}
-                        <this.tooltip
-                          title="Mark read"
-                          TransitionComponent={Fade}
-                          TransitionProps={{ timeout: 300 }}
-                          placement="bottom">
-                          <button></button>
-                        </this.tooltip>
-                      </div>
-                      <div className="notification-inner-header">
-                        <div>
-                          <img alt="img" />
-                        </div>
-                        <span>notification title</span>
-                      </div>
-                      <div className="notification-inner-user">
-                        <div className="user-avatar" alt={'Martin Sh.'}>
-                          <Avatar />
-                        </div>
-                        <div className="user-name">
-                          <span>Martin</span>
-                        </div>
-                      </div>
-                      <div className="notification-inner-content">
-                        <div className="icon">
-                          <span></span>
-                        </div>
-                        <div className="description">
-                          Made you an admin on the board <span>test</span> sep 24, 2021, 10:05am
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </PopoverMenu>
-          <Avatar className="avatar" alt={user.fullname} src={user.imgUrl || '/static/images/avatar/3.jpg'} />
+          <HeaderNotifications />
+          {user && <AppAvatar onClick={ev => this.onBoards(ev, 'account')} member={user} />}
+          <HeaderAccount user={user} onLogout={onLogout} history={this.props.history} />
         </div>
         <BoardAdd isModal={this.state.isModal} onClose={this.onBtnCreate} />
       </header>
@@ -214,6 +155,7 @@ const mapDispatchToProps = {
   onUpdateUser,
   setCardPopover,
   toggleMenu,
+  onLogout,
 };
 
 const mapStateToProps = state => {
