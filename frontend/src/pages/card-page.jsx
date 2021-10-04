@@ -53,9 +53,9 @@ class _CardPage extends Component {
     const card = cardService.getCardById(board, cardId);
     let archivedCard;
     if (!card) {
-      archivedCard = cardService.getCardFromArchive(board, cardId)
-      this.setState({ card: archivedCard.card, isArchived: true })
-      return
+      archivedCard = cardService.getCardFromArchive(board, cardId);
+      this.setState({ card: archivedCard.card, isArchived: true });
+      return;
     }
     if (!card && !archivedCard) this.props.history.replace('/board/' + board._id);
     this.setState({ card });
@@ -65,9 +65,7 @@ class _CardPage extends Component {
     const { board } = this.props;
     const { card, isArchived } = this.state;
     const updatedCard = { ...card, ...data };
-    const activity = activityType
-      ? boardService.createActivity(updatedCard, activityType, activityValues)
-      : null;
+    const activity = activityType ? boardService.createActivity(updatedCard, activityType, activityValues) : null;
     const updatedBoard = boardService.updateCard(board, updatedCard, activity, isArchived);
     this.props.updateBoard(updatedBoard);
   };
@@ -82,28 +80,28 @@ class _CardPage extends Component {
   };
 
   onArchiveCard = () => {
-    const updatedBoard = boardService.archiveCard(this.props.board, this.state.card)
-    this.props.updateBoard(updatedBoard)
-    this.setState({ isArchived: true })
-  }
+    const updatedBoard = boardService.archiveCard(this.props.board, this.state.card);
+    this.props.updateBoard(updatedBoard);
+    this.setState({ isArchived: true });
+  };
 
   onUnarchivedCard = () => {
-    const updatedBoard = boardService.unarchiveCard(this.props.board, this.state.card.id)
-    this.props.updateBoard(updatedBoard)
-    this.setState({ isArchived: false })
-  }
+    const updatedBoard = boardService.unarchiveCard(this.props.board, this.state.card.id);
+    this.props.updateBoard(updatedBoard);
+    this.setState({ isArchived: false });
+  };
 
   onRemoveCard = () => {
-    const updatedBoard = boardService.removeCard(this.props.board, this.state.card.id)
-    this.props.updateBoard(updatedBoard)
+    const updatedBoard = boardService.removeCard(this.props.board, this.state.card.id);
+    this.props.updateBoard(updatedBoard);
     this.onCloseCard();
-  }
+  };
 
   render() {
     if (!this.state.card) return <CircularProgress sx={{ position: 'absolute' }} />;
     const { description, title, checklists, dueDate, attachments } = this.state.card;
     const { card, isArchived } = this.state;
-    const coverImg = card.cover?.imgs?.find(img => img.id === card.cover.bgImgId)
+    const coverImg = card.cover?.imgs?.find(img => img.id === card.cover.bgImgId);
     const { cardPopover, board, setCardPopover, closeCardPopover } = this.props;
     const { updateField } = this;
     return (
@@ -114,9 +112,12 @@ class _CardPage extends Component {
           onClick={ev => ev.target.classList.contains('card-page-wrapper') && this.onCloseCard()}>
           {cardPopover.name && cardPopover.anchorEl && <CardPopover />}
           <section className="card-page">
-            {card.cover && (card.cover.color || coverImg) && card.cover.size &&
-              <div onClick={() => coverImg && window.open(coverImg.url, "_blank")} className={coverImg ? 'cover-img' : ''}>
-                <div className={`card-cover${card.cover.color ? ' ' + card.cover.color : ''}`}
+            {card.cover && (card.cover.color || coverImg) && card.cover.size && (
+              <div
+                onClick={() => coverImg && window.open(coverImg.url, '_blank')}
+                className={coverImg ? 'cover-img' : ''}>
+                <div
+                  className={`card-cover${card.cover.color ? ' ' + card.cover.color : ''}`}
                   style={coverImg ? { backgroundImage: `url(${coverImg.url})`, height: '160px' } : {}}>
                   <div className="card-cover-menu flex align-center">
                     <button
@@ -124,8 +125,8 @@ class _CardPage extends Component {
                       className={'add-cover-btn' + (card.cover?.color === 'black' ? ' light' : '')}
                       onClick={ev => {
                         ev.stopPropagation();
-                        if (cardPopover.name === 'add-cover') this.onClosePopover()
-                        else this.onOpenPopover(ev, { card, updateField })
+                        if (cardPopover.name === 'add-cover') this.onClosePopover();
+                        else this.onOpenPopover(ev, { card, updateField });
                       }}>
                       <VideoLabelIcon />
                       Cover
@@ -133,11 +134,13 @@ class _CardPage extends Component {
                   </div>
                 </div>
               </div>
-            }
-            {isArchived && <div className="archive-banner flex align-center">
-              <ArchiveIcon />
-              <p>This card is archived.</p>
-            </div>}
+            )}
+            {isArchived && (
+              <div className="archive-banner flex align-center">
+                <ArchiveIcon />
+                <p>This card is archived.</p>
+              </div>
+            )}
             <CardHeader
               updateField={updateField}
               title={title}
@@ -156,11 +159,7 @@ class _CardPage extends Component {
                     updateField={updateField}
                   />
                   <CardMembers board={board} card={card} updateField={updateField} />
-                  <CardDueDate
-                    dueDate={dueDate}
-                    updateField={updateField}
-                    onOpenPopover={this.onOpenPopover}
-                  />
+                  <CardDueDate dueDate={dueDate} updateField={updateField} onOpenPopover={this.onOpenPopover} />
                 </section>
                 <CardDescription description={description} updateField={updateField} />
                 <CardLocation

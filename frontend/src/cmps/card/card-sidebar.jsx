@@ -11,13 +11,24 @@ import RefreshIcon from '@mui/icons-material/Replay';
 import RemoveIcon from '@mui/icons-material/Remove';
 
 import { constService } from '../../services/const.service';
+import { AppBtn } from '../general/app-btn';
 
-export const CardSidebar = (props) => {
-  const { board, card, updateField, onOpenPopover, dueDate, isArchived, onArchiveCard, onUnarchivedCard, onRemoveCard } = props;
+export const CardSidebar = props => {
+  const {
+    board,
+    card,
+    updateField,
+    onOpenPopover,
+    dueDate,
+    isArchived,
+    onArchiveCard,
+    onUnarchivedCard,
+    onRemoveCard,
+  } = props;
   return (
     <aside className="card-sidebar flex column">
       <span className="sub-header">Add to card</span>
-      <button
+      <AppBtn
         name="add-members"
         onClick={ev =>
           onOpenPopover(ev, {
@@ -28,56 +39,69 @@ export const CardSidebar = (props) => {
         }>
         <MemberIcon />
         Members
-      </button>
-      <button name="add-labels" onClick={ev => onOpenPopover(ev, { board, card, updateField })}>
+      </AppBtn>
+      <AppBtn name="add-labels" onClick={ev => onOpenPopover(ev, { board, card, updateField })}>
         <LabelIcon />
         Labels
-      </button>
-      <button name="add-checklist" onClick={ev => onOpenPopover(ev, { card, updateField })}>
+      </AppBtn>
+      <AppBtn name="add-checklist" onClick={ev => onOpenPopover(ev, { card, updateField })}>
         <CheckBoxIcon />
         Checklist
-      </button>
-      <button name="add-due-date" onClick={ev => onOpenPopover(ev, { card, dueDate, updateField })}>
+      </AppBtn>
+      <AppBtn name="add-due-date" onClick={ev => onOpenPopover(ev, { card, dueDate, updateField })}>
         <DateIcon />
         Date
-      </button>
-      <button name="add-attachment" onClick={ev => onOpenPopover(ev, { card, updateField })}>
+      </AppBtn>
+      <AppBtn name="add-attachment" onClick={ev => onOpenPopover(ev, { card, updateField })}>
         <AttachmentIcon />
         Attachment
-      </button>
-      <button
+      </AppBtn>
+      <AppBtn
         name="add-location"
         onClick={ev => onOpenPopover(ev, { card, updateField, currPage: 'save', isFromNav: true })}>
         <LocationIcon />
         Location
-      </button>
-      <button name="add-cover" onClick={ev => onOpenPopover(ev, { card, updateField })}>
+      </AppBtn>
+      <AppBtn name="add-cover" onClick={ev => onOpenPopover(ev, { card, updateField })}>
         <CoverIcon />
         Cover
-      </button>
+      </AppBtn>
 
       <span className="sub-header actions">Actions</span>
-      {!isArchived &&
+      {!isArchived && (
         <>
-          <button name="copy-card" onClick={ev => onOpenPopover(ev, { board, card })}>
+          <AppBtn name="copy-card" onClick={ev => onOpenPopover(ev, { board, card })}>
             <CopyIcon />
             Copy
-          </button>
-          <button name="move-card" onClick={ev => onOpenPopover(ev, { board, card })}>
+          </AppBtn>
+          <AppBtn name="move-card" onClick={ev => onOpenPopover(ev, { board, card })}>
             <MoveIcon />
             Move
-          </button>
-          <button name="archive-card" onClick={onArchiveCard}>
+          </AppBtn>
+          <AppBtn name="archive-card" onClick={onArchiveCard}>
             Archive
-          </button>
+          </AppBtn>
         </>
-      }
-      {isArchived &&
+      )}
+      {isArchived && (
         <>
-          <button name="unarchive-card" onClick={onUnarchivedCard}><RefreshIcon /> Send to board</button>
-          <button name="remove-item" onClick={ev => onOpenPopover(ev, { item: card, onRemoveItem: onRemoveCard, msg: constService.MSG_REMOVE_CARD, itemType: 'card' })}><RemoveIcon /> Delete</button>
+          <AppBtn name="unarchive-card" onClick={onUnarchivedCard}>
+            <RefreshIcon /> Send to board
+          </AppBtn>
+          <AppBtn
+            name="remove-item"
+            onClick={ev =>
+              onOpenPopover(ev, {
+                item: card,
+                onRemoveItem: onRemoveCard,
+                msg: constService.MSG_REMOVE_CARD,
+                itemType: 'card',
+              })
+            }>
+            <RemoveIcon /> Delete
+          </AppBtn>
         </>
-      }
-    </aside >
+      )}
+    </aside>
   );
 };

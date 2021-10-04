@@ -1,32 +1,33 @@
 // Setup
-@import "setup/variables";
-@import "setup/functions";
-@import "setup/mixins";
-@import "setup/typography";
+@import 'setup/variables';
+@import 'setup/functions';
+@import 'setup/mixins';
+@import 'setup/typography';
 
 // Basics
-@import "basics/helpers";
-@import "basics/layout";
-@import "basics/base";
-@import "basics/links";
-@import "basics/forms";
+@import 'basics/helpers';
+@import 'basics/layout';
+@import 'basics/base';
+@import 'basics/links';
+@import 'basics/forms';
 
 // Components
 // Board Page
-@import "cmps/board-list";
-@import "cmps/board-preview";
-@import "cmps/top-panel";
-@import "cmps/list-preview";
-@import "cmps/list-all";
-@import "cmps/card-preview";
-@import "cmps/list-add";
-@import "cmps/app-header";
-@import "cmps/header-search";
-@import "cmps/panel/invite";
-@import "cmps/side-menu/side-menu";
-@import "cmps/side-menu/side-menu-activities";
-@import "cmps/side-menu/side-menu-search";
-@import "cmps/side-menu/side-menu-archive";
+@import 'cmps/board-list';
+@import 'cmps/board-preview';
+@import 'cmps/top-panel';
+@import 'cmps/list-preview';
+@import 'cmps/list-all';
+@import 'cmps/card-preview';
+@import 'cmps/list-add';
+@import 'cmps/app-header';
+@import 'cmps/header-search';
+@import 'cmps/panel/invite';
+@import 'cmps/side-menu/side-menu';
+@import 'cmps/side-menu/side-menu-activities';
+@import 'cmps/side-menu/side-menu-search';
+@import 'cmps/side-menu/side-menu-change-bg';
+@import 'cmps/side-menu/side-menu-archive';
 
 // Card Page
 @import "cmps/card/card-header";
@@ -50,21 +51,21 @@
 @import "cmps/card/card-quick-edit";
 
 //
-@import "cmps/home-header";
-@import "cmps/home-footer";
-@import "cmps/popover";
-@import "cmps/modal-window";
-@import "cmps/loader/loader-page";
-@import "cmps/dashboard";
-@import "cmps/poppers";
-@import "cmps/panel/notification";
+@import 'cmps/home-header';
+@import 'cmps/home-footer';
+@import 'cmps/popover';
+@import 'cmps/modal-window';
+@import 'cmps/loader/loader-page';
+@import 'cmps/dashboard';
+@import 'cmps/poppers';
+@import 'cmps/panel/notification';
 
 // Pages
-@import "cmps/card-page";
-@import "pages/home-page";
-@import "pages/board-page";
-@import "pages/user-boards";
-@import "pages/login-signup";
+@import 'cmps/card-page';
+@import 'pages/home-page';
+@import 'pages/board-page';
+@import 'pages/user-boards';
+@import 'pages/login-signup';
 
 // General
-@import "cmps/general/app-checkbox";
+@import 'cmps/general/app-checkbox';

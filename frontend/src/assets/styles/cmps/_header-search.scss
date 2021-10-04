@@ -5,6 +5,10 @@
   border: 1px solid rgba(255, 255, 255, 0.25);
   height: 32px;
 
+  .edit-icon {
+    display: none;
+  }
+
   &.active {
     background-color: #fff;
     color: $clr-default;
@@ -14,9 +18,15 @@
     height: 100%;
   }
 
-  svg {
+  .search-icon {
     height: 100%;
     padding-left: 4px;
+  }
+  .card-preview {
+    svg {
+      width: 16px;
+      height: 16px;
+    }
   }
 
   .icon-close {
@@ -56,6 +66,9 @@
   gap: 20px;
   .card-preview {
     width: 250px;
+    .card-cover {
+      margin: -8px -6px 2px -6px;
+    }
   }
 
   .card-title {
