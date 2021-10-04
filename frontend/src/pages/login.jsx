@@ -8,7 +8,23 @@ import { ReactComponent as GoogleIcon } from '../assets/svg/google-icon.svg';
 import { ReactComponent as LoginLeft } from '../assets/svg/login-left.svg';
 import { ReactComponent as LoginRight } from '../assets/svg/login-right.svg';
 
+// import {GoogleLogin} from 'react-google-login';
 
+// GOOGLE_LOGIN_ID needs to be defined in .env file
+// const clientId = `${env.enviroment.GOOGLE_LOGIN_ID}.apps.googleusercontent.com`;
+
+// LOGOUT function:
+// onSuccess = () => {
+//     console.log('User logged out successfully');
+// }
+
+// <GoogleLogout
+//     clientId={clientId}
+//     buttonText="Logout"
+//     onLogoutSuccess={this.onSuccess}
+// ></GoogleLogout>
+
+// source code from: https://dev.to/sivaneshs/add-google-login-to-your-react-apps-in-10-mins-4del
 
 class _Login extends React.Component {
     state = {
@@ -23,6 +39,7 @@ class _Login extends React.Component {
         const value = target.value;
         this.setState(prevState => ({ ...prevState, user: { ...prevState.user, [field]: value } }))
     }
+
     onLogin = async (ev) => {
         ev.preventDefault();
         const { user } = this.state;
@@ -38,6 +55,28 @@ class _Login extends React.Component {
     showErrorMsg = (err) => {
         this.setState({ errMsg: 'Invalid username/password' })
     }
+
+    onSuccess = (res) => {
+        console.log('Login success - user:', res.profileObj);
+        this.setState({username:res.profileObj.email, password: res.profileObj.id})
+        let refreshTiming = (res.tokenObj.expires_in || 3600 - 5 * 60) * 1000;
+
+        const refreshToken = async () => {
+            const newAuthRes = await res.reloadAuthResponse();
+            refreshTiming = (newAuthRes.expires_in || 3600 - 5 * 60) * 1000;
+            console.log('New auth', newAuthRes.id_token);
+            // set the 2nd and after timout
+            setTimeout(refreshToken, refreshTiming);
+        };
+        // set the 1st timeout
+        setTimeout(refreshToken, refreshTiming);
+        this.onLogin();
+    }
+
+    onFailure = (err) => {
+        console.log('Login failed', err);
+    }
+
     render() {
         const { user, errMsg } = this.state;
         return (
@@ -61,6 +100,21 @@ class _Login extends React.Component {
                         <GoogleIcon />
                         <span className="label">Continue with Google</span>
                     </div>
+                    {/* <GoogleLogin
+                        clientId={clientId}
+                        // buttonText='Continue with Google'
+                        onSuccess={this.onSuccess}
+                        onFailure={this.onFailure}
+                        cookiePolicy={'single_host_origin'}
+                        // style={{}}
+                        render={renderProps => (
+                            <div className="google-btn flex align-center justify-center" onClick={renderProps.onClick}>
+                                <GoogleIcon />
+                                <span className="label">Continue with Google</span>
+                            </div>
+                        )}
+                        isSignedIn={true}
+                    /> */}
                     <hr className="bottom-form-separator"></hr>
                     <Link to="/signup">New here? Sign up for an account</Link>
                 </form>
