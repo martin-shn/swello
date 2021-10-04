@@ -96,7 +96,7 @@ class _AppHeader extends Component {
     const { isUserBoardsPage } = this.props;
     const { isStarredMenuOpen, starredBoards } = this.state;
     const { boards, board, user } = this.props;
-
+    console.log(user);
     return (
       <header
         onClick={this.closePopover}

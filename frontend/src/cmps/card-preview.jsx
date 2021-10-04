@@ -21,8 +21,8 @@ export class CardPreview extends Component {
     // prettier-ignore
     return (
       <Draggable draggableId={card.id} index={idx}>
-        {(provided, snapshot) => (
-          <>
+        {(provided, snapshot) => {
+          return <>
             <div
               className="card-preview-container"
               {...provided.draggableProps}
@@ -32,7 +32,7 @@ export class CardPreview extends Component {
               <CardPreviewInfo card={card} title={this.state.title} handleChange={({ target }) => this.setState({ title: target.value })} />
             </div>
           </>
-        )}
+        }}
       </Draggable>
     );
   }

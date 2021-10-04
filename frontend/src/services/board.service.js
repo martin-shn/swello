@@ -2,8 +2,25 @@ import { storageService } from './async-storage.service';
 import { userService } from './user.service';
 import { socketService, SOCKET_EVENT_REVIEW_ADDED } from './socket.service';
 import { utilService } from './util.service';
-import { addList, copyList, updateList, moveList, moveAllCardsToList, sortList, archiveList, unarchiveList } from './board-services/list.service';
-import { updateCard, addCard, moveCard, archiveCard, unarchiveCard, removeCard, copyCard } from './board-services/card.service';
+import {
+  addList,
+  copyList,
+  updateList,
+  moveList,
+  moveAllCardsToList,
+  sortList,
+  archiveList,
+  unarchiveList,
+} from './board-services/list.service';
+import {
+  updateCard,
+  addCard,
+  moveCard,
+  archiveCard,
+  unarchiveCard,
+  removeCard,
+  copyCard,
+} from './board-services/card.service';
 import { httpService } from './http.service';
 export const boardService = {
   add,
@@ -28,19 +45,19 @@ export const boardService = {
   createActivity,
   sortList,
   archiveList,
-  unarchiveList
+  unarchiveList,
 };
 
 window.bs = boardService;
 
 function query() {
   // var queryStr = (!filterBy) ? '' : `?byUser=${filterBy.byUser}`
-  return httpService.get(`board`)
+  return httpService.get(`board`);
   // return storageService.query('board', filterBy);
 }
 
 function getById(boardId) {
-  return httpService.get(`board/${boardId}`)
+  return httpService.get(`board/${boardId}`);
   // return storageService.get('board', boardId);
 }
 
@@ -50,7 +67,7 @@ function getById(boardId) {
 // }
 
 async function add(board) {
-  const addedBoard = await httpService.post(`board`, board)
+  const addedBoard = await httpService.post(`board`, board);
   // board._id = utilService.makeId();
   // board.createdBy = userService.getLoggedinUser();
   // board.labels = [
@@ -84,7 +101,7 @@ async function update(updatedBoard) {
   // });
   //
   // const board = await storageService.put('board', updatedBoard);
-  const board = await httpService.put(`board/${updatedBoard._id}`, updatedBoard)
+  const board = await httpService.put(`board/${updatedBoard._id}`, updatedBoard);
   return board;
 }
 
@@ -112,9 +129,9 @@ function removeLabel(board, labelId) {
   });
   board.archive.cards.forEach(archivedCard => {
     if (archivedCard.card.labelIds) {
-      archivedCard.card.labelIds = archivedCard.card.labelIds.filter(id => id !== labelId)
+      archivedCard.card.labelIds = archivedCard.card.labelIds.filter(id => id !== labelId);
     }
-  })
+  });
   return board;
 }
 
@@ -137,7 +154,7 @@ function createActivity(card, type, values) {
     const freshBoards = await storageService.query('board');
     if (freshBoards.length === boards.length + 1) {
       console.log('Board Added - localStorage updated from another browser');
-      socketService.emit(SOCKET_EVENT_REVIEW_ADDED, freshBoards[freshBoards.length - 1]);
+      // socketService.emit(SOCKET_EVENT_REVIEW_ADDED, freshBoards[freshBoards.length - 1]);
     }
     boards = freshBoards;
   });

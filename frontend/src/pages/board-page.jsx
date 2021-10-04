@@ -4,9 +4,16 @@ import { AppHeader } from '../cmps/app-header';
 import { ListAll } from '../cmps/list-all';
 import { TopPanel } from '../cmps/top-panel';
 import { boardService } from '../services/board.service';
+import { socketService } from '../services/socket.service';
 import { togglePopover } from '../store/actions/system.actions';
 import { updateBoard, loadBoard, clearBoard } from '../store/actions/board.actions';
-import { hideLoadingPage, showLoadingPage, setQuickEdit, setCardPopover, closeCardPopover } from '../store/actions/system.actions';
+import {
+  hideLoadingPage,
+  showLoadingPage,
+  setQuickEdit,
+  setCardPopover,
+  closeCardPopover,
+} from '../store/actions/system.actions';
 import { onUpdateUser } from '../store/actions/user.actions';
 import { PopoverScreen } from '../cmps/popover-screen';
 import { CardPage } from './card-page';
@@ -17,6 +24,8 @@ import { Dashboard } from './dashboard/dashboard';
 import { listService } from '../services/board-services/list.service';
 import { cardService } from '../services/board-services/card.service';
 import { CardQuickEdit } from '../cmps/card/card-quick-edit';
+
+import { SOCKET_EVENT_SET_USER, SOCKET_EVENT_SET_BOARD } from '../services/socket.service'
 
 export class _BoardPage extends Component {
   state = {
@@ -30,8 +39,13 @@ export class _BoardPage extends Component {
   };
 
   async componentDidMount() {
-    this.props.showLoadingPage();
     const { boardId } = this.props.match.params;
+    socketService.setup();
+    // socketService.emit(socketService.SOCKET_EVENT_BOARD_UPDATED);
+    // socketService.on(SOCKET_EVENT_BOARD_UPDATED, () => this.props.loadBoard(boardId));
+    socketService.emit(SOCKET_EVENT_SET_BOARD, boardId)
+    socketService.emit(SOCKET_EVENT_SET_USER, this.props.user._id)
+    this.props.showLoadingPage();
     await this.props.loadBoard(boardId);
     this.props.hideLoadingPage();
   }
@@ -43,6 +57,8 @@ export class _BoardPage extends Component {
 
   componentWillUnmount() {
     this.props.clearBoard();
+    // socketService.off(SOCKET_EVENT_BOARD_UPDATED);
+    socketService.terminate();
   }
 
   // UI ACTIONS
@@ -110,20 +126,20 @@ export class _BoardPage extends Component {
 
   onMoveAllCardsToList = (currListId, newListId) => {
     const { board } = this.props;
-    const updatedBoard = boardService.moveAllCardsToList(board, currListId, newListId)
-    this.props.updateBoard(updatedBoard)
-  }
+    const updatedBoard = boardService.moveAllCardsToList(board, currListId, newListId);
+    this.props.updateBoard(updatedBoard);
+  };
 
   onSortList = (list, sortBy) => {
     const { board } = this.props;
-    const updatedBoard = boardService.sortList(board, list, sortBy)
-    this.props.updateBoard(updatedBoard)
-  }
-  onArchiveList = (list) => {
+    const updatedBoard = boardService.sortList(board, list, sortBy);
+    this.props.updateBoard(updatedBoard);
+  };
+  onArchiveList = list => {
     const { board } = this.props;
-    const updatedBoard = boardService.archiveList(board, list)
-    this.props.updateBoard(updatedBoard)
-  }
+    const updatedBoard = boardService.archiveList(board, list);
+    this.props.updateBoard(updatedBoard);
+  };
   onUpdateUser = async user => {
     await this.props.onUpdateUser(user);
   };
@@ -146,7 +162,8 @@ export class _BoardPage extends Component {
       isAddingList,
       // isCardPageOpen
     } = this.state;
-    const { popoverListId, filterBy, cardQuickEdit, setQuickEdit, setCardPopover, closeCardPopover, cardPopover } = this.props;
+    const { popoverListId, filterBy, cardQuickEdit, setQuickEdit, setCardPopover, closeCardPopover, cardPopover } =
+      this.props;
     const { title, members, lists, style } = this.props.board;
     return (
       <main
@@ -187,7 +204,7 @@ export class _BoardPage extends Component {
           onArchiveList={this.onArchiveList}
         />
         <SideMenu />
-        {cardQuickEdit &&
+        {cardQuickEdit && (
           <CardQuickEdit
             card={cardService.getCardById(this.props.board, cardQuickEdit.id)}
             board={this.props.board}
@@ -196,7 +213,9 @@ export class _BoardPage extends Component {
             setCardPopover={setCardPopover}
             updateBoard={this.props.updateBoard}
             cardPopover={cardPopover}
-            closeCardPopover={closeCardPopover} />}
+            closeCardPopover={closeCardPopover}
+          />
+        )}
       </main>
     );
   }
@@ -223,7 +242,7 @@ const mapStateToProps = state => {
     isLoadingPage: state.systemModule.isLoadingPage,
     user: state.userModule.user,
     cardQuickEdit: state.systemModule.cardQuickEdit,
-    cardPopover: state.systemModule.cardPopover
+    cardPopover: state.systemModule.cardPopover,
   };
 };
 

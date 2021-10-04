@@ -1,5 +1,7 @@
 import { boardService } from '../../services/board.service';
 import _ from 'lodash';
+import { socketService, SOCKET_EVENT_BOARD_UPDATED } from '../../services/socket.service'
+
 
 let gBoard = null;
 
@@ -20,6 +22,9 @@ export function loadBoard(id) {
       const board = await boardService.getById(id);
       gBoard = _.cloneDeep(board);
       dispatch({ type: 'SET_BOARD', board });
+      socketService.on(SOCKET_EVENT_BOARD_UPDATED, (board) =>{
+        dispatch({ type: 'SET_BOARD', board })
+      })
     } catch (err) {
       console.error(err);
     }

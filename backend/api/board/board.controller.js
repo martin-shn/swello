@@ -2,6 +2,8 @@ const logger = require('../../services/logger.service')
 const userService = require('../user/user.service')
 const socketService = require('../../services/socket.service')
 const boardService = require('./board.service')
+// const {broadcast} = require('../../services/socket.service')
+const asyncLocalStorage = require('../../services/als.service')
 
 async function getBoards(req, res) {
     try {
@@ -16,8 +18,7 @@ async function getBoards(req, res) {
 async function getById(req, res) {
     try {
         const boardId = req.params.id;
-        const result = await boardService.query(boardId)
-        const board = result[0];
+        const board = await boardService.getById(boardId)
         res.send(board)
     } catch (err) {
         logger.error('Failed to get board')
@@ -61,6 +62,12 @@ async function updateBoard(req, res) {
     try {
         const board = req.body;
         const updatedBoard = await boardService.update(board)
+        const alsStore = asyncLocalStorage.getStore()
+        const userId = alsStore.userId
+        socketService.broadcast({ type: socketService.SOCKET_EVENT_BOARD_UPDATED, data: updatedBoard, room: updatedBoard._id, userId })
+        // socketService.broadcast({ type: socketService.SOCKET_EVENT_BOARD_UPDATED, data: updatedBoard, room: updatedBoard._id, userId: '615b214036cd5f7d6c987cc9' })
+        // console.log({ type: socketService.SOCKET_EVENT_BOARD_UPDATED, data: updatedBoard, label: updatedBoard._id });
+        // socketService.emitTo({ type: socketService.SOCKET_EVENT_BOARD_UPDATED, data: updatedBoard, label: updatedBoard._id })
         res.json(updatedBoard)
     } catch (err) {
         logger.error('Failed to update board')
