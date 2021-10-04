@@ -36,9 +36,9 @@ export class CardQuickEdit extends React.Component {
     componentWillUnmount() {
         this.props.closeCardPopover()
     }
-    onOpenPopover = (ev, props) => {
+    onOpenPopover = (ev, props, placement) => {
         const { name } = ev.target.parentElement;
-        this.props.setCardPopover(name, ev.target, props);
+        this.props.setCardPopover(name, ev.target, props, placement);
     };
     updateField = (data, activityType, activityValues) => {
         const { board } = this.props;
@@ -101,7 +101,7 @@ export class CardQuickEdit extends React.Component {
                                 Copy
                             </div>
                         </button>
-                        <button name="add-due-date" onClick={ev => { ev.stopPropagation(); onOpenPopover(ev, { card, dueDate: card.dueDate, updateField }) }}>
+                        <button name="add-due-date" onClick={ev => { ev.stopPropagation(); onOpenPopover(ev, { card, dueDate: card.dueDate, updateField },'auto') }}>
                             <div className="flex">
                                 <DateIcon />
                                 Edit dates

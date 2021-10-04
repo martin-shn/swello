@@ -10,13 +10,14 @@ export function togglePopover(popoverListId) {
   };
 }
 
-export function setCardPopover(name, anchorEl, props) {
+export function setCardPopover(name, anchorEl, props, placement) {
   return dispatch => {
     dispatch({
       type: 'SET_CARD_POPOVER',
       name,
       anchorEl,
       props,
+      placement,
     });
   };
 }

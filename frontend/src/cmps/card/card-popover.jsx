@@ -61,7 +61,7 @@ class _CardPopover extends Component {
         className="cards-popper header-popper-menu"
         open={true}
         anchorEl={cardPopover.anchorEl}
-        placement="bottom-start"
+        placement={cardPopover.placement || 'bottom-start'}
         transition
         disablePortal>
         {({ TransitionProps, placement }) => (
