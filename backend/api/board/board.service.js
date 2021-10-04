@@ -129,7 +129,6 @@ async function add(board) {
 
 async function update(board) {
     try {
-        console.log('board sent to update -', board);
         const boardToSave = {
             ...board,
             createdBy: ObjectId(board.createdBy._id),

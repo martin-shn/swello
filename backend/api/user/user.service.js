@@ -89,6 +89,7 @@ async function add(user) {
             imgUrl: user.imgUrl || '',
             mentions: [],
             starredBoardsIds: [],
+            notifications: []
         }
         const collection = await dbService.getCollection('user')
         await collection.insertOne(userToAdd)

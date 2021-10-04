@@ -1,21 +1,31 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Avatar } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
-import { cardService } from '../../../services/board-services/card.service';
 
-export class AddMembers extends Component {
+import { cardService } from '../../../services/board-services/card.service';
+import { userService } from '../../../services/user.service';
+import {onUpdateUser} from '../../../store/actions/user.actions'
+
+export class _AddMembers extends Component {
   state = {
     search: '',
     updatedMembers: this.props.card.members,
     updatedBoardMembers: this.props.board.members,
   };
 
-  toggleCardMember = member => {
-    const { card } = this.props;
+  toggleCardMember = async (member) => {
+    const { card, board, user } = this.props;
     const { card: updatedCard, activity } = cardService.toggleCardMember(member, card);
     const { members } = updatedCard;
+    const notification = {type: 'mention', isRead: false, txt:`${user.fullname} added you to card ${card.title}.`, url:`/board/${board._id}/card/${card.id}`}
     this.setState({ updatedMembers: members });
     this.props.updateField({ members }, activity.type, activity.values);
+    let userToUpdate = await userService.getById(member._id)
+    userToUpdate = {...userToUpdate, notifications:[...userToUpdate.notifications, notification]}
+    // console.log('userToUpdate : ', userToUpdate);
+    
+    if (activity.type==='ADD-MEMBER' && user._id!==member._id) userService.update(userToUpdate, false)
   };
 
   handleChange = ev => {
@@ -75,3 +85,17 @@ export class AddMembers extends Component {
     );
   }
 }
+
+
+const mapDispatchToProps = {
+  onUpdateUser,
+};
+
+const mapStateToProps = state => {
+  return {
+    user: state.userModule.user,
+    board: state.boardModule.board,
+  };
+};
+
+export const AddMembers = connect(mapStateToProps, mapDispatchToProps)(_AddMembers);

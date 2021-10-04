@@ -13,6 +13,7 @@ import { MiniLoader } from '../loader/mini-loader';
 class _InviteMain extends Component {
     state = {
         name: '',
+        invitedUserId: '',
         isQrCode: false,
         isLink: false,
         res: null,
@@ -37,9 +38,15 @@ class _InviteMain extends Component {
         this.props.setCardPopover('', ev.target, props);
     };
 
-    onSendInvitation = () => {
+    onSendInvitation = async () => {
         // send invitation with sockets
-        console.log('Invitation was sent with sockets');
+        const {invitedUserId} = this.state
+        const {user, board} = this.props
+        const url = `http://localhost:3000/invite/${board._id}`;
+        const notification = {type: 'invite', isRead: false, txt:`${user.fullname} invited you to board ${board.title}.`, url}
+        let userToUpdate = await userService.getById(invitedUserId)
+        userToUpdate = {...userToUpdate, notifications:[...userToUpdate.notifications, notification]}
+        userService.update(userToUpdate, false)
         this.props.closeCardPopover()
     };
 
@@ -59,6 +66,7 @@ class _InviteMain extends Component {
                     <DebounceInput
                         debounceTimeout={500}
                         type='search'
+                        autoFocus
                         autoComplete='off'
                         autoCorrect='off'
                         placeholder='Email address or name'
@@ -82,11 +90,11 @@ class _InviteMain extends Component {
                 {this.state.res?.length === 0 && <div className="invite-results"><MiniLoader /></div>}
                 {this.state.res?.length > 0 && <div className="invite-results">
                     <div>
-                        {this.state.res.map(user => <div key={user._id} onClick={() => this.setState({ name: user.username, isLink: true, res: [] })}>
-                            {/* <img src={user.imgUrl} alt="user image"/> */}
+                        {this.state.res.map(user => 
+                        {return user._id!==this.props.user._id ? <div key={user._id} onClick={() => this.setState({ name: user.username, invitedUserId: user._id, isLink: true, res: null })}>
                             <Avatar alt={user.fullname} src={user.imgUrl} className="avatar" />
                             <span>{user.fullname}</span>
-                        </div>)}
+                        </div>:<></>})}
                     </div>
                 </div>}
             </section>
@@ -101,7 +109,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
     cardPopover: state.systemModule.cardPopover,
-    board: state.boardModule.board
+    board: state.boardModule.board,
+    user: state.userModule.user
 });
 
-export const InviteMain = withRouter(connect(mapStateToProps, mapDispatchToProps)(withRouter(_InviteMain)));
+export const InviteMain = connect(mapStateToProps, mapDispatchToProps)(withRouter(_InviteMain));

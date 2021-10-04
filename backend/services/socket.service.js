@@ -19,7 +19,6 @@ function connectSockets(http, session) {
       console.log('Someone disconnected');
     });
     socket.on(SOCKET_EVENT_SET_BOARD, boardId => {
-      console.log('got new board', boardId);
       if (socket.boardId === boardId) return;
       if (socket.boardId) {
         socket.leave(socket.boardId);
@@ -97,7 +96,7 @@ async function _getAllSockets() {
 
 async function _printSockets() {
   const sockets = await _getAllSockets();
-  console.log(`Sockets: (count: ${sockets.length}):`);
+  // console.log(`Sockets: (count: ${sockets.length}):`);
   sockets.forEach(_printSocket);
 }
 function _printSocket(socket) {

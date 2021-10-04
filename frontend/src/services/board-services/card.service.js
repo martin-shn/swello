@@ -234,7 +234,7 @@ function toggleCardMember(member, card) {
   } else {
     isAdd = true;
     card.members.push(member);
-  }
+  } 
   const activity = { type: isAdd ? 'ADD-MEMBER' : 'REMOVE-MEMBER', values: { member } };
   return { card, activity };
 }

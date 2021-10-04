@@ -33,10 +33,10 @@ async function getById(userId) {
   return user;
 }
 
-async function update(user) {
+async function update(user, isCurrUser=true) {
   // await storageService.put('user', user);
   user = await httpService.put(`user/${user._id}`, user)
-  return _saveLocalUser(user);
+  return isCurrUser ? _saveLocalUser(user) : user;
 }
 
 async function login(userCred) {
