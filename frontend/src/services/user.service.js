@@ -1,7 +1,7 @@
 // import { storageService } from './async-storage.service';
 import { httpService } from './http.service';
-// import { socketService } from './socket.service';
-const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser';
+import { socketService } from './socket.service';
+const {STORAGE_KEY_LOGGEDIN_USER, SOCKET_EVENT_SET_USER, SOCKET_EVENT_UNSET_USER} = socketService
 
 export const userService = {
   login,
@@ -38,18 +38,18 @@ async function login(userCred) {
   // if (user) return _saveLocalUser(user);
   // throw new Error('Auth error');
   const user = await httpService.post('auth/login', userCred)
-  // socketService.emit('set-user-socket', user._id);
+  socketService.emit(SOCKET_EVENT_SET_USER, user._id);
   if (user) return _saveLocalUser(user)
 }
 async function signup(userCred) {
   // const user = await storageService.post('user', userCred);
   const user = await httpService.post('auth/signup', userCred)
-  // socketService.emit('set-user-socket', user._id);
+  socketService.emit(SOCKET_EVENT_SET_USER, user._id);
   return _saveLocalUser(user);
 }
 async function logout() {
   // sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER);
-  // socketService.emit('unset-user-socket');
+  socketService.emit(SOCKET_EVENT_UNSET_USER);
   return await httpService.post('auth/logout')
 }
 

@@ -41,7 +41,7 @@ export class _BoardPage extends Component {
     socketService.setup();
     // socketService.emit(socketService.SOCKET_EVENT_BOARD_UPDATED);
     socketService.on(socketService.SOCKET_EVENT_BOARD_UPDATED, () => this.props.loadBoard(boardId));
-    // socketService.emit()
+    socketService.emit(socketService.BOARD_ID, boardId)
     this.props.showLoadingPage();
     await this.props.loadBoard(boardId);
     this.props.hideLoadingPage();

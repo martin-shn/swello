@@ -2,7 +2,9 @@ const asyncLocalStorage = require('./als.service');
 const logger = require('./logger.service');
 
 let gIo = null;
-export const BOARD_ID = 'board-id';
+const SOCKET_EVENT_SET_BOARD = 'set-board';
+const SOCKET_EVENT_SET_USER = 'set-user-socket';
+const SOCKET_EVENT_UNSET_USER = 'unset-user-socket';
 
 function connectSockets(http, session) {
   gIo = require('socket.io')(http, {
@@ -15,7 +17,7 @@ function connectSockets(http, session) {
     socket.on('disconnect', socket => {
       console.log('Someone disconnected');
     });
-    socket.on(BOARD_ID, boardId => {
+    socket.on(SOCKET_EVENT_SET_BOARD, boardId => {
       if (socket.boardId === boardId) return;
       if (socket.boardId) {
         socket.leave(socket.boardId);
@@ -33,18 +35,18 @@ function connectSockets(http, session) {
     socket.on('user-watch', userId => {
       socket.join('watching:' + userId);
     });
-    socket.on('set-user-socket', userId => {
+    socket.on(SOCKET_EVENT_SET_USER, userId => {
       logger.debug(`Setting (${socket.id}) socket.userId = ${userId}`);
       socket.userId = userId;
     });
-    socket.on('unset-user-socket', () => {
+    socket.on(SOCKET_EVENT_UNSET_USER, () => {
       delete socket.userId;
     });
   });
 }
 
 function emitTo({ type, data, label }) {
-  if (label) gIo.to('watching:' + label).emit(type, data);
+  if (label) gIo.to(label).emit(type, data);
   else gIo.emit(type, data);
 }
 
@@ -105,4 +107,5 @@ module.exports = {
   emitTo,
   emitToUser,
   broadcast,
+  SOCKET_EVENT_SET_BOARD
 };

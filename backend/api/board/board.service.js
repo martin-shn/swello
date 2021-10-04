@@ -2,11 +2,12 @@ const dbService = require('../../services/db.service')
 const ObjectId = require('mongodb').ObjectId
 const asyncLocalStorage = require('../../services/als.service')
 
-async function query(boardId = null) {
+
+async function query() {
     try {
         const store = asyncLocalStorage.getStore()
         const { userId } = store
-        const criteria = _buildCriteria(userId, boardId)
+        const criteria = _buildCriteria(userId)
         const collection = await dbService.getCollection('board')
         const boards = await collection.aggregate([
             {
@@ -40,6 +41,17 @@ async function query(boardId = null) {
         return boards
     } catch (err) {
         logger.error('cannot find boards', err)
+        throw err
+    }
+}
+
+async function getById(boardId){
+    try {
+        const collection = await dbService.getCollection('board')
+        const board = await collection.findOne({ '_id': ObjectId(boardId) })
+        return board
+    } catch (err) {
+        logger.error(`Cannot get board by Id ${boardId}`, err)
         throw err
     }
 }
@@ -106,8 +118,7 @@ async function update(board) {
 
 function _buildCriteria(userId, boardId) {
     const criteria = {};
-    criteria.members = { $in: [ObjectId(userId)] }
-    if (boardId) criteria._id = { $eq: ObjectId(boardId) }
+    if (userId) criteria.members = { $in: [ObjectId(userId)] }
     return criteria
 }
 
@@ -128,7 +139,8 @@ module.exports = {
     query,
     remove,
     add,
-    update
+    update,
+    getById
 }
 
 
