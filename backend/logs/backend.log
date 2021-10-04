@@ -200,27 +200,6 @@
 3.10.2021, 19:22:43 - INFO - Req from: Guest (sid: 6nXVO5f4iNotjJrM271GAsrqqKxN15UB)
 3.10.2021, 19:22:47 - INFO - Req from: Guest (sid: 6nXVO5f4iNotjJrM271GAsrqqKxN15UB)
 3.10.2021, 19:22:53 - INFO - Req from: Guest (sid: 6nXVO5f4iNotjJrM271GAsrqqKxN15UB)
-<<<<<<< HEAD
-03/10/2021, 19:45:08 - INFO - Server is running on port: 3030 
-03/10/2021, 19:45:14 - DEBUG - auth.service - login with username: guest@guest.com (sid: XoEQYmem03hDTxWTdqTABKSuCw8jH8I9)
-03/10/2021, 19:45:15 - ERROR - while finding user guest@guest.com | ReferenceError: logger is not defined (sid: XoEQYmem03hDTxWTdqTABKSuCw8jH8I9)
-03/10/2021, 19:45:15 - ERROR - Failed to Login ReferenceError: logger is not defined (sid: XoEQYmem03hDTxWTdqTABKSuCw8jH8I9)
-03/10/2021, 19:46:56 - DEBUG - auth.service - login with username: guest@guest.com (sid: XoEQYmem03hDTxWTdqTABKSuCw8jH8I9)
-03/10/2021, 19:46:56 - ERROR - while finding user guest@guest.com | ReferenceError: logger is not defined (sid: XoEQYmem03hDTxWTdqTABKSuCw8jH8I9)
-03/10/2021, 19:46:56 - ERROR - Failed to Login ReferenceError: logger is not defined (sid: XoEQYmem03hDTxWTdqTABKSuCw8jH8I9)
-03/10/2021, 19:47:05 - DEBUG - auth.service - login with username: guest@guest.com (sid: XoEQYmem03hDTxWTdqTABKSuCw8jH8I9)
-03/10/2021, 19:47:06 - ERROR - while finding user guest@guest.com | ReferenceError: logger is not defined (sid: XoEQYmem03hDTxWTdqTABKSuCw8jH8I9)
-03/10/2021, 19:47:06 - ERROR - Failed to Login ReferenceError: logger is not defined (sid: XoEQYmem03hDTxWTdqTABKSuCw8jH8I9)
-03/10/2021, 19:47:37 - DEBUG - auth.service - login with username: guest@guest.com (sid: XoEQYmem03hDTxWTdqTABKSuCw8jH8I9)
-03/10/2021, 19:47:38 - ERROR - while finding user guest@guest.com | ReferenceError: logger is not defined (sid: XoEQYmem03hDTxWTdqTABKSuCw8jH8I9)
-03/10/2021, 19:47:38 - ERROR - Failed to Login ReferenceError: logger is not defined (sid: XoEQYmem03hDTxWTdqTABKSuCw8jH8I9)
-03/10/2021, 19:54:07 - INFO - Server is running on port: 3030 
-03/10/2021, 19:54:20 - DEBUG - auth.service - login with username: guest@guest.com (sid: _dL7vKUloZc7ampNcfGc-pQChSzzc2Pm)
-03/10/2021, 19:54:21 - ERROR - Cannot Connect to DB | MongoError: bad auth : Authentication failed. (sid: _dL7vKUloZc7ampNcfGc-pQChSzzc2Pm)
-03/10/2021, 19:54:21 - ERROR - Failed to get Mongo collection | MongoError: bad auth : Authentication failed. (sid: _dL7vKUloZc7ampNcfGc-pQChSzzc2Pm)
-03/10/2021, 19:54:21 - ERROR - while finding user guest@guest.com | MongoError: bad auth : Authentication failed. (sid: _dL7vKUloZc7ampNcfGc-pQChSzzc2Pm)
-03/10/2021, 19:54:21 - ERROR - Failed to Login MongoError: bad auth : Authentication failed. (sid: _dL7vKUloZc7ampNcfGc-pQChSzzc2Pm)
-=======
 3.10.2021, 23:04:51 - INFO - Server is running on port: 3030 
 3.10.2021, 23:07:02 - DEBUG - auth.service - login with username: guest@guest.com (sid: WWuSUiSjWmGHOJ_wJ7MdPj-EHcAN-YH-)
 3.10.2021, 23:07:04 - INFO - Req from: Guest (sid: WWuSUiSjWmGHOJ_wJ7MdPj-EHcAN-YH-)
@@ -463,4 +442,3 @@
 4.10.2021, 4:34:46 - INFO - Req from: Guest (sid: WWuSUiSjWmGHOJ_wJ7MdPj-EHcAN-YH-)
 4.10.2021, 4:43:28 - INFO - Req from: Guest (sid: WWuSUiSjWmGHOJ_wJ7MdPj-EHcAN-YH-)
 4.10.2021, 4:43:36 - INFO - Req from: Guest (sid: WWuSUiSjWmGHOJ_wJ7MdPj-EHcAN-YH-)
->>>>>>> c462470e195533017793297acdb704d5c500cdbe
