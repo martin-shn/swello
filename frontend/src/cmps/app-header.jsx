@@ -199,7 +199,7 @@ class _AppHeader extends Component {
               </div>
             </div>
           </PopoverMenu>
-          <Avatar className="avatar" alt={user.fullname} src="/static/images/avatar/3.jpg" />
+          <Avatar className="avatar" alt={user.fullname} src={user.imgUrl || '/static/images/avatar/3.jpg'} />
         </div>
         <BoardAdd isModal={this.state.isModal} onClose={this.onBtnCreate} />
       </header>
