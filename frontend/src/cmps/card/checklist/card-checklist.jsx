@@ -3,6 +3,7 @@ import ChecklistIcon from '@mui/icons-material/CheckBoxOutlined';
 import { ReactComponent as CloseIcon } from '../../../assets/svg/close.svg';
 import { ChecklistItemList } from './checklist-item-list';
 import { cardService } from '../../../services/board-services/card.service';
+import { AppBtn } from '../../general/app-btn';
 // import { cardService } from '../../../services/board-services/card.service';
 
 const initialState = {
@@ -75,7 +76,7 @@ export class CardChecklist extends Component {
               suppressContentEditableWarning>
               {checklist.title}
             </h3>
-            <button onClick={() => onDeleteChecklist(checklist.id)}>Delete</button>
+            <AppBtn onClick={() => onDeleteChecklist(checklist.id)}>Delete</AppBtn>
           </div>
         </div>
         <div className="section-header" style={{ marginBottom: '5px' }}>
@@ -95,7 +96,7 @@ export class CardChecklist extends Component {
         />
 
         <div className="section-data checklist-add-item">
-          {!isAdding && <button onClick={() => onAddingItem(checklist.id, this.inputRef)}>Add an item</button>}
+          {!isAdding && <AppBtn onClick={() => onAddingItem(checklist.id, this.inputRef)}>Add an item</AppBtn>}
           {isAdding && (
             <form onSubmit={this.onAddItem}>
               <textarea

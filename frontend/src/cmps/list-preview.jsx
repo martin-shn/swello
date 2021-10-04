@@ -28,10 +28,7 @@ export class _ListPreview extends Component {
     setTimeout(() => {
       if (this.elInnerRef?.current) {
         this.setState({
-          class:
-            this.elInnerRef.current.scrollHeight > this.elInnerRef.current.clientHeight
-              ? ' visible-scroll'
-              : '',
+          class: this.elInnerRef.current.scrollHeight > this.elInnerRef.current.clientHeight ? ' visible-scroll' : '',
         });
       }
     }, 10);
@@ -93,7 +90,7 @@ export class _ListPreview extends Component {
       onMoveList,
       onMoveAllCardsToList,
       onSortList,
-      onArchiveList
+      onArchiveList,
       // board
     } = this.props;
     const { popoverPage } = this.state;
@@ -104,9 +101,7 @@ export class _ListPreview extends Component {
             className={`list-preview flex column${this.state.class}`}
             {...provided.draggableProps}
             ref={provided.innerRef}>
-            <div
-              className={`list-header flex space-between${this.state.class}`}
-              {...provided.dragHandleProps}>
+            <div className={`list-header flex space-between${this.state.class}`} {...provided.dragHandleProps}>
               {!this.state.isDragging && (
                 <input
                   type="text"
@@ -136,9 +131,7 @@ export class _ListPreview extends Component {
                   {list.title}
                 </h2>
               )}
-              <button
-                className="btn-more"
-                onClick={() => onTogglePopover(isPopoverOpen ? null : list.id)}>
+              <button className="btn-more transperant" onClick={() => onTogglePopover(isPopoverOpen ? null : list.id)}>
                 <MoreHorizIcon />
               </button>
             </div>
@@ -198,7 +191,7 @@ export class _ListPreview extends Component {
 
               <div className="add-card" style={{ order: isTopAdd ? '-1' : '0' }}>
                 {!isAddingCard && !isTopAdd && (
-                  <button className="content btn-adding" onClick={() => onAddingCard(list.id)}>
+                  <button className="content btn-adding transperant" onClick={() => onAddingCard(list.id)}>
                     <AddIcon />
                     <span>Add a card</span>
                   </button>

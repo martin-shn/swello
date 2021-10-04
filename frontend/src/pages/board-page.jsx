@@ -6,7 +6,7 @@ import { TopPanel } from '../cmps/top-panel';
 import { boardService } from '../services/board.service';
 import { togglePopover } from '../store/actions/system.actions';
 import { updateBoard, loadBoard, clearBoard } from '../store/actions/board.actions';
-import { hideLoadingPage, showLoadingPage } from '../store/actions/system.actions';
+import { hideLoadingPage, showLoadingPage, setQuickEdit, setCardPopover, closeCardPopover } from '../store/actions/system.actions';
 import { onUpdateUser } from '../store/actions/user.actions';
 import { PopoverScreen } from '../cmps/popover-screen';
 import { CardPage } from './card-page';
@@ -15,6 +15,8 @@ import { LoaderPage } from '../cmps/loader/loader-page';
 import { SideMenu } from '../cmps/side-menu/side-menu';
 import { Dashboard } from './dashboard/dashboard';
 import { listService } from '../services/board-services/list.service';
+import { cardService } from '../services/board-services/card.service';
+import { CardQuickEdit } from '../cmps/card/card-quick-edit';
 
 export class _BoardPage extends Component {
   state = {
@@ -144,9 +146,9 @@ export class _BoardPage extends Component {
       isAddingList,
       // isCardPageOpen
     } = this.state;
-    const { popoverListId, filterBy } = this.props;
+    const { popoverListId, filterBy, cardQuickEdit, setQuickEdit, setCardPopover, closeCardPopover, cardPopover } = this.props;
     const { title, members, lists, style } = this.props.board;
-
+    console.log(cardQuickEdit);
     return (
       <main
         className="board-page"
@@ -186,6 +188,16 @@ export class _BoardPage extends Component {
           onArchiveList={this.onArchiveList}
         />
         <SideMenu />
+        {cardQuickEdit &&
+          <CardQuickEdit
+            card={cardService.getCardById(this.props.board, cardQuickEdit.id)}
+            board={this.props.board}
+            pos={cardQuickEdit.pos}
+            setQuickEdit={setQuickEdit}
+            setCardPopover={setCardPopover}
+            updateBoard={this.props.updateBoard}
+            cardPopover={cardPopover}
+            closeCardPopover={closeCardPopover} />}
       </main>
     );
   }
@@ -199,6 +211,9 @@ const mapDispatchToProps = {
   hideLoadingPage,
   showLoadingPage,
   onUpdateUser,
+  setCardPopover,
+  closeCardPopover,
+  setQuickEdit,
 };
 
 const mapStateToProps = state => {
@@ -208,6 +223,8 @@ const mapStateToProps = state => {
     popoverListId: state.systemModule.popoverListId,
     isLoadingPage: state.systemModule.isLoadingPage,
     user: state.userModule.user,
+    cardQuickEdit: state.systemModule.cardQuickEdit,
+    cardPopover: state.systemModule.cardPopover
   };
 };
 

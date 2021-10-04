@@ -9,10 +9,46 @@
   margin-bottom: 8px;
   min-height: 32px;
   text-decoration: none;
-  padding: 6px;
+  padding: 8px 6px;
   position: relative;
   gap: 4px;
   background-size: cover;
+
+  &.quick-edit {
+    z-index: 21;
+    padding: 6px 8px;
+    .edit-icon {
+      display: none;
+    }
+    textarea {
+      overflow: hidden;
+      overflow-wrap: break-word;
+      resize: none;
+      min-height: 90px;
+      padding: 0;
+      background-color: initial;
+      box-shadow: none;
+    }
+    &:hover {
+      border: none !important;
+      background-color: #fff !important;
+    }
+    .card-cover {
+      margin: -6px -8px 2px -8px;
+    }
+    .save-quick-edit {
+      background-color: #0079bf;
+      color: #fff;
+      padding-left: 24px;
+      padding-right: 24px;
+      position: absolute;
+      bottom: -45px;
+      left: 0;
+      &:hover {
+        background-color: #026aa7;
+      }
+    }
+  }
 
   .full-cover-helper {
     align-self: flex-end;
@@ -75,10 +111,9 @@
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 32px;
-    margin: -6px -6px 2px -8px;
+    margin: -8px -6px 2px -8px;
   }
 
-  // AVIV: looks useless, commenting this shouldnt cause issues, uncomment this if there are visual bugs
   .content {
     padding: 6px 8px 2px;
   }
@@ -97,7 +132,6 @@
     right: 2px;
     z-index: 1;
   }
-
   .card-cover.green,
   .card-cover.yellow,
   .card-cover.orange,

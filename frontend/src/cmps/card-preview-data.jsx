@@ -5,6 +5,7 @@ import { boardService } from '../services/board.service';
 import { updateBoard } from '../store/actions/board.actions';
 import ChecklistIcon from '@mui/icons-material/CheckBoxOutlined';
 import LocationIcon from '@mui/icons-material/LocationOn';
+import { ReactComponent as ArchiveIcon } from '../assets/svg/archive-icon.svg';
 import { Avatar } from '@mui/material';
 import { utilService } from '../services/util.service';
 import { connect } from 'react-redux';
@@ -38,6 +39,11 @@ class _CardPreviewData extends Component {
             </div>
           )}
           {checklists?.length > 0 && <CardPreviewChecklists checklists={checklists} />}
+          {cardService.getCardFromArchive(this.props.board, this.props.card.id) &&
+            <div className="flex align-center">
+              <ArchiveIcon /> <span style={{ fontSize: '12px', marginLeft: '4px' }}>Archived</span>
+            </div>
+          }
           {location && <LocationIcon />}
         </div>
         {members?.length > 0 && <CardPreviewMembers members={members} />}
@@ -96,7 +102,7 @@ function CardPreviewMembers({ members }) {
   return (
     <div className="card-preview-members flex align-center">
       {members.map(member => (
-        <Avatar key={member._id} className="avatar" alt={member?.fullname} src={member?.imgUrl} />
+        <Avatar key={member._id} className="avatar" alt={member?.fullname} src={member?.imgUrl || '/static/images/avatar/3.jpg'} />
       ))}
     </div>
   );

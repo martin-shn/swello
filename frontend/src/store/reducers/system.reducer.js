@@ -4,6 +4,7 @@ const initialState = {
   cardPopover: { name: '', anchorEl: null, props: null },
   isSideMenuOpen: false,
   menu: { isOpen: false, id: null, anchor: null },
+  cardQuickEdit: null
 };
 
 export function systemReducer(state = initialState, action) {
@@ -24,6 +25,8 @@ export function systemReducer(state = initialState, action) {
       return { ...state, isSideMenuOpen: !state.isSideMenuOpen };
     case 'TOGGLE_MENU':
       return { ...state, menu: { ...action.menu } };
+    case 'SET_QUICK_EDIT':
+      return { ...state, cardQuickEdit: action.cardQuickEdit }
     default:
       return state;
   }

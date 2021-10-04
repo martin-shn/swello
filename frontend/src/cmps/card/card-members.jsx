@@ -14,7 +14,7 @@ class _CardMembers extends Component {
         <div className="sub-header">Members</div>
         <div className="flex members-list" style={{ gap: '3px' }}>
           {members.map(member => (
-            <Avatar key={member._id} className="avatar" alt={member.fullname} src={member.imgUrl} />
+            <Avatar key={member._id} className="avatar" alt={member.fullname} src={member.imgUrl || '/static/images/avatar/3.jpg'} />
           ))}
           <Avatar className="avatar">
             <button

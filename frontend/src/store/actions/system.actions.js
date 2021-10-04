@@ -33,19 +33,25 @@ export function closeCardPopover() {
 }
 
 export function showLoadingPage() {
-  return async dispatch => {
+  return dispatch => {
     dispatch({ type: 'SHOW_LOADING_PAGE' });
   };
 }
 
 export function toggleSideMenu() {
-  return async dispatch => {
+  return dispatch => {
     dispatch({ type: 'TOGGLE_SIDE_MENU' });
   };
 }
 
 export function hideLoadingPage() {
-  return async dispatch => {
+  return dispatch => {
     dispatch({ type: 'HIDE_LOADING_PAGE' });
+  };
+}
+
+export function setQuickEdit(cardQuickEdit) {
+  return dispatch => {
+    dispatch({ type: 'SET_QUICK_EDIT', cardQuickEdit });
   };
 }

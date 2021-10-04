@@ -128,7 +128,7 @@ function getCardById(board, cardId) {
     for (const card of list.cards) {
       if (card.id === cardId) return card;
     }
-  }
+  }  
   return null;
 }
 

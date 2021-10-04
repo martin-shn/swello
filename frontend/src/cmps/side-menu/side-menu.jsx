@@ -5,7 +5,8 @@ import { SideMenuIndex } from './side-menu-index';
 import { toggleSideMenu } from '../../store/actions/system.actions';
 import { updateBoard } from '../../store/actions/board.actions';
 import { SideMenuSearch } from './side-menu-search';
-import { SideMenuArchive } from './side-menu-archive'
+import { SideMenuArchive } from './side-menu-archive';
+import { SideMenuChangeBg } from './side-menu-change-bg';
 
 class _SideMenu extends React.Component {
   state = {
@@ -18,10 +19,7 @@ class _SideMenu extends React.Component {
     setTimeout(() => {
       if (this.elInnerRef?.current) {
         this.setState({
-          isScroll:
-            this.elInnerRef.current.scrollHeight > this.elInnerRef.current.clientHeight
-              ? true
-              : false,
+          isScroll: this.elInnerRef.current.scrollHeight > this.elInnerRef.current.clientHeight ? true : false,
         });
       }
     }, 10);
@@ -49,8 +47,16 @@ class _SideMenu extends React.Component {
             {currPage === 'search' && (
               <SideMenuSearch setPage={this.setPage} toggleSideMenu={toggleSideMenu} board={board} />
             )}
+            {currPage === 'change-bg' && (
+              <SideMenuChangeBg setPage={this.setPage} toggleSideMenu={toggleSideMenu} board={board} updateBoard={updateBoard} />
+            )}
             {currPage === 'archive' && (
-              <SideMenuArchive setPage={this.setPage} toggleSideMenu={toggleSideMenu} board={board} updateBoard={updateBoard} />
+              <SideMenuArchive
+                setPage={this.setPage}
+                toggleSideMenu={toggleSideMenu}
+                board={board}
+                updateBoard={updateBoard}
+              />
             )}
           </div>
         </div>
@@ -61,7 +67,7 @@ class _SideMenu extends React.Component {
 
 const mapDispatchToProps = {
   toggleSideMenu,
-  updateBoard
+  updateBoard,
 };
 
 const mapStateToProps = state => ({
@@ -69,6 +75,4 @@ const mapStateToProps = state => ({
   board: state.boardModule.board,
 });
 
-export const SideMenu = withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(withRouter(_SideMenu))
-);
+export const SideMenu = withRouter(connect(mapStateToProps, mapDispatchToProps)(withRouter(_SideMenu)));

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { cardService } from "../../../services/board-services/card.service";
 import { boardService } from '../../../services/board.service'
 import { updateBoard } from '../../../store/actions/board.actions';
+import { setQuickEdit } from '../../../store/actions/system.actions';
 
 
 export class _MoveCard extends React.Component {
@@ -25,6 +26,7 @@ export class _MoveCard extends React.Component {
         const updatedBoard = boardService.moveCard(board, this.initialListId, this.initialCardIdx, listId, idx)
         this.props.updateBoard(updatedBoard)
         this.props.closeCardPopover()
+        if (this.props.cardQuickEdit) this.props.setQuickEdit(null)
     }
     render() {
         const { board, closeCardPopover } = this.props;
@@ -70,7 +72,14 @@ export class _MoveCard extends React.Component {
 
 const mapDispatchToProps = {
     updateBoard,
+    setQuickEdit
+};
+
+const mapStateToProps = state => {
+    return {
+        cardQuickEdit: state.systemModule.cardQuickEdit,
+    };
 };
 
 
-export const MoveCard = connect(null, mapDispatchToProps)(_MoveCard);
+export const MoveCard = connect(mapStateToProps, mapDispatchToProps)(_MoveCard);
