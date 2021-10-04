@@ -9,6 +9,8 @@ import CopyIcon from '@mui/icons-material/ContentCopy';
 import MoveIcon from '@mui/icons-material/ArrowForward';
 import RefreshIcon from '@mui/icons-material/Replay';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { ReactComponent as ArchiveIcon } from '../../assets/svg/archive-icon.svg';
+
 
 import { constService } from '../../services/const.service';
 import { AppBtn } from '../general/app-btn';
@@ -79,6 +81,7 @@ export const CardSidebar = props => {
             Move
           </AppBtn>
           <AppBtn name="archive-card" onClick={onArchiveCard}>
+            <ArchiveIcon />
             Archive
           </AppBtn>
         </>

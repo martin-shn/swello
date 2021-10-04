@@ -26,7 +26,8 @@ class _CardPreviewData extends Component {
 
   render() {
     const { checklists, attachments, description, dueDate, location, members } = this.props.card;
-    if (!checklists && !attachments && !description && !dueDate && !location && !members)
+    const isArchived = cardService.getCardFromArchive(this.props.board, this.props.card.id);
+    if (!checklists && !attachments && !description && !dueDate && !location && !members && !isArchived)
       return <></>;
     return (
       <section className="card-preview-data flex wrap align-center">
@@ -39,7 +40,7 @@ class _CardPreviewData extends Component {
             </div>
           )}
           {checklists?.length > 0 && <CardPreviewChecklists checklists={checklists} />}
-          {cardService.getCardFromArchive(this.props.board, this.props.card.id) &&
+          {isArchived &&
             <div className="flex align-center">
               <ArchiveIcon /> <span style={{ fontSize: '12px', marginLeft: '4px' }}>Archived</span>
             </div>

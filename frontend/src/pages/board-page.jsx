@@ -148,7 +148,6 @@ export class _BoardPage extends Component {
     } = this.state;
     const { popoverListId, filterBy, cardQuickEdit, setQuickEdit, setCardPopover, closeCardPopover, cardPopover } = this.props;
     const { title, members, lists, style } = this.props.board;
-    console.log(cardQuickEdit);
     return (
       <main
         className="board-page"

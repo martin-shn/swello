@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { createApi } from 'unsplash-js';
 import { ActivityDetails } from './activity-details';
 
+
 export const SideMenuIndex = ({ activities, setPage, isScroll, toggleSideMenu }) => {
   const elInnerRef = useRef();
   const [actsCount, setActsCount] = useState(15);
