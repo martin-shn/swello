@@ -29,16 +29,6 @@
   & button {
     padding: 6px 12px;
   }
-  & button:not(.btn-add):not(.label),
-  .btn {
-    &:hover {
-      background-color: #091e4214;
-    }
-    &:active {
-      background-color: #e4f0f6;
-      color: #0079bf;
-    }
-  }
 
   .cover-img {
     cursor: pointer;
@@ -139,19 +129,19 @@
         margin: 0 6px 0 -6px;
         pointer-events: none;
       }
-      &[name="add-members"],
-      &[name="copy-card"],
-      &[name="unarchive-card"] {
+      &[name='add-members'],
+      &[name='copy-card'],
+      &[name='unarchive-card'] {
         margin-top: 0;
       }
-      &[name="archive-card"]::before {
+      &[name='archive-card']::before {
         font-family: FA-solid;
-        content: "\f187";
+        content: '\f187';
         margin: 0 6px 0 -6px;
         height: 16px;
         width: 16px;
       }
-      &[name="remove-item"] {
+      &[name='remove-item'] {
         color: #fff;
         background-color: #b04632;
         &:hover {
@@ -174,7 +164,7 @@
     & > .header-icon::before {
       font-family: FA-regular;
       font-size: 1.1rem;
-      content: "\f07b";
+      content: '\f07b';
       color: #42526e;
     }
 

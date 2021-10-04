@@ -5,6 +5,7 @@ import React from 'react';
 import { getCoverImgHeight } from '../../services/cloudinary-service';
 import { constService } from '../../services/const.service';
 import { utilService } from '../../services/util.service';
+import { AppBtn } from '../general/app-btn';
 
 export const CardAttachments = ({ attachments, setCardPopover, card, updateField, closeCardPopover }) => {
   const onRemoveAttachment = attachment => {
@@ -58,13 +59,13 @@ export const CardAttachments = ({ attachments, setCardPopover, card, updateField
         cover={card.cover}
       />
       <div className="section-data">
-        <button
+        <AppBtn
           onClick={ev => {
             ev.preventDefault();
             setCardPopover('add-attachment', ev.target, { card, updateField });
           }}>
           Add an attachment
-        </button>
+        </AppBtn>
       </div>
     </section>
   );
