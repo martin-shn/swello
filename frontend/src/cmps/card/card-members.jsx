@@ -3,6 +3,7 @@ import { Avatar } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { connect } from 'react-redux';
 import { setCardPopover } from '../../store/actions/system.actions';
+import { AppAvatar } from '../general/app-avatar';
 
 class _CardMembers extends Component {
   render() {
@@ -14,14 +15,12 @@ class _CardMembers extends Component {
         <div className="sub-header">Members</div>
         <div className="flex members-list" style={{ gap: '3px' }}>
           {members.map(member => (
-            <Avatar key={member._id} className="avatar" alt={member.fullname} src={member.imgUrl || '/static/images/avatar/3.jpg'} />
+            <AppAvatar key={member._id} member={member} />
           ))}
           <Avatar className="avatar">
             <button
               className="btn-add-member"
-              onClick={ev =>
-                this.props.setCardPopover('add-members', ev.target, { board, card, updateField })
-              }>
+              onClick={ev => this.props.setCardPopover('add-members', ev.target, { board, card, updateField })}>
               <AddIcon />
             </button>
           </Avatar>

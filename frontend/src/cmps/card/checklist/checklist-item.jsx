@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { setCardPopover } from '../../../store/actions/system.actions';
 import { utilService } from '../../../services/util.service';
 import { cardService } from '../../../services/board-services/card.service';
-import { Avatar } from '@mui/material';
+import { AppAvatar } from '../../general/app-avatar';
 
 const _ChecklistItem = props => {
   // TODO - Finish the remaining add-member and due-date buttons, enable title edit
@@ -19,10 +19,7 @@ const _ChecklistItem = props => {
   const className = `section-header checklist-item ${status} ${isData ? ' is-data' : ''}`;
   return (
     <div className={className}>
-      <AppCheckbox
-        isDone={isDone}
-        onClick={() => props.onUpdateItem(props.item, { isDone: !isDone })}
-      />
+      <AppCheckbox isDone={isDone} onClick={() => props.onUpdateItem(props.item, { isDone: !isDone })} />
       <div className="item flex space-between">
         <div
           className="title content-editable grow"
@@ -35,9 +32,7 @@ const _ChecklistItem = props => {
         <section className="actions flex align-center">
           <button
             className="btn-due-date"
-            onClick={ev =>
-              props.setCardPopover('add-checkitem-due-date', ev.target, { item, onUpdateItem })
-            }
+            onClick={ev => props.setCardPopover('add-checkitem-due-date', ev.target, { item, onUpdateItem })}
             style={{ width: 'auto', gap: '4px' }}>
             <DueDateIcon style={{ width: '15px' }} />
             {dueDate && (
@@ -48,10 +43,8 @@ const _ChecklistItem = props => {
           </button>
 
           {assignedToMemberId && (
-            <Avatar
-              className="avatar"
-              alt={assignedToMember.fullName}
-              src={assignedToMember.imgUrl}
+            <AppAvatar
+              member={assignedToMember}
               onClick={ev =>
                 props.setCardPopover('add-checkitem-member', ev.target, {
                   boardMembers: board.members,

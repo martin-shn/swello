@@ -14,7 +14,7 @@ class _SideMenuSearch extends Component {
   render() {
     const { setPage, board, toggleSideMenu, filterBy, clearFilter } = this.props;
     return (
-      <div>
+      <section className="side-menu-search flex column">
         <div className={`side-menu-header visible-scroll`}>
           <span className="back" onClick={() => setPage('index')}></span>
           <h3>Menu</h3>
@@ -54,7 +54,7 @@ class _SideMenuSearch extends Component {
             </div>
           </div>
         </div>
-      </div>
+      </section>
     );
   }
 }

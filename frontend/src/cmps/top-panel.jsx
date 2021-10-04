@@ -5,11 +5,11 @@ import { ReactComponent as BtnBoardIcon } from '../assets/svg/board-btns/btn-boa
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { Avatar } from '@mui/material';
 
 import { setCardPopover, toggleSideMenu } from '../store/actions/system.actions';
 import { updateBoard } from '../store/actions/board.actions';
 import { CardPopover } from './card/card-popover';
+import { AppAvatar } from './general/app-avatar';
 
 const _TopPanel = props => {
   const { title, members, onUpdateTitle, user, board, onUpdateUser, setCardPopover, cardPopover } = props;
@@ -43,7 +43,7 @@ const _TopPanel = props => {
         </button>
         <div className="members flex">
           {members?.map(member => (
-            <Avatar key={member._id} alt={member.fullname} src={member.imgUrl} />
+            <AppAvatar key={member._id} member={member} />
           ))}
         </div>
         <button

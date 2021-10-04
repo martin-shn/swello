@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Avatar } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
 import { cardService } from '../../../services/board-services/card.service';
+import { AppAvatar } from '../../general/app-avatar';
 
 export class AddMembers extends Component {
   state = {
@@ -61,7 +61,7 @@ export class AddMembers extends Component {
                   key={member._id}
                   className="member flex align-center"
                   onClick={() => this.toggleCardMember(member)}>
-                  <Avatar className="avatar" alt={member.fullname} src={member.imgUrl} />
+                  <AppAvatar member={member} />
                   <span className="member-name">
                     {member.fullname}
                   </span>

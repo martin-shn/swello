@@ -1,7 +1,8 @@
 .side-menu-change-bg {
+  height: 100%;
   .content {
     padding: 0 6px 12px 12px;
-    height: 84vh;
+    flex-grow: 1;
     overflow-y: scroll;
   }
   .search {

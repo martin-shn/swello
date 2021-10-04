@@ -1,6 +1,5 @@
 import { storageService } from './async-storage.service';
 import { userService } from './user.service';
-import { socketService, SOCKET_EVENT_REVIEW_ADDED } from './socket.service';
 import { utilService } from './util.service';
 import {
   addList,

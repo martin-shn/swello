@@ -7,14 +7,13 @@ import { Draggable } from 'react-beautiful-dnd';
 import { CardPreviewLabels } from './card-preview-labels';
 import { CardPreviewData } from './card-preview-data';
 import { setQuickEdit } from '../store/actions/system.actions';
-import { CardQuickEdit } from './card/card-quick-edit';
 import { cardService } from '../services/board-services/card.service';
-import { updateBoard } from '../store/actions/board.actions'
+import { updateBoard } from '../store/actions/board.actions';
 
 export class CardPreview extends Component {
   state = {
-    title: this.props.card.title
-  }
+    title: this.props.card.title,
+  };
   render() {
     const { card, idx } = this.props;
 
@@ -38,18 +37,28 @@ export class CardPreview extends Component {
   }
 }
 
-function _CardPreviewInfo({ card, history, location, cardQuickEdit, setQuickEdit, title, handleChange, board, updateBoard }) {
+function _CardPreviewInfo({
+  card,
+  history,
+  location,
+  cardQuickEdit,
+  setQuickEdit,
+  title,
+  handleChange,
+  board,
+  updateBoard,
+}) {
   const updateCardTitle = () => {
-    const updatedBoard = cardService.updateCard(board, { ...card, title })
-    updateBoard(updatedBoard)
-    setQuickEdit(null)
-  }
+    const updatedBoard = cardService.updateCard(board, { ...card, title });
+    updateBoard(updatedBoard);
+    setQuickEdit(null);
+  };
   const coverImg = card.cover?.imgs?.find(img => img.id === card.cover.bgImgId);
   const coverStyle =
     coverImg && card.cover.size === 'full-cover'
       ? { backgroundImage: `url(${coverImg.url})`, height: `${coverImg.previewHeight}px` }
       : {};
-  const previewRef = React.createRef()
+  const previewRef = React.createRef();
   const isOnQuickEdit = cardQuickEdit && cardQuickEdit.id === card.id;
   return (
     <div
@@ -63,44 +72,53 @@ function _CardPreviewInfo({ card, history, location, cardQuickEdit, setQuickEdit
       onClick={() => !isOnQuickEdit && history.push(location.pathname + `/card/${card.id}`)}>
       {card.cover && (card.cover.color || coverImg) && card.cover.size === 'top-cover' && (
         <div
-          className={`card-cover${card.cover.color ? ' ' + card.cover.color : ''}${card.cover.bgImgId ? ' cover-img' : ''
-            }`}
+          className={`card-cover${card.cover.color ? ' ' + card.cover.color : ''}${
+            card.cover.bgImgId ? ' cover-img' : ''
+          }`}
           style={
             coverImg ? { backgroundImage: `url(${coverImg.url})`, height: `${coverImg.previewHeight}px` } : {}
           }></div>
       )}
       {(!card.cover || card.cover.size !== 'full-cover') && <CardPreviewLabels card={card} />}
-      <button className="edit-icon" onClick={(ev) => {
-        ev.stopPropagation()
-        const cardPos = previewRef.current.getBoundingClientRect()
-        setQuickEdit({ pos: cardPos, id: card.id })
-      }}>
+      <button
+        className="edit-icon"
+        onClick={ev => {
+          ev.stopPropagation();
+          const cardPos = previewRef.current.getBoundingClientRect();
+          setQuickEdit({ pos: cardPos, id: card.id });
+        }}>
         <EditIcon fontSize="small" />
       </button>
       <div
-        className={`${card.cover?.size === 'full-cover' ? 'full-cover-helper' : ''}${coverImg ? ' theme ' + coverImg.theme : ''
-          }`}>
-        {!isOnQuickEdit && <span style={{ color: card.cover?.color === 'black' && card.cover?.size === 'full-cover' ? '#fff' : '' }}>
-          {card.title}
-        </span>}
+        className={`${card.cover?.size === 'full-cover' ? 'full-cover-helper' : ''}${
+          coverImg ? ' theme ' + coverImg.theme : ''
+        }`}>
+        {!isOnQuickEdit && (
+          <span style={{ color: card.cover?.color === 'black' && card.cover?.size === 'full-cover' ? '#fff' : '' }}>
+            {card.title}
+          </span>
+        )}
         {isOnQuickEdit && <textarea autoFocus value={title} onChange={handleChange}></textarea>}
-        {isOnQuickEdit && <button className="save-quick-edit" onClick={updateCardTitle}>Save</button>}
+        {isOnQuickEdit && (
+          <button className="save-quick-edit" onClick={updateCardTitle}>
+            Save
+          </button>
+        )}
         {(!card.cover || card.cover.size !== 'full-cover') && <CardPreviewData card={card} />}
       </div>
-    </div >
+    </div>
   );
 }
 
-
 const mapDispatchToProps = {
   setQuickEdit,
-  updateBoard
+  updateBoard,
 };
 
 const mapStateToProps = state => {
   return {
     cardQuickEdit: state.systemModule.cardQuickEdit,
-    board: state.boardModule.board
+    board: state.boardModule.board,
   };
 };
 
