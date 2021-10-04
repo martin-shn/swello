@@ -7,7 +7,7 @@ export const SideMenuIndex = ({ activities, setPage, isScroll, toggleSideMenu })
   const [actsCount, setActsCount] = useState(15);
   const currClass = isScroll ? 'visible-scroll' : 'no-scroll';
   return (
-    <section className="side-menu-index">
+    <section className="side-menu-index flex column">
       <div className={`side-menu-header ${currClass}`}>
         <span></span>
         <h3>Menu</h3>

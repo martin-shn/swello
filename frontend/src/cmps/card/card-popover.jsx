@@ -73,11 +73,7 @@ class _CardPopover extends Component {
             <Paper>
               <ClickAwayListener onClickAway={() => this.props.setCardPopover(null, null, null)}>
                 <div>
-                  <PopoverCmp
-                    name={cardPopover.name}
-                    props={cardPopover.props}
-                    closeCardPopover={closeCardPopover}
-                  />
+                  <PopoverCmp name={cardPopover.name} props={cardPopover.props} closeCardPopover={closeCardPopover} />
                 </div>
               </ClickAwayListener>
             </Paper>

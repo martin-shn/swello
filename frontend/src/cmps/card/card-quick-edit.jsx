@@ -20,7 +20,9 @@ export class CardQuickEdit extends React.Component {
     }
     componentDidMount() {
         const { pos } = this.props;
-        this.setState({ top: pos.top, left: pos.left + pos.width })
+        const diff = document.body.clientHeight - (pos.top + 288)
+        const top = diff < 0 ? pos.top + (diff - 20) : pos.top
+        this.setState({ top, left: pos.left + pos.width })
         setTimeout(() => {
             this.setState({ fade: true })
         }, 50)
@@ -36,7 +38,6 @@ export class CardQuickEdit extends React.Component {
     }
     onOpenPopover = (ev, props) => {
         const { name } = ev.target.parentElement;
-        console.log(ev);
         this.props.setCardPopover(name, ev.target, props);
     };
     updateField = (data, activityType, activityValues) => {
