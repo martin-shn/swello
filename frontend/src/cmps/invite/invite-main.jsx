@@ -65,47 +65,7 @@ class _InviteMain extends Component {
           <span>Invite to board</span>
           <button className="close-icon" onClick={this.props.closeCardPopover}></button>
         </div>
-        <div className="invite-content popper-content">
-          <DebounceInput
-            debounceTimeout={500}
-            type="search"
-            autoComplete="off"
-            autoCorrect="off"
-            placeholder="Email address or name"
-            onChange={ev => {
-              this.handleChange(ev);
-            }}
-            value={this.state.name}
-          />
-          <div className="invite-link">
-            <span>
-              <LinkIcon />
-              Invite with link
-            </span>
-            <button className="create-invite-link" onClick={this.createLink}>
-              {this.state.isQrCode ? 'Disable link' : 'Create link'}
-            </button>
-          </div>
-          {this.state.isQrCode && <QrCode boardId={this.props.board._id} />}
-          <button className={this.state.isLink ? 'invite-active' : 'invite-disable'} onClick={this.onSendInvitation}>
-            Send invitation
-          </button>
-        </div>
-        {this.state.res?.length === 0 && (
-          <div className="invite-results">
-            <MiniLoader />
-          </div>
-        )}
-        {this.state.res?.length > 0 && (
-          <div className="invite-results">
-            <div>
-              {this.state.res.map(user => (
-                <div key={user._id} onClick={() => this.setState({ name: user.username, isLink: true, res: [] })}>
-                  {/* <img src={user.imgUrl} alt="user image"/> */}
-                  <AppAvatar member={user} />
-                  <span>{user.fullname}</span>
-                </div>
-                <div className='invite-content popper-content'>
+        <div className='invite-content popper-content'>
                     <DebounceInput
                         debounceTimeout={500}
                         type='search'
@@ -143,7 +103,7 @@ class _InviteMain extends Component {
             </section>
         );
     }
-}
+  }
 
 const mapDispatchToProps = {
   setCardPopover,
