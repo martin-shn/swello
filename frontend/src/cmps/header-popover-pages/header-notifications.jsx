@@ -17,6 +17,7 @@ export class HeaderNotifications extends Component {
     })
   );
   render() {
+    const {user, onUpdateUser} = this.props
     return (
       <>
         <PopoverMenu id="notification" header="Notification" classNames="notification-menu header-popper-menu">
@@ -28,6 +29,7 @@ export class HeaderNotifications extends Component {
             <div className="notification-content-main">
               <div className="notification-content">
                 {/* HERE COMES THE MAP RETURN DIVs */}
+                {}
                 <div className="notification">
                   <div className="notification-inner">
                     <div className="notification-read-btn">

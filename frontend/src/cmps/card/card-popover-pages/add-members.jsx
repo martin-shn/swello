@@ -18,7 +18,7 @@ export class _AddMembers extends Component {
     const { card, board, user } = this.props;
     const { card: updatedCard, activity } = cardService.toggleCardMember(member, card);
     const { members } = updatedCard;
-    const notification = {type: 'mention', isRead: false, txt:`${user.fullname} added you to card ${card.title}.`, url:`/board/${board._id}/card/${card.id}`}
+    const notification = {type: 'mention', title:'', isRead: false, txt:`${user.fullname} added you to card ${card.title}.`, url:`/board/${board._id}/card/${card.id}`}
     this.setState({ updatedMembers: members });
     this.props.updateField({ members }, activity.type, activity.values);
     let userToUpdate = await userService.getById(member._id)

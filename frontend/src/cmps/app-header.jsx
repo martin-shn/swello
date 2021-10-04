@@ -20,6 +20,7 @@ import { StarredBoardsMenuContent } from './header-popover-pages/starredboards-m
 import { HeaderSearch } from './header-popover-pages/header-search';
 import { AppAvatar } from './general/app-avatar';
 import { HeaderNotifications } from './header-popover-pages/header-notifications';
+import {Badge} from '@mui/material/';
 import { HeaderAccount } from './header-popover-pages/header-account';
 
 class _AppHeader extends Component {
@@ -84,7 +85,6 @@ class _AppHeader extends Component {
   render() {
     const { isStarredMenuOpen, starredBoards } = this.state;
     const { isUserBoardsPage, boards, board, user, onLogout } = this.props;
-    console.log(user);
     return (
       <header
         onClick={this.closePopover}
@@ -136,9 +136,16 @@ class _AppHeader extends Component {
             onClick={ev => {
               this.onBoards(ev, 'notification');
             }}>
-            <NotificationsIcon />
+              <Badge 
+                overlap="circular"
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                variant="dot"
+                // badgeContent={'1'}
+                >
+              <NotificationsIcon />
+            </Badge>
           </button>
-          <HeaderNotifications />
+          <HeaderNotifications user={user} onUpdateUser={this.props.onUpdateUser}/>
           {user && <AppAvatar onClick={ev => this.onBoards(ev, 'account')} member={user} />}
           <HeaderAccount user={user} onLogout={onLogout} history={this.props.history} />
         </div>

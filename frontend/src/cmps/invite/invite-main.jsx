@@ -46,7 +46,7 @@ class _InviteMain extends Component {
         const {invitedUserId} = this.state
         const {user, board} = this.props
         const url = `http://localhost:3000/invite/${board._id}`;
-        const notification = {type: 'invite', isRead: false, txt:`${user.fullname} invited you to board ${board.title}.`, url}
+        const notification = {type: 'invite', title: 'Board Invitation', isRead: false, txt:`${user.fullname} invited you to board ${board.title}.`, url, sentAt: Date.now()}
         let userToUpdate = await userService.getById(invitedUserId)
         userToUpdate = {...userToUpdate, notifications:[...userToUpdate.notifications, notification]}
         userService.update(userToUpdate, false)
