@@ -44,7 +44,6 @@ export const SideMenuIndex = ({ activities, setPage, isScroll, toggleSideMenu })
           </button>
         )}
       </div>
-      <button className="view-all-activity">View all activity...</button>
     </section>
   );
 };
