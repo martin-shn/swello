@@ -95,7 +95,7 @@ class _InviteMain extends Component {
                     <div>
                         {this.state.res.map(user => 
                         {return user._id!==this.props.user._id ? <div key={user._id} onClick={() => this.setState({ name: user.username, invitedUserId: user._id, isLink: true, res: null })}>
-                            <Avatar alt={user.fullname} src={user.imgUrl} className="avatar" />
+                            <AppAvatar member={user} />
                             <span>{user.fullname}</span>
                         </div>:<></>})}
                     </div>
