@@ -3,7 +3,7 @@ const templateService = require('./template.service');
 
 async function getTemplates(req, res) {
   try {
-    const templates = await templateService.query(req.params);
+    const templates = await templateService.query();
     res.send(templates);
   } catch (err) {
     logger.error('Cannot get templates', err);

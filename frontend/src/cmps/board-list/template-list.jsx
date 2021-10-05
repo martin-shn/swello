@@ -1,30 +1,35 @@
-import templates from '../../data/template.json';
 import FileCopyIcon from '@mui/icons-material/FileCopy';
+import { LoaderPage } from '../loader/loader-page';
 
-export function TemplateList() {
-  const onTemplateClick = template => {};
+export function TemplateList({ templates, createBoard, history }) {
+  const onTemplateClick = async template => {
+    const newBoard = await createBoard(template);
+    history.push(`/board/${newBoard._id}`);
+  };
 
+  if (!templates) return <LoaderPage />;
   return (
-    <div className="template-list-main" style={{ flexGrow: 1, padding: '20px' }}>
-      <h3 className="flex align-center" style={{ gap: '10px' }}>
-        <FileCopyIcon style={{ width: '19px' }} />
+    <div className="template-list-main">
+      <h3 className="flex align-center">
+        <FileCopyIcon />
         Templates
       </h3>
-      <section className="template-list flex" style={{ gap: '15px' }}>
+      <section className="template-list flex">
         {templates?.length > 0 &&
           templates.map(template => (
             <div
+              key={template._id}
               className="board-preview"
               onClick={() => onTemplateClick(template)}
               style={{
                 backgroundImage: `url(${template.style.imgUrl || ''})`,
                 backgroundColor: template.style.bgColor || '#fefefe',
-                width: '200px',
               }}>
               <span></span>
               <div>{template.title}</div>
             </div>
           ))}
+        {templates.length === 0 && <div>No templates found</div>}
       </section>
     </div>
   );

@@ -1,11 +1,11 @@
 const dbService = require('../../services/db.service');
 const ObjectId = require('mongodb').ObjectId;
+const logger = require('../../services/logger.service');
 
-async function query(filterBy = {}) {
+async function query() {
   try {
-    const { _id } = filterBy;
     const collection = await dbService.getCollection('template');
-    const templates = await collection.find({ _id: ObjectId(_id) }).toArray();
+    const templates = await collection.find({}).toArray();
     return templates;
   } catch (err) {
     logger.error('cannot find templates', err);
@@ -26,9 +26,23 @@ async function remove(templateId) {
 
 async function add(template) {
   try {
+    const { title, style, lists, labels = [] } = template;
+    const templateToAdd = {
+      title,
+      style,
+      members: [],
+      archive: {
+        lists: [],
+        cards: [],
+      },
+      lists,
+      activities: [],
+      isFullLabels: false,
+      labels,
+    };
     collection = await dbService.getCollection('template');
-    await collection.insertOne(template);
-    return template;
+    await collection.insertOne(templateToAdd);
+    return templateToAdd;
   } catch (err) {
     logger.error('cannot insert template', err);
     throw err;
@@ -48,6 +62,17 @@ async function update(template) {
     logger.error(`Cannot update template ${template._id}`, err);
     throw err;
   }
+}
+
+function _makeId(length = 6) {
+  var txt = '';
+  var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+  for (var i = 0; i < length; i++) {
+    txt += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+
+  return txt;
 }
 
 module.exports = {

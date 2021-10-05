@@ -93,4 +93,19 @@
 // Template boards:
 
 .template-list-main {
+  flex-grow: 1;
+  padding: 20px;
+  > h3 {
+    gap: 10px;
+    svg {
+      width: 19px;
+    }
+  }
+}
+.template-list {
+  gap: 15px;
+  .board-preview {
+    width: 200px;
+    cursor: pointer;
+  }
 }
