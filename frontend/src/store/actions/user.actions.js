@@ -1,5 +1,7 @@
 import { userService } from "../../services/user.service.js";
 import { showErrorMsg } from '../../services/event-bus.service.js'
+import { socketService, SOCKET_EVENT_USER_UPDATED } from '../../services/socket.service'
+
 
 export function loadUsers(filterBy) {
     return async dispatch => {
@@ -37,6 +39,9 @@ export function onLogin(credentials) {
                 type: 'SET_USER',
                 user
             })
+            // socketService.on(SOCKET_EVENT_USER_UPDATED, (user) => {
+            //     dispatch({ type: 'SET_USER', user })
+            // })
             return user
         } catch (err) {
             console.log('Cannot login', err)
@@ -53,6 +58,9 @@ export function onSignup(credentials) {
                 type: 'SET_USER',
                 user
             })
+            // socketService.on(SOCKET_EVENT_USER_UPDATED, (user) => {
+            //     dispatch({ type: 'SET_USER', user })
+            // })
             return user;
         }
         catch (err) {

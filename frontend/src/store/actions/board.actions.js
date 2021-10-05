@@ -1,6 +1,6 @@
 import { boardService } from '../../services/board.service';
 import _ from 'lodash';
-import { socketService, SOCKET_EVENT_BOARD_UPDATED } from '../../services/socket.service'
+import { socketService, SOCKET_EVENT_BOARD_UPDATED, SOCKET_EVENT_USER_UPDATED } from '../../services/socket.service'
 
 
 let gBoard = null;

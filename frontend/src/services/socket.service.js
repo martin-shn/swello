@@ -1,13 +1,12 @@
 import io from 'socket.io-client';
 
-export const SOCKET_EMIT_USER_WATCH = 'user-watch';
-// export const SOCKET_EVENT_USER_UPDATED = 'user-updated';
 // export const SOCKET_EVENT_REVIEW_ADDED = 'review-added';
 // export const SOCKET_EVENT_REVIEW_ABOUT_YOU = 'review-about-you';
 export const SOCKET_EVENT_BOARD_UPDATED = 'board-updated';
 export const SOCKET_EVENT_SET_BOARD = 'set-board';
 export const SOCKET_EVENT_SET_USER = 'set-user-socket';
 export const SOCKET_EVENT_UNSET_USER = 'unset-user-socket';
+export const SOCKET_EVENT_USER_UPDATED = 'user-updated';
 
 // unstar when adding backend
 // eslint-disable-next-line

@@ -4,7 +4,8 @@ import CheckIcon from '@mui/icons-material/Check';
 
 import { cardService } from '../../../services/board-services/card.service';
 import { userService } from '../../../services/user.service';
-import {onUpdateUser} from '../../../store/actions/user.actions'
+import { utilService } from '../../../services/util.service';
+import { onUpdateUser } from '../../../store/actions/user.actions'
 import { AppAvatar } from '../../general/app-avatar';
 
 export class _AddMembers extends Component {
@@ -18,14 +19,12 @@ export class _AddMembers extends Component {
     const { card, board, user } = this.props;
     const { card: updatedCard, activity } = cardService.toggleCardMember(member, card);
     const { members } = updatedCard;
-    const notification = {type: 'mention', title:'', isRead: false, txt:`${user.fullname} added you to card ${card.title}.`, url:`/board/${board._id}/card/${card.id}`}
+    const notification = { id: utilService.makeId(), type: 'mention', title: 'Card mention', isRead: false, user: { fullname: user.fullname, imgUrl: user.imgUrl }, txt: `${user.fullname} added you to card`, cardTitle: card.title, url: `/board/${board._id}/card/${card.id}`, sentAt: Date.now() }
     this.setState({ updatedMembers: members });
     this.props.updateField({ members }, activity.type, activity.values);
     let userToUpdate = await userService.getById(member._id)
-    userToUpdate = {...userToUpdate, notifications:[...userToUpdate.notifications, notification]}
-    // console.log('userToUpdate : ', userToUpdate);
-    
-    if (activity.type==='ADD-MEMBER' && user._id!==member._id) userService.update(userToUpdate, false)
+    userToUpdate = { ...userToUpdate, notifications: [notification, ...userToUpdate.notifications,] }
+    if (activity.type === 'ADD-MEMBER' && user._id !== member._id) userService.update(userToUpdate, false)
   };
 
   handleChange = ev => {

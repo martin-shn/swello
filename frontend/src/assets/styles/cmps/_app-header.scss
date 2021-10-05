@@ -55,6 +55,12 @@
     &.btn-notifications {
       padding: 6px;
       background-color: rgba(255, 255, 255, 0.3);
+      &.active {
+        background-color: #EB5A46;
+        &:hover {
+          background-color: #CF513D;
+        }
+      }
       &:hover {
         background-color: rgba(255, 255, 255, 0.2);
       }

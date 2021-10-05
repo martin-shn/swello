@@ -9,6 +9,8 @@ import { CardPreviewData } from './card-preview-data';
 import { setQuickEdit } from '../store/actions/system.actions';
 import { cardService } from '../services/board-services/card.service';
 import { updateBoard } from '../store/actions/board.actions';
+import { closeCardPopover } from '../store/actions/system.actions';
+
 
 export class CardPreview extends Component {
   state = {
@@ -47,6 +49,7 @@ function _CardPreviewInfo({
   handleChange,
   board,
   updateBoard,
+  closeCardPopover
 }) {
   const updateCardTitle = () => {
     const updatedBoard = cardService.updateCard(board, { ...card, title });
@@ -72,9 +75,8 @@ function _CardPreviewInfo({
       onClick={() => !isOnQuickEdit && history.push(location.pathname + `/card/${card.id}`)}>
       {card.cover && (card.cover.color || coverImg) && card.cover.size === 'top-cover' && (
         <div
-          className={`card-cover${card.cover.color ? ' ' + card.cover.color : ''}${
-            card.cover.bgImgId ? ' cover-img' : ''
-          }`}
+          className={`card-cover${card.cover.color ? ' ' + card.cover.color : ''}${card.cover.bgImgId ? ' cover-img' : ''
+            }`}
           style={
             coverImg ? { backgroundImage: `url(${coverImg.url})`, height: `${coverImg.previewHeight}px` } : {}
           }></div>
@@ -85,14 +87,14 @@ function _CardPreviewInfo({
         onClick={ev => {
           ev.stopPropagation();
           const cardPos = previewRef.current.getBoundingClientRect();
+          closeCardPopover()
           setQuickEdit({ pos: cardPos, id: card.id });
         }}>
         <EditIcon fontSize="small" />
       </button>
       <div
-        className={`${card.cover?.size === 'full-cover' ? 'full-cover-helper' : ''}${
-          coverImg ? ' theme ' + coverImg.theme : ''
-        }`}>
+        className={`${card.cover?.size === 'full-cover' ? 'full-cover-helper' : ''}${coverImg ? ' theme ' + coverImg.theme : ''
+          }`}>
         {!isOnQuickEdit && (
           <span style={{ color: card.cover?.color === 'black' && card.cover?.size === 'full-cover' ? '#fff' : '' }}>
             {card.title}
@@ -113,6 +115,7 @@ function _CardPreviewInfo({
 const mapDispatchToProps = {
   setQuickEdit,
   updateBoard,
+  closeCardPopover,
 };
 
 const mapStateToProps = state => {

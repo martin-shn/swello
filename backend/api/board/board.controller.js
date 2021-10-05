@@ -2,7 +2,6 @@ const logger = require('../../services/logger.service')
 const userService = require('../user/user.service')
 const socketService = require('../../services/socket.service')
 const boardService = require('./board.service')
-// const {broadcast} = require('../../services/socket.service')
 const asyncLocalStorage = require('../../services/als.service')
 
 async function getBoards(req, res) {
