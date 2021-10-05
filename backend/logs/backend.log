@@ -1323,3 +1323,7 @@
 
 >>>>>>> ff49f97772505b3e7a8b2964e51f22728097b1f2
 05/10/2021, 16:20:10 - INFO - Server is running on port: 3030 
+5.10.2021, 18:23:26 - INFO - Req from: Guest (sid: yDiUuwJSatEDpa9r7truykRn5VWDeV7l)
+5.10.2021, 18:23:26 - DEBUG - Setting (JkfUtR1C8YZuC-3eAAA-) socket.userId = 615b54ae1052964f2cc29bf3 
+5.10.2021, 18:23:26 - INFO - Req from: Guest (sid: yDiUuwJSatEDpa9r7truykRn5VWDeV7l)
+5.10.2021, 18:23:27 - DEBUG - Setting (sXgvGn-n5hIlYXKXAAA_) socket.userId = 615b54ae1052964f2cc29bf3 
