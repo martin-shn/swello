@@ -25,28 +25,15 @@ import { HeaderAccount } from './header-popover-pages/header-account';
 class _AppHeader extends Component {
   state = {
     isModal: false,
-    starredBoards: [],
   };
 
-  async componentDidMount() {
-    let { boards, user } = this.props;
-    if (boards?.length === 0) {
-      await this.props.loadBoards({ byUserId: user._id });
-      boards = this.props.boards;
-    }
-    this.setState({
-      starredBoards: boards.filter(board => user.starredBoardsIds.includes(board._id)),
-    });
+  componentDidMount() {
+    const { user } = this.props;
+    this.props.loadBoards({ byUserId: user._id });
   }
 
-  async componentDidUpdate(prevProps, prevState) {
-    if (prevProps.user.starredBoardsIds !== this.props.user.starredBoardsIds) {
-      await this.props.loadBoards({ byUserId: this.props.user._id });
-      const boards = this.props.boards;
-      this.setState({
-        starredBoards: boards.filter(board => this.props.user.starredBoardsIds.includes(board._id)),
-      });
-    }
+  componentWillUnmount() {
+    this.onClose()
   }
 
   closePopover = () => {
@@ -67,23 +54,19 @@ class _AppHeader extends Component {
   };
 
   // remove starred board from app header popper
-  onStar = async (ev, boardId) => {
+  onStar = (ev, boardId) => {
     ev.preventDefault();
     ev.stopPropagation();
     this.onClose();
     let newUser = { ...this.props.user };
     newUser.starredBoardsIds = newUser.starredBoardsIds.filter(id => id !== boardId);
-    await this.props.onUpdateUser(newUser);
-    this.setState({
-      starredBoards: this.props.boards.filter(
-        board => board._id !== boardId && this.props.user.starredBoardsIds.includes(board._id)
-      ),
-    });
+    this.props.onUpdateUser(newUser);
   };
 
   render() {
-    const { isStarredMenuOpen, starredBoards } = this.state;
+    const { isStarredMenuOpen } = this.state;
     const { isUserBoardsPage, boards, board, user, onLogout } = this.props;
+    const starredBoards = boards.filter(board => this.props.user.starredBoardsIds.includes(board._id))
     return (
       <header
         onClick={this.closePopover}
@@ -139,7 +122,7 @@ class _AppHeader extends Component {
             <NotificationsIcon />
 
           </button>
-          <HeaderNotifications user={user} onUpdateUser={this.props.onUpdateUser} toggleMenu={this.props.toggleMenu}/>
+          <HeaderNotifications user={user} onUpdateUser={this.props.onUpdateUser} toggleMenu={this.props.toggleMenu} />
           {user && <AppAvatar onClick={ev => this.onBoards(ev, 'account')} member={user} />}
           <HeaderAccount user={user} onLogout={onLogout} history={this.props.history} />
         </div>

@@ -1,18 +1,18 @@
 // import React from 'react';
 
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 export function SideNav() {
   return (
     <ul>
-      <li className="boards active">
-        <Link to="/board">Boards</Link>
+      <li >
+        <NavLink to="/board" className="boards"><span>Boards</span></NavLink>
       </li>
-      <li className="templates">
-        <Link to="/templates">Templates</Link>
+      <li >
+        <NavLink to="/templates" className="templates"><span>Templates</span></NavLink>
       </li>
-      <li className="home">
-        <Link to="/">Home</Link>
+      <li >
+        <Link to="/" className="home"><span>Home</span></Link>
       </li>
       <hr />
     </ul>

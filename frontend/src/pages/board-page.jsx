@@ -40,11 +40,7 @@ export class _BoardPage extends Component {
 
   async componentDidMount() {
     const { boardId } = this.props.match.params;
-    socketService.setup();
-    // socketService.emit(socketService.SOCKET_EVENT_BOARD_UPDATED);
-    // socketService.on(SOCKET_EVENT_BOARD_UPDATED, () => this.props.loadBoard(boardId));
     socketService.emit(SOCKET_EVENT_SET_BOARD, boardId)
-    socketService.emit(SOCKET_EVENT_SET_USER, this.props.user._id)
     this.props.showLoadingPage();
     await this.props.loadBoard(boardId);
     this.props.hideLoadingPage();
@@ -57,8 +53,6 @@ export class _BoardPage extends Component {
 
   componentWillUnmount() {
     this.props.clearBoard();
-    // socketService.off(SOCKET_EVENT_BOARD_UPDATED);
-    socketService.terminate();
   }
 
   // UI ACTIONS

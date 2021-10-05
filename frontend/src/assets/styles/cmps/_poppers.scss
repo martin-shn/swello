@@ -4,8 +4,8 @@
   }
   & .MuiPaper-root {
     color: #172b4d;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu',
-      'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu", "Droid Sans",
+      "Helvetica Neue", sans-serif;
     font-size: 14px;
     line-height: 20px;
     font-weight: 400;
@@ -68,65 +68,6 @@
       }
     }
 
-    & .your-boards {
-      & > ul {
-        list-style: none;
-        padding-inline: 0;
-        margin-inline: 0;
-        & > li {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          text-decoration: none;
-          overflow: hidden;
-          border-radius: 4px;
-          padding: 8px 6px;
-          margin: 8px 8px 14px;
-          &:hover {
-            background-color: rgba(9, 30, 66, 0.08);
-            color: #091e42;
-          }
-          &:active {
-            outline: 0;
-          }
-          & > div {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            & > div {
-              // your and guest avatar
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              height: 32px;
-              width: 32px;
-              border-radius: 6px;
-              background-color: #c5c5c5;
-              overflow: hidden;
-              font-size: 20px;
-              color: #ffffff;
-              font-weight: bold;
-              text-transform: uppercase;
-              line-height: 16px;
-              margin: 0;
-              background-position: center center;
-              background-size: cover;
-            }
-
-            & > span {
-              // your and guest board name
-              font-size: 14px;
-              font-weight: 600;
-              margin: 0 0 0 8px;
-              flex: 1;
-              white-space: nowrap;
-              overflow: hidden;
-              text-overflow: ellipsis;
-            }
-          }
-        }
-      }
-    }
     // YOUR BOARDS:
     & .your-boards {
       & > ul {
@@ -153,6 +94,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            text-overflow: ellipsis;
+            overflow: hidden;
             & > div {
               // your and guest avatar
               display: flex;
@@ -233,6 +176,8 @@
             display: block;
             float: left;
             width: 100%;
+            text-overflow: ellipsis;
+            overflow: hidden;
             & > div {
               // board avatar
               display: inline-block;
@@ -247,8 +192,8 @@
 
             & > span:first-of-type {
               // starred board name
-              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans',
-                'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+              font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu", "Droid Sans",
+                "Helvetica Neue", sans-serif;
               display: block;
               padding-right: 12px;
               overflow: hidden;
@@ -265,7 +210,7 @@
               // star icon
               &::before {
                 font-family: FA-regular;
-                content: '\f005';
+                content: "\f005";
               }
               width: 24px;
               margin-right: 4px;
@@ -307,8 +252,8 @@
     grid-template-columns: 12px 1fr 12px;
     & div {
       color: #172b4d;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu',
-        'Droid Sans', 'Helvetica Neue', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu", "Droid Sans",
+        "Helvetica Neue", sans-serif;
       font-size: 14px;
       line-height: 20px;
       font-weight: 400;
@@ -344,7 +289,7 @@
       text-decoration: none;
       &::before {
         font-family: FA-solid;
-        content: '\f00d';
+        content: "\f00d";
       }
     }
   }

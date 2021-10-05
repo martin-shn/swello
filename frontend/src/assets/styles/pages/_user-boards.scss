@@ -16,7 +16,7 @@
         margin: 0;
         margin-block: 0;
         padding-inline-start: 0;
-        & li {
+        & a {
           line-height: 20px;
           margin-bottom: 5px;
           padding: 8px 6px;
@@ -24,6 +24,8 @@
           align-items: center;
           border-radius: 4px;
           cursor: pointer;
+          font-weight: 700;
+          gap: 15px;
           &.active {
             background-color: #e4f0f6;
             color: #0079bf;
@@ -39,10 +41,10 @@
             font-size: 1rem;
             object-fit: scale-down;
           }
-          & a {
-            padding-inline-start: 15px;
-            font-weight: 700;
-          }
+          // & a {
+          //   padding-inline-start: 15px;
+          //   font-weight: 700;
+          // }
         }
       }
     }
@@ -75,17 +77,17 @@
 
   & > .star::before {
     font-family: FA-solid;
-    content: '\f005';
+    content: "\f005";
     margin-right: 15px;
   }
   & .your-boards::before {
     font-family: FA-solid;
-    content: '\f007';
+    content: "\f007";
     margin-right: 15px;
   }
   & .guest-boards::before {
     font-family: FA-solid;
-    content: '\f0c0';
+    content: "\f0c0";
     margin-right: 15px;
   }
 }
