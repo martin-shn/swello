@@ -182,7 +182,7 @@ export class _ListPreview extends Component {
             </Popover>
             <div
               ref={this.elInnerRef}
-              className={`cards-container flex column visible-scroll${this.state.class}`}
+              className={`cards-container flex column visible-scroll${this.state.class}${this.props.cardQuickEdit ? ' quick-edit-open' : ''}`}
               style={{
                 gap: isTopAdd ? '10px' : '0',
                 // marginRight: this.elRef.current.scrollHeight > this.elRef.current.clientHeight?'-10px':'0px'
@@ -233,6 +233,7 @@ const mapDispatchToProps = {
 function mapStateToProps(state) {
   return {
     board: state.boardModule.board,
+    cardQuickEdit: state.systemModule.cardQuickEdit
   };
 }
 

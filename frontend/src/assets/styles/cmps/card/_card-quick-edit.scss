@@ -5,14 +5,14 @@
     inset: 0;
     z-index: 20;
     pointer-events: auto;
+    overflow: hidden;
     .close-icon {
         color: #fff9;
         padding: 15px;
         position: absolute;
         right: 0;
         top: 0;
-        transition-duration: 0.15s;
-        transition-property: transform, color;
+        transition: transform 0.15s, color 0.15s;
         width: 60px;
         height: 60px;
         &:hover {
@@ -31,6 +31,12 @@
         width: 240px;
         transform: translateX(-20px);
         transition: opacity 85ms ease-in, transform 85ms ease-in;
+        align-items: flex-start;
+        &.from-left {
+            align-items: flex-end;
+            padding-right: 10px;
+            transform: translateX(20px);
+        }
         opacity: 0;
         &.fade-in {
             opacity: 1;
