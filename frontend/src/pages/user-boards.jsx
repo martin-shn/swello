@@ -12,6 +12,7 @@ class _UserBoards extends React.Component {
 
   componentDidMount() {
     const { user } = this.props;
+    if (!user) return;
     this.props.loadBoards({ byUserId: user._id });
     this.props.loadTemplates();
   }
@@ -20,7 +21,7 @@ class _UserBoards extends React.Component {
     const { user, boards, templates, history, createBoard } = this.props;
     if (!user) {
       history.replace('/');
-      return;
+      return <></>;
     }
 
     return (
