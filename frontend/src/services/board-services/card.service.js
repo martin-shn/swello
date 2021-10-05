@@ -128,7 +128,7 @@ function getCardById(board, cardId) {
     for (const card of list.cards) {
       if (card.id === cardId) return card;
     }
-  }  
+  }
   return null;
 }
 
@@ -234,7 +234,7 @@ function toggleCardMember(member, card) {
   } else {
     isAdd = true;
     card.members.push(member);
-  } 
+  }
   const activity = { type: isAdd ? 'ADD-MEMBER' : 'REMOVE-MEMBER', values: { member } };
   return { card, activity };
 }
@@ -248,6 +248,6 @@ function checkDueDate(dueDate) {
   if (!dueDate.date) return 'no-date';
   if (dueDate.date < now && dueDate.date + 24 * hour > now) return 'overdue-recent'; // less than 24 hours since overdue
   if (dueDate.date < now) return 'overdue';
-  if (dueDate.date - now < hour) return 'due-soon'; // less than 1 hour until overdue
+  if (dueDate.date - now < 24 * hour) return 'due-soon'; // less than 24 hour until overdue
   return 'normal';
 }
