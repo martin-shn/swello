@@ -20,7 +20,6 @@ import { StarredBoardsMenuContent } from './header-popover-pages/starredboards-m
 import { HeaderSearch } from './header-popover-pages/header-search';
 import { AppAvatar } from './general/app-avatar';
 import { HeaderNotifications } from './header-popover-pages/header-notifications';
-import {Badge} from '@mui/material/';
 import { HeaderAccount } from './header-popover-pages/header-account';
 
 class _AppHeader extends Component {
@@ -132,20 +131,15 @@ class _AppHeader extends Component {
         <div>
           <HeaderSearch board={this.props.board} menu={this.props.menu} toggleMenu={this.props.toggleMenu} />
           <button
-            className="btn-notifications"
+            className={`btn-notifications${user.notifications.some(notification => !notification.isRead) ? ' active' : ''}`}
             onClick={ev => {
               this.onBoards(ev, 'notification');
             }}>
-              <Badge 
-                overlap="circular"
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                variant="dot"
-                // badgeContent={'1'}
-                >
-              <NotificationsIcon />
-            </Badge>
+
+            <NotificationsIcon />
+
           </button>
-          <HeaderNotifications user={user} onUpdateUser={this.props.onUpdateUser}/>
+          <HeaderNotifications user={user} onUpdateUser={this.props.onUpdateUser} toggleMenu={this.props.toggleMenu}/>
           {user && <AppAvatar onClick={ev => this.onBoards(ev, 'account')} member={user} />}
           <HeaderAccount user={user} onLogout={onLogout} history={this.props.history} />
         </div>

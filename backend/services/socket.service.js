@@ -6,6 +6,7 @@ const SOCKET_EVENT_SET_BOARD = 'set-board';
 const SOCKET_EVENT_SET_USER = 'set-user-socket';
 const SOCKET_EVENT_UNSET_USER = 'unset-user-socket';
 const SOCKET_EVENT_BOARD_UPDATED = 'board-updated';
+const SOCKET_EVENT_USER_UPDATED = 'user-updated'
 
 function connectSockets(http, session) {
   gIo = require('socket.io')(http, {
@@ -109,5 +110,6 @@ module.exports = {
   emitToUser,
   broadcast,
   SOCKET_EVENT_SET_BOARD,
-  SOCKET_EVENT_BOARD_UPDATED
+  SOCKET_EVENT_BOARD_UPDATED,
+  SOCKET_EVENT_USER_UPDATED
 };

@@ -1,6 +1,7 @@
 const userService = require('./user.service')
 const socketService = require('../../services/socket.service')
 const logger = require('../../services/logger.service')
+const asyncLocalStorage = require('../../services/als.service')
 
 async function getUser(req, res) {
     try {
@@ -39,6 +40,11 @@ async function updateUser(req, res) {
     try {
         const user = req.body
         const savedUser = await userService.update(user)
+        // const alsStore = asyncLocalStorage.getStore()
+        // const userId = alsStore.userId
+        // if (userId !== savedUser._id) {
+        //     socketService.emitToUser({ type: socketService.SOCKET_EVENT_USER_UPDATED, data: savedUser, userId: savedUser._id })
+        // }
         res.send(savedUser)
     } catch (err) {
         logger.error('Failed to update user', err)

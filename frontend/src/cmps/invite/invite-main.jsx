@@ -3,7 +3,7 @@ import { ReactComponent as LinkIcon } from '../../assets/svg/icon-link.svg';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { DebounceInput } from 'react-debounce-input';
-
+import { utilService } from '../../services/util.service';
 import { setCardPopover, closeCardPopover } from '../../store/actions/system.actions';
 import { QrCode } from './qrcode';
 import { userService } from '../../services/user.service';
@@ -46,9 +46,9 @@ class _InviteMain extends Component {
         const {invitedUserId} = this.state
         const {user, board} = this.props
         const url = `http://localhost:3000/invite/${board._id}`;
-        const notification = {type: 'invite', title: 'Board Invitation', isRead: false, txt:`${user.fullname} invited you to board ${board.title}.`, url, sentAt: Date.now()}
+        const notification = {id: utilService.makeId(), type: 'invite', title: 'Board Invitation', user, isRead: false, txt:`${user.fullname} invited you to board ${board.title}`, url, sentAt: Date.now()}
         let userToUpdate = await userService.getById(invitedUserId)
-        userToUpdate = {...userToUpdate, notifications:[...userToUpdate.notifications, notification]}
+        userToUpdate = {...userToUpdate, notifications:[notification, ...userToUpdate.notifications]}
         userService.update(userToUpdate, false)
         this.props.closeCardPopover()
     };
