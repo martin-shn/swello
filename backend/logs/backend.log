@@ -164,3 +164,23 @@
 05/10/2021, 0:45:29 - INFO - Req from: Guest (sid: bJLfr6QCSU5LnK2Dh2qohCqlmhGisCK7)
 05/10/2021, 0:45:31 - DEBUG - Setting (CNJU5qHJHRvr3xexAAAj) socket.userId = 615b54ae1052964f2cc29bf3 
 05/10/2021, 0:47:15 - DEBUG - Setting (gGoHD4BIFTqEY7lRAAAl) socket.userId = 615b54ae1052964f2cc29bf3 
+05/10/2021, 1:21:07 - INFO - Req from: Guest (sid: bJLfr6QCSU5LnK2Dh2qohCqlmhGisCK7)
+05/10/2021, 1:21:09 - DEBUG - Setting (cho5eywKwoN0DkBlAAAp) socket.userId = 615b54ae1052964f2cc29bf3 
+05/10/2021, 1:21:17 - INFO - Req from: Guest (sid: bJLfr6QCSU5LnK2Dh2qohCqlmhGisCK7)
+05/10/2021, 1:21:18 - DEBUG - broadcast to all but user:  | 615b54ae1052964f2cc29bf3 (sid: bJLfr6QCSU5LnK2Dh2qohCqlmhGisCK7)
+05/10/2021, 1:21:24 - INFO - Req from: Guest (sid: bJLfr6QCSU5LnK2Dh2qohCqlmhGisCK7)
+05/10/2021, 1:21:24 - DEBUG - broadcast to all but user:  | 615b54ae1052964f2cc29bf3 (sid: bJLfr6QCSU5LnK2Dh2qohCqlmhGisCK7)
+05/10/2021, 11:36:39 - INFO - Server is running on port: 3030 
+05/10/2021, 11:36:45 - DEBUG - auth.service - login with username: guest@guest.com (sid: gWXVMf4-N3wmR3J1T_CjuLClRC2m_ZOr)
+05/10/2021, 11:36:46 - DEBUG - Setting (NtHPuBzoIZnOZlFsAAAD) socket.userId = 615b54ae1052964f2cc29bf3 
+05/10/2021, 11:36:47 - INFO - Req from: Guest (sid: gWXVMf4-N3wmR3J1T_CjuLClRC2m_ZOr)
+05/10/2021, 11:36:47 - INFO - Req from: Guest (sid: gWXVMf4-N3wmR3J1T_CjuLClRC2m_ZOr)
+05/10/2021, 11:41:51 - DEBUG - auth.service - signup with username: martinshn@gmail.com, fullname: מרטין ש. (sid: gWXVMf4-N3wmR3J1T_CjuLClRC2m_ZOr)
+05/10/2021, 11:41:51 - DEBUG - auth.route - new account created: {"username":"martinshn@gmail.com","password":"$2b$10$01Fcc5aIfdGaRqFVSQDiJe496ss/UApLbMjbhMHrVbKsoDQHpKq3W","fullname":"מרטין ש.","imgUrl":"https://lh3.googleusercontent.com/a-/AOh14GhsMDMOACY0v3N7qQkpQ3k3DNUjpk_wJcx1lnvA=s96-c","mentions":[],"starredBoardsIds":[],"notifications":[],"_id":"615c0fcfe7111c1bb4704340"} (sid: gWXVMf4-N3wmR3J1T_CjuLClRC2m_ZOr)
+05/10/2021, 11:41:51 - DEBUG - auth.service - login with username: martinshn@gmail.com (sid: gWXVMf4-N3wmR3J1T_CjuLClRC2m_ZOr)
+05/10/2021, 11:41:51 - DEBUG - Setting (SFEL0XrD-lnpBkhTAAAH) socket.userId = 615c0fcfe7111c1bb4704340 
+05/10/2021, 11:41:51 - INFO - Req from: מרטין ש. (sid: gWXVMf4-N3wmR3J1T_CjuLClRC2m_ZOr)
+05/10/2021, 11:41:51 - INFO - Req from: מרטין ש. (sid: gWXVMf4-N3wmR3J1T_CjuLClRC2m_ZOr)
+05/10/2021, 11:43:50 - INFO - Req from: מרטין ש. (sid: gWXVMf4-N3wmR3J1T_CjuLClRC2m_ZOr)
+05/10/2021, 11:55:30 - INFO - Req from: מרטין ש. (sid: gWXVMf4-N3wmR3J1T_CjuLClRC2m_ZOr)
+05/10/2021, 11:55:31 - DEBUG - Setting (W30X5-RNR4RohTEhAAAL) socket.userId = 615c0fcfe7111c1bb4704340 
