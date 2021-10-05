@@ -1,5 +1,6 @@
 const initialState = {
   boards: [],
+  templates: null,
   board: null,
   isFullLabels: false,
   labelsClass: '',
@@ -12,6 +13,8 @@ export function boardReducer(state = initialState, action) {
       return { ...state, board: { ...action.board } };
     case 'SET_BOARDS':
       return { ...state, boards: action.boards };
+    case 'SET_TEMPLATES':
+      return { ...state, templates: action.templates };
     case 'CLEAR_BOARD':
       return { ...state, board: null };
     case 'SET_FULL_LABELS':

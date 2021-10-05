@@ -18,6 +18,21 @@
   &.quick-edit {
     z-index: 21;
     padding: 6px 8px;
+    &.full-cover.cover-img {
+      .full-cover-helper {
+        height: 100%;
+        &.dark {
+          textarea {
+            color: #fff;
+          }
+        }
+      }
+    }
+    &.full-cover.black {
+      textarea {
+        color: #fff;
+      }
+    }
     .edit-icon {
       display: none;
     }
@@ -30,7 +45,7 @@
       background-color: initial;
       box-shadow: none;
     }
-    &:hover {
+    &:not(.full-cover):hover {
       border: none !important;
       background-color: #fff !important;
     }
@@ -59,7 +74,7 @@
     border-radius: 0px 0px 3px 3px;
     &.theme {
       ::before {
-        content: '';
+        content: "";
         height: 32px;
         left: 0;
         mix-blend-mode: normal;

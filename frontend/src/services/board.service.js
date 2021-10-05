@@ -24,6 +24,7 @@ import { httpService } from './http.service';
 export const boardService = {
   add,
   query,
+  templatesQuery,
   update,
   // remove,
   getById,
@@ -53,6 +54,10 @@ function query() {
   // var queryStr = (!filterBy) ? '' : `?byUser=${filterBy.byUser}`
   return httpService.get(`board`);
   // return storageService.query('board', filterBy);
+}
+
+function templatesQuery() {
+  return httpService.get('template');
 }
 
 function getById(boardId) {

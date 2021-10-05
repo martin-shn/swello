@@ -21,6 +21,10 @@ const routes = [
     component: UserBoards,
   },
   {
+    path: '/templates',
+    component: UserBoards,
+  },
+  {
     path: '/login',
     component: Login,
   },
