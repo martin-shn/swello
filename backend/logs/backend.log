@@ -808,3 +808,26 @@
 5.10.2021, 5:20:32 - DEBUG - auth.service - login with username: puki@puki.com (sid: sEYFp3Bbn2jQMlguxzLYsaoOEFAchHOa)
 5.10.2021, 5:20:32 - DEBUG - Setting (Y2hhLz6rgtQjEZjVAAAE) socket.userId = 615b97305c2ddf4ac852ddd4 
 5.10.2021, 5:20:32 - INFO - Req from: Puki Da (sid: sEYFp3Bbn2jQMlguxzLYsaoOEFAchHOa)
+5.10.2021, 5:24:20 - DEBUG - auth.service - login with username: guest@guest.com (sid: sEYFp3Bbn2jQMlguxzLYsaoOEFAchHOa)
+5.10.2021, 5:24:20 - DEBUG - Setting (ansPnEnaJkWwOU6XAAAN) socket.userId = 615b54ae1052964f2cc29bf3 
+5.10.2021, 5:24:20 - INFO - Req from: Guest (sid: sEYFp3Bbn2jQMlguxzLYsaoOEFAchHOa)
+5.10.2021, 5:24:20 - INFO - Req from: Guest (sid: sEYFp3Bbn2jQMlguxzLYsaoOEFAchHOa)
+5.10.2021, 5:24:25 - INFO - Req from: Guest (sid: sEYFp3Bbn2jQMlguxzLYsaoOEFAchHOa)
+5.10.2021, 5:24:25 - DEBUG - Setting (_vRXQozeOCiKdyW4AAAR) socket.userId = 615b54ae1052964f2cc29bf3 
+5.10.2021, 5:24:32 - INFO - Req from: Guest (sid: sEYFp3Bbn2jQMlguxzLYsaoOEFAchHOa)
+5.10.2021, 5:24:33 - INFO - Req from: Guest (sid: sEYFp3Bbn2jQMlguxzLYsaoOEFAchHOa)
+5.10.2021, 5:24:34 - INFO - Req from: Guest (sid: sEYFp3Bbn2jQMlguxzLYsaoOEFAchHOa)
+5.10.2021, 5:24:34 - DEBUG - Setting (Y7rXMA7LHSqaMdD1AAAV) socket.userId = 615b54ae1052964f2cc29bf3 
+5.10.2021, 5:25:39 - INFO - Req from: Guest (sid: sEYFp3Bbn2jQMlguxzLYsaoOEFAchHOa)
+5.10.2021, 5:25:40 - DEBUG - broadcast to all but user:  | 615b54ae1052964f2cc29bf3 (sid: sEYFp3Bbn2jQMlguxzLYsaoOEFAchHOa)
+5.10.2021, 5:25:41 - INFO - Req from: Guest (sid: sEYFp3Bbn2jQMlguxzLYsaoOEFAchHOa)
+5.10.2021, 5:25:41 - DEBUG - broadcast to all but user:  | 615b54ae1052964f2cc29bf3 (sid: sEYFp3Bbn2jQMlguxzLYsaoOEFAchHOa)
+5.10.2021, 5:26:01 - INFO - Req from: Guest (sid: sEYFp3Bbn2jQMlguxzLYsaoOEFAchHOa)
+5.10.2021, 5:26:09 - INFO - Req from: Guest (sid: sEYFp3Bbn2jQMlguxzLYsaoOEFAchHOa)
+5.10.2021, 5:26:09 - DEBUG - Setting (UAXX6Un4otsRqpClAAAZ) socket.userId = 615b54ae1052964f2cc29bf3 
+5.10.2021, 5:26:15 - INFO - Req from: Guest (sid: sEYFp3Bbn2jQMlguxzLYsaoOEFAchHOa)
+5.10.2021, 5:26:16 - DEBUG - broadcast to all but user:  | 615b54ae1052964f2cc29bf3 (sid: sEYFp3Bbn2jQMlguxzLYsaoOEFAchHOa)
+5.10.2021, 5:26:17 - INFO - Req from: Guest (sid: sEYFp3Bbn2jQMlguxzLYsaoOEFAchHOa)
+5.10.2021, 5:26:17 - DEBUG - broadcast to all but user:  | 615b54ae1052964f2cc29bf3 (sid: sEYFp3Bbn2jQMlguxzLYsaoOEFAchHOa)
+5.10.2021, 5:26:41 - INFO - Req from: Guest (sid: sEYFp3Bbn2jQMlguxzLYsaoOEFAchHOa)
+5.10.2021, 5:26:41 - DEBUG - broadcast to all but user:  | 615b54ae1052964f2cc29bf3 (sid: sEYFp3Bbn2jQMlguxzLYsaoOEFAchHOa)
