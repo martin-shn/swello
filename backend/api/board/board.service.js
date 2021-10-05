@@ -120,8 +120,8 @@ async function add(board) {
     const store = asyncLocalStorage.getStore();
     const { userId } = store;
     const boardToAdd = {
-      title: title,
-      style: style,
+      title,
+      style,
       createdBy: ObjectId(userId),
       members: [ObjectId(userId)],
       createdAt: Date.now(),

@@ -42,9 +42,9 @@ const _TopPanel = props => {
           }}>
           <StarOutlineIcon />
         </button>
-        <AvatarGroup max={4} spacing={3}>
+        <AvatarGroup max={4} spacing={3} className="members">
           {members?.map(member => (
-            <AppAvatar key={member._id} member={member} style={{ border: 'none' }} />
+            <AppAvatar key={member._id} member={member} />
           ))}
         </AvatarGroup>
         <button
