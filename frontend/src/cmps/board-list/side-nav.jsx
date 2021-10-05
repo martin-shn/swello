@@ -1,10 +1,20 @@
 // import React from 'react';
 
-export function SideNav(){
-    return <ul>
-        <li className="boards active"><a href="/board">Boards</a></li>
-        <li className="templates"><a href="/templates">Templates</a></li>
-        <li className="home"><a href="/">Home</a></li>
-        <hr/>
+import { Link } from 'react-router-dom';
+
+export function SideNav() {
+  return (
+    <ul>
+      <li className="boards active">
+        <Link to="/board">Boards</Link>
+      </li>
+      <li className="templates">
+        <Link to="/templates">Templates</Link>
+      </li>
+      <li className="home">
+        <Link to="/">Home</Link>
+      </li>
+      <hr />
     </ul>
+  );
 }

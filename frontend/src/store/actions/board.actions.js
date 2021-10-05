@@ -1,7 +1,6 @@
 import { boardService } from '../../services/board.service';
 import _ from 'lodash';
-import { socketService, SOCKET_EVENT_BOARD_UPDATED, SOCKET_EVENT_USER_UPDATED } from '../../services/socket.service'
-
+import { socketService, SOCKET_EVENT_BOARD_UPDATED, SOCKET_EVENT_USER_UPDATED } from '../../services/socket.service';
 
 let gBoard = null;
 
@@ -16,15 +15,26 @@ export function loadBoards(filterBy) {
   };
 }
 
+export function loadTemplates() {
+  return async dispatch => {
+    try {
+      const templates = await boardService.templatesQuery();
+      dispatch({ type: 'SET_TEMPLATES', templates });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+}
+
 export function loadBoard(id) {
   return async dispatch => {
     try {
       const board = await boardService.getById(id);
       gBoard = _.cloneDeep(board);
       dispatch({ type: 'SET_BOARD', board });
-      socketService.on(SOCKET_EVENT_BOARD_UPDATED, (board) =>{
-        dispatch({ type: 'SET_BOARD', board })
-      })
+      socketService.on(SOCKET_EVENT_BOARD_UPDATED, board => {
+        dispatch({ type: 'SET_BOARD', board });
+      });
     } catch (err) {
       console.error(err);
     }

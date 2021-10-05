@@ -64,7 +64,7 @@ async function emitToUser({ type, data, userId }) {
 
 // Send to all sockets BUT not the current socket
 async function broadcast({ type, data, room = null, userId }) {
-  console.log('BROADCASTING', JSON.stringify(arguments));
+  // console.log('BROADCASTING', JSON.stringify(arguments));
   const excludedSocket = await _getUserSocket(userId);
   if (!excludedSocket) {
     logger.debug('Shouldnt happen, socket not found');
