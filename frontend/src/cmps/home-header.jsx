@@ -35,6 +35,7 @@ export class HomeHeader extends Component {
 
   render() {
     const { style } = this.state;
+    const {user, onLogout} = this.props
     return (
       <header className="flex align-center" style={style}>
         <div className="logo">
@@ -42,8 +43,11 @@ export class HomeHeader extends Component {
           <LogoText />
         </div>
         <div className="btns flex">
-          <Link to="/login">Log in</Link>
-          <Link to="/signup" className="btn">Sign up</Link>
+          {!user&&<>
+            <Link to="/login">Log in</Link>
+            <Link to="/signup" className="btn">Sign up</Link>
+          </>}
+          {user&&<Link to="/" onClick={onLogout}>Log out</Link>}
         </div>
       </header>
     );

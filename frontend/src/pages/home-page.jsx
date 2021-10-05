@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { storageService } from '../services/async-storage.service';
-import { onLogin } from '../store/actions/user.actions'
+import { onLogin, onLogout } from '../store/actions/user.actions'
 import { HomeFooter } from '../cmps/home-footer';
 import { HomeHeader } from '../cmps/home-header';
 import HeroImg from '../assets/img/hero.png';
@@ -38,7 +38,7 @@ export class _HomePage extends React.Component {
     const { userEmail } = this.state;
     return (
       <section className="home-page">
-        <HomeHeader />
+        <HomeHeader user={this.props.user} onLogout={this.props.onLogout}/>
         <section className="hero">
           <div className="container flex align-center">
             <div>
@@ -109,7 +109,14 @@ export class _HomePage extends React.Component {
 }
 
 const mapDispatchToProps = {
-  onLogin
+  onLogin,
+  onLogout
 }
 
-export const HomePage = connect(null, mapDispatchToProps)(_HomePage)
+function mapStatetoProps(state){
+  return {
+    user: state.userModule.user
+  }
+}
+
+export const HomePage = connect(mapStatetoProps, mapDispatchToProps)(_HomePage)

@@ -94,7 +94,7 @@ function getLoggedinUser() {
 // })();
 
 // This is relevant when backend is connected
-// (async () => {
-//     var user = getLoggedinUser()
-//     if (user) socketService.emit('set-user-socket', user._id)
-// })();
+(async () => {
+    var user = getLoggedinUser()
+    if (user) socketService.emit(SOCKET_EVENT_SET_USER, user._id)
+})();

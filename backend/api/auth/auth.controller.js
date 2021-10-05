@@ -18,14 +18,14 @@ async function signup(req, res) {
     const { username, password, fullname, imgUrl } = req.body;
     // Never log passwords
     // logger.debug(fullname + ', ' + username + ', ' + password)
-    const account = await authService.signup(username, password, fullname, imgUrl);
-    logger.debug(`auth.route - new account created: ` + JSON.stringify(account));
-    const user = await authService.login(username, password);
+    const user = await authService.signup(username, password, fullname, imgUrl);
+    logger.debug(`auth.route - new account created: ` + JSON.stringify(user));
+    if (!user) res.status(500).send({err:'Username already exist'})
     req.session.user = user;
     res.json(user);
   } catch (err) {
     logger.error('Failed to signup ' + err);
-    res.status(500).send({ err: 'Failed to signup' });
+    res.status(500).send({ err: 'An error occured. Please try again later' });
   }
 }
 

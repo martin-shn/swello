@@ -51,6 +51,9 @@ class _Login extends React.Component {
   };
 
   showErrorMsg = err => {
+    console.log(err.response.data);
+      console.log(err.response.status);
+      console.log(err.response.headers);
     this.setState({ errMsg: 'Invalid username/password' });
   };
 

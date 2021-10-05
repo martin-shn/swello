@@ -50,8 +50,9 @@ class _Signup extends React.Component {
   };
 
   showErrorMsg = err => {
-    this.setState({ errMsg: 'An error occured. Please try again later' });
+    this.setState({ errMsg: err.response.data.err });
   };
+
   render() {
     const { user, errMsg } = this.state;
     return (
