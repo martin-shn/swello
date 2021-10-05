@@ -2,12 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AppHeader } from '../cmps/app-header';
 
-// import { storageService } from '../services/async-storage.service';
-// import { boardService } from '../services/board.service';
-// import { userService } from '../services/user.service';
 import { UserBoardMain } from '../cmps/board-list/user-board-main';
 import { SideNav } from '../cmps/board-list/side-nav';
-// import { LoaderPage } from '../cmps/loader/loader-page'
+import { withRouter } from 'react-router';
+import { TemplateList } from '../cmps/board-list/template-list';
 
 class _UserBoards extends React.Component {
   state = {};
@@ -15,7 +13,7 @@ class _UserBoards extends React.Component {
   render() {
     const user = this.props.user;
     if (!user) {
-      this.props.history.replace('/')
+      this.props.history.replace('/');
       return;
     }
 
@@ -28,17 +26,19 @@ class _UserBoards extends React.Component {
           <aside className="side-nav">
             <SideNav />
           </aside>
-          <section className="user-boards-main">
-            <UserBoardMain />
-          </section>
+          {this.props.location.pathname === '/board' && (
+            <section className="user-boards-main">
+              <UserBoardMain />
+            </section>
+          )}
+          {this.props.location.pathname === '/templates' && <TemplateList />}
         </section>
       </section>
     );
   }
 }
 
-const mapDispatchToProps = {
-};
+const mapDispatchToProps = {};
 
 const mapStateToProps = state => {
   return {
@@ -46,4 +46,4 @@ const mapStateToProps = state => {
   };
 };
 
-export const UserBoards = connect(mapStateToProps, mapDispatchToProps)(_UserBoards);
+export const UserBoards = connect(mapStateToProps, mapDispatchToProps)(withRouter(_UserBoards));

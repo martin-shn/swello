@@ -1,90 +1,96 @@
 .user-boards {
-    & .upper-nav{
-        z-index: 1;
-    }
+  & .upper-nav {
+    z-index: 1;
+  }
+  display: flex;
+  flex-direction: column;
+  & section {
     display: flex;
-    flex-direction: column;
-    & section {
-        display: flex;
 
-        & .side-nav {
-            margin: 40px 0 0;
-            padding: 0 16px;
-            min-width: 240px;
-            & ul {
-                list-style: none;
-                margin: 0;
-                margin-block: 0;
-                padding-inline-start: 0;
-                & li {
-                    line-height: 20px;
-                    margin-bottom: 5px;
-                    padding: 8px 6px;
-                    display: flex;
-                    align-items: center;
-                    border-radius: 4px;
-                    cursor: pointer;
-                    &.active {
-                        background-color: #e4f0f6;
-                        color: #0079bf;
-                    }
-                    &:hover {
-                        &:not(.active) {
-                            background-color: rgba(9, 30, 66, 0.08);
-                        }
-                    }
-                    &::before {
-                        width: 1rem;
-                        height: 1rem;
-                        font-size: 1rem;
-                        object-fit: scale-down;
-                    }
-                    & a {
-                        padding-inline-start: 15px;
-                        font-weight: 700;
-                    }
-                }
+    & .side-nav {
+      margin: 40px 0 0;
+      padding: 0 16px;
+      min-width: 240px;
+      & ul {
+        list-style: none;
+        margin: 0;
+        margin-block: 0;
+        padding-inline-start: 0;
+        & li {
+          line-height: 20px;
+          margin-bottom: 5px;
+          padding: 8px 6px;
+          display: flex;
+          align-items: center;
+          border-radius: 4px;
+          cursor: pointer;
+          &.active {
+            background-color: #e4f0f6;
+            color: #0079bf;
+          }
+          &:hover {
+            &:not(.active) {
+              background-color: rgba(9, 30, 66, 0.08);
             }
+          }
+          &::before {
+            width: 1rem;
+            height: 1rem;
+            font-size: 1rem;
+            object-fit: scale-down;
+          }
+          & a {
+            padding-inline-start: 15px;
+            font-weight: 700;
+          }
         }
-
-        & .user-boards-main {
-            flex-grow: 1;
-        }
+      }
     }
+
+    & .user-boards-main {
+      flex-grow: 1;
+    }
+  }
 }
 
-.user-boards-main {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
+.user-boards-main,
+.template-list-main {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
 
-    & > h3 {
-        align-items: center;
-        flex: 1;
-        font-size: rem(16px);
-        font-weight: 700;
-        line-height: rem(24px);
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        margin: 0;
-        line-height: 30px;
-        padding: 0 0 11px 0;
-    }
+  & > h3 {
+    align-items: center;
+    // flex: 1;
+    font-size: rem(16px);
+    font-weight: 700;
+    line-height: rem(24px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0;
+    line-height: 30px;
+    padding: 0 0 11px 0;
+  }
 
-    & > .star::before {
-        font-family: FA-solid;
-        content: "\f005";
-        margin-right: 15px;
-    }
-    & .your-boards::before {
-        font-family: FA-solid;
-        content: "\f007";
-        margin-right: 15px;
-    }
-    & .guest-boards::before {
-        font-family: FA-solid;
-        content: "\f0c0";
-        margin-right: 15px;
-    }
+  & > .star::before {
+    font-family: FA-solid;
+    content: '\f005';
+    margin-right: 15px;
+  }
+  & .your-boards::before {
+    font-family: FA-solid;
+    content: '\f007';
+    margin-right: 15px;
+  }
+  & .guest-boards::before {
+    font-family: FA-solid;
+    content: '\f0c0';
+    margin-right: 15px;
+  }
+}
+
+// Template boards:
+
+.template-list-main {
 }
