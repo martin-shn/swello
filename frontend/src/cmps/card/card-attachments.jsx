@@ -6,6 +6,7 @@ import { getCoverImgHeight } from '../../services/cloudinary-service';
 import { constService } from '../../services/const.service';
 import { utilService } from '../../services/util.service';
 import { AppBtn } from '../general/app-btn';
+import _ from 'lodash';
 
 export const CardAttachments = ({ attachments, setCardPopover, card, updateField, closeCardPopover }) => {
   const onRemoveAttachment = attachment => {
@@ -73,7 +74,7 @@ export const CardAttachments = ({ attachments, setCardPopover, card, updateField
 
 //
 
-function CardAttachmentList({
+function CardAttachmentList ({
   attachments,
   setCardPopover,
   onRemoveAttachment,
@@ -133,13 +134,13 @@ function CardAttachmentList({
           <div key={attachment.id} className="card-attachment" onClick={() => window.open(attachment.url, '_blank')}>
             <div
               className="attachment-thumbnail flex align-center justify-center"
-              style={!thumbnailText ? { backgroundImage: `url(${attachment.url})` } : {}}>
+              style={!thumbnailText ? { backgroundImage: `url(${ attachment.url })` } : {}}>
               <span>{thumbnailText}</span>
             </div>
             <section className="attachment-info">
               <div className="attachment-basic-info">
                 <div className="attachment-name">
-                  {attachment.name || 'Untitled'} <span className="icon-open" />
+                  {_.truncate(attachment.name, { length: 30 }) || 'Untitled'} <span className="icon-open" />
                 </div>
                 <span>
                   Added {formatDistance(attachment.createdAt, Date.now(), { addSuffix: true })} -{' '}

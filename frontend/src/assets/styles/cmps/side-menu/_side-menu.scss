@@ -11,12 +11,15 @@
   z-index: 11;
   position: fixed;
   &.open {
-    width: 339px;
+    width: 280px;
     transform: translateX(0);
     transition-duration: 0.1s;
     transition-property: transform;
     transition-timing-function: ease-in;
     box-shadow: 0 12px 24px -6px #091e4240, 0 0 0 1px #091e4214;
+    @include for-narrow-layout {
+      width: 339px;
+    }
   }
 
   & .side-menu-container {
@@ -29,6 +32,7 @@
     top: 0;
     & .side-menu-content {
       flex-grow: 1;
+      width: 100%;
       & hr {
         background-color: #091e4221;
         border: 0;

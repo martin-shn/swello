@@ -43,8 +43,7 @@ class _TopPanel extends React.Component {
     const { currPage, isMenuModalOpen } = this.state;
     const isStar = user.starredBoardsIds.includes(board._id);
     return (
-      <section className="top-panel full flex space-between">
-        <div className="flex align-center">
+      <section className="top-panel full flex">
           <button
             ref={this.btnRef}
             onClick={() => {
@@ -91,14 +90,11 @@ class _TopPanel extends React.Component {
             }}>
             Invite
           </button>
-        </div>
         {cardPopover.name === 'invite-main' && <CardPopover />}
-        <div>
           <button className="btn-menu" onClick={this.props.toggleSideMenu}>
             <MoreHorizIcon />
             Show Menu
           </button>
-        </div>
       </section>
     );
   }
