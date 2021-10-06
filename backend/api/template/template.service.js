@@ -25,19 +25,20 @@ async function remove(templateId) {
 }
 
 async function add(template) {
+  const defaultLabels = [
+    { id: _makeId(), title: '', color: 'green' },
+    { id: _makeId(), title: '', color: 'yellow' },
+    { id: _makeId(), title: '', color: 'orange' },
+    { id: _makeId(), title: '', color: 'red' },
+    { id: _makeId(), title: '', color: 'purple' },
+    { id: _makeId(), title: '', color: 'blue' },
+  ];
   try {
-    const { title, style, lists, labels = [] } = template;
+    const { title, style, lists = [], labels = defaultLabels } = template;
     const templateToAdd = {
       title,
       style,
-      members: [],
-      archive: {
-        lists: [],
-        cards: [],
-      },
       lists,
-      activities: [],
-      isFullLabels: false,
       labels,
     };
     collection = await dbService.getCollection('template');

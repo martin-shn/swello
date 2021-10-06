@@ -1,6 +1,6 @@
 import { boardService } from '../../services/board.service';
 import _ from 'lodash';
-import { socketService, SOCKET_EVENT_BOARD_UPDATED, SOCKET_EVENT_USER_UPDATED } from '../../services/socket.service';
+import { socketService, SOCKET_EVENT_BOARD_UPDATED, SOCKET_EVENT_ITEM_DRAGGED } from '../../services/socket.service';
 
 let gBoard = null;
 
@@ -9,6 +9,9 @@ export function loadBoards(filterBy) {
     try {
       const boards = await boardService.query(filterBy);
       dispatch({ type: 'SET_BOARDS', boards });
+      socketService.on(SOCKET_EVENT_ITEM_DRAGGED, draggedItem => {
+        dispatch({ type: 'SET_DRAGGED_ITEM', draggedItem })
+      })
     } catch (err) {
       console.error(err);
     }

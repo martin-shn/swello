@@ -4,6 +4,7 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { ListAdd } from './list-add';
 import { ListPreview } from './list-preview';
 import { boardService } from '../services/board.service';
+import { socketService, SOCKET_EVENT_UNSET_ITEM_DRAGGED } from '../services/socket.service';
 
 export const ListAll = props => {
   const {
@@ -27,7 +28,7 @@ export const ListAll = props => {
   } = props;
 
   // DRAG DROP :
-  const onDragEnd = ({ destination, source, type }) => {
+  const onDragEnd = async ({ destination, source, type }) => {
     if (!destination) return;
     let updatedBoard = board;
     if (type === 'list') {
@@ -35,7 +36,8 @@ export const ListAll = props => {
     } else if (type === 'card') {
       updatedBoard = boardService.moveCard(board, source.droppableId, source.index, destination.droppableId, destination.index)
     }
-    updateBoard(updatedBoard)
+    await updateBoard(updatedBoard)
+    socketService.emit(SOCKET_EVENT_UNSET_ITEM_DRAGGED)
   };
 
   return (
@@ -44,7 +46,7 @@ export const ListAll = props => {
         <Droppable droppableId="all-lists" direction="horizontal" type="list">
           {(provided, snapshot) => (
             <section
-              className={`flex lists-container${snapshot.isDraggingOver?' dragging-over':''}`}
+              className={`flex lists-container${snapshot.isDraggingOver ? ' dragging-over' : ''}`}
               {...provided.droppableProps}
               ref={provided.innerRef}>
               {lists.map((list, idx) => (

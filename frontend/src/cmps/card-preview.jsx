@@ -10,6 +10,7 @@ import { setQuickEdit } from '../store/actions/system.actions';
 import { cardService } from '../services/board-services/card.service';
 import { updateBoard } from '../store/actions/board.actions';
 import { closeCardPopover } from '../store/actions/system.actions';
+import { socketService, SOCKET_EVENT_ITEM_DRAGGED } from '../services/socket.service';
 
 
 export class CardPreview extends Component {
@@ -30,6 +31,7 @@ export class CardPreview extends Component {
               {...provided.dragHandleProps}
               ref={provided.innerRef}
             >
+              {snapshot.isDragging && socketService.emit(SOCKET_EVENT_ITEM_DRAGGED, { id: card.id, style: provided.draggableProps.style })}
               <CardPreviewInfo card={card} title={this.state.title} handleChange={({ target }) => this.setState({ title: target.value })} />
             </div>
           </>
@@ -49,7 +51,8 @@ function _CardPreviewInfo({
   handleChange,
   board,
   updateBoard,
-  closeCardPopover
+  closeCardPopover,
+  draggedItem
 }) {
   const updateCardTitle = () => {
     const updatedBoard = cardService.updateCard(board, { ...card, title });
@@ -63,6 +66,7 @@ function _CardPreviewInfo({
       : {};
   const previewRef = React.createRef();
   const isOnQuickEdit = cardQuickEdit && cardQuickEdit.id === card.id;
+  const draggingStyle = draggedItem && draggedItem.id === card.id ? draggedItem.style : {}
   return (
     <div
       className={
@@ -71,7 +75,7 @@ function _CardPreviewInfo({
         (isOnQuickEdit ? ' quick-edit' : '')
       }
       ref={previewRef}
-      style={coverStyle}
+      style={{ ...coverStyle, ...draggingStyle }}
       onClick={() => !isOnQuickEdit && history.push(location.pathname + `/card/${card.id}`)}>
       {card.cover && (card.cover.color || coverImg) && card.cover.size === 'top-cover' && (
         <div
@@ -122,6 +126,7 @@ const mapStateToProps = state => {
   return {
     cardQuickEdit: state.systemModule.cardQuickEdit,
     board: state.boardModule.board,
+    draggedItem: state.boardModule.draggedItem
   };
 };
 

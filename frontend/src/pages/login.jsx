@@ -31,7 +31,12 @@ class _Login extends React.Component {
       password: '',
     },
     errMsg: '',
+    isFromInvite: false
   };
+
+  componentDidMount() {
+    this.setState({ isFromInvite: this.props.match.path.startsWith('/invite') ? true : false })
+  }
 
   handleChange = ({ target }) => {
     const field = target.name;
@@ -41,19 +46,17 @@ class _Login extends React.Component {
 
   onLogin = async ev => {
     if (ev) ev.preventDefault();
-    const { user } = this.state;
+    const { user, isFromInvite } = this.state;
+    const { boardId } = this.props.match.params;
     try {
       await this.props.onLogin(user, this.showErrorMsg);
-      this.props.history.push('/board');
+      isFromInvite ? this.props.history.push(`/invite/${boardId}`) : this.props.history.push('/board')
     } catch (err) {
       this.showErrorMsg(err);
     }
   };
 
   showErrorMsg = err => {
-    console.log(err.response.data);
-      console.log(err.response.status);
-      console.log(err.response.headers);
     this.setState({ errMsg: 'Invalid username/password' });
   };
 
@@ -68,7 +71,7 @@ class _Login extends React.Component {
   };
 
   render() {
-    const { user, errMsg } = this.state;
+    const { user, errMsg, isFromInvite } = this.state;
     return (
       <section className="login">
         <div className="login-left-img">
@@ -87,7 +90,7 @@ class _Login extends React.Component {
               <p>{errMsg}</p>
             </div>
           )}
-          <h1>Log in to Swello</h1>
+          <h1>{isFromInvite ? 'Please log in first to join the board' : 'Log in to Swello'}</h1>
           <input
             autoCorrect="off"
             type="email"
@@ -109,17 +112,11 @@ class _Login extends React.Component {
           />
           <button type="submit">Log in</button>
           <span>OR</span>
-          {/* <div className="google-btn flex align-center justify-center">
-            <GoogleIcon />
-            <span className="label">Continue with Google</span>
-          </div> */}
           <GoogleLogin
             clientId={clientId}
-            // buttonText='Continue with Google'
             onSuccess={this.onSuccess}
             onFailure={this.onFailure}
             cookiePolicy={'single_host_origin'}
-            // style={{}}
             render={renderProps => (
               <div className="google-btn flex align-center justify-center" onClick={renderProps.onClick}>
                 <GoogleIcon />
@@ -129,7 +126,7 @@ class _Login extends React.Component {
             isSignedIn={false}
           />
           <hr className="bottom-form-separator"></hr>
-          <Link to="/signup">New here? Sign up for an account</Link>
+          <Link to={isFromInvite ? `/invite/${this.props.match.params.boardId}/signup` : '/signup'}>New here? Sign up for an account</Link>
         </form>
         <HomeFooter />
       </section>

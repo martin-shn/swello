@@ -7,6 +7,10 @@ const SOCKET_EVENT_SET_USER = 'set-user-socket';
 const SOCKET_EVENT_UNSET_USER = 'unset-user-socket';
 const SOCKET_EVENT_BOARD_UPDATED = 'board-updated';
 const SOCKET_EVENT_USER_UPDATED = 'user-updated'
+const SOCKET_EVENT_ITEM_DRAGGED = 'item-dragged'
+const SOCKET_EVENT_UNSET_ITEM_DRAGGED = 'unset-item-dragged'
+
+
 
 function connectSockets(http, session) {
   gIo = require('socket.io')(http, {
@@ -44,6 +48,12 @@ function connectSockets(http, session) {
     socket.on(SOCKET_EVENT_UNSET_USER, () => {
       delete socket.userId;
     });
+    socket.on(SOCKET_EVENT_ITEM_DRAGGED, draggedItem => {
+      socket.broadcast.to(socket.boardId).emit(SOCKET_EVENT_ITEM_DRAGGED, draggedItem);
+    })
+    socket.on(SOCKET_EVENT_UNSET_ITEM_DRAGGED, () => {
+      socket.broadcast.to(socket.boardId).emit(SOCKET_EVENT_ITEM_DRAGGED, null);
+    })
   });
 }
 

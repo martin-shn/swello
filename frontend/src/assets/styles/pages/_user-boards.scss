@@ -4,8 +4,12 @@
   }
   display: flex;
   flex-direction: column;
-  & section {
+  & .user-boards-container {
     display: flex;
+    flex-direction: column;
+    @media (min-width: 620px) {
+      flex-direction: row;
+    }
 
     & .side-nav {
       margin: 40px 0 0;
@@ -16,7 +20,7 @@
         margin: 0;
         margin-block: 0;
         padding-inline-start: 0;
-        & li {
+        & a {
           line-height: 20px;
           margin-bottom: 5px;
           // padding: 8px 6px;
@@ -24,6 +28,12 @@
           // align-items: center;
           border-radius: 4px;
           cursor: pointer;
+          font-weight: 700;
+          gap: 15px;
+          &.active {
+            background-color: #e4f0f6;
+            color: #0079bf;
+          }
           &:hover {
             &:not(.active) {
               background-color: rgba(9, 30, 66, 0.08);
@@ -35,17 +45,10 @@
             font-size: 1rem;
             object-fit: scale-down;
           }
-          & a {
-            padding-inline-start: 15px;
-            flex-grow: 1;
-            padding: 0 14px;
-            height: 26px;
-            font-weight: 700;
-            &.active ~ li {
-              background-color: #e4f0f6;
-              color: #0079bf;
-            }
-          }
+          // & a {
+          //   padding-inline-start: 15px;
+          //   font-weight: 700;
+          // }
         }
       }
     }
@@ -78,17 +81,17 @@
 
   & > .star::before {
     font-family: FA-solid;
-    content: '\f005';
+    content: "\f005";
     margin-right: 15px;
   }
   & .your-boards::before {
     font-family: FA-solid;
-    content: '\f007';
+    content: "\f007";
     margin-right: 15px;
   }
   & .guest-boards::before {
     font-family: FA-solid;
-    content: '\f0c0';
+    content: "\f0c0";
     margin-right: 15px;
   }
 }

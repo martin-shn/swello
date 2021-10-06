@@ -1,0 +1,12 @@
+.header-more {
+  display: flex;
+  flex-direction: column;
+  > button {
+    padding: 6px 12px;
+    width: 100%;
+    justify-content: space-between;
+    &:hover {
+      background-color: #ebecf0;
+    }
+  }
+}

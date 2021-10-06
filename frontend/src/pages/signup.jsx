@@ -20,10 +20,12 @@ class _Signup extends React.Component {
       imgUrl: '',
     },
     errMsg: '',
+    isFromInvite: false
   };
   componentDidMount() {
     const userEmail = sessionStorage.getItem('userEmail');
     if (userEmail) this.setState(prevState => ({ ...prevState, user: { ...prevState.user, username: userEmail } }));
+    this.setState({ isFromInvite: this.props.match.path.startsWith('/invite') ? true : false })
   }
   componentWillUnmount() {
     sessionStorage.removeItem('userEmail');
@@ -40,10 +42,11 @@ class _Signup extends React.Component {
   };
   onSignup = async ev => {
     if (ev) ev.preventDefault();
-    const { user } = this.state;
+    const { user, isFromInvite } = this.state;
+    const { boardId } = this.props.match.params;
     try {
       await this.props.onSignup(user);
-      this.props.history.push('/board');
+      isFromInvite ? this.props.history.push(`/invite/${boardId}`) : this.props.history.push('/board')
     } catch (err) {
       this.showErrorMsg(err);
     }
@@ -54,7 +57,7 @@ class _Signup extends React.Component {
   };
 
   render() {
-    const { user, errMsg } = this.state;
+    const { user, errMsg, isFromInvite } = this.state;
     return (
       <section className="signup">
         <div className="login-left-img">
@@ -104,17 +107,11 @@ class _Signup extends React.Component {
           />
           <button type="submit">Sign up</button>
           <span>OR</span>
-          {/* <div className="google-btn flex align-center justify-center">
-                        <GoogleIcon />
-                        <span className="label">Continue with Google</span>
-                    </div> */}
           <GoogleLogin
             clientId={clientId}
-            // buttonText='Continue with Google'
             onSuccess={this.onSuccess}
             onFailure={this.onFailure}
             cookiePolicy={'single_host_origin'}
-            // style={{}}
             render={renderProps => (
               <div className="google-btn flex align-center justify-center" onClick={renderProps.onClick}>
                 <GoogleIcon />
@@ -124,7 +121,7 @@ class _Signup extends React.Component {
             isSignedIn={false}
           />
           <hr className="bottom-form-separator"></hr>
-          <Link to="/login">Already have an account? Log in</Link>
+          <Link to={isFromInvite ? `/invite/${this.props.match.params.boardId}/login` : '/login'}>Already have an account? Log in</Link>
         </form>
         <HomeFooter />
       </section>

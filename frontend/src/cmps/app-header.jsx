@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 
 import { ReactComponent as ArrowDownIcon } from '../assets/svg/arrow-down.svg';
 import { ReactComponent as NotificationsIcon } from '../assets/svg/notifications.svg';
+import { ReactComponent as CreateIcon } from '../assets/svg/create.svg';
 import { BoardAdd } from './board-list/board-add';
 
 // import MenuItem from '@mui/material/MenuItem';
@@ -21,32 +22,20 @@ import { HeaderSearch } from './header-popover-pages/header-search';
 import { AppAvatar } from './general/app-avatar';
 import { HeaderNotifications } from './header-popover-pages/header-notifications';
 import { HeaderAccount } from './header-popover-pages/header-account';
+import { HeaderMore } from './header-popover-pages/header-more';
 
 class _AppHeader extends Component {
   state = {
     isModal: false,
-    starredBoards: [],
   };
 
-  async componentDidMount() {
-    let { boards, user } = this.props;
-    if (boards?.length === 0) {
-      await this.props.loadBoards({ byUserId: user._id });
-      boards = this.props.boards;
-    }
-    this.setState({
-      starredBoards: boards.filter(board => user.starredBoardsIds.includes(board._id)),
-    });
+  componentDidMount () {
+    const { user } = this.props;
+    this.props.loadBoards({ byUserId: user._id });
   }
 
-  async componentDidUpdate(prevProps, prevState) {
-    if (prevProps.user.starredBoardsIds !== this.props.user.starredBoardsIds) {
-      await this.props.loadBoards({ byUserId: this.props.user._id });
-      const boards = this.props.boards;
-      this.setState({
-        starredBoards: boards.filter(board => this.props.user.starredBoardsIds.includes(board._id)),
-      });
-    }
+  componentWillUnmount () {
+    this.onClose();
   }
 
   closePopover = () => {
@@ -67,23 +56,19 @@ class _AppHeader extends Component {
   };
 
   // remove starred board from app header popper
-  onStar = async (ev, boardId) => {
+  onStar = (ev, boardId) => {
     ev.preventDefault();
     ev.stopPropagation();
     this.onClose();
     let newUser = { ...this.props.user };
     newUser.starredBoardsIds = newUser.starredBoardsIds.filter(id => id !== boardId);
-    await this.props.onUpdateUser(newUser);
-    this.setState({
-      starredBoards: this.props.boards.filter(
-        board => board._id !== boardId && this.props.user.starredBoardsIds.includes(board._id)
-      ),
-    });
+    this.props.onUpdateUser(newUser);
   };
 
-  render() {
-    const { isStarredMenuOpen, starredBoards } = this.state;
+  render () {
+    const { isStarredMenuOpen } = this.state;
     const { isUserBoardsPage, boards, board, user, onLogout } = this.props;
+    const starredBoards = boards.filter(board => this.props.user.starredBoardsIds.includes(board._id));
     return (
       <header
         onClick={this.closePopover}
@@ -95,8 +80,11 @@ class _AppHeader extends Component {
           <span>Swello</span>
         </Link>
         <div className="actions">
+          {/* this button is only visible in mobile: */}
+          <HeaderMore onBoards={this.onBoards} toggleMenu={this.props.toggleMenu} />
           <button
             id="composition-button"
+            className="btn-board"
             aria-controls={isStarredMenuOpen ? 'composition-menu' : undefined}
             aria-expanded={isStarredMenuOpen ? 'true' : undefined}
             aria-haspopup="true"
@@ -112,6 +100,7 @@ class _AppHeader extends Component {
           <button
             // ref={this.starredAnchorRef}
             id="composition-button"
+            className="btn-starred"
             aria-controls={isStarredMenuOpen ? 'composition-menu' : undefined}
             aria-expanded={isStarredMenuOpen ? 'true' : undefined}
             aria-haspopup="true"
@@ -125,13 +114,14 @@ class _AppHeader extends Component {
             <StarredBoardsMenuContent starredBoards={starredBoards} onClose={this.onClose} onStar={this.onStar} />
           </PopoverMenu>
           <button className="btn-create" onClick={this.onBtnCreate}>
-            Create
+            <span className="txt-create">Create</span>
+            <CreateIcon className="icon-create" />
           </button>
         </div>
         <div>
           <HeaderSearch board={this.props.board} menu={this.props.menu} toggleMenu={this.props.toggleMenu} />
           <button
-            className={`btn-notifications${user.notifications.some(notification => !notification.isRead) ? ' active' : ''}`}
+            className={`btn-notifications${ user.notifications.some(notification => !notification.isRead) ? ' active' : '' }`}
             onClick={ev => {
               this.onBoards(ev, 'notification');
             }}>
@@ -139,7 +129,7 @@ class _AppHeader extends Component {
             <NotificationsIcon />
 
           </button>
-          <HeaderNotifications user={user} onUpdateUser={this.props.onUpdateUser} toggleMenu={this.props.toggleMenu}/>
+          <HeaderNotifications user={user} onUpdateUser={this.props.onUpdateUser} toggleMenu={this.props.toggleMenu} />
           {user && <AppAvatar onClick={ev => this.onBoards(ev, 'account')} member={user} />}
           <HeaderAccount user={user} onLogout={onLogout} history={this.props.history} />
         </div>

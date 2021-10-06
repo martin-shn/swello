@@ -54,6 +54,7 @@ class _CardPage extends Component {
     let archivedCard;
     if (!card) {
       archivedCard = cardService.getCardFromArchive(board, cardId);
+      if(!archivedCard) return;
       this.setState({ card: archivedCard.card, isArchived: true });
       return;
     }

@@ -250,6 +250,12 @@
   margin: 0;
   overflow-y: visible;
   color: #172b4d;
+  .no-results {
+    color: #7a869a;
+    font-size: 14px;
+    background-color: #fafbfc;
+    padding: 16px 12px;
+  }
   & > div:not(.mini-loader) {
     // inner container
     margin: 4px;

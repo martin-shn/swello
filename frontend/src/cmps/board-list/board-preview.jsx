@@ -1,9 +1,10 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { createBoard } from '../../store/actions/board.actions';
 import { onUpdateUser } from '../../store/actions/user.actions';
-import {BoardAdd} from './board-add'
+import { BoardAdd } from './board-add'
+
 
 class _BoardPreview extends React.Component {
   state = {
@@ -48,16 +49,16 @@ class _BoardPreview extends React.Component {
             style={!isAdd ? { backgroundColor: '#f0f2f4' } : {}}>
             <span></span>
             <div>Create new board</div>
-            {}
+            { }
           </button>
           <BoardAdd isModal={this.state.isModal} onClose={this.onNew} />
         </>
       );
     } else
       return (
-        <a
-          href={`/board/${board._id}`}
-          className={(bgColor!=='inherit'?'bg-color':'') + ' board-preview'}
+        <Link
+          to={`/board/${board._id}`}
+          className={(bgColor !== 'inherit' ? 'bg-color' : '') + ' board-preview'}
           style={{ backgroundImage: `url(${imgUrl})`, backgroundColor: bgColor }}>
           <span></span>
           <div>
@@ -67,7 +68,7 @@ class _BoardPreview extends React.Component {
           <span
             className={`${isStarred ? 'starred' : ''} star`}
             onClick={ev => this.onStar(ev)}></span>
-        </a>
+        </Link>
       );
   }
 }

@@ -1,16 +1,17 @@
 .top-panel {
-  // z-index: 11;
-  & > * {
-    gap: 5px;
-  }
+  gap: 5px;
   color: #fff;
   background-color: #0000003d;
   padding: 8px 8px 4px;
+  flex-wrap: wrap;
 
-  .members > * {
-    width: 28px;
-    height: 28px;
-    font-size: 1em;
+  .members {
+    .MuiAvatarGroup-avatar {
+      border: none;
+      width: 32px;
+      height: 32px;
+      font-size: 1em;
+    }
   }
 
   .board-name {
@@ -36,6 +37,10 @@
 
     &.btn-menu {
       padding-right: 12px;
+      margin-left: unset;
+      @include for-normal-layout {
+        margin-left: auto;
+      }
     }
 
     svg {
@@ -49,6 +54,47 @@
   .star {
     &.starred > svg {
       color: #e6c60d;
+    }
+  }
+
+  .board-options-menu {
+    all: initial;
+    width: 304px;
+    border-radius: 3px;
+    margin-top: 10px;
+    box-shadow: 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 0 1px rgba(9, 30, 66, 0.08);
+    button {
+      padding: 6px 12px;
+      height: fit-content;
+      width: 304px;
+      color: #172b4d;
+      align-items: flex-start;
+      &.active {
+        background-color: #e2e6e9;
+        &:hover {
+          background-color: #e2e6e9;
+        }
+      }
+      &:hover {
+        background-color: #091e420a;
+      }
+      h3 {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        margin-left: 4px;
+      }
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+      span {
+        color: #5e6c84;
+        font-size: 12px;
+        line-height: 16px;
+        margin-top: 4px;
+        text-align: left;
+      }
     }
   }
 }
