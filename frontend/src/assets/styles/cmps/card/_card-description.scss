@@ -4,9 +4,8 @@
   }
   .description-view {
     cursor: pointer;
-    white-space: pre;
     padding: 8px 8px 8px 8px;
-    white-space: normal;
+    white-space: pre-line;
     &.empty {
       background-color: #091e420a;
       height: 56px;

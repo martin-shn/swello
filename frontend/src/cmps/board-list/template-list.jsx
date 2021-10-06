@@ -1,10 +1,10 @@
 import FileCopyIcon from '@mui/icons-material/FileCopy';
 import { LoaderPage } from '../loader/loader-page';
 
-export function TemplateList({ templates, createBoard, history }) {
+export function TemplateList ({ templates, createBoard, history }) {
   const onTemplateClick = async template => {
     const newBoard = await createBoard(template);
-    history.push(`/board/${newBoard._id}`);
+    history.push(`/board/${ newBoard._id }`);
   };
 
   if (!templates) return <LoaderPage />;
@@ -14,7 +14,7 @@ export function TemplateList({ templates, createBoard, history }) {
         <FileCopyIcon />
         Templates
       </h3>
-      <section className="template-list flex">
+      <section className="template-list flex wrap">
         {templates?.length > 0 &&
           templates.map(template => (
             <div
@@ -23,7 +23,7 @@ export function TemplateList({ templates, createBoard, history }) {
               // onClick={() => onTemplateClick(template)}
               onClick={()=>{history.push(`/templates/${template._id}`)}}
               style={{
-                backgroundImage: `url(${template.style.imgUrl || ''})`,
+                backgroundImage: `url(${ template.style.imgUrl || '' })`,
                 backgroundColor: template.style.bgColor || '#fefefe',
               }}>
               <span></span>

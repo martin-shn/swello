@@ -81,17 +81,17 @@
 
   & > .star::before {
     font-family: FA-solid;
-    content: "\f005";
+    content: '\f005';
     margin-right: 15px;
   }
   & .your-boards::before {
     font-family: FA-solid;
-    content: "\f007";
+    content: '\f007';
     margin-right: 15px;
   }
   & .guest-boards::before {
     font-family: FA-solid;
-    content: "\f0c0";
+    content: '\f0c0';
     margin-right: 15px;
   }
 }

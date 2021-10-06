@@ -12,6 +12,11 @@
       height: 32px;
       font-size: 1em;
     }
+    > :last-child {
+      .avatar {
+        margin-left: 0 !important;
+      }
+    }
   }
 
   .board-name {
