@@ -19,82 +19,83 @@ class _TopPanel extends React.Component {
   state = {
     currPage: this.props.location.pathname.endsWith('dashboard') ? 'dashboard' : 'board',
     isMenuModalOpen: false,
-  }
-  btnRef = React.createRef()
+  };
+  btnRef = React.createRef();
   onStar = (user, boardId, isStar) => {
     let newUser = { ...user };
     if (isStar) newUser.starredBoardsIds = newUser.starredBoardsIds.filter(id => id !== boardId);
     else newUser.starredBoardsIds.push(boardId);
     this.props.onUpdateUser(newUser);
-  }
+  };
   onOpenPopover = (ev) => {
     this.props.setCardPopover('invite-main', ev.target, null);
-  }
+  };
   onCloseMenuModal = () => {
-    this.setState({ isMenuModalOpen: false })
-  }
+    this.setState({ isMenuModalOpen: false });
+  };
   onChangePage = (page) => {
     const { board } = this.props;
-    page === 'dashboard' ? this.props.history.push(`/board/${board._id}/dashboard`) : this.props.history.push(`/board/${board._id}`)
-    this.setState({ currPage: page, isMenuModalOpen: false })
-  }
-  render() {
+    page === 'dashboard' ? this.props.history.push(`/board/${ board._id }/dashboard`) : this.props.history.push(`/board/${ board._id }`);
+    this.setState({ currPage: page, isMenuModalOpen: false });
+  };
+  render () {
     const { title, members, onUpdateTitle, user, board, cardPopover } = this.props;
     const { currPage, isMenuModalOpen } = this.state;
     const isStar = user.starredBoardsIds.includes(board._id);
     return (
       <section className="top-panel full flex">
-          <button
-            ref={this.btnRef}
-            onClick={() => {
-              this.setState({ isMenuModalOpen: true })
-            }}>
-            {currPage === 'board' ?
-              <>
-                <BtnBoardIcon />
-                Board
-                <KeyboardArrowDownIcon />
-              </> :
-              <>
-                <BtnDashBoardIcon />
-                Dashboard
-                <KeyboardArrowDownIcon />
-              </>}
-          </button>
-          <BoardOptionsMenu anchor={this.btnRef.current} isOpen={isMenuModalOpen} onClose={this.onCloseMenuModal} currPage={currPage} onChangePage={this.onChangePage} />
-          <h1
-            className="board-name content-editable"
-            contentEditable
-            suppressContentEditableWarning={true}
-            onKeyDown={ev => ev.key === 'Enter' && ev.target.blur()}
-            onBlur={ev => onUpdateTitle(ev.target.innerText)}>
-            {title}
-          </h1>
-          <button
-            className={(isStar ? 'starred' : '') + ` star`}
-            onClick={() => {
-              this.onStar(user, board._id, isStar);
-            }}>
-            <StarOutlineIcon />
-          </button>
-          <AvatarGroup max={4} spacing={3} className="members">
-            {members?.map(member => (
-              <AppAvatar key={member._id} member={member} />
-            ))}
-          </AvatarGroup>
-          <button
-            name="invite-main"
-            className="btn-invite"
-            onClick={ev => {
-              this.onOpenPopover(ev);
-            }}>
-            Invite
-          </button>
+        <button
+          ref={this.btnRef}
+          onClick={() => {
+            this.setState({ isMenuModalOpen: true });
+          }}>
+          {currPage === 'board' ?
+            <>
+              <BtnBoardIcon />
+              Board
+              <KeyboardArrowDownIcon />
+            </> :
+            <>
+              <BtnDashBoardIcon />
+              Dashboard
+              <KeyboardArrowDownIcon />
+            </>}
+        </button>
+        <BoardOptionsMenu anchor={this.btnRef.current} isOpen={isMenuModalOpen} onClose={this.onCloseMenuModal} currPage={currPage} onChangePage={this.onChangePage} />
+        <h1
+          className="board-name content-editable"
+          contentEditable
+          suppressContentEditableWarning={true}
+          onKeyDown={ev => ev.key === 'Enter' && ev.target.blur()}
+          onBlur={ev => onUpdateTitle(ev.target.innerText)}>
+          {title}
+        </h1>
+        <button
+          className={(isStar ? 'starred' : '') + ` star`}
+          onClick={() => {
+            this.onStar(user, board._id, isStar);
+          }}>
+          <StarOutlineIcon />
+        </button>
+        <AvatarGroup max={4} spacing={3} className="members">
+          {user?._id && <AppAvatar key={user._id} member={user} />}
+          {members?.map(member => member._id !== user._id && (
+            <AppAvatar key={member._id} member={member} />
+          ))}
+        </AvatarGroup>
+        <button
+          name="invite-main"
+          className="btn-invite"
+          onClick={ev => {
+            this.onOpenPopover(ev);
+          }}>
+          Invite
+        </button>
         {cardPopover.name === 'invite-main' && <CardPopover />}
-          <button className="btn-menu" onClick={this.props.toggleSideMenu}>
-            <MoreHorizIcon />
-            Show Menu
-          </button>
+        <button className="btn-menu" onClick={this.props.toggleSideMenu}>
+          <MoreHorizIcon />
+          Show Menu
+        </button>
       </section>
     );
   }

@@ -23,7 +23,7 @@
         & a {
           line-height: 20px;
           margin-bottom: 5px;
-          // padding: 8px 6px;
+          padding: 8px 0;
           display: flex;
           // align-items: center;
           border-radius: 4px;
@@ -81,17 +81,17 @@
 
   & > .star::before {
     font-family: FA-solid;
-    content: "\f005";
+    content: '\f005';
     margin-right: 15px;
   }
   & .your-boards::before {
     font-family: FA-solid;
-    content: "\f007";
+    content: '\f007';
     margin-right: 15px;
   }
   & .guest-boards::before {
     font-family: FA-solid;
-    content: "\f0c0";
+    content: '\f0c0';
     margin-right: 15px;
   }
 }
