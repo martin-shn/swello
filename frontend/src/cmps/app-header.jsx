@@ -95,7 +95,7 @@ class _AppHeader extends Component {
           <img className="logo" alt="swello" />
           <span>Swello</span>
         </Link>
-        <div className="actions">
+        <div className="actions" style={isTemplate?{marginRight:'5px'}:{}}>
           {/* this button is only visible in mobile: */}
           <HeaderMore onBoards={this.onBoards} toggleMenu={this.props.toggleMenu} />
           <button
@@ -133,7 +133,7 @@ class _AppHeader extends Component {
             <span className="txt-create">Create</span>
             <CreateIcon className="icon-create" />
           </button>
-          {isTemplate&&<button className="btn-create" style={{backgroundColor:'#2e8af6'}} onClick={this.copyTemplate}>Use template</button>}
+          {isTemplate&&<button className="btn-create" style={{backgroundColor:'#2e8af6', marginLeft:'auto'}} onClick={this.copyTemplate}>Use template</button>}
         </div>
         
         <div>
