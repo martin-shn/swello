@@ -22,7 +22,8 @@ export class _CardPreviewLabels extends Component {
   }
 
   render() {
-    const { board, card, isFullLabels, labelsClass } = this.props;
+    let { board, card, isFullLabels, labelsClass, template } = this.props;
+    if(template) board=template;
     if (!card.labelIds) return <></>;
     return (
       <div className="labels-container flex" onClick={this.onToggleFullLabels}>

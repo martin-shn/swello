@@ -26,7 +26,7 @@ class _CardPreviewData extends Component {
 
   render() {
     const { checklists, attachments, description, dueDate, location, members } = this.props.card;
-    const isArchived = cardService.getCardFromArchive(this.props.board, this.props.card.id);
+    const isArchived = this.props.isTemplate?false:cardService.getCardFromArchive(this.props.board, this.props.card.id);
     if (!checklists && !attachments && !description && !dueDate && !location && !members && !isArchived) return <></>;
     return (
       <section className="card-preview-data flex wrap align-center">
