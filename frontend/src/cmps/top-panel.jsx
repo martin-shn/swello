@@ -78,7 +78,7 @@ class _TopPanel extends React.Component {
           <StarOutlineIcon />
         </button>
         <AvatarGroup max={4} spacing={3} className="members">
-          {user?._id && <AppAvatar key={user._id} member={user} />}
+          {user?._id && members.find(member => member._id === user._id) && <AppAvatar key={user._id} member={user} />}
           {members?.map(member => member._id !== user._id && (
             <AppAvatar key={member._id} member={member} />
           ))}

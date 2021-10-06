@@ -1,51 +1,53 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { storageService } from '../services/async-storage.service';
-import { onLogin, onLogout } from '../store/actions/user.actions'
+import { onLogin, onLogout } from '../store/actions/user.actions';
 import { HomeFooter } from '../cmps/home-footer';
 import { HomeHeader } from '../cmps/home-header';
 import HeroImg from '../assets/img/hero.png';
 import BoardImg from '../assets/img/board-s.png';
 import ViewImg from '../assets/svg/view.svg';
-import CardImg from '../assets/svg/card-back.svg'
+import CardImg from '../assets/svg/card-back.svg';
 
 export class _HomePage extends React.Component {
   state = {
     userEmail: ''
-  }
+  };
 
-  async componentDidMount() {
+  async componentDidMount () {
     await storageService.init();
   }
 
   handleChange = ({ target }) => {
-    this.setState({ userEmail: target.value })
-  }
+    this.setState({ userEmail: target.value });
+  };
   onSignup = (ev) => {
     ev.preventDefault();
     const { userEmail } = this.state;
-    sessionStorage.setItem('userEmail', userEmail)
-    this.props.history.push('/signup')
-  }
+    sessionStorage.setItem('userEmail', userEmail);
+    this.props.history.push('/signup');
+  };
 
   onGetStarted = async () => {
-    await this.props.onLogin({ username: 'guest@guest.com', password: '1234' })
-    this.props.history.push('/board')
-  }
+    if (!this.props.user) await this.props.onLogin({ username: 'guest@guest.com', password: '1234' });
+    console.log(this.props.user);
+    this.props.history.push('/board');
+  };
 
-  render() {
+  render () {
     const { userEmail } = this.state;
+    const { user } = this.props;
     return (
       <section className="home-page">
-        <HomeHeader user={this.props.user} onLogout={this.props.onLogout}/>
+        <HomeHeader user={this.props.user} onLogout={this.props.onLogout} />
         <section className="hero">
           <div className="container flex align-center">
             <div>
               <h1>Swello helps teams move work forward.</h1>
               <p>Collaborate, manage projects, and reach new productivity peaks.
                 From high rises to the home office, the way your team works is unique—accomplish it all with Swello.</p>
-              <Link to="/" className="btn" onClick={this.onGetStarted}>Get Started - it's free!</Link>
+              <button className="btn btn-continue" onClick={this.onGetStarted}>{user ? 'Continue to boards' : 'Try live demo'}</button>
             </div>
             <img src={HeroImg} alt="hero" />
           </div>
@@ -111,12 +113,12 @@ export class _HomePage extends React.Component {
 const mapDispatchToProps = {
   onLogin,
   onLogout
-}
+};
 
-function mapStatetoProps(state){
+function mapStatetoProps (state) {
   return {
     user: state.userModule.user
-  }
+  };
 }
 
-export const HomePage = connect(mapStatetoProps, mapDispatchToProps)(_HomePage)
+export const HomePage = connect(mapStatetoProps, mapDispatchToProps)(_HomePage);

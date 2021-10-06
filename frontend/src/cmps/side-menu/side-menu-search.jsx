@@ -11,7 +11,7 @@ class _SideMenuSearch extends Component {
     this.props.setFilter(filterBy);
   };
 
-  render() {
+  render () {
     const { setPage, board, toggleSideMenu, filterBy, clearFilter } = this.props;
     return (
       <section className="side-menu-search flex column">
@@ -27,7 +27,7 @@ class _SideMenuSearch extends Component {
               className="search"
               type="text"
               value={filterBy.text}
-              onChange={ev => this.updateFilter({ text: ev.target.value })}
+              onChange={ev => this.updateFilter({ text: ev.target.value.replace('\\', '') })}
             />
             <div className="filter">
               <p>Search by term, label, member, or due time.</p>

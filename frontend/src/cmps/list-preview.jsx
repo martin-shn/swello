@@ -24,14 +24,14 @@ export class _ListPreview extends Component {
     class: '',
   };
 
-  componentDidMount() {
+  componentDidMount () {
     setTimeout(() => {
       if (this.elInnerRef?.current) {
         this.setState({
           class: this.elInnerRef.current.scrollHeight > this.elInnerRef.current.clientHeight ? ' visible-scroll' : '',
         });
       }
-    }, 10);
+    }, 100);
   }
 
   elInnerRef = React.createRef();
@@ -75,7 +75,7 @@ export class _ListPreview extends Component {
     this.props.updateBoard(updatedBoard);
   };
 
-  render() {
+  render () {
     const {
       idx,
       list,
@@ -98,10 +98,10 @@ export class _ListPreview extends Component {
       <Draggable draggableId={list.id} index={idx}>
         {provided => (
           <div
-            className={`list-preview flex column${this.state.class}`}
+            className={`list-preview flex column${ this.state.class }`}
             {...provided.draggableProps}
             ref={provided.innerRef}>
-            <div className={`list-header flex space-between${this.state.class}`} {...provided.dragHandleProps}>
+            <div className={`list-header flex space-between${ this.state.class }`} {...provided.dragHandleProps}>
               {!this.state.isDragging && (
                 <input
                   type="text"
@@ -182,7 +182,7 @@ export class _ListPreview extends Component {
             </Popover>
             <div
               ref={this.elInnerRef}
-              className={`cards-container flex column visible-scroll${this.state.class}${this.props.cardQuickEdit ? ' quick-edit-open' : ''}`}
+              className={`cards-container flex column ${ this.state.class }${ this.props.cardQuickEdit ? ' quick-edit-open' : '' }`}
               style={{
                 gap: isTopAdd ? '10px' : '0',
                 // marginRight: this.elRef.current.scrollHeight > this.elRef.current.clientHeight?'-10px':'0px'
@@ -230,7 +230,7 @@ const mapDispatchToProps = {
   updateBoard,
 };
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return {
     board: state.boardModule.board,
     cardQuickEdit: state.systemModule.cardQuickEdit
