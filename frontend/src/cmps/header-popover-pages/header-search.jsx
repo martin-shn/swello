@@ -11,7 +11,7 @@ export class HeaderSearch extends Component {
   searchContainerRef = React.createRef();
   toggleMenu = this.props.toggleMenu;
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate (prevProps, prevState) {
     if (prevProps.board !== this.props.board && this.props.menu.isOpen) this.updateStateCards();
   }
 
@@ -26,7 +26,7 @@ export class HeaderSearch extends Component {
   };
 
   handleChange = ev => {
-    const search = ev.target.value;
+    const search = ev.target.value.replace('\\', '');
     this.openMenu();
     const searchRegex = new RegExp(search, 'i');
     const cards = [];
@@ -34,17 +34,17 @@ export class HeaderSearch extends Component {
       list.cards.forEach(card => searchRegex.test(card.title) && cards.push({ ...card, listTitle: list.title }))
     );
     this.props.board.archive.cards.forEach(archivedCard => {
-      const cardList = this.props.board.lists.find(list => list.id === archivedCard.listId)
-      return searchRegex.test(archivedCard.card.title) && cards.push({ ...archivedCard.card, listTitle: cardList.title })
-    })
+      const cardList = this.props.board.lists.find(list => list.id === archivedCard.listId);
+      return searchRegex.test(archivedCard.card.title) && cards.push({ ...archivedCard.card, listTitle: cardList.title });
+    });
     this.setState({ cards, search });
   };
 
   cleanSearch = () => {
-    this.setState({ search: '' })
+    this.setState({ search: '' });
     this.toggleMenu(false);
-  }
-  get recentCards() {
+  };
+  get recentCards () {
     let cards = [];
     this.props.board.lists &&
       this.props.board.lists.forEach(list => list.cards && list.cards.forEach(card => cards.push(card)));
@@ -52,7 +52,7 @@ export class HeaderSearch extends Component {
     return cards.slice(0, 5);
   }
 
-  render() {
+  render () {
     const { isActive, cards, search } = this.state;
     const { board } = this.props;
     if (!board) return <></>;
@@ -96,7 +96,7 @@ export class HeaderSearch extends Component {
   }
 }
 
-function _SearchCardList({ cards, history, boardId, cleanSearch }) {
+function _SearchCardList ({ cards, history, boardId, cleanSearch }) {
   if (!cards.length) return <div>No cards match your search.</div>;
   return (
     <section className="search-card-list">
@@ -104,7 +104,7 @@ function _SearchCardList({ cards, history, boardId, cleanSearch }) {
         <div key={card.id} className="search-card flex" onClick={cleanSearch}>
           <CardPreviewInfo key={card.id} card={card} />
           <section>
-            <div className="card-title" onClick={() => history.push(`/board/${boardId}/card/${card.id}`)}>
+            <div className="card-title" onClick={() => history.push(`/board/${ boardId }/card/${ card.id }`)}>
               {card.title}
             </div>
             <div className="list-title">
@@ -118,7 +118,7 @@ function _SearchCardList({ cards, history, boardId, cleanSearch }) {
 }
 const SearchCardList = withRouter(_SearchCardList);
 
-function RecentCardList({ recentCards }) {
+function RecentCardList ({ recentCards }) {
   if (!recentCards.length) return <div>No Recent cards.</div>;
   return (
     <section className="recent-card-list flex column">

@@ -10,12 +10,12 @@ export class AddCheckItemMember extends Component {
   };
 
   handleChange = ev => {
-    const search = ev.target.value;
+    const search = ev.target.value.replace('\\', '');
     const searchRegex = new RegExp(search, 'i');
     this.setState({
       search,
       boardMembers: this.props.boardMembers.filter(member => searchRegex.test(member.fullname)),
-      cardMembers: this.props.cardMembers.filter(member => searchRegex.test(member.fullname)),
+      cardMembers: this.props.cardMembers?.filter(member => searchRegex.test(member.fullname)),
     });
   };
 
@@ -26,7 +26,7 @@ export class AddCheckItemMember extends Component {
     this.props.closeCardPopover();
   };
 
-  render() {
+  render () {
     const { closeCardPopover, item } = this.props;
     const { boardMembers = [], cardMembers = [] } = this.state;
     const filteredBoardMembers = boardMembers.filter(boardMember =>
@@ -70,7 +70,7 @@ export class AddCheckItemMember extends Component {
   }
 }
 
-function MembersList({ members, itemMemberId, toggleMember }) {
+function MembersList ({ members, itemMemberId, toggleMember }) {
   if (!members) return <></>;
   return (
     <div className="members-list">
