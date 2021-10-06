@@ -31,7 +31,14 @@ class _AppHeader extends Component {
 
   componentDidMount () {
     const { user } = this.props;
-    this.props.loadBoards({ byUserId: user._id });
+    if (user)
+      this.props.loadBoards({ byUserId: user._id });
+  }
+
+  componentDidUpdate (prevProps) {
+    if (this.props.user && (this.props.user !== prevProps.user))
+      this.props.loadBoards({ byUserId: this.props.user._id });
+
   }
 
   componentWillUnmount () {
@@ -65,10 +72,19 @@ class _AppHeader extends Component {
     this.props.onUpdateUser(newUser);
   };
 
+  copyTemplate = async () => {
+    const { templates } = this.props;
+    const { boardId } = this.props.match.params;
+    const template = templates.filter((template) => template._id === boardId)[0];
+    const newBoard = await this.props.createBoard(template);
+    this.props.history.push(`/board/${ newBoard._id }`);
+  }
+
   render () {
     const { isStarredMenuOpen } = this.state;
-    const { isUserBoardsPage, boards, board, user, onLogout } = this.props;
-    const starredBoards = boards.filter(board => this.props.user.starredBoardsIds.includes(board._id));
+    const { isUserBoardsPage, boards, board, user, onLogout, isTemplate } = this.props;
+    if (!user) return <></>;
+    const starredBoards = boards.filter(board => user.starredBoardsIds.includes(board._id));
     return (
       <header
         onClick={this.closePopover}
@@ -117,7 +133,9 @@ class _AppHeader extends Component {
             <span className="txt-create">Create</span>
             <CreateIcon className="icon-create" />
           </button>
+          {isTemplate&&<button className="btn-create" style={{backgroundColor:'#2e8af6'}} onClick={this.copyTemplate}>Use template</button>}
         </div>
+        
         <div>
           <HeaderSearch board={this.props.board} menu={this.props.menu} toggleMenu={this.props.toggleMenu} />
           <button
@@ -156,6 +174,7 @@ const mapStateToProps = state => {
     board: state.boardModule.board,
     user: state.userModule.user,
     menu: state.systemModule.menu,
+    templates: state.boardModule.templates,
   };
 };
 

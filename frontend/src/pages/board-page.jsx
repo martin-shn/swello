@@ -14,7 +14,7 @@ import {
   setCardPopover,
   closeCardPopover,
 } from '../store/actions/system.actions';
-import { onUpdateUser } from '../store/actions/user.actions';
+import { onUpdateUser, onLogin } from '../store/actions/user.actions';
 import { PopoverScreen } from '../cmps/popover-screen';
 import { CardPage } from './card-page';
 import { Route } from 'react-router';
@@ -25,7 +25,7 @@ import { listService } from '../services/board-services/list.service';
 import { cardService } from '../services/board-services/card.service';
 import { CardQuickEdit } from '../cmps/card/card-quick-edit';
 
-import { SOCKET_EVENT_SET_USER, SOCKET_EVENT_SET_BOARD } from '../services/socket.service'
+import { SOCKET_EVENT_SET_USER, SOCKET_EVENT_SET_BOARD } from '../services/socket.service';
 
 export class _BoardPage extends Component {
   state = {
@@ -40,31 +40,36 @@ export class _BoardPage extends Component {
     currPage: this.props.location.pathname.endsWith('dashboard') ? 'dashboard' : 'board',
   };
 
-  async componentDidMount() {
+  async componentDidMount () {
+    if (!this.props.user) await this.props.onLogin({ username: 'guest@guest.com', password: '1234' });
     const { boardId } = this.props.match.params;
-    if (this.props.location.pathname.substr(0,10) === '/templates'){
+    if (this.props.location.pathname.substr(0, 10) === '/templates') {
       if (!this.props.templates) this.props.history.push('/templates');
-      this.setState({template:this.props.templates.filter(template=>template._id===boardId)})
+      this.setState({ template: this.props.templates.filter(template => template._id === boardId) });
     }
     else {
-      socketService.emit(SOCKET_EVENT_SET_BOARD, boardId)
+      socketService.emit(SOCKET_EVENT_SET_BOARD, boardId);
       this.props.showLoadingPage();
-      await this.props.loadBoard(boardId);
+      await this.loadBoard(boardId);
       this.props.hideLoadingPage();
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate (prevProps, prevState) {
     const { boardId } = this.props.match.params;
-    if (prevProps.match.params.boardId !== this.props.match.params.boardId) this.props.loadBoard(boardId);
-    if (prevProps.location.pathname !== this.props.location.pathname) this.setState({ currPage: this.props.location.pathname.endsWith('dashboard') ? 'dashboard' : 'board' })
+    if (prevProps.match.params.boardId !== this.props.match.params.boardId) this.loadBoard(boardId);
+    if (prevProps.location.pathname !== this.props.location.pathname) this.setState({ currPage: this.props.location.pathname.endsWith('dashboard') ? 'dashboard' : 'board' });
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.props.clearBoard();
-    this.props.closeCardPopover()
+    this.props.closeCardPopover();
   }
 
+  loadBoard = async (boardId) => {
+    const board = await this.props.loadBoard(boardId);
+    if (!board) this.props.history.replace('/board');
+  };
   // UI ACTIONS
 
   onAddingCard = listId => {
@@ -149,10 +154,10 @@ export class _BoardPage extends Component {
   };
 
   // TODO: add dynamic text color using contrast-js
-  render() {
-    let isTemplate=false;
-    if (this.props.location.pathname === '/templates' && this.state.template) isTemplate=true
-    if (!this.props.board || this.props.isLoadingPage)
+  render () {
+    let isTemplate = false;
+    if (this.props.location.pathname === '/templates' && this.state.template) isTemplate = true;
+    if (!this.props.board || this.props.isLoadingPage || !this.props.user)
       return (
         <>
           <AppHeader />
@@ -176,11 +181,11 @@ export class _BoardPage extends Component {
       <main
         className="board-page"
         style={{
-          backgroundImage: `url(${style.imgUrl})` || 'none',
+          backgroundImage: `url(${ style.imgUrl })` || 'none',
           backgroundColor: style.bgColor || 'unset',
         }}>
         <AppHeader />
-        {!isTemplate&&<TopPanel
+        {!isTemplate && <TopPanel
           title={title}
           members={members}
           onUpdateTitle={this.onUpdateTitle}
@@ -239,6 +244,7 @@ const mapDispatchToProps = {
   hideLoadingPage,
   showLoadingPage,
   onUpdateUser,
+  onLogin,
   setCardPopover,
   closeCardPopover,
   setQuickEdit,

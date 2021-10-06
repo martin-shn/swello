@@ -1,5 +1,6 @@
 import { BoardPage } from './pages/board-page';
 import { HomePage } from './pages/home-page';
+import { TemplatePage } from './pages/template-page';
 import { UserBoards } from './pages/user-boards';
 import { InvitePage } from './pages/invite-page';
 import { Login } from './pages/login';
@@ -14,7 +15,7 @@ const routes = [
   },
   {
     path: '/templates/:boardId',
-    component: BoardPage,
+    component: TemplatePage,
   },
   {
     path: '/invite/:boardId/login',

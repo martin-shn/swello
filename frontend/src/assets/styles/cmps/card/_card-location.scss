@@ -27,10 +27,11 @@
         padding: 8px 12px;
         & .desc-main {
           width: calc(100% - 32px);
-          & textarea {
+          & .location-title {
             overflow: hidden;
             overflow-wrap: break-word;
             background: #0000;
+            color: $clr-default;
             border-radius: 3px;
             box-shadow: none;
             font-size: 14px;

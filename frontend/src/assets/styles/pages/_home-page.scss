@@ -1,5 +1,5 @@
 .home-page {
-  font-family: "Charlie";
+  font-family: 'Charlie';
   line-height: 1.5;
   font-size: 1.25rem;
   color: #091e42;
@@ -55,11 +55,12 @@
             font-size: 3rem;
           }
         }
-        a {
+        .btn-continue {
           display: block;
           width: 100%;
           border: 1px solid transparent;
           border-radius: 6px;
+          font-weight: 600;
           padding: 0.375rem 0.75rem;
           @media (min-width: 768px) {
             width: fit-content;
@@ -220,7 +221,8 @@
             font-size: 1.25rem;
             line-height: 1.5;
             border-radius: 6px;
-            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+              box-shadow 0.15s ease-in-out;
             &:hover {
               background-color: #0098b3;
               border-color: #008da6;
