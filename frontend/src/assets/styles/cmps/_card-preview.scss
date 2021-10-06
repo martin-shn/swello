@@ -224,14 +224,23 @@
       }
       &.overdue {
         color: #fff;
+        svg {
+          fill: #fff;
+        }
         background-color: $clr-due-date-overdue;
       }
       &.overdue-recent {
         color: #fff;
+        svg {
+          fill: #fff;
+        }
         background-color: $clr-due-date-overdue-recent;
       }
       &.complete {
         color: #fff;
+        svg {
+          fill: #fff;
+        }
         background-color: $clr-due-date-complete;
       }
     }
@@ -248,6 +257,7 @@
       &:hover {
         .due-date-icon {
           content: url(../../../assets/svg/card/checkbox.svg);
+          color: #fff;
         }
       }
       &.due-soon,

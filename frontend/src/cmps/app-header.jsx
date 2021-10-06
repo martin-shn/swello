@@ -31,7 +31,14 @@ class _AppHeader extends Component {
 
   componentDidMount () {
     const { user } = this.props;
-    this.props.loadBoards({ byUserId: user._id });
+    if (user)
+      this.props.loadBoards({ byUserId: user._id });
+  }
+
+  componentDidUpdate (prevProps) {
+    if (this.props.user && (this.props.user !== prevProps.user))
+      this.props.loadBoards({ byUserId: this.props.user._id });
+
   }
 
   componentWillUnmount () {
@@ -68,7 +75,8 @@ class _AppHeader extends Component {
   render () {
     const { isStarredMenuOpen } = this.state;
     const { isUserBoardsPage, boards, board, user, onLogout } = this.props;
-    const starredBoards = boards.filter(board => this.props.user.starredBoardsIds.includes(board._id));
+    if (!user) return <></>;
+    const starredBoards = boards.filter(board => user.starredBoardsIds.includes(board._id));
     return (
       <header
         onClick={this.closePopover}

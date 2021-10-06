@@ -10,8 +10,8 @@ export function loadBoards(filterBy) {
       const boards = await boardService.query(filterBy);
       dispatch({ type: 'SET_BOARDS', boards });
       socketService.on(SOCKET_EVENT_ITEM_DRAGGED, draggedItem => {
-        dispatch({ type: 'SET_DRAGGED_ITEM', draggedItem })
-      })
+        dispatch({ type: 'SET_DRAGGED_ITEM', draggedItem });
+      });
     } catch (err) {
       console.error(err);
     }
@@ -38,6 +38,7 @@ export function loadBoard(id) {
       socketService.on(SOCKET_EVENT_BOARD_UPDATED, board => {
         dispatch({ type: 'SET_BOARD', board });
       });
+      return board;
     } catch (err) {
       console.error(err);
     }

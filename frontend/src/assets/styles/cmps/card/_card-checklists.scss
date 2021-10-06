@@ -23,9 +23,9 @@
     left: 0;
     top: 0;
     transition-duration: 0.14s;
-    transition-property: width, background;
+    transition-property: width, background-color;
     transition-timing-function: ease-in;
-    &.complete {
+    &.done {
       background-color: #61bd4f;
     }
   }
