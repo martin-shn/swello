@@ -8,6 +8,24 @@
   color: #fff;
   font-size: 14px;
 
+  .btn-starred,
+  .btn-board {
+    display: none;
+  }
+  .btn-more {
+    display: flex;
+  }
+
+  @include for-normal-layout {
+    .btn-starred,
+    .btn-board {
+      display: flex;
+    }
+    .btn-more {
+      display: none;
+    }
+  }
+
   &.user-boards-header {
     background-color: #026aa7;
   }
@@ -56,9 +74,9 @@
       padding: 6px;
       background-color: rgba(255, 255, 255, 0.3);
       &.active {
-        background-color: #EB5A46;
+        background-color: #eb5a46;
         &:hover {
-          background-color: #CF513D;
+          background-color: #cf513d;
         }
       }
       &:hover {
@@ -72,6 +90,24 @@
     }
     &.btn-create {
       background-color: rgba(0, 0, 0, 0.24);
+      padding: 6px;
+      .icon-create {
+        display: inline;
+        width: 20px;
+        height: 20px;
+      }
+      .txt-create {
+        display: none;
+      }
+      @include for-narrow-layout {
+        padding: 6px 10px;
+        .icon-create {
+          display: none;
+        }
+        .txt-create {
+          display: inline;
+        }
+      }
     }
     &:hover {
       background-color: rgba(255, 255, 255, 0.3);

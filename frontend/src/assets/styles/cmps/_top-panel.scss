@@ -1,11 +1,9 @@
 .top-panel {
-  // z-index: 11;
-  & > * {
-    gap: 5px;
-  }
+  gap: 5px;
   color: #fff;
   background-color: #0000003d;
   padding: 8px 8px 4px;
+  flex-wrap: wrap;
 
   .members {
     .MuiAvatarGroup-avatar {
@@ -39,6 +37,10 @@
 
     &.btn-menu {
       padding-right: 12px;
+      margin-left: unset;
+      @include for-normal-layout {
+        margin-left: auto;
+      }
     }
 
     svg {

@@ -17,57 +17,57 @@ const _TopPanel = props => {
   const isStar = user.starredBoardsIds.includes(board._id);
 
   return (
-    <section className="top-panel full flex space-between">
-      <div className="flex align-center">
-        <button
-          onClick={() => {
-            props.history.push(`/board/${board._id}/dashboard`);
-          }}>
-          <BtnBoardIcon />
-          Board
-          <KeyboardArrowDownIcon />
-        </button>
-        <h1
-          className="board-name content-editable"
-          contentEditable
-          suppressContentEditableWarning={true}
-          onKeyDown={ev => ev.key === 'Enter' && ev.target.blur()}
-          onBlur={ev => onUpdateTitle(ev.target.innerText)}>
-          {title}
-        </h1>
-        <button
-          className={(isStar ? 'starred' : '') + ` star`}
-          onClick={() => {
-            onStar(user, board._id, onUpdateUser, isStar);
-          }}>
-          <StarOutlineIcon />
-        </button>
-        <AvatarGroup max={4} spacing={3} className="members">
-          {members?.map(member => (
-            <AppAvatar key={member._id} member={member} />
-          ))}
-        </AvatarGroup>
-        <button
-          name="invite-main"
-          className="btn-invite"
-          onClick={ev => {
-            onOpenPopover(ev, setCardPopover);
-          }}>
-          Invite
-        </button>
-      </div>
+    <section className="top-panel full flex">
+      {/* <div className="flex align-center"> */}
+      <button
+        onClick={() => {
+          props.history.push(`/board/${ board._id }/dashboard`);
+        }}>
+        <BtnBoardIcon />
+        Board
+        <KeyboardArrowDownIcon />
+      </button>
+      <h1
+        className="board-name content-editable"
+        contentEditable
+        suppressContentEditableWarning={true}
+        onKeyDown={ev => ev.key === 'Enter' && ev.target.blur()}
+        onBlur={ev => onUpdateTitle(ev.target.innerText)}>
+        {title}
+      </h1>
+      <button
+        className={(isStar ? 'starred' : '') + ` star`}
+        onClick={() => {
+          onStar(user, board._id, onUpdateUser, isStar);
+        }}>
+        <StarOutlineIcon />
+      </button>
+      <AvatarGroup max={4} spacing={3} className="members">
+        {members?.map(member => (
+          <AppAvatar key={member._id} member={member} />
+        ))}
+      </AvatarGroup>
+      <button
+        name="invite-main"
+        className="btn-invite"
+        onClick={ev => {
+          onOpenPopover(ev, setCardPopover);
+        }}>
+        Invite
+      </button>
+      {/* </div> */}
       {cardPopover.name === 'invite-main' && <CardPopover />}
-      <div>
-        <button className="btn-menu" onClick={props.toggleSideMenu}>
-          <MoreHorizIcon />
-          Show Menu
-        </button>
-      </div>
+      {/* <div> */}
+      <button className="btn-menu" onClick={props.toggleSideMenu}>
+        <MoreHorizIcon />
+        Show Menu
+      </button>
+      {/* </div> */}
     </section>
   );
 };
 
-function onStar(user, boardId, onUpdateUser, isStar) {
+function onStar (user, boardId, onUpdateUser, isStar) {
   let newUser = { ...user };
   if (isStar) newUser.starredBoardsIds = newUser.starredBoardsIds.filter(id => id !== boardId);
   else newUser.starredBoardsIds.push(boardId);
@@ -77,7 +77,7 @@ function onStar(user, boardId, onUpdateUser, isStar) {
   //     this.props.user.starredBoardsIds.includes(board._id))})
 }
 
-function onOpenPopover(ev, setCardPopover) {
+function onOpenPopover (ev, setCardPopover) {
   // const { name } = ev.target;
   setCardPopover('invite-main', ev.target, null);
 }

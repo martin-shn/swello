@@ -19,12 +19,13 @@
   z-index: 1;
   min-height: 600px;
   height: fit-content;
-  width: 768px;
   background-color: #f4f5f7;
   border-radius: 2px;
   margin: 48px 0 80px;
   padding: 0 8px 8px 16px;
   position: relative;
+  max-width: 768px;
+  width: 100%;
 
   & button {
     padding: 6px 12px;
@@ -106,6 +107,10 @@
   }
 
   .data-and-sidebar {
+    flex-direction: column;
+    @media (min-width: $mobile-breakpoint + 130) {
+      flex-direction: row;
+    }
     gap: 20px;
   }
 
