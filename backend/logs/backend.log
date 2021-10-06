@@ -3907,3 +3907,11 @@
 06/10/2021, 14:31:33 - DEBUG - broadcast to all but user:  | 615b54ae1052964f2cc29bf3 (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
 06/10/2021, 14:32:55 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
 06/10/2021, 14:32:55 - DEBUG - broadcast to all but user:  | 615b54ae1052964f2cc29bf3 (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+06/10/2021, 14:38:05 - DEBUG - Setting (8wfrLGo-S93gW5y6AAAt) socket.userId = 615b54ae1052964f2cc29bf3 
+06/10/2021, 14:38:10 - DEBUG - auth.service - login with username: guest@guest.com (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+06/10/2021, 14:38:11 - DEBUG - Setting (8wfrLGo-S93gW5y6AAAt) socket.userId = 615b54ae1052964f2cc29bf3 
+06/10/2021, 14:38:11 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+06/10/2021, 14:38:11 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+06/10/2021, 14:38:12 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+06/10/2021, 14:38:16 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+06/10/2021, 14:38:17 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
