@@ -33,7 +33,7 @@ export const CardAttachments = ({ attachments, setCardPopover, card, updateField
     };
     let { cover } = card;
     if (!cover) cover = { size: 'top-cover', color: '', imgs: [img], bgImgId: img.id };
-    else cover = { ...cover, imgs: [...cover.imgs, img], bgImgId: img.id };
+    else cover = { ...cover, imgs: [...cover.imgs, img], bgImgId: img.id, color:'' };
     updateField({ cover }, 'ADD-COVER', { cover: img });
   };
 
@@ -154,7 +154,7 @@ function CardAttachmentList ({
                 </span>
               </div>
               <div className="attachment-actions flex align-center">
-                {attachment.type === 'image' && (
+                {(attachment.type === 'image' || utilService.isValidImg(attachment.url)) && (
                   <>
                     <CoverIcon />{' '}
                     {isCardCover(attachment) ? (

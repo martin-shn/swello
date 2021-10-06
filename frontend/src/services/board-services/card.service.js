@@ -82,7 +82,7 @@ export function moveCard(board, currListId, currCardIdx, newListId, newCardIdx) 
 export function copyCard(board, card, listId, idx, title, keep) {
   const cardToCopy = { ...card, title, id: utilService.makeId() };
   if (!keep.checklists) delete cardToCopy.checklists;
-  if (!keep.label) delete cardToCopy.labelIds;
+  if (!keep.labels) delete cardToCopy.labelIds;
   if (!keep.members) delete cardToCopy.members;
   if (!keep.attachments) delete cardToCopy.attachments;
   const listIdx = board.lists.findIndex(list => list.id === listId);

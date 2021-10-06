@@ -57,6 +57,7 @@ export class SaveLocation extends React.Component {
           <DebounceInput
             debounceTimeout={500}
             minLength={2}
+            autoFocus
             className="search"
             type="search"
             placeholder="Search location"

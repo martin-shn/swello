@@ -54,6 +54,7 @@ export function copyList(board, list, listTitle) {
   const copiedList = _.cloneDeep(list);
   copiedList.title = listTitle;
   copiedList.id = utilService.makeId();
+  copiedList.cards.forEach(card => card.id = utilService.makeId())
   const listIdx = board.lists.findIndex(currList => currList.id === list.id);
   board.lists.splice(listIdx + 1, 0, copiedList);
   return board;

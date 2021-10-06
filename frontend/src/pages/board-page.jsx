@@ -33,6 +33,7 @@ export class _BoardPage extends Component {
       // only one add-card-to-list form can be active at all times.
       id: null,
       isTopAdd: false,
+      template: null
     },
     // popoverListId: null, // only one popover can be active at all times
     isAddingList: false,
@@ -41,10 +42,16 @@ export class _BoardPage extends Component {
 
   async componentDidMount() {
     const { boardId } = this.props.match.params;
-    socketService.emit(SOCKET_EVENT_SET_BOARD, boardId)
-    this.props.showLoadingPage();
-    await this.props.loadBoard(boardId);
-    this.props.hideLoadingPage();
+    if (this.props.location.pathname.substr(0,10) === '/templates'){
+      if (!this.props.templates) this.props.history.push('/templates');
+      this.setState({template:this.props.templates.filter(template=>template._id===boardId)})
+    }
+    else {
+      socketService.emit(SOCKET_EVENT_SET_BOARD, boardId)
+      this.props.showLoadingPage();
+      await this.props.loadBoard(boardId);
+      this.props.hideLoadingPage();
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -143,6 +150,8 @@ export class _BoardPage extends Component {
 
   // TODO: add dynamic text color using contrast-js
   render() {
+    let isTemplate=false;
+    if (this.props.location.pathname === '/templates' && this.state.template) isTemplate=true
     if (!this.props.board || this.props.isLoadingPage)
       return (
         <>
@@ -171,20 +180,20 @@ export class _BoardPage extends Component {
           backgroundColor: style.bgColor || 'unset',
         }}>
         <AppHeader />
-        <TopPanel
+        {!isTemplate&&<TopPanel
           title={title}
           members={members}
           onUpdateTitle={this.onUpdateTitle}
           user={this.props.user}
           board={this.props.board}
           onUpdateUser={this.onUpdateUser}
-        />
+        />}
         <PopoverScreen isOpen={popoverListId} onTogglePopover={this.onTogglePopover} />
         <Route path="/board/:boardId/card/:cardId" component={CardPage} />
         <Route path="/board/:boardId/dashboard" component={Dashboard} />
         {currPage === 'board' && <>
           <ListAll
-            board={this.props.board}
+            board={this.state.template || this.props.board}
             updateBoard={this.props.updateBoard}
             lists={listService.filterLists(lists, filterBy)}
             activeList={activeList}
@@ -201,6 +210,7 @@ export class _BoardPage extends Component {
             onMoveAllCardsToList={this.onMoveAllCardsToList}
             onSortList={this.onSortList}
             onArchiveList={this.onArchiveList}
+            isTemplate={isTemplate}
           />
           <SideMenu />
           {cardQuickEdit && (
@@ -243,6 +253,7 @@ const mapStateToProps = state => {
     user: state.userModule.user,
     cardQuickEdit: state.systemModule.cardQuickEdit,
     cardPopover: state.systemModule.cardPopover,
+    templates: state.boardModule.templates
   };
 };
 

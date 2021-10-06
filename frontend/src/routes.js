@@ -13,6 +13,10 @@ const routes = [
     component: BoardPage,
   },
   {
+    path: '/templates/:boardId',
+    component: BoardPage,
+  },
+  {
     path: '/invite/:boardId/login',
     component: Login,
   },

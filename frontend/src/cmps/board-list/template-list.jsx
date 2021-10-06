@@ -20,7 +20,8 @@ export function TemplateList({ templates, createBoard, history }) {
             <div
               key={template._id}
               className="board-preview"
-              onClick={() => onTemplateClick(template)}
+              // onClick={() => onTemplateClick(template)}
+              onClick={()=>{history.push(`/templates/${template._id}`)}}
               style={{
                 backgroundImage: `url(${template.style.imgUrl || ''})`,
                 backgroundColor: template.style.bgColor || '#fefefe',

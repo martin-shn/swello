@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { cardService } from "../../../services/board-services/card.service";
 import { boardService } from '../../../services/board.service'
 import { updateBoard } from '../../../store/actions/board.actions';
+import { setQuickEdit } from '../../../store/actions/system.actions'
 
 
 export class _CopyCard extends React.Component {
@@ -41,6 +42,7 @@ export class _CopyCard extends React.Component {
         const updatedBoard = boardService.copyCard(board, card, listId, idx, title, keep)
         this.props.updateBoard(updatedBoard)
         this.props.closeCardPopover()
+        this.props.setQuickEdit(null)
     }
     render() {
         const { board, card, closeCardPopover } = this.props;
@@ -56,7 +58,7 @@ export class _CopyCard extends React.Component {
                     <form className="flex column">
 
                         <label htmlFor="title" className="sub-header">Title</label>
-                        <textarea name="title" id="title" value={title} onChange={this.handleChange}></textarea>
+                        <textarea name="title" id="title" autoFocus value={title} onChange={this.handleChange}></textarea>
 
                         <span className="sub-header">Keep...</span>
                         {card.checklists?.length > 0 &&
@@ -112,6 +114,7 @@ export class _CopyCard extends React.Component {
 
 const mapDispatchToProps = {
     updateBoard,
+    setQuickEdit,
 };
 
 

@@ -47,7 +47,13 @@ class _BoardAdd extends Component {
     ];
 
     onCloseModal = (ev) => {
-        this.setState({ isModal: false }, ()=>{this.props.onClose()});
+        this.setState({ isModal: false,
+            markedId: 0,
+            boardName: '',
+            isAllowed: 'not-allowed',
+            isStarredMenuOpen: false,
+            isBoardsMenuOpen: false,
+            starredBoards: null }, ()=>{this.props.onClose()});
     };
 
     handleBgc = (targetId) => {
@@ -70,6 +76,8 @@ class _BoardAdd extends Component {
             ? (boardToAdd.style.imgUrl = this.bgcs[this.state.markedId].bgc.substring(0, this.bgcs[this.state.markedId].bgc.length - 6))
             : (boardToAdd.style.bgColor = this.bgcs[this.state.markedId].bgc);
         const newBoard = await this.props.createBoard(boardToAdd);
+        this.onCloseModal()
+
         this.props.history.push(`/board/${newBoard._id}`)
     };
 
