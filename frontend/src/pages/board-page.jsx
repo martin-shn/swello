@@ -36,6 +36,7 @@ export class _BoardPage extends Component {
     },
     // popoverListId: null, // only one popover can be active at all times
     isAddingList: false,
+    currPage: this.props.location.pathname.endsWith('dashboard') ? 'dashboard' : 'board',
   };
 
   async componentDidMount() {
@@ -49,10 +50,12 @@ export class _BoardPage extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { boardId } = this.props.match.params;
     if (prevProps.match.params.boardId !== this.props.match.params.boardId) this.props.loadBoard(boardId);
+    if (prevProps.location.pathname !== this.props.location.pathname) this.setState({ currPage: this.props.location.pathname.endsWith('dashboard') ? 'dashboard' : 'board' })
   }
 
   componentWillUnmount() {
     this.props.clearBoard();
+    this.props.closeCardPopover()
   }
 
   // UI ACTIONS
@@ -154,6 +157,7 @@ export class _BoardPage extends Component {
     const {
       activeList,
       isAddingList,
+      currPage
       // isCardPageOpen
     } = this.state;
     const { popoverListId, filterBy, cardQuickEdit, setQuickEdit, setCardPopover, closeCardPopover, cardPopover } =
@@ -178,38 +182,40 @@ export class _BoardPage extends Component {
         <PopoverScreen isOpen={popoverListId} onTogglePopover={this.onTogglePopover} />
         <Route path="/board/:boardId/card/:cardId" component={CardPage} />
         <Route path="/board/:boardId/dashboard" component={Dashboard} />
-        <ListAll
-          board={this.props.board}
-          updateBoard={this.props.updateBoard}
-          lists={listService.filterLists(lists, filterBy)}
-          activeList={activeList}
-          popoverListId={popoverListId}
-          onTogglePopover={this.onTogglePopover}
-          onAddingCard={this.onAddingCard}
-          onAddingTopCard={this.onAddingTopCard}
-          isAddingList={isAddingList}
-          onAddingList={this.onAddingList}
-          onAddList={this.onAddList}
-          onListUpdated={this.onListUpdated}
-          onCopyList={this.onCopyList}
-          onMoveList={this.onMoveList}
-          onMoveAllCardsToList={this.onMoveAllCardsToList}
-          onSortList={this.onSortList}
-          onArchiveList={this.onArchiveList}
-        />
-        <SideMenu />
-        {cardQuickEdit && (
-          <CardQuickEdit
-            card={cardService.getCardById(this.props.board, cardQuickEdit.id)}
+        {currPage === 'board' && <>
+          <ListAll
             board={this.props.board}
-            pos={cardQuickEdit.pos}
-            setQuickEdit={setQuickEdit}
-            setCardPopover={setCardPopover}
             updateBoard={this.props.updateBoard}
-            cardPopover={cardPopover}
-            closeCardPopover={closeCardPopover}
+            lists={listService.filterLists(lists, filterBy)}
+            activeList={activeList}
+            popoverListId={popoverListId}
+            onTogglePopover={this.onTogglePopover}
+            onAddingCard={this.onAddingCard}
+            onAddingTopCard={this.onAddingTopCard}
+            isAddingList={isAddingList}
+            onAddingList={this.onAddingList}
+            onAddList={this.onAddList}
+            onListUpdated={this.onListUpdated}
+            onCopyList={this.onCopyList}
+            onMoveList={this.onMoveList}
+            onMoveAllCardsToList={this.onMoveAllCardsToList}
+            onSortList={this.onSortList}
+            onArchiveList={this.onArchiveList}
           />
-        )}
+          <SideMenu />
+          {cardQuickEdit && (
+            <CardQuickEdit
+              card={cardService.getCardById(this.props.board, cardQuickEdit.id)}
+              board={this.props.board}
+              pos={cardQuickEdit.pos}
+              setQuickEdit={setQuickEdit}
+              setCardPopover={setCardPopover}
+              updateBoard={this.props.updateBoard}
+              cardPopover={cardPopover}
+              closeCardPopover={closeCardPopover}
+            />
+          )}
+        </>}
       </main>
     );
   }

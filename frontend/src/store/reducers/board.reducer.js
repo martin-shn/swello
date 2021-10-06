@@ -5,6 +5,7 @@ const initialState = {
   isFullLabels: false,
   labelsClass: '',
   filterBy: { text: '', memberIds: [], labelIds: [], dueDate: { diff: Infinity, isComplete: null } },
+  draggedItem: null
 };
 
 export function boardReducer(state = initialState, action) {
@@ -24,8 +25,9 @@ export function boardReducer(state = initialState, action) {
     case 'SET_FILTER':
       return { ...state, filterBy: action.filterBy };
     case 'CLEAR_FILTER':
-      console.log('clear');
       return { ...state, filterBy: initialState.filterBy };
+    case 'SET_DRAGGED_ITEM':
+      return { ...state, draggedItem: action.draggedItem }
     default:
       return state;
   }

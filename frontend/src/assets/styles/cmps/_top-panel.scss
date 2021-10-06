@@ -54,4 +54,45 @@
       color: #e6c60d;
     }
   }
+
+  .board-options-menu {
+    all: initial;
+    width: 304px;
+    border-radius: 3px;
+    margin-top: 10px;
+    box-shadow: 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 0 1px rgba(9, 30, 66, 0.08);
+    button {
+      padding: 6px 12px;
+      height: fit-content;
+      width: 304px;
+      color: #172b4d;
+      align-items: flex-start;
+      &.active {
+        background-color: #e2e6e9;
+        &:hover {
+          background-color: #e2e6e9;
+        }
+      }
+      &:hover {
+        background-color: #091e420a;
+      }
+      h3 {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        margin-left: 4px;
+      }
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+      span {
+        color: #5e6c84;
+        font-size: 12px;
+        line-height: 16px;
+        margin-top: 4px;
+        text-align: left;
+      }
+    }
+  }
 }

@@ -7,6 +7,8 @@ export const SOCKET_EVENT_SET_BOARD = 'set-board';
 export const SOCKET_EVENT_SET_USER = 'set-user-socket';
 export const SOCKET_EVENT_UNSET_USER = 'unset-user-socket';
 export const SOCKET_EVENT_USER_UPDATED = 'user-updated';
+export const SOCKET_EVENT_ITEM_DRAGGED = 'item-dragged'
+export const SOCKET_EVENT_UNSET_ITEM_DRAGGED = 'unset-item-dragged'
 
 // unstar when adding backend
 // eslint-disable-next-line
