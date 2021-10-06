@@ -4,8 +4,12 @@
   }
   display: flex;
   flex-direction: column;
-  & section {
+  & .user-boards-container {
     display: flex;
+    flex-direction: column;
+    @media (min-width: 620px) {
+      flex-direction: row;
+    }
 
     & .side-nav {
       margin: 40px 0 0;

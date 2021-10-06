@@ -29,7 +29,7 @@ class _UserBoards extends React.Component {
         <header className="upper-nav">
           <AppHeader isUserBoardsPage={true} />
         </header>
-        <section>
+        <section className="user-boards-container">
           <aside className="side-nav">
             <SideNav />
           </aside>
