@@ -1323,3 +1323,22 @@
 
 >>>>>>> ff49f97772505b3e7a8b2964e51f22728097b1f2
 05/10/2021, 16:20:10 - INFO - Server is running on port: 3030 
+05/10/2021, 16:21:59 - DEBUG - Setting (-09v_z5mDC95ohCGAAAF) socket.userId = 615c2b78114a323d50a3c783 
+05/10/2021, 16:22:31 - DEBUG - Setting (JiHs_VcdC2_tNFIqAAAH) socket.userId = 615c2b78114a323d50a3c783 
+05/10/2021, 16:23:05 - DEBUG - Setting (nCjVUlLIaR37Z4N1AAAJ) socket.userId = 615c2b78114a323d50a3c783 
+05/10/2021, 16:23:19 - DEBUG - auth.service - login with username: martinshn@gmail.com (sid: 2ib2CKmd4ZNbPT82v3TpzvVV7Sy9R_IH)
+05/10/2021, 16:23:19 - DEBUG - Setting (nCjVUlLIaR37Z4N1AAAJ) socket.userId = 615c2b78114a323d50a3c783 
+05/10/2021, 16:23:19 - INFO - Req from: מרטין ש. (sid: 2ib2CKmd4ZNbPT82v3TpzvVV7Sy9R_IH)
+05/10/2021, 16:23:19 - INFO - Req from: מרטין ש. (sid: 2ib2CKmd4ZNbPT82v3TpzvVV7Sy9R_IH)
+05/10/2021, 16:23:19 - INFO - Req from: מרטין ש. (sid: 2ib2CKmd4ZNbPT82v3TpzvVV7Sy9R_IH)
+05/10/2021, 16:23:39 - INFO - Req from: מרטין ש. (sid: 2ib2CKmd4ZNbPT82v3TpzvVV7Sy9R_IH)
+05/10/2021, 16:23:39 - INFO - Req from: מרטין ש. (sid: 2ib2CKmd4ZNbPT82v3TpzvVV7Sy9R_IH)
+05/10/2021, 16:23:42 - INFO - Req from: מרטין ש. (sid: 2ib2CKmd4ZNbPT82v3TpzvVV7Sy9R_IH)
+05/10/2021, 16:23:43 - DEBUG - Setting (L11v6WoZJtWjS0KJAAAL) socket.userId = 615c2b78114a323d50a3c783 
+05/10/2021, 16:24:07 - INFO - Req from: מרטין ש. (sid: 2ib2CKmd4ZNbPT82v3TpzvVV7Sy9R_IH)
+05/10/2021, 16:24:07 - INFO - Req from: מרטין ש. (sid: 2ib2CKmd4ZNbPT82v3TpzvVV7Sy9R_IH)
+05/10/2021, 18:19:33 - INFO - Req from: מרטין ש. (sid: 2ib2CKmd4ZNbPT82v3TpzvVV7Sy9R_IH)
+05/10/2021, 18:19:33 - INFO - Req from: מרטין ש. (sid: 2ib2CKmd4ZNbPT82v3TpzvVV7Sy9R_IH)
+05/10/2021, 18:21:26 - INFO - Req from: מרטין ש. (sid: 2ib2CKmd4ZNbPT82v3TpzvVV7Sy9R_IH)
+05/10/2021, 18:21:26 - INFO - Req from: מרטין ש. (sid: 2ib2CKmd4ZNbPT82v3TpzvVV7Sy9R_IH)
+05/10/2021, 18:21:26 - INFO - Req from: מרטין ש. (sid: 2ib2CKmd4ZNbPT82v3TpzvVV7Sy9R_IH)

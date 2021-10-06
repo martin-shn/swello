@@ -19,15 +19,11 @@
         & li {
           line-height: 20px;
           margin-bottom: 5px;
-          padding: 8px 6px;
+          // padding: 8px 6px;
           display: flex;
-          align-items: center;
+          // align-items: center;
           border-radius: 4px;
           cursor: pointer;
-          &.active {
-            background-color: #e4f0f6;
-            color: #0079bf;
-          }
           &:hover {
             &:not(.active) {
               background-color: rgba(9, 30, 66, 0.08);
@@ -41,7 +37,14 @@
           }
           & a {
             padding-inline-start: 15px;
+            flex-grow: 1;
+            padding: 0 14px;
+            height: 26px;
             font-weight: 700;
+            &.active ~ li {
+              background-color: #e4f0f6;
+              color: #0079bf;
+            }
           }
         }
       }
