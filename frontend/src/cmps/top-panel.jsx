@@ -27,6 +27,11 @@ class _TopPanel extends React.Component {
     else newUser.starredBoardsIds.push(boardId);
     this.props.onUpdateUser(newUser);
   };
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      this.setState({ currPage: this.props.location.pathname.endsWith('dashboard') ? 'dashboard' : 'board', })
+    }
+  }
   onOpenPopover = (ev) => {
     this.props.setCardPopover('invite-main', ev.target, null);
   };
@@ -35,10 +40,10 @@ class _TopPanel extends React.Component {
   };
   onChangePage = (page) => {
     const { board } = this.props;
-    page === 'dashboard' ? this.props.history.push(`/board/${ board._id }/dashboard`) : this.props.history.push(`/board/${ board._id }`);
+    page === 'dashboard' ? this.props.history.push(`/board/${board._id}/dashboard`) : this.props.history.push(`/board/${board._id}`);
     this.setState({ currPage: page, isMenuModalOpen: false });
   };
-  render () {
+  render() {
     const { title, members, onUpdateTitle, user, board, cardPopover } = this.props;
     const { currPage, isMenuModalOpen } = this.state;
     const isStar = user.starredBoardsIds.includes(board._id);

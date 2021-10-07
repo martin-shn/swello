@@ -19,7 +19,6 @@ export class CardList extends React.Component {
           <>
             <section className="card-list" ref={provided.innerRef} {...provided.droppableProps} style={cards.length ? {} : this.style}>
               {cards.map((card, idx) => (
-                <div key={card.id}>
                 <CardPreview
                   key={card.id}
                   card={card}
@@ -27,7 +26,6 @@ export class CardList extends React.Component {
                   listId={listId}
                   isDraggingOver={snapshot.isDraggingOver}
                 />
-                </div>
               ))}
             </section>
             {provided.placeholder}

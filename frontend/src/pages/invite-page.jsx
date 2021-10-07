@@ -10,10 +10,10 @@ class _InvitePage extends React.Component {
         const { boardId } = this.props.match.params;
         const user = userService.getLoggedinUser();
         if (!user) {
-            this.props.history.push(`/invite/${ boardId }/login`);
+            this.props.history.push(`/invite/${boardId}/login`)
             return;
         }
-        const board = await boardService.getById(boardId);
+        const board = await boardService.getById(boardId)
         if (!board.members.some(member => member._id === user._id)) {
             const miniUser = {
                 _id: user._id,

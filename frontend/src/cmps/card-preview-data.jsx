@@ -26,12 +26,12 @@ class _CardPreviewData extends Component {
 
   render() {
     const { checklists, attachments, description, dueDate, location, members } = this.props.card;
-    const isArchived = this.props.isTemplate?false:cardService.getCardFromArchive(this.props.board, this.props.card.id);
-    if (!checklists && !attachments && !description && !dueDate && !location && !members && !isArchived) return <></>;
+    const isArchived = this.props.isTemplate ? false : cardService.getCardFromArchive(this.props.board, this.props.card.id);
+    if (!checklists?.length && !attachments && !description && !dueDate && !location && !members?.length && !isArchived) return <></>;
     return (
       <section className="card-preview-data flex wrap align-center">
         <div className="flex align-center wrap" style={{ gap: '12px', flexGrow: '1' }}>
-          {dueDate && <CardPreviewDueDate dueDate={dueDate} toggleDueDate={this.toggleDueDate} />}
+          {dueDate && <CardPreviewDueDate dueDate={dueDate} toggleDueDate={this.props.isTemplate?()=>{}:this.toggleDueDate} />}
           {description && <DescriptionIcon />}
           {attachments?.length > 0 && (
             <div className="flex align-center">
