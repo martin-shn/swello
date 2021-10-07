@@ -38,7 +38,6 @@ export function loadBoard(id) {
       dispatch({ type: 'SET_BOARD', board });
       socketService.off(SOCKET_EVENT_BOARD_UPDATED)
       socketService.on(SOCKET_EVENT_BOARD_UPDATED, board => {
-        console.log('here');
         dispatch({ type: 'SET_BOARD', board });
       });
       return board;

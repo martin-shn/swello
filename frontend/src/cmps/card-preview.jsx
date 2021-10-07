@@ -30,7 +30,7 @@ export class CardPreview extends Component {
               {...provided.draggableProps}
               {...provided.dragHandleProps}
               ref={provided.innerRef}
-            >
+            > 
               {snapshot.isDragging && socketService.emit(SOCKET_EVENT_ITEM_DRAGGED, { id: card.id, style: provided.draggableProps.style })}
               <CardPreviewInfo card={card} title={this.state.title} handleChange={({ target }) => this.setState({ title: target.value })} />
             </div>
