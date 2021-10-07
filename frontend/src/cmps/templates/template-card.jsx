@@ -16,19 +16,19 @@ export class TemplateCard extends React.Component{
                         'content card-preview flex column ' +
                         (card.cover?.size === 'full-cover' ? `full-cover ${card.cover.color ? card.cover.color : 'cover-img'}` : '')
                     }
-                    style={{ ...this.coverStyle }}
                     ref={(el) => el && el.style.setProperty('cursor', 'default', 'important')}
+                    style={{ ...coverStyle }}
                 >
-                    {card.cover && (card.cover.color || this.coverImg) && card.cover.size === 'top-cover' && (
+                    {card.cover && (card.cover.color || coverImg) && card.cover.size === 'top-cover' && (
                         <div
                             className={`card-cover${card.cover.color ? ' ' + card.cover.color : ''}${
                                 card.cover.bgImgId ? ' cover-img' : ''
                             }`}
                             style={
-                                this.coverImg
+                                coverImg
                                     ? {
-                                          backgroundImage: `url(${this.coverImg.url})`,
-                                          height: `${this.coverImg.previewHeight}px`,
+                                          backgroundImage: `url(${coverImg.url})`,
+                                          height: `${coverImg.previewHeight}px`,
                                       }
                                     : {}
                             }
@@ -37,7 +37,7 @@ export class TemplateCard extends React.Component{
                     {(!card.cover || card.cover.size !== 'full-cover') && <CardPreviewLabels card={card} template={template} />}
                     <div
                         className={`${card.cover?.size === 'full-cover' ? 'full-cover-helper' : ''}${
-                            this.coverImg ? ' theme ' + this.coverImg.theme : ''
+                            coverImg ? ' theme ' + coverImg.theme : ''
                         }`}
                     >
                         {card.title}
