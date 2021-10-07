@@ -78,7 +78,7 @@ class _AppHeader extends Component {
     const template = templates.filter((template) => template._id === boardId)[0];
     const newBoard = await this.props.createBoard(template);
     this.props.history.push(`/board/${ newBoard._id }`);
-  }
+  };
 
   render () {
     const { isStarredMenuOpen } = this.state;
@@ -95,7 +95,7 @@ class _AppHeader extends Component {
           <img className="logo" alt="swello" />
           <span>Swello</span>
         </Link>
-        <div className="actions" style={isTemplate?{marginRight:'5px'}:{}}>
+        <div className="actions" style={isTemplate ? { marginRight: '5px' } : {}}>
           {/* this button is only visible in mobile: */}
           <HeaderMore onBoards={this.onBoards} toggleMenu={this.props.toggleMenu} />
           <button
@@ -133,9 +133,11 @@ class _AppHeader extends Component {
             <span className="txt-create">Create</span>
             <CreateIcon className="icon-create" />
           </button>
-          {isTemplate&&<button className="btn-create" style={{backgroundColor:'#2e8af6', marginLeft:'auto'}} onClick={this.copyTemplate}>Use template</button>}
+          {isTemplate && <button className="btn-create btn-use-template" style={{ backgroundColor: '#2e8af6', marginLeft: 'auto' }} onClick={this.copyTemplate}>
+
+          </button>}
         </div>
-        
+
         <div>
           <HeaderSearch board={this.props.board} menu={this.props.menu} toggleMenu={this.props.toggleMenu} />
           <button
