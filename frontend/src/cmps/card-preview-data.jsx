@@ -31,7 +31,7 @@ class _CardPreviewData extends Component {
     return (
       <section className="card-preview-data flex wrap align-center">
         <div className="flex align-center wrap" style={{ gap: '12px', flexGrow: '1' }}>
-          {dueDate && <CardPreviewDueDate dueDate={dueDate} toggleDueDate={this.toggleDueDate} />}
+          {dueDate && <CardPreviewDueDate dueDate={dueDate} toggleDueDate={this.props.isTemplate?()=>{}:this.toggleDueDate} />}
           {description && <DescriptionIcon />}
           {attachments?.length > 0 && (
             <div className="flex align-center">

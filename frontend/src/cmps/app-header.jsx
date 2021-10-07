@@ -133,7 +133,7 @@ class _AppHeader extends Component {
             <span className="txt-create">Create</span>
             <CreateIcon className="icon-create" />
           </button>
-          {isTemplate&&<button className="btn-create" style={{backgroundColor:'#2e8af6', marginLeft:'auto'}} onClick={this.copyTemplate}>Use template</button>}
+          {isTemplate&&<button className="btn-create btn-use-template" style={{backgroundColor:'#2e8af6', marginLeft:'auto'}} onClick={this.copyTemplate}>Use template</button>}
         </div>
         
         <div>
