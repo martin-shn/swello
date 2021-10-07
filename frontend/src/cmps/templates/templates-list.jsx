@@ -12,9 +12,8 @@ export class TemplateList extends React.Component {
               const elClass = this.state.class.map((c,idx)=>this.elInnerRef[idx].current.scrollHeight > this.elInnerRef[idx].current.clientHeight ? ' visible-scroll' : '')
             this.setState({
               class: elClass,
-            },()=>{console.log('final state:',this.state);});
+            });
         //   }
-        console.log(this.elInnerRef, this.state);
         }, 100);
       }
     
@@ -22,7 +21,6 @@ export class TemplateList extends React.Component {
     
     render() {
         this.elInnerRef = Array(this.props.template.lists.length).fill().map((_, i) => this.elInnerRef[i] || React.createRef())
-        console.log(this.props.template.lists.length);
         const {template} = this.props;
         return (
             <>
