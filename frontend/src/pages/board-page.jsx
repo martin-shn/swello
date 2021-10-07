@@ -25,7 +25,7 @@ import { listService } from '../services/board-services/list.service';
 import { cardService } from '../services/board-services/card.service';
 import { CardQuickEdit } from '../cmps/card/card-quick-edit';
 
-import { SOCKET_EVENT_SET_USER, SOCKET_EVENT_SET_BOARD } from '../services/socket.service';
+import { SOCKET_EVENT_SET_BOARD } from '../services/socket.service';
 
 export class _BoardPage extends Component {
   state = {

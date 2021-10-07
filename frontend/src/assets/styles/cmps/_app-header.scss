@@ -49,11 +49,14 @@
     }
     & + span {
       font-family: Charlie;
-      margin-right: 20px;
+      margin-right: 5px;
       line-height: normal;
       font-size: 17px;
       font-weight: 700;
       letter-spacing: 1px;
+      @include for-narrow-layout {
+        margin-right: 20px;
+      }
     }
   }
 
@@ -99,8 +102,14 @@
       .txt-create {
         display: none;
       }
+      &.btn-use-template::before {
+        content: 'Use';
+      }
       @include for-narrow-layout {
         padding: 6px 10px;
+        &.btn-use-template::before {
+          content: 'Use template';
+        }
         .icon-create {
           display: none;
         }

@@ -14,7 +14,7 @@ class _Dashboard extends React.Component {
   };
   innerRef = React.createRef();
 
-  componentDidMount() {
+  componentDidMount () {
     setTimeout(() => {
       if (this.innerRef?.current) {
         this.setState({
@@ -24,7 +24,7 @@ class _Dashboard extends React.Component {
     }, 100);
   }
 
-  get allCards() {
+  get allCards () {
     const { board } = this.props;
     if (!board) return null;
     const cards = [];
@@ -32,22 +32,17 @@ class _Dashboard extends React.Component {
     return cards;
   }
 
-  onClose = () => {
-    this.props.history.push(`/board/${this.props.match.params.boardId}`);
-  };
 
-  render() {
+
+  render () {
     if (!this.props.match.params) this.props.history.push('/board');
     const { labels } = this.props.board;
     return (
       <section className="dashboard">
         <div className="dashboard-header">
-          <button className="dashboard-close" onClick={this.onClose}>
-            <span></span>
-          </button>
         </div>
         <div
-          className={`dashboard-content${this.state.isScroll ? ' scroll-visible' : ' no-scroll'}`}
+          className={`dashboard-content${ this.state.isScroll ? ' scroll-visible' : ' no-scroll' }`}
           ref={this.innerRef}>
           {/* HERE COMES ALL GRAPHES - EACH IS A DIV */}
           <DashboardGraph title="Cards per label">
@@ -63,7 +58,7 @@ class _Dashboard extends React.Component {
             <CardPerMember cards={this.allCards} />
           </DashboardGraph>
         </div>
-      </section>
+      </section >
     );
   }
 }
@@ -78,7 +73,7 @@ export const Dashboard = connect(mapStateToProps, mapDispatchToProps)(withRouter
 
 // card status
 
-function DashboardGraph({ title, children }) {
+function DashboardGraph ({ title, children }) {
   return (
     <section className="graph">
       <div>
