@@ -17,15 +17,14 @@ class _TemplatePage extends React.Component {
         const { boardId } = this.props.match.params;
         const template = templates.filter((template) => template._id === boardId)[0];
         return (
-            <div className='board-page'>
+            <div className='board-page' style={{backgroundImage: `url(${template.style.imgUrl})`, backgroundColor: template.style.bgColor,}}>
                 <AppHeader isTemplate={true} />
                     <div
                         className='list-all full with-main-layout'
                         style={{
                             gridRow: '3',
                             display: 'flex',
-                            backgroundImage: `url(${template.style.imgUrl})`,
-                            backgroundColor: template.style.bgColor,
+                            overflowY: 'hidden'
                         }}
                     >
                         <TemplateList template={template}/>
