@@ -64,9 +64,6 @@ async function updateBoard(req, res) {
         const alsStore = asyncLocalStorage.getStore()
         const userId = alsStore.userId
         socketService.broadcast({ type: socketService.SOCKET_EVENT_BOARD_UPDATED, data: updatedBoard, room: updatedBoard._id, userId })
-        // socketService.broadcast({ type: socketService.SOCKET_EVENT_BOARD_UPDATED, data: updatedBoard, room: updatedBoard._id, userId: '615b214036cd5f7d6c987cc9' })
-        // console.log({ type: socketService.SOCKET_EVENT_BOARD_UPDATED, data: updatedBoard, label: updatedBoard._id });
-        // socketService.emitTo({ type: socketService.SOCKET_EVENT_BOARD_UPDATED, data: updatedBoard, label: updatedBoard._id })
         res.json(updatedBoard)
     } catch (err) {
         logger.error('Failed to update board')

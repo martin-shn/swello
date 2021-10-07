@@ -15,10 +15,6 @@ export class _HomePage extends React.Component {
     userEmail: ''
   };
 
-  async componentDidMount () {
-    await storageService.init();
-  }
-
   handleChange = ({ target }) => {
     this.setState({ userEmail: target.value });
   };

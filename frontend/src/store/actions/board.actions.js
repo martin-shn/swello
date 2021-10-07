@@ -38,12 +38,20 @@ export function loadBoard(id) {
       dispatch({ type: 'SET_BOARD', board });
       socketService.off(SOCKET_EVENT_BOARD_UPDATED)
       socketService.on(SOCKET_EVENT_BOARD_UPDATED, board => {
-        console.log('here');
         dispatch({ type: 'SET_BOARD', board });
+        localStorage.setItem(`board-${board._id}`, JSON.stringify(board))
       });
+      localStorage.setItem(`board-${board._id}`, JSON.stringify(board))
       return board;
     } catch (err) {
+      console.log('board action load board catch');
       console.error(err);
+      let board = localStorage.getItem(`board-${id}`)
+      if (board) {
+        board = JSON.parse(board)
+        dispatch({ type: 'SET_BOARD', board });
+      }
+      return board
     }
   };
 }
@@ -57,14 +65,23 @@ export function clearBoard() {
 export function updateBoard(updatedBoard) {
   return async dispatch => {
     try {
+      console.log('action board update begin');
       dispatch({ type: 'SET_BOARD', board: updatedBoard });
       const board = await boardService.update(updatedBoard);
       gBoard = _.cloneDeep(board);
+      localStorage.setItem(`board-${updatedBoard._id}`,JSON.stringify(updatedBoard))
       return board;
     } catch (err) {
-      dispatch({ type: 'SET_BOARD', board: _.cloneDeep(gBoard) });
-      console.error(err);
-      return gBoard;
+      console.log('board-action update err:', err.message, navigator.onLine, gBoard);
+      if (err.message==='Network Error' && !navigator.onLine) {
+        localStorage.setItem(`board-${updatedBoard._id}`,JSON.stringify(updatedBoard))
+        dispatch({ type: 'SET_BOARD', board: _.cloneDeep(updatedBoard) });
+        return updatedBoard
+      } else {
+        dispatch({ type: 'SET_BOARD', board: _.cloneDeep(gBoard) });
+        console.error(err);
+        return gBoard;
+      }
     }
   };
 }

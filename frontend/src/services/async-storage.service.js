@@ -12,15 +12,15 @@ export const storageService = {
 };
 
 async function init() {
-  const boards = await query('board');
-  const users = await query('user');
-  if (!boards.length) {
-    await postMany('board', boardData);
-  }
-  if (!users.length) {
-    await postMany('user', userData);
-  }
-  return Promise.resolve()
+  // const boards = await query('board');
+  // const users = await query('user');
+  // if (!boards.length) {
+  //   await postMany('board', boardData);
+  // }
+  // if (!users.length) {
+  //   await postMany('user', userData);
+  // }
+  // return Promise.resolve()
 }
 
 function query(entityType, filterBy, delay = 1200) {

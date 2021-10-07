@@ -1,0 +1,30 @@
+.connectivity-msg{
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 0 1px rgba(9,30,66,0.31), 0 20px 32px -8px tgba(9,30,66,0.25);
+    color: #172B4D;
+    font-weight: 600;
+    font-size: rem(14px);
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    transition: background-color 200ms;
+    width: 100%;
+    // z-index: 600;
+    & svg{
+        height: 24px;
+        width: 24px;
+    }
+    & .online{
+        color: #172B4D;
+        margin-right: 8px;
+    }
+    & .offline{
+        color: rgb(242,214,0);
+        margin-right: 8px;
+    }
+    & .close-icon{
+        height: 16px;
+        width: 16px;
+    }
+}

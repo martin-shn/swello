@@ -8,6 +8,8 @@ this.addEventListener('install', ev => {
         '/static/js/bundle.js',
         '/static/css/main.chunk.css',
         '/index.html',
+        '/board',
+        '/board/:boardId',
         '/',
       ]);
     })
