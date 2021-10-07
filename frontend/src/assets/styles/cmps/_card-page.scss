@@ -123,29 +123,28 @@
     min-width: 192px;
     padding-right: 8px;
     margin-bottom: 24px;
-    > * {
-      width: 100%;
+    .add-to-card-container,
+    .actions-container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 8px;
+      .app-btn {
+        flex-basis: calc(50% - 4px);
+      }
+      @media (min-width: $mobile-breakpoint + 130) {
+        flex-direction: column;
+        .app-btn {
+          flex-basis: unset;
+        }
+      }
     }
     button {
-      // background-color: #091e420a;
-      margin-top: 8px;
       svg {
         width: 16px;
         height: 16px;
         margin: 0 6px 0 -6px;
         pointer-events: none;
-      }
-      &[name='add-members'],
-      &[name='copy-card'],
-      &[name='unarchive-card'] {
-        margin-top: 0;
-      }
-      &[name='archive-card']::before {
-        // font-family: FA-solid;
-        // content: '\f187';
-        // margin: 0 6px 0 -6px;
-        // height: 16px;
-        // width: 16px;
       }
       &[name='remove-item'] {
         color: #fff;

@@ -30,81 +30,84 @@ export const CardSidebar = props => {
   return (
     <aside className="card-sidebar flex column">
       <span className="sub-header">Add to card</span>
-      <AppBtn
-        name="add-members"
-        onClick={ev =>
-          onOpenPopover(ev, {
-            card,
-            board,
-            updateField,
-          })
-        }>
-        <MemberIcon />
-        Members
-      </AppBtn>
-      <AppBtn name="add-labels" onClick={ev => onOpenPopover(ev, { board, card, updateField })}>
-        <LabelIcon />
-        Labels
-      </AppBtn>
-      <AppBtn name="add-checklist" onClick={ev => onOpenPopover(ev, { card, updateField })}>
-        <CheckBoxIcon />
-        Checklist
-      </AppBtn>
-      <AppBtn name="add-due-date" onClick={ev => onOpenPopover(ev, { card, dueDate, updateField })}>
-        <DateIcon />
-        Date
-      </AppBtn>
-      <AppBtn name="add-attachment" onClick={ev => onOpenPopover(ev, { card, updateField })}>
-        <AttachmentIcon />
-        Attachment
-      </AppBtn>
-      <AppBtn
-        name="add-location"
-        onClick={ev => onOpenPopover(ev, { card, updateField, currPage: 'save', isFromNav: true })}>
-        <LocationIcon />
-        Location
-      </AppBtn>
-      <AppBtn name="add-cover" onClick={ev => onOpenPopover(ev, { card, updateField })}>
-        <CoverIcon />
-        Cover
-      </AppBtn>
-
+      <div className="add-to-card-container">
+        <AppBtn
+          name="add-members"
+          onClick={ev =>
+            onOpenPopover(ev, {
+              card,
+              board,
+              updateField,
+            })
+          }>
+          <MemberIcon />
+          Members
+        </AppBtn>
+        <AppBtn name="add-labels" onClick={ev => onOpenPopover(ev, { board, card, updateField })}>
+          <LabelIcon />
+          Labels
+        </AppBtn>
+        <AppBtn name="add-checklist" onClick={ev => onOpenPopover(ev, { card, updateField })}>
+          <CheckBoxIcon />
+          Checklist
+        </AppBtn>
+        <AppBtn name="add-due-date" onClick={ev => onOpenPopover(ev, { card, dueDate, updateField })}>
+          <DateIcon />
+          Date
+        </AppBtn>
+        <AppBtn name="add-attachment" onClick={ev => onOpenPopover(ev, { card, updateField })}>
+          <AttachmentIcon />
+          Attachment
+        </AppBtn>
+        <AppBtn
+          name="add-location"
+          onClick={ev => onOpenPopover(ev, { card, updateField, currPage: 'save', isFromNav: true })}>
+          <LocationIcon />
+          Location
+        </AppBtn>
+        <AppBtn name="add-cover" onClick={ev => onOpenPopover(ev, { card, updateField })}>
+          <CoverIcon />
+          Cover
+        </AppBtn>
+      </div>
       <span className="sub-header actions">Actions</span>
-      {!isArchived && (
-        <>
-          <AppBtn name="copy-card" onClick={ev => onOpenPopover(ev, { board, card })}>
-            <CopyIcon />
-            Copy
-          </AppBtn>
-          <AppBtn name="move-card" onClick={ev => onOpenPopover(ev, { board, card })}>
-            <MoveIcon />
-            Move
-          </AppBtn>
-          <AppBtn name="archive-card" onClick={onArchiveCard}>
-            <ArchiveIcon />
-            Archive
-          </AppBtn>
-        </>
-      )}
-      {isArchived && (
-        <>
-          <AppBtn name="unarchive-card" onClick={onUnarchivedCard}>
-            <RefreshIcon /> Send to board
-          </AppBtn>
-          <AppBtn
-            name="remove-item"
-            onClick={ev =>
-              onOpenPopover(ev, {
-                item: card,
-                onRemoveItem: onRemoveCard,
-                msg: constService.MSG_REMOVE_CARD,
-                itemType: 'card',
-              })
-            }>
-            <RemoveIcon /> Delete
-          </AppBtn>
-        </>
-      )}
-    </aside>
+      <div className="actions-container">
+        {!isArchived && (
+          <>
+            <AppBtn name="copy-card" onClick={ev => onOpenPopover(ev, { board, card })}>
+              <CopyIcon />
+              Copy
+            </AppBtn>
+            <AppBtn name="move-card" onClick={ev => onOpenPopover(ev, { board, card })}>
+              <MoveIcon />
+              Move
+            </AppBtn>
+            <AppBtn name="archive-card" onClick={onArchiveCard}>
+              <ArchiveIcon />
+              Archive
+            </AppBtn>
+          </>
+        )}
+        {isArchived && (
+          <>
+            <AppBtn name="unarchive-card" onClick={onUnarchivedCard}>
+              <RefreshIcon /> Send to board
+            </AppBtn>
+            <AppBtn
+              name="remove-item"
+              onClick={ev =>
+                onOpenPopover(ev, {
+                  item: card,
+                  onRemoveItem: onRemoveCard,
+                  msg: constService.MSG_REMOVE_CARD,
+                  itemType: 'card',
+                })
+              }>
+              <RemoveIcon /> Delete
+            </AppBtn>
+          </>
+        )}
+      </div>
+    </aside >
   );
 };
