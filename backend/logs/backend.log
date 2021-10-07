@@ -4402,6 +4402,7 @@
 06/10/2021, 23:43:12 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
 06/10/2021, 23:43:12 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
 06/10/2021, 23:43:13 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+<<<<<<< HEAD
 
 6.10.2021, 23:48:52 - INFO - Req from: Guest (sid: iGLikPuJIM7mVenWZqmxlriFVpd9Fkcm)
 6.10.2021, 23:48:53 - INFO - Req from: Guest (sid: iGLikPuJIM7mVenWZqmxlriFVpd9Fkcm)
@@ -4589,3 +4590,29 @@
 7.10.2021, 1:07:48 - DEBUG - broadcast to all but user:  | 615c38afe8411543e0c5d9c5 (sid: 8L3LMgfsR4xG7fCO2y2jdH-qHV8eCm2M)
 7.10.2021, 1:07:52 - INFO - Req from: Ziv (sid: 8L3LMgfsR4xG7fCO2y2jdH-qHV8eCm2M)
 7.10.2021, 1:07:52 - DEBUG - broadcast to all but user:  | 615c38afe8411543e0c5d9c5 (sid: 8L3LMgfsR4xG7fCO2y2jdH-qHV8eCm2M)
+=======
+07/10/2021, 0:04:24 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+07/10/2021, 0:04:24 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+07/10/2021, 0:04:25 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+07/10/2021, 0:04:26 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+07/10/2021, 0:05:40 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+07/10/2021, 0:05:40 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+07/10/2021, 0:05:41 - DEBUG - Setting (hEhyhuWdVtFk0BF9AABf) socket.userId = 615b54ae1052964f2cc29bf3 
+07/10/2021, 0:05:41 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+07/10/2021, 0:05:43 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+07/10/2021, 0:08:30 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+07/10/2021, 0:08:30 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+07/10/2021, 0:08:30 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+07/10/2021, 0:08:31 - DEBUG - Setting (az_nFdnbE4UFQTnVAABh) socket.userId = 615b54ae1052964f2cc29bf3 
+07/10/2021, 0:08:32 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+07/10/2021, 0:09:46 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+07/10/2021, 0:09:46 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+07/10/2021, 0:09:47 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+07/10/2021, 0:09:48 - DEBUG - Setting (RaIvYHlFQefsySvVAABj) socket.userId = 615b54ae1052964f2cc29bf3 
+07/10/2021, 0:09:49 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+07/10/2021, 0:10:28 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+07/10/2021, 0:20:34 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+07/10/2021, 0:20:35 - INFO - Req from: Guest (sid: Pmp45fK8eOYOfLXOKI7YeG63rN-H0DzO)
+>>>>>>> b2824e5124368f210d987f546f696236609b098c
+7.10.2021, 1:08:28 - INFO - Req from: Ziv (sid: 8L3LMgfsR4xG7fCO2y2jdH-qHV8eCm2M)
+7.10.2021, 1:08:28 - INFO - Req from: Guest (sid: UD3hl2I5Ay3XPnVU9-X_rcGRmKC353pN)
