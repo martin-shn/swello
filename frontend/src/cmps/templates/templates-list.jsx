@@ -30,7 +30,7 @@ export class TemplateList extends React.Component {
                 <section key={list.id} className='flex lists-container' style={{ maxHeight: '98vh' }}>
                     <div className='list-preview flex column' style={this.state.class[idx]===''?{}:{paddingRight:'4px'}}>
                         <div className="list-header flex space-between">
-                            <h2 className="list-title content-editable">{list.title}</h2>
+                            <h2 className="list-title content-editable" style={{cursor:'default'}}>{list.title}</h2>
                         </div>
                         <div ref={this.elInnerRef[idx]} className={"cards-container flex column"+this.state.class[idx]} style={{gap:"0"}}>
                             <section className="card-list">

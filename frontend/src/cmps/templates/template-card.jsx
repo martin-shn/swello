@@ -17,6 +17,7 @@ export class TemplateCard extends React.Component{
                         (card.cover?.size === 'full-cover' ? `full-cover ${card.cover.color ? card.cover.color : 'cover-img'}` : '')
                     }
                     style={{ ...this.coverStyle }}
+                    ref={(el) => el && el.style.setProperty('cursor', 'default', 'important')}
                 >
                     {card.cover && (card.cover.color || this.coverImg) && card.cover.size === 'top-cover' && (
                         <div
