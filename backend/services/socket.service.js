@@ -44,6 +44,7 @@ function connectSockets(http, session) {
     socket.on(SOCKET_EVENT_SET_USER, userId => {
       logger.debug(`Setting (${socket.id}) socket.userId = ${userId}`);
       socket.userId = userId;
+      socket.emit('set-user-successfully','ok')
     });
     socket.on(SOCKET_EVENT_UNSET_USER, () => {
       delete socket.userId;
