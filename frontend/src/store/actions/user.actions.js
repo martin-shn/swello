@@ -51,11 +51,11 @@ export function listenForUserUpdates() {
     socketService.on(SOCKET_EVENT_USER_UPDATED, user => {
       dispatch({ type: 'SET_USER', user });
       sessionStorage.setItem('loggedinUser', JSON.stringify(user));
-      if (Notification.permission == 'granted') {
-        navigator.serviceWorker.getRegistration().then(function (reg) {
-          reg.showNotification(user.notifications[0].txt || 'New notification from Swello!');
-        });
-      }
+      // if (Notification.permission == 'granted') {
+      //   navigator.serviceWorker.getRegistration().then(function (reg) {
+      //     reg.showNotification(user.notifications[0].txt || 'New notification from Swello!');
+      //   });
+      // }
     });
   };
 }

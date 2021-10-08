@@ -45,8 +45,16 @@ async function updateUser(req, res) {
     const userId = alsStore.userId;
     if (userId !== savedUser._id.toString()) {
       webpush
-        .sendNotification(savedUser.subscription, 'Hellooo')
-        .catch(err => console.log('err in sendNotification:', err));
+        .sendNotification(
+          savedUser.subscription,
+          JSON.stringify({
+            title: 'Swello - New Activity',
+            text: savedUser.notifications[0].txt,
+            url: savedUser.notifications[0].url,
+            image: 'https://logos-world.net/wp-content/uploads/2021/02/Trello-Emblem.png',
+          })
+        )
+        .catch(err => logger.error('err in sendNotification:', err));
       socketService.emitToUser({
         type: socketService.SOCKET_EVENT_USER_UPDATED,
         data: savedUser,
