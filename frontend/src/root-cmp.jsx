@@ -1,10 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 // const { Switch, Route } = ReactRouterDOM
 import { Switch, Route } from 'react-router';
 import routes from './routes';
+import { listenForUserUpdates } from './store/actions/user.actions';
 
-export class RootCmp extends React.Component {
-  render() {
+class _RootCmp extends React.Component {
+  componentDidMount () {
+    Notification.requestPermission();
+    this.props.listenForUserUpdates();
+
+  }
+  render () {
     return (
       <main>
         <Switch>
@@ -16,3 +23,8 @@ export class RootCmp extends React.Component {
     );
   }
 }
+const mapDispatchToProps = {
+  listenForUserUpdates
+};
+
+export const RootCmp = connect(null, mapDispatchToProps)(_RootCmp);
