@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import AddIcon from '@mui/icons-material/Add';
 import { boardService } from '../services/board.service';
 import { updateBoard } from '../store/actions/board.actions';
 import { Popover } from './popover';
@@ -11,10 +10,10 @@ import { CopyPage } from './list-popover-pages/copy-page';
 import { MovePage } from './list-popover-pages/move-page';
 import { MoveAllCards } from './list-popover-pages/move-all-cards-page';
 import { SortPage } from './list-popover-pages/sort-page';
-import { ReactComponent as CloseIcon } from '../assets/svg/close.svg';
 // import { utilService } from '../services/util.service';
 import { CardList } from './card-list';
 import { Draggable } from 'react-beautiful-dnd';
+import { AddCard } from './add-card';
 
 export class _ListPreview extends Component {
   state = {
@@ -46,16 +45,15 @@ export class _ListPreview extends Component {
     }
   };
 
-  onAddCard = (ev, isTopAdd) => {
-    ev.preventDefault();
-    const title = ev.target.title.value;
+  onAddCard = (title, isTopAdd) => {
+    if (!title) return;
     const { board, list } = this.props;
     const updatedBoard = boardService.addCard(board, list, title, isTopAdd);
-    if (isTopAdd) {
-      this.props.onAddingTopCard(false);
-    } else {
-      this.props.onAddingCard(false);
-    }
+    // if (isTopAdd) {
+    //   this.props.onAddingTopCard(false);
+    // } else {
+    //   this.props.onAddingCard(false);
+    // }
     this.props.updateBoard(updatedBoard);
   };
 
@@ -188,36 +186,7 @@ export class _ListPreview extends Component {
                 // marginRight: this.elRef.current.scrollHeight > this.elRef.current.clientHeight?'-10px':'0px'
               }}>
               {list.cards && <CardList listId={list.id} cards={list.cards} />}
-
-              <div className="add-card" style={{ order: isTopAdd ? '-1' : '0' }}>
-                {!isAddingCard && !isTopAdd && (
-                  <button className="content btn-adding transperant" onClick={() => onAddingCard(list.id)}>
-                    <AddIcon />
-                    <span>Add a card</span>
-                  </button>
-                )}
-                {(isAddingCard || isTopAdd) && (
-                  <>
-                    <form
-                      onSubmit={ev => {
-                        this.onAddCard(ev, isTopAdd);
-                      }}>
-                      <textarea
-                        name="title"
-                        autoFocus
-                        placeholder="Enter a title for this card..."
-                        onKeyDown={ev => ev.key === 'Enter' && this.bottomAddRef.current.click()}
-                      />
-                      <div className="add-controls">
-                        <button ref={this.bottomAddRef} className="btn-add">
-                          Add Card
-                        </button>
-                        <CloseIcon className="close-icon" onClick={() => onAddingCard(false)} />
-                      </div>
-                    </form>
-                  </>
-                )}
-              </div>
+              <AddCard isTopAdd={isTopAdd} isAddingCard={isAddingCard} onAddCard={this.onAddCard} onAddingCard={onAddingCard} listId={list.id} />
             </div>
           </div>
         )}

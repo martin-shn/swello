@@ -1,5 +1,12 @@
 .list-add {
-  cursor: pointer;
+  transition: background-color 85ms ease-in, opacity 40ms ease-in, border-color 85ms ease-in;
+  &:not(.adding) {
+    cursor: pointer;
+    padding: 0;
+    .add-placeholder {
+      padding: 10px 8px;
+    }
+  }
   .add-placeholder {
     color: #fff;
   }
