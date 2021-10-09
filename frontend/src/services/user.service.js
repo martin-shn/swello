@@ -43,17 +43,20 @@ async function login(userCred) {
   // const user = users.find(user => user.username === userCred.username);
   // if (user) return _saveLocalUser(user);
   // throw new Error('Auth error');
-  const subscription = await pushNotifService.subscribeUser();
-  const user = await httpService.post('auth/login', { ...userCred, subscription });
+  // const subscription = await pushNotifService.subscribeUser();
+  // const user = await httpService.post('auth/login', { ...userCred, subscription });
+  const user = await httpService.post('auth/login', userCred);
   socketService.emit(SOCKET_EVENT_SET_USER, user._id);
   if (user) return _saveLocalUser(user);
 }
+
 async function signup(userCred) {
   // const user = await storageService.post('user', userCred);
   const user = await httpService.post('auth/signup', userCred);
   socketService.emit(SOCKET_EVENT_SET_USER, user._id);
   return _saveLocalUser(user);
 }
+
 async function logout() {
   sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER);
   socketService.emit(SOCKET_EVENT_UNSET_USER);

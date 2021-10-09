@@ -65,7 +65,7 @@ export function clearBoard() {
 export function updateBoard(updatedBoard) {
   return async dispatch => {
     try {
-      console.log('action board update begin');
+      // console.log('action board update begin');
       dispatch({ type: 'SET_BOARD', board: updatedBoard });
       const board = await boardService.update(updatedBoard);
       gBoard = _.cloneDeep(board);

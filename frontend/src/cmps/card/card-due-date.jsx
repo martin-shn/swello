@@ -8,7 +8,7 @@ export const CardDueDate = props => {
   const { dueDate, updateField, onOpenPopover } = props;
 
   const onToggleComplete = () => {
-    const updatedDueDate = { ...dueDate, isComplete: !dueDate.isComplete };
+    const updatedDueDate = { ...dueDate, isComplete: !dueDate.isComplete, completedAt: !dueDate.isComplete?Date.now():null };
     updateField({ dueDate: updatedDueDate }, 'MARK-DUE-DATE', { dueDate: updatedDueDate });
   };
 

@@ -8,8 +8,8 @@ const expressSession = require('express-session')
 const app = express()
 const http = require('http').createServer(app)
 
-const publicVapidKey = 'BBGieDQKPJrzTX6bgj97u-MBRdO97yAtG990P3il5DidgCVcaOEfhO2Y4o9FSsx0vOyIL8oNtXH-yRpNv8U7YAg';
-const privateVapidKey = 'Hg8vU3UWecoS8vTsHVKCkVf8GDNTJqEU3FwYvYyTWBk';
+const publicVapidKey = process.env.PUBLIC_VAPID_KEY
+const privateVapidKey = process.env.PRIVATE_VAPID_KEY
 
 webpush.setVapidDetails('mailto:mail@mail.com' , publicVapidKey, privateVapidKey)
 
@@ -23,15 +23,15 @@ const session = expressSession({
 app.use(express.json({limit: '50mb'}))
 app.use(session)
 
-// if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.resolve(__dirname, 'public')))
-// } else {
-//     const corsOptions = {
-//         origin: ['http://127.0.0.1:8080', 'http://localhost:8080', 'http://127.0.0.1:3000', 'http://localhost:3000'],
-//         credentials: true
-//     }
-//     app.use(cors(corsOptions))
-// }
+} else {
+    const corsOptions = {
+        origin: ['http://127.0.0.1:8080', 'http://localhost:8080', 'http://127.0.0.1:3000', 'http://localhost:3000'],
+        credentials: true
+    }
+    app.use(cors(corsOptions))
+}
 
 const authRoutes = require('./api/auth/auth.routes')
 const userRoutes = require('./api/user/user.routes')
@@ -50,15 +50,15 @@ app.use('/api/template',templateRoutes)
 connectSockets(http, session)
 
 // web notifications
-app.post('/subscribe', (req, res) => {
-    const subscription = req.body;
+// app.post('/subscribe', (req, res) => {
+//     const subscription = req.body;
 
-    res.status(201).json({});
+//     res.status(201).json({});
 
-    const payload = JSON.stringify({title: 'test'})
+//     const payload = JSON.stringify({title: 'test'})
 
-    webpush.sendNotification(subscription, payload).catch(err=>console.error(err));
-})
+//     webpush.sendNotification(subscription, payload).catch(err=>console.error(err));
+// })
 
 
 // Make every server-side-route to match the index.html

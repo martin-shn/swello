@@ -33,7 +33,7 @@ class _CardPage extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.board !== this.props.board) {
-      console.log('board changed');
+      // console.log('board changed');
       this.loadCard();
     }
   }

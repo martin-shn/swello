@@ -1,5 +1,5 @@
-import boardData from '../data/board.json';
-import userData from '../data/user.json';
+// import boardData from '../data/board.json';
+// import userData from '../data/user.json';
 
 export const storageService = {
   init,

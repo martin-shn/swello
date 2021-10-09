@@ -21,7 +21,7 @@ export function CardPerMember ({ cards }) {
       },
     ],
   };
-  console.log('🚀 ~ file: card-per-member.jsx ~ line 22 ~ CardPerMember ~ membersMap', membersMap);
+  // console.log('🚀 ~ file: card-per-member.jsx ~ line 22 ~ CardPerMember ~ membersMap', membersMap);
   if (!Object.keys(membersMap).length) return <div>No cards assigned to members</div>;
   return <Doughnut data={data} options={{ responsive: true, maintainAspectRatio: false }} />;
 }
