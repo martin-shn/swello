@@ -13,8 +13,7 @@
   .dashboard-header {
     width: 100%;
     display: flex;
-    padding: 16px;
-    margin-top: 16px;
+    padding: 16px 8px;
     @media (max-width: 1400px) {
       max-width: 1000px;
     }
@@ -22,7 +21,7 @@
       display: flex;
       /* gap: 15px; */
       width: 100%;
-      padding: 16px;
+      // padding: 16px;
       // margin: 8px;
       justify-content: space-between;
       &>div{
