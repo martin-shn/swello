@@ -5,13 +5,13 @@ import differenceInDays from 'date-fns/differenceInDays'
 export class DashboardHeader extends React.Component{
 
     state={
-        cycleTime:{},
-        wip:{},
-        flowEff:{},
-        proccessMetrics:{}
+        cycleTime:{days:0,hours:0,mins:0,precent:0},
+        wip: {openTasks:0, age:{wip_days:0,wip_hours:0,wip_mins:0}},
+        flowEff:{flowEff:0},
+        proccessMetrics:{avgTotalTaskInRange:0,avgCompletedTasksInRange:0,WIPInRange:0, cycleTimeProccessTime:{cycleTimeProccessTimeDays:0,cycleTimeProccessTimeHours:0,cycleTimeProccessTimeMins:0}}
     }
 
-    componentWillMount() {
+    componentDidMount() {
         const {board}=this.props
         console.log(board);
         let totalTasks = 0;
@@ -82,8 +82,8 @@ export class DashboardHeader extends React.Component{
         // WIP
         const wip_avgLifeCycle = totalTimeWip/(totalTasks-completedTasks);
         let wip_days = parseInt(wip_avgLifeCycle/day)
-        let wip_hours = parseInt((wip_avgLifeCycle - (days*day) )/hour)
-        let wip_mins = parseInt((wip_avgLifeCycle - (days*day) - (hours*hour))/min)
+        let wip_hours = parseInt((wip_avgLifeCycle - (wip_days*day) )/hour)
+        let wip_mins = parseInt((wip_avgLifeCycle - (wip_days*day) - (wip_hours*hour))/min)
 
         // flow eff
         const flowEff = (completedChecklistTasks/totalChecklists*100).toFixed(2);
@@ -91,11 +91,11 @@ export class DashboardHeader extends React.Component{
         // proccess metrics
         const avgTotalTaskInRange = (totalTaskInRange/rangeDays).toFixed(2)
         const avgCompletedTasksInRange = (completedTaskInRange/rangeDays).toFixed(2)
-        const avgLifeCycleInRange = totalTimeToCompleteInRange/avgCompletedTasksInRange;
+        const avgLifeCycleInRange = totalTimeToCompleteInRange/completedTaskInRange;
         const WIPInRange = ((totalTaskInRange-completedTaskInRange)/rangeDays).toFixed(2)
         let cycleTimeProccessTimeDays = parseInt(avgLifeCycleInRange/day);
-        let cycleTimeProccessTimeHours = parseInt((avgLifeCycleInRange- (days*day) )/hour);
-        let cycleTimeProccessTimeMins = parseInt((avgLifeCycleInRange- (days*day) - (hours*hour))/min);
+        let cycleTimeProccessTimeHours = parseInt((avgLifeCycleInRange- (cycleTimeProccessTimeDays*day) )/hour);
+        let cycleTimeProccessTimeMins = parseInt((avgLifeCycleInRange- (cycleTimeProccessTimeDays*day) - (cycleTimeProccessTimeHours*hour))/min);
 
         if (isNaN(days)) days=0
         if (isNaN(hours)) hours=0
@@ -108,7 +108,7 @@ export class DashboardHeader extends React.Component{
         if (isNaN(cycleTimeProccessTimeMins)) cycleTimeProccessTimeMins=0
         if (totalTasks===0) totalTasks=1
         this.setState({
-            cycleTime:{days,hours,mins,precent:completedTasks/totalTasks*100},
+            cycleTime:{days,hours,mins,precent:(completedTasks/totalTasks*100).toFixed(2)},
             wip: {openTasks:totalTasks-completedTasks, age:{wip_days,wip_hours,wip_mins}},
             flowEff:{flowEff},
             proccessMetrics:{avgTotalTaskInRange,avgCompletedTasksInRange,WIPInRange, cycleTimeProccessTime:{cycleTimeProccessTimeDays,cycleTimeProccessTimeHours,cycleTimeProccessTimeMins}}
@@ -175,8 +175,8 @@ export class DashboardHeader extends React.Component{
                         <p>Daily WIP<br/>items</p>
                         </div>
                         <div>
-                        <span>{`${proccessMetrics.cycleTimeProccessTime.cycleTimeProccessTimeDays}d ${proccessMetrics.cycleTimeProccessTime.cycleTimeProccessTimeHours}h`}</span>
-                        {/* <span>{`${proccessMetrics.cycleTimeProccessTime.cycleTimeProccessTimeDays}d ${proccessMetrics.cycleTimeProccessTime.cycleTimeProccessTimeHours}h ${proccessMetrics.cycleTimeProccessTime.cycleTimeProccessTimeMins}m`}</span> */}
+                        {/* <span>{`${proccessMetrics.cycleTimeProccessTime.cycleTimeProccessTimeDays}d ${proccessMetrics.cycleTimeProccessTime.cycleTimeProccessTimeHours}h`}</span> */}
+                        <span>{`${proccessMetrics.cycleTimeProccessTime.cycleTimeProccessTimeDays}d ${proccessMetrics.cycleTimeProccessTime.cycleTimeProccessTimeHours}h ${proccessMetrics.cycleTimeProccessTime.cycleTimeProccessTimeMins}m`}</span>
                         <p>Cycle Time</p>
                         </div>
                     </div>

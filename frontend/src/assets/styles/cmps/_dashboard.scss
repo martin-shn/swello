@@ -18,6 +18,9 @@
     @media (max-width: 1400px) {
       max-width: 1000px;
     }
+    @media (max-width: 550px) {
+      display: none;
+    }
     & .dashboard-header-container{
       display: flex;
       /* gap: 15px; */
@@ -51,11 +54,19 @@
           font-size: 1.4rem;
           font-weight: 600;
           margin-bottom: 10px;
+          @media (max-width: 680px) {
+            font-size: 1rem;
+            margin-bottom: 5px;
+          }
         }
         & p{
           margin-bottom: 10px;
           font-size: 0.8rem;
           text-align: center;
+          @media (max-width: 680px) {
+            margin-bottom: 5px;
+            font-size: 0.6rem;
+          }
         }
       }
       &>div.flow-eff{
