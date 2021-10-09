@@ -68,21 +68,22 @@ export class DashboardHeader extends React.Component{
                 }
             })
         )
+    
         const avgLifeCycle = totalTimeToComplete/completedTasks;
         const day = 1000*60*60*24
         const hour = day/24
         const min = hour/60
 
         // cycle
-        const days = parseInt(avgLifeCycle/day)
-        const hours = parseInt((avgLifeCycle - (days*day) )/hour)
-        const mins = parseInt((avgLifeCycle - (days*day) - (hours*hour))/min)
+        let days = parseInt(avgLifeCycle/day)
+        let hours = parseInt((avgLifeCycle - (days*day) )/hour)
+        let mins = parseInt((avgLifeCycle - (days*day) - (hours*hour))/min)
 
         // WIP
         const wip_avgLifeCycle = totalTimeWip/(totalTasks-completedTasks);
-        const wip_days = parseInt(wip_avgLifeCycle/day)
-        const wip_hours = parseInt((wip_avgLifeCycle - (days*day) )/hour)
-        const wip_mins = parseInt((wip_avgLifeCycle - (days*day) - (hours*hour))/min)
+        let wip_days = parseInt(wip_avgLifeCycle/day)
+        let wip_hours = parseInt((wip_avgLifeCycle - (days*day) )/hour)
+        let wip_mins = parseInt((wip_avgLifeCycle - (days*day) - (hours*hour))/min)
 
         // flow eff
         const flowEff = (completedChecklistTasks/totalChecklists*100).toFixed(2);
@@ -92,11 +93,22 @@ export class DashboardHeader extends React.Component{
         const avgCompletedTasksInRange = (completedTaskInRange/rangeDays).toFixed(2)
         const avgLifeCycleInRange = totalTimeToCompleteInRange/avgCompletedTasksInRange;
         const WIPInRange = ((totalTaskInRange-completedTaskInRange)/rangeDays).toFixed(2)
-        const cycleTimeProccessTimeDays = parseInt(avgLifeCycleInRange/day);
-        const cycleTimeProccessTimeHours = parseInt((avgLifeCycleInRange- (days*day) )/hour);
-        const cycleTimeProccessTimeMins = parseInt((avgLifeCycleInRange- (days*day) - (hours*hour))/min);
+        let cycleTimeProccessTimeDays = parseInt(avgLifeCycleInRange/day);
+        let cycleTimeProccessTimeHours = parseInt((avgLifeCycleInRange- (days*day) )/hour);
+        let cycleTimeProccessTimeMins = parseInt((avgLifeCycleInRange- (days*day) - (hours*hour))/min);
 
-        this.setState({cycleTime:{days,hours,mins,precent:completedTasks/totalTasks*100},
+        if (isNaN(days)) days=0
+        if (isNaN(hours)) hours=0
+        if (isNaN(mins)) mins=0
+        if (isNaN(wip_days)) wip_days=0
+        if (isNaN(wip_hours)) wip_hours=0
+        if (isNaN(wip_mins)) wip_mins=0
+        if (isNaN(cycleTimeProccessTimeDays)) cycleTimeProccessTimeDays=0
+        if (isNaN(cycleTimeProccessTimeHours)) cycleTimeProccessTimeHours=0
+        if (isNaN(cycleTimeProccessTimeMins)) cycleTimeProccessTimeMins=0
+        if (totalTasks===0) totalTasks=1
+        this.setState({
+            cycleTime:{days,hours,mins,precent:completedTasks/totalTasks*100},
             wip: {openTasks:totalTasks-completedTasks, age:{wip_days,wip_hours,wip_mins}},
             flowEff:{flowEff},
             proccessMetrics:{avgTotalTaskInRange,avgCompletedTasksInRange,WIPInRange, cycleTimeProccessTime:{cycleTimeProccessTimeDays,cycleTimeProccessTimeHours,cycleTimeProccessTimeMins}}
