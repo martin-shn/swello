@@ -23,12 +23,11 @@
       width: 100%;
       // padding: 16px;
       // margin: 8px;
-      justify-content: space-between;
+      justify-content: space-around;
       &>div{
         // display: flex;
         display: grid;
         grid-template-rows: 65px 1fr;
-        width: 30%;
         // flex-direction: column;
         // align-items: center;
         & h6{
@@ -68,6 +67,7 @@
         }
       }
       &>div.proccess-metrics{
+        width: 20%;
         &>div{
           flex-grow: 1;
           gap: 10px;
