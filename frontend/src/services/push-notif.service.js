@@ -1,7 +1,8 @@
 export const pushNotifService = { subscribeUser };
 
 function subscribeUser() {
-  const publicVapidKey = process.env.PUBLIC_VAPID_KEY;
+  const publicVapidKey = process.env.REACT_APP_PUBLIC_VAPID_KEY;
+  console.log('publicVapidKey', publicVapidKey);
   if ('serviceWorker' in navigator) {
     return navigator.serviceWorker.ready.then(function (reg) {
       return reg.pushManager

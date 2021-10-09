@@ -7,6 +7,7 @@ import { listenForUserUpdates } from './store/actions/user.actions';
 
 class _RootCmp extends React.Component {
   componentDidMount () {
+    console.log('publicVapidKey', process.env.REACT_APP_PUBLIC_VAPID_KEY);
     Notification.requestPermission();
     this.props.listenForUserUpdates();
 

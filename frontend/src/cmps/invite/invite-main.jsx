@@ -20,25 +20,25 @@ class _InviteMain extends Component {
     isRes: false
   };
 
-  componentDidMount() {
+  componentDidMount () {
     this._ismounted = true;
   }
-  componentWillUnmount() {
+  componentWillUnmount () {
     this._ismounted = false;
   }
 
   handleChange = ev => {
-    if (!this._ismounted) return
+    if (!this._ismounted) return;
     if (ev.target.value.length > 0) {
       this.setState({ res: [] });
     }
     if (!ev.target.value.trim().length) {
-      if (!this._ismounted) return
+      if (!this._ismounted) return;
       this.setState({ name: '', res: null, isLink: false });
     } else {
       this.setState({ name: ev.target.value }, async () => {
         const res = await userService.getUsers({ name: this.state.name });
-        if (!this._ismounted) return
+        if (!this._ismounted) return;
         this.setState({ res: res.length ? res : null, noRes: res.length ? true : false });
       });
     }
@@ -55,21 +55,21 @@ class _InviteMain extends Component {
 
   onSendInvitation = async () => {
     // send invitation with sockets
-    const { invitedUserId } = this.state
-    const { user, board } = this.props
-    const url = `http://localhost:3000/invite/${board._id}`;
-    const notification = { id: utilService.makeId(), type: 'invite', title: 'Board Invitation', user, isRead: false, txt: `${user.fullname} invited you to board ${board.title}`, url, sentAt: Date.now() }
-    let userToUpdate = await userService.getById(invitedUserId)
-    userToUpdate = { ...userToUpdate, notifications: [notification, ...userToUpdate.notifications] }
-    userService.update(userToUpdate, false)
-    this.props.closeCardPopover()
+    const { invitedUserId } = this.state;
+    const { user, board } = this.props;
+    const url = `/invite/${ board._id }`;
+    const notification = { id: utilService.makeId(), type: 'invite', title: 'Board Invitation', user, isRead: false, txt: `${ user.fullname } invited you to board ${ board.title }`, url, sentAt: Date.now() };
+    let userToUpdate = await userService.getById(invitedUserId);
+    userToUpdate = { ...userToUpdate, notifications: [notification, ...userToUpdate.notifications] };
+    userService.update(userToUpdate, false);
+    this.props.closeCardPopover();
   };
 
   createLink = () => {
     this.setState({ isQrCode: !this.state.isQrCode });
   };
 
-  render() {
+  render () {
     // console.log(this.state);
     return (
       <section className="invite-main cards-popper">
@@ -110,7 +110,7 @@ class _InviteMain extends Component {
               return user._id !== this.props.user._id ? <div key={user._id} onClick={() => this.setState({ name: user.username, invitedUserId: user._id, isLink: true, res: null })}>
                 <AppAvatar member={user} />
                 <span>{user.fullname}</span>
-              </div> : <></>
+              </div> : <></>;
             })}
           </div>
         </div>}

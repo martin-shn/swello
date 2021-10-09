@@ -43,9 +43,9 @@ async function login(userCred) {
   // const user = users.find(user => user.username === userCred.username);
   // if (user) return _saveLocalUser(user);
   // throw new Error('Auth error');
-  // const subscription = await pushNotifService.subscribeUser();
-  // const user = await httpService.post('auth/login', { ...userCred, subscription });
-  const user = await httpService.post('auth/login', userCred);
+  const subscription = await pushNotifService.subscribeUser();
+  const user = await httpService.post('auth/login', { ...userCred, subscription });
+  // const user = await httpService.post('auth/login', userCred);
   socketService.emit(SOCKET_EVENT_SET_USER, user._id);
   if (user) return _saveLocalUser(user);
 }
