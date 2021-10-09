@@ -15,6 +15,7 @@
     display: flex;
     padding: 16px 8px;
     margin-top: 20px;
+    max-width: 2047px;
     @media (max-width: 1400px) {
       max-width: 1000px;
     }
