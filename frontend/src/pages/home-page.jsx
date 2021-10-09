@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { storageService } from '../services/async-storage.service';
+// import { storageService } from '../services/async-storage.service';
 import { onLogin, onLogout } from '../store/actions/user.actions';
 import { HomeFooter } from '../cmps/home-footer';
 import { HomeHeader } from '../cmps/home-header';
@@ -26,8 +26,10 @@ export class _HomePage extends React.Component {
   };
 
   onGetStarted = async () => {
-    if (!this.props.user) await this.props.onLogin({ username: 'guest@guest.com', password: '1234' });
-    console.log(this.props.user);
+    if (!this.props.user) {
+      await this.props.onLogin({ username: 'guest@guest.com', password: '1234' });
+      console.log(this.props.user);
+    }
     this.props.history.push('/board');
   };
 

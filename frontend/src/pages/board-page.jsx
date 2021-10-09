@@ -265,12 +265,11 @@ export class _BoardPage extends Component {
                         {this.state.isOnline
                             ? 'Connection is back. All changes are being commited.'
                             : 'Lost internet connection. All changes will be commited once connection is back.'}
-                        <IconButton>
+                        <IconButton onClick={() => {
+                                    this.setState({ isSnackbarOpen: false });
+                                }}>
                             <CloseIcon
                                 className='close-icon'
-                                onClick={() => {
-                                    this.setState({ isSnackbarOpen: false });
-                                }}
                             />
                         </IconButton>
                     </div>

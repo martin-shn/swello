@@ -1,5 +1,6 @@
 // import { storageService } from './async-storage.service';
 import { httpService } from './http.service';
+import { pushNotifService } from './push-notif.service';
 import { socketService } from './socket.service';
 // const {SOCKET_EVENT_SET_USER, SOCKET_EVENT_UNSET_USER} = socketService
 
@@ -33,7 +34,7 @@ async function getById(userId) {
 
 async function update(user, isCurrUser = true) {
   // await storageService.put('user', user);
-  user = await httpService.put(`user/${user._id}`, user)
+  user = await httpService.put(`user/${user._id}`, user);
   return isCurrUser ? _saveLocalUser(user) : user;
 }
 
@@ -42,16 +43,20 @@ async function login(userCred) {
   // const user = users.find(user => user.username === userCred.username);
   // if (user) return _saveLocalUser(user);
   // throw new Error('Auth error');
+  // const subscription = await pushNotifService.subscribeUser();
+  // const user = await httpService.post('auth/login', { ...userCred, subscription });
   const user = await httpService.post('auth/login', userCred);
   socketService.emit(SOCKET_EVENT_SET_USER, user._id);
   if (user) return _saveLocalUser(user);
 }
+
 async function signup(userCred) {
   // const user = await storageService.post('user', userCred);
   const user = await httpService.post('auth/signup', userCred);
   socketService.emit(SOCKET_EVENT_SET_USER, user._id);
   return _saveLocalUser(user);
 }
+
 async function logout() {
   sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER);
   socketService.emit(SOCKET_EVENT_UNSET_USER);
@@ -95,6 +100,6 @@ function getLoggedinUser() {
 
 // This is relevant when backend is connected
 (async () => {
-    var user = getLoggedinUser()
-    if (user) socketService.emit(SOCKET_EVENT_SET_USER, user._id)
+  var user = getLoggedinUser();
+  if (user) socketService.emit(SOCKET_EVENT_SET_USER, user._id);
 })();

@@ -14,7 +14,7 @@ export class AddDueDate extends Component {
 
   onSave = () => {
     const { date } = this.state;
-    const dueDate = { ...this.props.dueDate, date: Date.parse(date) };
+    const dueDate = { createdAt: Date.now(), ...this.props.dueDate, date: Date.parse(date) };
     this.props.updateField({ dueDate }, 'ADD-DUE-DATE', { date: dueDate.date });
     this.props.closeCardPopover();
   };

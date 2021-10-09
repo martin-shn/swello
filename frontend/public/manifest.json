@@ -1,6 +1,7 @@
 {
   "short_name": "Swello",
   "name": "Swello",
+  "gcm_sender_id": "103953800507",
   "icons": [
     {
       "src": "favicon.ico",

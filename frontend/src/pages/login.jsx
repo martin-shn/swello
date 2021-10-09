@@ -34,8 +34,8 @@ class _Login extends React.Component {
     isFromInvite: false
   };
 
-  componentDidMount() {
-    this.setState({ isFromInvite: this.props.match.path.startsWith('/invite') ? true : false })
+  componentDidMount () {
+    this.setState({ isFromInvite: this.props.match.path.startsWith('/invite') ? true : false });
   }
 
   handleChange = ({ target }) => {
@@ -50,7 +50,7 @@ class _Login extends React.Component {
     const { boardId } = this.props.match.params;
     try {
       await this.props.onLogin(user, this.showErrorMsg);
-      isFromInvite ? this.props.history.push(`/invite/${boardId}`) : this.props.history.push('/board')
+      isFromInvite ? this.props.history.push(`/invite/${ boardId }`) : this.props.history.push('/board');
     } catch (err) {
       this.showErrorMsg(err);
     }
@@ -70,7 +70,7 @@ class _Login extends React.Component {
     this.setState({ errMsg: 'Failed to login with google' });
   };
 
-  render() {
+  render () {
     const { user, errMsg, isFromInvite } = this.state;
     return (
       <section className="login">
@@ -126,7 +126,7 @@ class _Login extends React.Component {
             isSignedIn={false}
           />
           <hr className="bottom-form-separator"></hr>
-          <Link to={isFromInvite ? `/invite/${this.props.match.params.boardId}/signup` : '/signup'}>New here? Sign up for an account</Link>
+          <Link to={isFromInvite ? `/invite/${ this.props.match.params.boardId }/signup` : '/signup'}>New here? Sign up for an account</Link>
         </form>
         <HomeFooter />
       </section>

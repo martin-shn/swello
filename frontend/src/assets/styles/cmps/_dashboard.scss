@@ -10,10 +10,123 @@
   flex-direction: column;
   align-items: center;
   z-index: 11;
+  overflow-y: auto;
+  &.scroll-visible {
+    padding-top: 1px;
+  }
+  &::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    // margin: 0 5px;
+    // border: 5px solid transparent;
+    border-radius: 10px;
+    // box-shadow: inset 0 0 8px 8px rgba($color: #fff, $alpha: 0.35)d;
+    background-color: rgba($color: #fff, $alpha: 0.35);
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    // border: 5px solid transparent;
+    border-radius: 10px;
+    // background-color: #091e4214;
+    // box-shadow: inset 0 0 8px 8px rgba($color: #000000, $alpha: 0.15);
+    background-color: rgba($color: #000000, $alpha: 0.15);
+  }
+
   .dashboard-header {
-    margin: 8px;
-    margin-left: auto;
+    width: 100%;
     display: flex;
+    padding: 16px 8px;
+    margin-top: 20px;
+    max-width: 2047px;
+    @media (max-width: 1400px) {
+      max-width: 1000px;
+    }
+    @media (max-width: 550px) {
+      display: none;
+    }
+    & .dashboard-header-container{
+      display: flex;
+      /* gap: 15px; */
+      width: 100%;
+      // padding: 16px;
+      // margin: 8px;
+      justify-content: space-around;
+      &>div{
+        // display: flex;
+        display: grid;
+        grid-template-rows: 65px 1fr;
+        // flex-direction: column;
+        // align-items: center;
+        & h6{
+          grid-row: 1;
+          font-size: 0.7rem;
+          margin-bottom: 25px;
+          text-align: center;
+          line-height: 1.3;
+          min-height: 45px;
+        }
+        &>div{
+          grid-row: 2;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+        & span{
+          color: #0079bf;
+          font-size: 1.4rem;
+          font-weight: 600;
+          margin-bottom: 10px;
+          @media (max-width: 680px) {
+            font-size: 1rem;
+            margin-bottom: 5px;
+          }
+        }
+        & p{
+          margin-bottom: 10px;
+          font-size: 0.8rem;
+          text-align: center;
+          @media (max-width: 680px) {
+            margin-bottom: 5px;
+            font-size: 0.6rem;
+          }
+        }
+      }
+      &>div.flow-eff{
+        &>div{
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+      &>div.proccess-metrics{
+        width: 20%;
+        &>div{
+          flex-grow: 1;
+          gap: 10px;
+          &>div{
+            // each row
+            display: flex;
+            justify-content: space-around;
+            gap: 10px;
+            width: 100%;
+            &>div{
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+            }
+          }
+        }
+      }
+    }
     button.dashboard-close {
       height: 20px;
       width: 20px;
@@ -43,7 +156,6 @@
     box-sizing: border-box;
     grid-column-gap: 32px;
     grid-row-gap: 32px;
-    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     -webkit-transform: translate3d(0, 0, 0);
     grid-auto-rows: minmax(500px, 0.5fr);
@@ -52,33 +164,8 @@
       grid-template-columns: minmax(0, 1000px);
     }
 
-    &.scroll-visible {
-      padding-top: 1px;
-    }
     &:last-child {
       padding-bottom: 1px;
-    }
-    &::-webkit-scrollbar {
-      height: 8px;
-      width: 8px;
-    }
-
-    /* Track */
-    &::-webkit-scrollbar-track {
-      // margin: 0 5px;
-      // border: 5px solid transparent;
-      border-radius: 10px;
-      // box-shadow: inset 0 0 8px 8px rgba($color: #fff, $alpha: 0.35)d;
-      background-color: rgba($color: #fff, $alpha: 0.35);
-    }
-
-    /* Handle */
-    &::-webkit-scrollbar-thumb {
-      // border: 5px solid transparent;
-      border-radius: 10px;
-      // background-color: #091e4214;
-      // box-shadow: inset 0 0 8px 8px rgba($color: #000000, $alpha: 0.15);
-      background-color: rgba($color: #000000, $alpha: 0.15);
     }
 
     > .graph {

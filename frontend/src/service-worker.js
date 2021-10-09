@@ -63,10 +63,29 @@ registerRoute(
 
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
-self.addEventListener('message', (event) => {
+self.addEventListener('message', event => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
 });
 
 // Any other custom service worker logic can go here.
+self.addEventListener('push', function (ev) {
+  const { image, url, title, text } = ev.data.json();
+  const options = {
+    data: url,
+    body: text,
+    icon: 'https://res.cloudinary.com/avivyaari/image/upload/c_thumb,w_200,g_face/v1633715879/Trello%20Icon.ico',
+    vibrate: [200, 100, 200],
+    // image: image,
+    // badge: image,
+    // actions: [{ action: 'Detail', title: 'Open', icon: 'https://via.placeholder.com/128/ff0000' }],
+  };
+  ev.waitUntil(self.registration.showNotification(title, options));
+});
+
+self.addEventListener('notificationclick', function (ev) {
+  const notification = ev.notification;
+  clients.openWindow(notification.data);
+  notification.close();
+});

@@ -17,7 +17,7 @@ class _CardPreviewData extends Component {
     // this.props.card.dueDate.isComplete = !this.props.card.dueDate.isComplete;
     const { card } = this.props;
     const isComplete = !card.dueDate.isComplete;
-    const updatedCard = { ...card, dueDate: { ...card.dueDate, isComplete } };
+    const updatedCard = { ...card, dueDate: { ...card.dueDate, isComplete, completedAt: isComplete?Date.now():null } };
     const updatedBoard = boardService.updateCard(this.props.board, updatedCard);
     const activity = boardService.createActivity(updatedCard, 'MARK-DUE-DATE', { dueDate: updatedCard.dueDate });
     updatedBoard.activities.unshift(activity);
