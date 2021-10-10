@@ -62,6 +62,7 @@ class _Login extends React.Component {
 
   onSuccess = res => {
     const { email, googleId } = res.profileObj;
+    console.log(email, googleId);
     this.setState({ user: { username: email, password: googleId } }, this.onLogin);
   };
 

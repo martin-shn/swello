@@ -30,23 +30,18 @@ function query(entityType, filterBy, delay = 1200) {
     if (filterBy.byUserId) {
       entities = entities.filter(entity => {
         return (
-          entity.createdBy._id === filterBy.byUserId ||
-          entity.members.some(member => member._id === filterBy.byUserId)
+          entity.createdBy._id === filterBy.byUserId || entity.members.some(member => member._id === filterBy.byUserId)
         );
       });
     }
 
-    if (filterBy.byBoardId) {
-      console.log('filter by board id');
-    }
-
-    if(filterBy.name){
-      entities = entities.filter(entity=>{
-        return(
+    if (filterBy.name) {
+      entities = entities.filter(entity => {
+        return (
           entity.fullname.toLowerCase().includes(filterBy.name.toLowerCase()) ||
-          entity.username.toLowerCase().includes(filterBy.name.toLowerCase()) 
-        )
-      })
+          entity.username.toLowerCase().includes(filterBy.name.toLowerCase())
+        );
+      });
     }
   }
 
