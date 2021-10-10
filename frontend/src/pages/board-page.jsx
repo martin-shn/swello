@@ -41,7 +41,7 @@ export class _BoardPage extends Component {
     };
 
     async componentDidMount () {
-        if (!this.props.user) await this.props.onLogin({ username: 'guest@guest.com', password: '1234' });
+        if (!this.props.user) await this.props.onLogin({ username: 'avivyaariswello@gmail.com', password: '102653615196118506035' });
         const { boardId } = this.props.match.params;
         this.state.isOnline && socketService.emit(SOCKET_EVENT_SET_BOARD, boardId);
         this.props.showLoadingPage();
