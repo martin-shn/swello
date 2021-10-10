@@ -39,7 +39,7 @@ class _InviteMain extends Component {
       this.setState({ name: ev.target.value }, async () => {
         const res = await userService.getUsers({ name: this.state.name });
         if (!this._ismounted) return;
-        this.setState({ res: res.length ? res : null, noRes: res.length ? true : false });
+        this.setState({ res: res.length ? res : null, isRes: res.length ? true : false });
       });
     }
   };
@@ -107,7 +107,7 @@ class _InviteMain extends Component {
         {this.state.res?.length > 0 && <div className="invite-results">
           <div>
             {this.state.res.map(user => {
-              return user._id !== this.props.user._id ? <div key={user._id} onClick={() => this.setState({ name: user.username, invitedUserId: user._id, isLink: true, res: null })}>
+              return user._id !== this.props.user._id ? <div key={user._id} onClick={() => this.setState({ name: user.username, invitedUserId: user._id, isLink: true, res: null, isRes: false })}>
                 <AppAvatar member={user} />
                 <span>{user.fullname}</span>
               </div> : <></>;
