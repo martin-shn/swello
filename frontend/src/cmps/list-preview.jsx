@@ -49,11 +49,11 @@ export class _ListPreview extends Component {
     if (!title) return;
     const { board, list } = this.props;
     const updatedBoard = boardService.addCard(board, list, title, isTopAdd);
-    // if (isTopAdd) {
-    //   this.props.onAddingTopCard(false);
-    // } else {
-    //   this.props.onAddingCard(false);
-    // }
+    if (isTopAdd) {
+      this.props.onAddingTopCard(false);
+    } else {
+      this.props.onAddingCard(false);
+    }
     this.props.updateBoard(updatedBoard);
   };
 

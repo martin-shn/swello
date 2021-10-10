@@ -86,7 +86,7 @@ export class DashboardHeader extends React.Component{
         let wip_mins = parseInt((wip_avgLifeCycle - (wip_days*day) - (wip_hours*hour))/min)
 
         // flow eff
-        const flowEff = (completedChecklistTasks/totalChecklists*100).toFixed(2);
+        let flowEff = (completedChecklistTasks/totalChecklists*100).toFixed(2);
 
         // proccess metrics
         const avgTotalTaskInRange = (totalTaskInRange/rangeDays).toFixed(2)
@@ -105,7 +105,8 @@ export class DashboardHeader extends React.Component{
         if (isNaN(wip_mins)) wip_mins=0
         if (isNaN(cycleTimeProccessTimeDays)) cycleTimeProccessTimeDays=0
         if (isNaN(cycleTimeProccessTimeHours)) cycleTimeProccessTimeHours=0
-        if (isNaN(cycleTimeProccessTimeMins)) cycleTimeProccessTimeMins=0
+        if (isNaN(cycleTimeProccessTimeMins)) cycleTimeProccessTimeMins = 0
+        if (isNaN(flowEff)) flowEff = 0
         if (totalTasks===0) totalTasks=1
         this.setState({
             cycleTime:{days,hours,mins,precent:(completedTasks/totalTasks*100).toFixed(2)},

@@ -120,7 +120,7 @@ export class _BoardPage extends Component {
         const { board } = this.props;
         const updatedBoard = boardService.addList(board, listTitle);
         this.props.updateBoard(updatedBoard);
-        // this.setState({ isAddingList: false });
+        this.setState({ isAddingList: false });
     };
 
     onCopyList = (list, title) => {
