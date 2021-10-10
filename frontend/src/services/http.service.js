@@ -6,6 +6,7 @@ var axios = Axios.create({
   withCredentials: true,
 });
 
+
 export const httpService = {
   get(endpoint, data) {
     return ajax(endpoint, 'GET', data);
@@ -20,9 +21,9 @@ export const httpService = {
     return ajax(endpoint, 'DELETE', data);
   },
   async getFromApi(endpoint) {
-    const res = await axios.get(endpoint, { headers: { 'Access-Control-Allow-Origin': '*' } });
-    return res.data;
-  },
+    const res = await axios.get(endpoint)
+    return res.data
+  }
 };
 
 async function ajax(endpoint, method = 'GET', data = null) {
@@ -35,7 +36,9 @@ async function ajax(endpoint, method = 'GET', data = null) {
     });
     return res.data;
   } catch (err) {
-    console.log(`Had Issues ${method}ing to the backend, endpoint: ${endpoint}, with data: ${data}`);
+    console.log(
+      `Had Issues ${method}ing to the backend, endpoint: ${endpoint}, with data: ${data}`
+    );
     // if (err.response && err.response.status === 401) {
     //   window.location.assign('/');
     // }

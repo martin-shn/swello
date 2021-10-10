@@ -22,12 +22,12 @@ class _Signup extends React.Component {
     errMsg: '',
     isFromInvite: false
   };
-  componentDidMount () {
+  componentDidMount() {
     const userEmail = sessionStorage.getItem('userEmail');
     if (userEmail) this.setState(prevState => ({ ...prevState, user: { ...prevState.user, username: userEmail } }));
-    this.setState({ isFromInvite: this.props.match.path.startsWith('/invite') ? true : false });
+    this.setState({ isFromInvite: this.props.match.path.startsWith('/invite') ? true : false })
   }
-  componentWillUnmount () {
+  componentWillUnmount() {
     sessionStorage.removeItem('userEmail');
   }
   handleChange = ({ target }) => {
@@ -36,6 +36,7 @@ class _Signup extends React.Component {
     this.setState(prevState => ({ ...prevState, user: { ...prevState.user, [field]: value } }));
   };
   onSuccess = res => {
+    console.log('Login success - user:', res.profileObj);
     const { email, name, googleId, imageUrl } = res.profileObj;
     this.setState({ user: { username: email, fullname: name, password: googleId, imgUrl: imageUrl } }, this.onSignup);
   };
@@ -45,7 +46,7 @@ class _Signup extends React.Component {
     const { boardId } = this.props.match.params;
     try {
       await this.props.onSignup(user);
-      isFromInvite ? this.props.history.push(`/invite/${ boardId }`) : this.props.history.push('/board');
+      isFromInvite ? this.props.history.push(`/invite/${boardId}`) : this.props.history.push('/board')
     } catch (err) {
       this.showErrorMsg(err);
     }
@@ -55,7 +56,7 @@ class _Signup extends React.Component {
     this.setState({ errMsg: err.response.data.err });
   };
 
-  render () {
+  render() {
     const { user, errMsg, isFromInvite } = this.state;
     return (
       <section className="signup">
@@ -120,7 +121,7 @@ class _Signup extends React.Component {
             isSignedIn={false}
           />
           <hr className="bottom-form-separator"></hr>
-          <Link to={isFromInvite ? `/invite/${ this.props.match.params.boardId }/login` : '/login'}>Already have an account? Log in</Link>
+          <Link to={isFromInvite ? `/invite/${this.props.match.params.boardId}/login` : '/login'}>Already have an account? Log in</Link>
         </form>
         <HomeFooter />
       </section>

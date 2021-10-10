@@ -72,6 +72,7 @@ self.addEventListener('message', event => {
 // Any other custom service worker logic can go here.
 self.addEventListener('push', function (ev) {
   const { image, url, title, text } = ev.data.json();
+  console.log('recieved push event:', ev.data.json());
   const options = {
     data: url,
     body: text,
