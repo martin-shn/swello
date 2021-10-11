@@ -40,8 +40,8 @@ export class _BoardPage extends Component {
         isSnackbarOpen: false,
     };
 
-    async componentDidMount() {
-        if (!this.props.user) await this.props.onLogin({ username: 'guest@guest.com', password: '1234' });
+    async componentDidMount () {
+        if (!this.props.user) await this.props.onLogin({ username: 'avivyaariswello@gmail.com', password: '102653615196118506035' });
         const { boardId } = this.props.match.params;
         this.state.isOnline && socketService.emit(SOCKET_EVENT_SET_BOARD, boardId);
         this.props.showLoadingPage();
@@ -53,7 +53,7 @@ export class _BoardPage extends Component {
             socketService.emit(SOCKET_EVENT_SET_BOARD, boardId);
             socketService.emit(SOCKET_EVENT_SET_USER, this.props.user._id);
             socketService.on('set-user-successfully', () => {
-                let updatedBoard = localStorage.getItem(`board-${boardId}`);
+                let updatedBoard = localStorage.getItem(`board-${ boardId }`);
                 if (updatedBoard) {
                     this.props.updateBoard(JSON.parse(updatedBoard));
                 }
@@ -65,23 +65,23 @@ export class _BoardPage extends Component {
         });
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate (prevProps, prevState) {
         const { boardId } = this.props.match.params;
         if (prevProps.match.params.boardId !== this.props.match.params.boardId) {
-            localStorage.removeItem(`board-${prevProps.match.params.boardId}`);
+            localStorage.removeItem(`board-${ prevProps.match.params.boardId }`);
             this.loadBoard(boardId);
         }
         if (prevProps.location.pathname !== this.props.location.pathname)
             this.setState({ currPage: this.props.location.pathname.endsWith('dashboard') ? 'dashboard' : 'board' });
     }
 
-    componentWillUnmount() {
+    componentWillUnmount () {
         this.props.clearBoard();
         this.props.closeCardPopover();
         const { boardId } = this.props.match.params;
-        localStorage.removeItem(`board-${boardId}`);
-        window.removeEventListener('online', () => {});
-        window.removeEventListener('offline', () => {});
+        localStorage.removeItem(`board-${ boardId }`);
+        window.removeEventListener('online', () => { });
+        window.removeEventListener('offline', () => { });
     }
 
     loadBoard = async (boardId) => {
@@ -115,6 +115,7 @@ export class _BoardPage extends Component {
     onAddList = (ev) => {
         ev.preventDefault();
         const listTitle = ev.target.title.value;
+        if (!listTitle) return;
         ev.target.reset();
         const { board } = this.props;
         const updatedBoard = boardService.addList(board, listTitle);
@@ -172,7 +173,7 @@ export class _BoardPage extends Component {
     };
 
     // TODO: add dynamic text color using contrast-js
-    render() {
+    render () {
         let isTemplate = false;
         if (this.props.location.pathname === '/templates' && this.state.template) isTemplate = true;
         if (!this.props.board || this.props.isLoadingPage || !this.props.user)
@@ -198,7 +199,7 @@ export class _BoardPage extends Component {
             <main
                 className='board-page'
                 style={{
-                    backgroundImage: `url(${style.imgUrl})` || 'none',
+                    backgroundImage: `url(${ style.imgUrl })` || 'none',
                     backgroundColor: style.bgColor || 'unset',
                 }}
             >
@@ -266,8 +267,8 @@ export class _BoardPage extends Component {
                             ? 'Connection is back. All changes are being commited.'
                             : 'Lost internet connection. All changes will be commited once connection is back.'}
                         <IconButton onClick={() => {
-                                    this.setState({ isSnackbarOpen: false });
-                                }}>
+                            this.setState({ isSnackbarOpen: false });
+                        }}>
                             <CloseIcon
                                 className='close-icon'
                             />

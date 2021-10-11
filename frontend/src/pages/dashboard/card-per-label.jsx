@@ -1,7 +1,7 @@
 import _ from 'lodash';
-import { Pie } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 
-export function CardPerLabel({ cards, labels }) {
+export function CardPerLabel ({ cards, labels }) {
   const cardsWithLabel = label =>
     cards.reduce((count, card) => (card.labelIds?.includes(label.id) ? count + 1 : count), 0);
   // prettier-ignore
@@ -25,5 +25,5 @@ export function CardPerLabel({ cards, labels }) {
     data.datasets[0].data.push(cardsWithLabel(label));
   });
   if (!_.sum(data.datasets[0].data)) return <div>No cards with labels</div>;
-  return <Pie data={data} options={{ responsive: true, maintainAspectRatio: false }} />;
+  return <Doughnut data={data} options={{ responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' } } }} />;
 }

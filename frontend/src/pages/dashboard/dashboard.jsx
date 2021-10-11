@@ -7,7 +7,7 @@ import { CardPerLabel } from './card-per-label';
 import { CardStatus } from './card-status';
 import { CardPerList } from './card-per-list';
 import { CardPerMember } from './card-per-member';
-import {DashboardHeader} from './dashboard-header';
+import { DashboardHeader } from './dashboard-header';
 
 class _Dashboard extends React.Component {
   state = {
@@ -41,23 +41,23 @@ class _Dashboard extends React.Component {
     return (
       <section className="dashboard">
         <div className="dashboard-header">
-          <DashboardHeader board={this.props.board}/>
+          <DashboardHeader board={this.props.board} />
         </div>
         <div
           className={`dashboard-content${ this.state.isScroll ? ' scroll-visible' : ' no-scroll' }`}
           ref={this.innerRef}>
           {/* HERE COMES ALL GRAPHES - EACH IS A DIV */}
-          <DashboardGraph title="Cards per label">
-            <CardPerLabel cards={this.allCards} labels={labels} />
+          <DashboardGraph title="Cards per member">
+            <CardPerMember cards={this.allCards} />
           </DashboardGraph>
           <DashboardGraph title="Cards per due date">
             <CardStatus cards={this.allCards} />
           </DashboardGraph>
+          <DashboardGraph title="Cards per label">
+            <CardPerLabel cards={this.allCards} labels={labels} />
+          </DashboardGraph>
           <DashboardGraph title="Cards per list">
             <CardPerList board={this.props.board} />
-          </DashboardGraph>
-          <DashboardGraph title="Cards per member">
-            <CardPerMember cards={this.allCards} />
           </DashboardGraph>
         </div>
       </section >
