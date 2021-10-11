@@ -6,8 +6,13 @@ import { setCardPopover } from '../../store/actions/system.actions';
 import { AppAvatar } from '../general/app-avatar';
 
 class _CardMembers extends Component {
-  render() {
-    const { board, card, updateField } = this.props;
+  onMemberClick = (ev) => {
+    const { board, card, updateField, setCardPopover } = this.props;
+    setCardPopover('add-members', ev.target, { board, card, updateField });
+  };
+
+  render () {
+    const { card } = this.props;
     const { members } = card;
     if (!members?.length) return <></>;
     return (
@@ -15,12 +20,12 @@ class _CardMembers extends Component {
         <div className="sub-header">Members</div>
         <div className="flex members-list" style={{ gap: '3px' }}>
           {members.map(member => (
-            <AppAvatar key={member._id} member={member} />
+            <AppAvatar key={member._id} member={member} onClick={this.onMemberClick} />
           ))}
           <Avatar className="avatar">
             <button
               className="btn-add-member"
-              onClick={ev => this.props.setCardPopover('add-members', ev.target, { board, card, updateField })}>
+              onClick={this.onMemberClick}>
               <AddIcon />
             </button>
           </Avatar>

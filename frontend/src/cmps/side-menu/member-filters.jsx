@@ -37,7 +37,7 @@ export const MemberFilters = ({ filterMemberIds, boardMembers, updateFilter }) =
             <span>
               <AppAvatar member={member} />
             </span>
-            <span>Guest</span>
+            <span>{member.fullname || member.username}</span>
             {filterMemberIds.includes(member._id) && <span className="checkmark"></span>}
           </button>
         </li>

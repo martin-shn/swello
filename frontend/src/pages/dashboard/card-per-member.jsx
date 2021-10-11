@@ -1,4 +1,4 @@
-import { Doughnut } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 
 export function CardPerMember ({ cards }) {
   const membersMap = cards.reduce((res, card) => {
@@ -23,5 +23,5 @@ export function CardPerMember ({ cards }) {
   };
   // console.log('🚀 ~ file: card-per-member.jsx ~ line 22 ~ CardPerMember ~ membersMap', membersMap);
   if (!Object.keys(membersMap).length) return <div>No cards assigned to members</div>;
-  return <Doughnut data={data} options={{ responsive: true, maintainAspectRatio: false }} />;
+  return <Pie data={data} options={{ responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' } } }} />;
 }

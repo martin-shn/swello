@@ -44,6 +44,7 @@ async function updateUser(req, res) {
     const alsStore = asyncLocalStorage.getStore();
     const userId = alsStore.userId;
     if (userId !== savedUser._id.toString()) {
+      logger.debug('server sending push event');
       webpush
         .sendNotification(
           savedUser.subscription,

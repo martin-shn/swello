@@ -1,10 +1,10 @@
 .card-preview-container {
   margin-bottom: 8px;
-}
-.card-preview {
   &:first-child {
     margin-top: 2px;
   }
+}
+.card-preview {
   background-color: #fff;
   border-radius: 3px;
   box-shadow: 0 1px 0 #091e4240;
@@ -17,6 +17,11 @@
   position: relative;
   gap: 4px;
   background-size: cover;
+  @include for-mobile-layout {
+    .edit-icon{
+      display: none;
+    }
+  }
 
   &.quick-edit {
     z-index: 21;
@@ -188,13 +193,20 @@
     visibility: visible;
   }
 
+  .edit-icon {
+    background-color: #f4f5f7;
+    opacity: 0.8;
+  }
+
+  .edit-icon,
+  .card-preview-data svg {
+    color: #6b778c;
+    fill: #6b778c;
+  }
+
   .card-preview-data {
     gap: 5px;
     margin-top: 6px;
-    svg {
-      color: #6b778c;
-      fill: #6b778c;
-    }
 
     // Members
 
@@ -221,6 +233,10 @@
 
       &.due-soon {
         background-color: $clr-due-date-due-soon;
+        color: #fff;
+        svg {
+          fill: #fff;
+        }
       }
       &.overdue {
         color: #fff;
@@ -253,6 +269,7 @@
         content: url(../../../assets/svg/card/checklist-due-date.svg);
         width: 16px;
         height: 16px;
+        filter: invert(0.4);
       }
       &:hover {
         .due-date-icon {

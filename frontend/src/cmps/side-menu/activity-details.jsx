@@ -13,6 +13,8 @@ function _DynamicActivity ({ createdBy, card, type, values, board }) {
   switch (type) {
     case 'ADD-CARD':
       return <span>added <CardLink /> to {values.listTitle}</span>;
+    case 'UPDATE-TITLE':
+      return <span>Updated title on card <CardLink /></span>;
     case 'ADD-MEMBER':
       if (values.member._id === createdBy._id) return <span>joined to <CardLink /></span>;
       return <span>added <span className="created-by" style={{ margin: 0 }}>{values.member.fullname || values.member.username}</span> to <CardLink /></span>;

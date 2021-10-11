@@ -68,10 +68,6 @@ export function onSignup(credentials) {
         type: 'SET_USER',
         user,
       });
-      socketService.on(SOCKET_EVENT_USER_UPDATED, user => {
-        dispatch({ type: 'SET_USER', user });
-        sessionStorage.setItem('loggedinUser', JSON.stringify(user));
-      });
       return user;
     } catch (err) {
       throw err;
@@ -87,7 +83,7 @@ export function onLogout() {
         type: 'SET_USER',
         user: null,
       });
-      socketService.off(SOCKET_EVENT_USER_UPDATED);
+      
     } catch (err) {
       showErrorMsg('Cannot logout');
       console.log('Cannot logout', err);
