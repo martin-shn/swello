@@ -7,7 +7,6 @@ import { CardPerLabel } from './card-per-label';
 import { CardStatus } from './card-status';
 import { CardPerList } from './card-per-list';
 import { CardPerMember } from './card-per-member';
-import { DashboardHeader } from './dashboard-header';
 
 class _Dashboard extends React.Component {
   state = {

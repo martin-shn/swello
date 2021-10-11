@@ -20,7 +20,7 @@ ReactDOM.render(
 
 // swDev();
 
-serviceWorkerRegistration.unregister();
-// serviceWorkerRegistration.register();
+// serviceWorkerRegistration.unregister();
+serviceWorkerRegistration.register();
 
 // reportWebVitals();

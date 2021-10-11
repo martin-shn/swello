@@ -28,7 +28,6 @@ export class _HomePage extends React.Component {
   onGetStarted = async () => {
     if (!this.props.user) {
       await this.props.onLogin({ username: 'guest@guest.com', password: '1234' });
-      console.log(this.props.user);
     }
     this.props.history.push('/board');
   };
