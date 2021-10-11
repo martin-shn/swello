@@ -83,7 +83,7 @@ export function onLogout() {
         type: 'SET_USER',
         user: null,
       });
-      socketService.off(SOCKET_EVENT_USER_UPDATED);
+      
     } catch (err) {
       showErrorMsg('Cannot logout');
       console.log('Cannot logout', err);

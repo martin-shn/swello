@@ -99,7 +99,7 @@ class _TopPanel extends React.Component {
         {cardPopover.name === 'invite-main' && <CardPopover />}
         <button className="btn-menu" onClick={this.props.toggleSideMenu}>
           <MoreHorizIcon />
-          Show Menu
+          Show menu
         </button>
       </section>
     );

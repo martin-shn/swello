@@ -40,9 +40,9 @@ class _Dashboard extends React.Component {
     const { labels } = this.props.board;
     return (
       <section className="dashboard">
-        <div className="dashboard-header">
+        {/* <div className="dashboard-header">
           <DashboardHeader board={this.props.board} />
-        </div>
+        </div> */}
         <div
           className={`dashboard-content${ this.state.isScroll ? ' scroll-visible' : ' no-scroll' }`}
           ref={this.innerRef}>

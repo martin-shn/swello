@@ -1,39 +1,35 @@
 .dashboard {
-  position: absolute;
+  // position: absolute;
   background: #f4f5f7;
   border-radius: 3px;
-  top: 98px;
-  bottom: 20px;
-  right: 10px;
-  left: 10px;
+  margin: 10px 0;
+  overflow-x: hidden;
+  // top: 98px;
+  // bottom: 20px;
+  // right: 10px;
+  // left: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 11;
+  // z-index: 11;
   overflow-y: auto;
   &.scroll-visible {
     padding-top: 1px;
   }
   &::-webkit-scrollbar {
     height: 8px;
-    width: 8px;
+    width: 10px;
   }
 
   /* Track */
   &::-webkit-scrollbar-track {
-    // margin: 0 5px;
-    // border: 5px solid transparent;
     border-radius: 10px;
-    // box-shadow: inset 0 0 8px 8px rgba($color: #fff, $alpha: 0.35)d;
     background-color: rgba($color: #fff, $alpha: 0.35);
   }
 
   /* Handle */
   &::-webkit-scrollbar-thumb {
-    // border: 5px solid transparent;
     border-radius: 10px;
-    // background-color: #091e4214;
-    // box-shadow: inset 0 0 8px 8px rgba($color: #000000, $alpha: 0.15);
     background-color: rgba($color: #000000, $alpha: 0.15);
   }
 
@@ -67,6 +63,14 @@
         font-size: 28px;
         line-height: 35px;
         padding: 0 0 4px 4px;
+      }
+      >div{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        svg{
+          width: 50px;
+        }
       }
       &.total-cards {
         background-image: linear-gradient(
@@ -105,24 +109,17 @@
 
   .dashboard-content {
     width: 100%;
-    height: 100%;
-    padding: 8px;
+    padding: 4px 8px;
     margin: 8px;
     display: grid;
     box-sizing: border-box;
     grid-column-gap: 32px;
     grid-row-gap: 32px;
-    -webkit-overflow-scrolling: touch;
-    -webkit-transform: translate3d(0, 0, 0);
     grid-auto-rows: minmax(500px, 0.5fr);
     grid-template-columns: repeat(2, minmax(0, 1000px));
     justify-content: center;
     @media (max-width: 1400px) {
       grid-template-columns: minmax(0, 1000px);
-    }
-
-    &:last-child {
-      padding-bottom: 1px;
     }
 
     > .graph {

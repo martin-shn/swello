@@ -4,8 +4,8 @@ import TotalIcon from '@mui/icons-material/Assignment';
 import ClockIcon from '@mui/icons-material/AccessTime';
 import ErrorIcon from '@mui/icons-material/ErrorOutline';
 import SpeedIcon from '@mui/icons-material/Speed';
-import { CircularProgress, Typography } from '@mui/material';
-import { Box } from '@mui/system';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 export class DashboardHeader extends React.Component {
 
@@ -62,52 +62,63 @@ export class DashboardHeader extends React.Component {
         });
     };
 
+    get progressCircleStyle() {
+        return {
+            path: {
+                stroke: ` #2fb4f5`,
+                transition: 'stroke-dashoffset 0.5s ease 0s',
+                transformOrigin: 'center center',
+            },
+            trail: {
+                stroke: '#ffffff',
+                strokeLinecap: 'butt',
+                transform: 'rotate(0.25turn)',
+                transformOrigin: 'center center',
+            },
+            text: {
+                fill: '#ffffff',
+                fontSize: '25px',
+
+            },
+        }
+    }
+
+    get dueSoonPercentage(){
+        return (this.dueSoonCards/this.totalCards*100).toFixed(0)
+    }
+    get overDueSoonPercentage(){
+        return (this.overdueCards/this.totalCards*100).toFixed(0)
+    }
+
     render () {
         const { cycleTime } = this.state;
 
         return <>
-            <CircularProgressWithLabel value={50} />
             <div className="total-cards">
                 <h6><TotalIcon />Total Cards</h6>
                 <span>{this.totalCards}</span>
             </div>
             <div className="due-soon">
                 <h6><ClockIcon />Due Soon</h6>
+                <div>
                 <span>{this.dueSoonCards}</span>
+                    <CircularProgressbar value={this.dueSoonPercentage} text={`${this.dueSoonPercentage}%`}
+                                    styles={this.progressCircleStyle} />
+                </div>
             </div>
             <div className="overdue">
                 <h6><ErrorIcon />Overdue</h6>
-                <span>{this.overdueCards}</span>
+                <div>
+                    <span>{this.overdueCards}</span>
+                    <CircularProgressbar value={this.overDueSoonPercentage} text={`${this.overDueSoonPercentage}%`}
+                                    styles={this.progressCircleStyle} />
+                </div>
             </div>
             <div className="time-to-complete">
-                <h6><SpeedIcon />time to complete</h6>
+                <h6><SpeedIcon />Cards Life Cycle</h6>
                 <span>{`${ cycleTime.hours }d ${ cycleTime.hours }h ${ cycleTime.mins }m avg.`}</span>
             </div>
         </>;
     }
-}
-
-function CircularProgressWithLabel (props) {
-    return (
-        <Box sx={{ position: 'relative', display: 'inline-flex' }}>
-            <CircularProgress variant="determinate" {...props} />
-            <Box
-                sx={{
-                    top: 0,
-                    left: 0,
-                    bottom: 0,
-                    right: 0,
-                    position: 'absolute',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}
-            >
-                <Typography variant="caption" component="div" color="text.secondary">
-                    {`${ Math.round(props.value) }%`}
-                </Typography>
-            </Box>
-        </Box>
-    );
 }
 

@@ -17,6 +17,11 @@
   position: relative;
   gap: 4px;
   background-size: cover;
+  @include for-mobile-layout {
+    .edit-icon{
+      display: none;
+    }
+  }
 
   &.quick-edit {
     z-index: 21;
