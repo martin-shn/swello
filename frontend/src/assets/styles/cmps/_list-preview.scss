@@ -92,6 +92,9 @@
   }
 
   .add-card {
+    &.visible-scroll {
+      padding-right: 12px;
+    }
     .btn-adding {
       gap: 5px;
       width: 100%;
