@@ -47,6 +47,7 @@
 .home::before {
   font-family: FA-solid;
   content: '\f83e';
+  color: #000;
 }
 
 .boards::before {
@@ -55,6 +56,8 @@
 
 .templates::before {
   content: url(../../svg/template.svg);
+  position: relative;
+  left: -2px;
 }
 
 // Elements
@@ -90,16 +93,13 @@
   }
 }
 
-
-.MuiTypography-h3, 
-.MuiTypography-h4
-{
-  font-size: 2rem!important;
+.MuiTypography-h3,
+.MuiTypography-h4 {
+  font-size: 2rem !important;
 }
-.MuiTypography-subtitle1{
-  font-size: 0.9rem!important;
+.MuiTypography-subtitle1 {
+  font-size: 0.9rem !important;
 }
-.MuiPickersBasePicker-pickerView{
-  min-width: unset!important;
+.MuiPickersBasePicker-pickerView {
+  min-width: unset !important;
 }
-

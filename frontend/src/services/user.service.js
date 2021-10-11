@@ -45,10 +45,10 @@ async function login(userCred) {
   // throw new Error('Auth error');
 
   // with service worker - use in production:
-  const subscription = await pushNotifService.subscribeUser();
-  const user = await httpService.post('auth/login', { ...userCred, subscription });
+  // const subscription = await pushNotifService.subscribeUser();
+  // const user = await httpService.post('auth/login', { ...userCred, subscription });
   // no service worker - use in developement:
-  // const user = await httpService.post('auth/login', userCred);
+  const user = await httpService.post('auth/login', userCred);
 
   socketService.emit(SOCKET_EVENT_SET_USER, user._id);
   if (user) return _saveLocalUser(user);

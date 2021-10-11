@@ -22,10 +22,10 @@ export class AddCard extends Component {
     };
 
     render () {
-        const { isTopAdd, isAddingCard, onAddCard, onAddingCard, listId } = this.props;
+        const { scrollClass, isTopAdd, isAddingCard, onAddCard, onAddingCard, listId } = this.props;
         const { title } = this.state;
         return (
-            <section className="add-card" style={{ order: isTopAdd ? '-1' : '0' }}>
+            <section className={`add-card${ scrollClass }`} style={{ order: isTopAdd ? '-1' : '0' }}>
                 {!isAddingCard && !isTopAdd && (
                     <button className="content btn-adding transperant" onClick={() => onAddingCard(listId)}>
                         <AddIcon />

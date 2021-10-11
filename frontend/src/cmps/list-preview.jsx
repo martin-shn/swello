@@ -23,16 +23,6 @@ export class _ListPreview extends Component {
     class: '',
   };
 
-  componentDidMount () {
-    setTimeout(() => {
-      if (this.elInnerRef?.current) {
-        this.setState({
-          class: this.elInnerRef.current.scrollHeight > this.elInnerRef.current.clientHeight ? ' visible-scroll' : '',
-        });
-      }
-    }, 100);
-  }
-
   elInnerRef = React.createRef();
 
   bottomAddRef = React.createRef();
@@ -92,6 +82,13 @@ export class _ListPreview extends Component {
       // board
     } = this.props;
     const { popoverPage } = this.state;
+    setTimeout(() => {
+      if (this.elInnerRef?.current) {
+        this.setState({
+          class: this.elInnerRef.current.scrollHeight > this.elInnerRef.current.clientHeight ? ' visible-scroll' : '',
+        });
+      }
+    }, 100);
     return (
       <Draggable draggableId={list.id} index={idx}>
         {provided => (
@@ -182,12 +179,11 @@ export class _ListPreview extends Component {
               ref={this.elInnerRef}
               className={`cards-container flex column ${ this.state.class }${ this.props.cardQuickEdit ? ' quick-edit-open' : '' }`}
               style={{
-                gap: isTopAdd ? '10px' : '0',
-                // marginRight: this.elRef.current.scrollHeight > this.elRef.current.clientHeight?'-10px':'0px'
+                marginTop: isTopAdd ? '10px' : '0',
               }}>
               {list.cards && <CardList listId={list.id} cards={list.cards} />}
-              <AddCard isTopAdd={isTopAdd} isAddingCard={isAddingCard} onAddCard={this.onAddCard} onAddingCard={onAddingCard} listId={list.id} />
             </div>
+            <AddCard scrollClass={this.state.class} isTopAdd={isTopAdd} isAddingCard={isAddingCard} onAddCard={this.onAddCard} onAddingCard={onAddingCard} listId={list.id} />
           </div>
         )}
       </Draggable>
