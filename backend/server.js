@@ -49,17 +49,6 @@ app.use('/api/board', boardRoutes);
 app.use('/api/template', templateRoutes);
 connectSockets(http, session);
 
-// web notifications
-// app.post('/subscribe', (req, res) => {
-//     const subscription = req.body;
-
-//     res.status(201).json({});
-
-//     const payload = JSON.stringify({title: 'test'})
-
-//     webpush.sendNotification(subscription, payload).catch(err=>console.error(err));
-// })
-
 // Make every server-side-route to match the index.html
 // so when requesting http://localhost:3030/index.html/car/123 it will still respond with
 // our SPA (single page app) (the index.html file) and allow vue/react-router to take it from there

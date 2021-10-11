@@ -1,5 +1,5 @@
 .home-page {
-  font-family: 'Charlie';
+  font-family: "Charlie";
   line-height: 1.5;
   font-size: 1.25rem;
   color: #091e42;
@@ -21,6 +21,9 @@
 
   p {
     margin-bottom: 1.5rem;
+  }
+  img[alt="board"] {
+    width: 100%;
   }
   .hero {
     background: linear-gradient(0deg, #fff, #eae6ff 100%);
@@ -238,7 +241,8 @@
 
   .pre-footer {
     background-color: #fafbfc;
-    padding: 1rem 0;
+    padding: 1rem 16px;
+    text-align: center;
     font-size: 1rem;
     @media (min-width: 576px) {
       font-size: inherit;
