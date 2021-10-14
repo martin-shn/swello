@@ -17,4 +17,4 @@ Production link - https://swello.herokuapp.com/
 * MERN (MongoDB, Express, React, Node)
 * REST API
 * Websockets - Socket.io
-* PWA and push notifications(Webpush)
+* PWA and push notifications (Webpush)
