@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { setFilter, clearFilter } from '../../store/actions/board.actions';
 import { MemberFilters } from './member-filters';
 import { DateFilters } from './date-filters';
+import CloseIcon from '@mui/icons-material/Close';
+import BackIcon from '@mui/icons-material/ArrowBackIosNew';
+
 
 class _SideMenuSearch extends Component {
   updateFilter = field => {
@@ -16,9 +19,9 @@ class _SideMenuSearch extends Component {
     return (
       <section className="side-menu-search flex column">
         <div className={`side-menu-header visible-scroll`}>
-          <span className="back" onClick={() => setPage('index')}></span>
+          <span className="back" onClick={() => setPage('index')}><BackIcon /></span>
           <h3>Menu</h3>
-          <button className="close-side-menu" onClick={toggleSideMenu}></button>
+          <button className="close-side-menu" onClick={toggleSideMenu}><CloseIcon /></button>
         </div>
         <hr style={{ width: 'calc(100% - 18px)', margin: '0px auto 4px' }} />
         <div className="search-container">

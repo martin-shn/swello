@@ -12,26 +12,19 @@ import { ReactComponent as ArchiveIcon } from '../../assets/svg/archive-icon.svg
 import { boardService } from '../../services/board.service';
 import { CardPopover } from './card-popover';
 
-export class CardQuickEdit extends React.Component {
+export class CardQuickEdit extends React.PureComponent {
     state = {
         top: null,
         left: null,
-        fade: false,
         openFrom: 'right'
     }
     componentDidMount() {
-        const { pos } = this.props;
-        // console.log(pos);
+        const { pos, isScroll } = this.props;
         const topDiff = document.body.clientHeight - (pos.top + 288)
         const top = topDiff < 0 ? pos.top + (topDiff - 20) : pos.top
-        // console.log(pos.left);
-        // console.log(document.body.clientWidth)
         const sideDiff = document.body.clientWidth - (pos.left + 244 + 200)
-        const left = sideDiff < 0 ? pos.left - 240 : pos.left + pos.width
+        const left = sideDiff < 0 ? pos.left - 240 : pos.left + pos.width + (isScroll ? 8 : 0)
         this.setState({ top, left, openFrom: sideDiff < 0 ? 'left' : 'right' })
-        setTimeout(() => {
-            this.setState({ fade: true })
-        }, 50)
     }
     componentDidUpdate(prevProps) {
         if (prevProps.card !== this.props.card) {
@@ -62,7 +55,7 @@ export class CardQuickEdit extends React.Component {
         this.props.setQuickEdit(null);
     }
     render() {
-        const { top, left, fade, openFrom } = this.state;
+        const { top, left, openFrom } = this.state;
         if (!top || !left) return <div></div>;
         const { card, setQuickEdit, board, cardPopover } = this.props;
         const { updateField, onOpenPopover } = this;
@@ -70,7 +63,7 @@ export class CardQuickEdit extends React.Component {
             <>
                 <div className="editor-screen" onClick={() => { setQuickEdit(null) }}>
                     <CloseIcon className="close-icon" onClick={(ev) => { ev.stopPropagation(); setQuickEdit(null) }} />
-                    <section className={`card-quick-edit flex column${fade ? ' fade-in' : ''}${openFrom === 'right' ? '' : ' from-left'}`} style={{ top: `${top}px`, left: `${left}px` }}>
+                    <section className={`card-quick-edit flex column${openFrom === 'right' ? '' : ' from-left'}`} style={{ top: `${top}px`, left: `${left}px` }}>
                         <Link to={`/board/${board._id}/card/${card.id}`}>
                             <div className="flex">
                                 <VideoLabelIcon />

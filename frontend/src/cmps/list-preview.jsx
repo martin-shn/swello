@@ -29,11 +29,32 @@ export class _ListPreview extends Component {
   topAddRef = React.createRef();
   title = React.createRef();
 
+  componentDidMount() {
+    this.setScrollClass()
+  }
+
   componentDidUpdate = prevProps => {
     if (prevProps.isPopoverOpen !== this.props.isPopoverOpen) {
       this.setState({ popoverPage: 'main' });
     }
+    if (prevProps.list.cards.length !== this.props.list.cards.length) {
+      this.setScrollClass()
+    }
   };
+
+  componentWillUnmount() {
+    clearTimeout(this.timeout)
+  }
+
+  setScrollClass = () => {
+    this.timeout = setTimeout(() => {
+      if (this.elInnerRef?.current) {
+        this.setState({
+          class: this.elInnerRef.current.scrollHeight > this.elInnerRef.current.clientHeight ? ' visible-scroll' : '',
+        });
+      }
+    }, 100);
+  }
 
   onAddCard = (title, isTopAdd) => {
     if (!title) return;
@@ -63,7 +84,7 @@ export class _ListPreview extends Component {
     this.props.updateBoard(updatedBoard);
   };
 
-  render () {
+  render() {
     const {
       idx,
       list,
@@ -82,21 +103,21 @@ export class _ListPreview extends Component {
       // board
     } = this.props;
     const { popoverPage } = this.state;
-    setTimeout(() => {
-      if (this.elInnerRef?.current) {
-        this.setState({
-          class: this.elInnerRef.current.scrollHeight > this.elInnerRef.current.clientHeight ? ' visible-scroll' : '',
-        });
-      }
-    }, 100);
+    // setTimeout(() => {
+    //   if (this.elInnerRef?.current) {
+    //     this.setState({
+    //       class: this.elInnerRef.current.scrollHeight > this.elInnerRef.current.clientHeight ? ' visible-scroll' : '',
+    //     });
+    //   }
+    // }, 100);
     return (
       <Draggable draggableId={list.id} index={idx}>
         {provided => (
           <div
-            className={`list-preview flex column${ this.state.class }`}
+            className={`list-preview flex column${ this.state.class}`}
             {...provided.draggableProps}
             ref={provided.innerRef}>
-            <div className={`list-header flex space-between${ this.state.class }`} {...provided.dragHandleProps}>
+            <div className={`list-header flex space-between${ this.state.class}`} {...provided.dragHandleProps}>
               {!this.state.isDragging && (
                 <input
                   type="text"
@@ -177,13 +198,14 @@ export class _ListPreview extends Component {
             </Popover>
             <div
               ref={this.elInnerRef}
-              className={`cards-container flex column ${ this.state.class }${ this.props.cardQuickEdit ? ' quick-edit-open' : '' }`}
+              className={`cards-container flex column ${this.state.class}${this.props.cardQuickEdit ? ' quick-edit-open' : ''}`}
               style={{
                 marginTop: isTopAdd ? '10px' : '0',
               }}>
-              {list.cards && <CardList listId={list.id} cards={list.cards} />}
+              {list.cards && <CardList listId={list.id} cards={list.cards} isScroll={this.state.class === ' visible-scroll'} />}
+              {list.cards && list.cards.length === 0 && <AddCard scrollClass={this.state.class} isTopAdd={isTopAdd} isAddingCard={isAddingCard} onAddCard={this.onAddCard} onAddingCard={onAddingCard} listId={list.id} />}
             </div>
-            <AddCard scrollClass={this.state.class} isTopAdd={isTopAdd} isAddingCard={isAddingCard} onAddCard={this.onAddCard} onAddingCard={onAddingCard} listId={list.id} />
+            {list.cards && list.cards.length > 0 && <AddCard scrollClass={this.state.class} isTopAdd={isTopAdd} isAddingCard={isAddingCard} onAddCard={this.onAddCard} onAddingCard={onAddingCard} listId={list.id} />}
           </div>
         )}
       </Draggable>
@@ -195,7 +217,7 @@ const mapDispatchToProps = {
   updateBoard,
 };
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
     board: state.boardModule.board,
     cardQuickEdit: state.systemModule.cardQuickEdit

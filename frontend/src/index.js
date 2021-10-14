@@ -7,7 +7,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './assets/styles/main.scss';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
-// import swDev from './swDev';
+import swDev from './swDev';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -18,9 +18,9 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-// swDev();
+swDev();
 
-// serviceWorkerRegistration.unregister();
-serviceWorkerRegistration.register();
+serviceWorkerRegistration.unregister();
+// serviceWorkerRegistration.register();
 
 // reportWebVitals();

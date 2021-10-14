@@ -29,18 +29,12 @@
     .card-quick-edit {
         position: absolute;
         width: 240px;
-        transform: translateX(-20px);
-        transition: opacity 85ms ease-in, transform 85ms ease-in;
+        animation: fade-to-right 85ms ease-in;
         align-items: flex-start;
         &.from-left {
             align-items: flex-end;
             padding-right: 10px;
-            transform: translateX(20px);
-        }
-        opacity: 0;
-        &.fade-in {
-            opacity: 1;
-            transform: translateX(0);
+            animation: fade-to-left 85ms ease-in;
         }
         a,
         button {
@@ -66,5 +60,27 @@
                 transform: translateX(5px);
             }
         }
+    }
+}
+
+@keyframes fade-to-right {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fade-to-left {
+    0% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
     }
 }

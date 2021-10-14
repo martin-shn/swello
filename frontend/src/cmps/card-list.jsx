@@ -12,20 +12,20 @@ export class CardList extends React.Component {
   }
 
   render() {
-    const { cards, listId } = this.props;
+    const { cards, listId, isScroll} = this.props;
     return (
       <Droppable droppableId={listId} type="card">
         {(provided, snapshot) => (
           <>
             <section className="card-list" ref={provided.innerRef} {...provided.droppableProps} style={cards.length ? {} : this.style}>
               {cards.map((card, idx) => (
-                <div key={card._id}>
+                <div key={card.id}>
                   <CardPreview
-                    key={card.id}
                     card={card}
                     idx={idx}
                     listId={listId}
                     isDraggingOver={snapshot.isDraggingOver}
+                    isScroll={isScroll}
                   />
                 </div>
               ))}

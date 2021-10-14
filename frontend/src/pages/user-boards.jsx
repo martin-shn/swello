@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppHeader } from '../cmps/app-header';
+import { LoaderPage } from '../cmps/loader/loader-page'
 import { loadTemplates, loadBoards, createBoard } from '../store/actions/board.actions';
 import { UserBoardMain } from '../cmps/board-list/user-board-main';
 import { SideNav } from '../cmps/board-list/side-nav';
@@ -10,7 +11,7 @@ import { TemplateList } from '../cmps/board-list/template-list';
 class _UserBoards extends React.Component {
   state = { templateBoards: null };
 
-  componentDidMount() {
+  async componentDidMount() {
     const { user } = this.props;
     if (!user) return;
     this.props.loadBoards({ byUserId: user._id });
@@ -22,6 +23,11 @@ class _UserBoards extends React.Component {
     if (!user) {
       history.replace('/');
       return <></>;
+    } else if (!boards || !boards.length) {
+      return <>
+        <AppHeader />
+        <LoaderPage />;
+      </>
     }
 
     return (

@@ -18,7 +18,7 @@ export class CardPreview extends Component {
     title: this.props.card.title,
   };
   render() {
-    const { card, idx } = this.props;
+    const { card, idx, isScroll } = this.props;
 
     // prettier-ignore
     return (
@@ -30,9 +30,9 @@ export class CardPreview extends Component {
               {...provided.draggableProps}
               {...provided.dragHandleProps}
               ref={provided.innerRef}
-            > 
+            >
               {snapshot.isDragging && socketService.emit(SOCKET_EVENT_ITEM_DRAGGED, { id: card.id, style: provided.draggableProps.style })}
-              <CardPreviewInfo card={card} title={this.state.title} handleChange={({ target }) => this.setState({ title: target.value })} />
+              <CardPreviewInfo card={card} title={this.state.title} isScroll={isScroll} handleChange={({ target }) => this.setState({ title: target.value })} />
             </div>
           </>
         }}
@@ -52,7 +52,8 @@ function _CardPreviewInfo({
   board,
   updateBoard,
   closeCardPopover,
-  draggedItem
+  draggedItem,
+  isScroll
 }) {
   const updateCardTitle = () => {
     const updatedBoard = cardService.updateCard(board, { ...card, title });
@@ -92,7 +93,7 @@ function _CardPreviewInfo({
           ev.stopPropagation();
           const cardPos = previewRef.current.getBoundingClientRect();
           closeCardPopover()
-          setQuickEdit({ pos: cardPos, id: card.id });
+          setQuickEdit({ pos: cardPos, id: card.id, isScroll });
         }}>
         <EditIcon fontSize="small" />
       </button>

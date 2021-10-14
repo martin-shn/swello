@@ -2,6 +2,9 @@ import React from 'react'
 import RefreshIcon from '@mui/icons-material/Replay';
 import { boardService } from '../../services/board.service';
 import { CardPreviewInfo } from '../card-preview'
+import CloseIcon from '@mui/icons-material/Close';
+import BackIcon from '@mui/icons-material/ArrowBackIosNew';
+
 export class SideMenuArchive extends React.Component {
     state = {
         currItem: 'cards',
@@ -45,9 +48,9 @@ export class SideMenuArchive extends React.Component {
                         onClick={() => {
                             setPage('index');
                         }}
-                    ></span>
+                    ><BackIcon /></span>
                     <h3>Archive</h3>
-                    <button className="close-side-menu" onClick={toggleSideMenu}></button>
+                    <button className="close-side-menu" onClick={toggleSideMenu}><CloseIcon /></button>
                 </div>
                 <hr style={{ width: 'calc(100% - 18px)', margin: '0px auto 4px' }} />
                 <div className="archive-container">

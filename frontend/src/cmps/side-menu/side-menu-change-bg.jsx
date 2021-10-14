@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { createApi } from 'unsplash-js';
 import { AppBtn } from '../general/app-btn';
 import DUMMY_DATA from '../../data/unsplash.json';
+import CloseIcon from '@mui/icons-material/Close';
+import BackIcon from '@mui/icons-material/ArrowBackIosNew';
 import _ from 'lodash';
 
 const COLORS = [
@@ -26,9 +28,9 @@ export class SideMenuChangeBg extends Component {
           <span
             className="back"
             onClick={() => (colorOrImg ? this.setState({ colorOrImg: null }) : setPage('index'))}
-          />
+          ><BackIcon /></span>
           <h3>{colorOrImg === 'img' ? 'Photos by Unsplash' : 'Change Background'}</h3>
-          <button className="close-side-menu" onClick={() => toggleSideMenu(false)}></button>
+          <button className="close-side-menu" onClick={() => toggleSideMenu(false)}><CloseIcon /></button>
         </div>
         <section className="content">
           <hr style={{ margin: '0 auto 14px' }} />

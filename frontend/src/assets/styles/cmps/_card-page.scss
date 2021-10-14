@@ -129,14 +129,8 @@
       flex-direction: row;
       flex-wrap: wrap;
       gap: 8px;
-      .app-btn {
-        flex-basis: calc(50% - 4px);
-      }
       @media (min-width: $mobile-breakpoint + 130) {
         flex-direction: column;
-        .app-btn {
-          flex-basis: unset;
-        }
       }
     }
     button {

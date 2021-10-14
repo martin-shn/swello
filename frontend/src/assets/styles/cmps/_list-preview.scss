@@ -14,10 +14,6 @@
     position: relative;
     overflow-y: auto;
 
-    &.quick-edit-open {
-      overflow-y: initial;
-    }
-
     &::-webkit-scrollbar {
       height: 8px;
       width: 8px;

@@ -1,5 +1,7 @@
 import { useRef, useState } from 'react';
 import { ActivityDetails } from './activity-details';
+import CloseIcon from '@mui/icons-material/Close';
+
 
 export const SideMenuIndex = ({ activities, setPage, isScroll, toggleSideMenu }) => {
   const elInnerRef = useRef();
@@ -10,12 +12,12 @@ export const SideMenuIndex = ({ activities, setPage, isScroll, toggleSideMenu })
       <div className={`side-menu-header ${currClass}`}>
         <span></span>
         <h3>Menu</h3>
-        <button className="close-side-menu" onClick={toggleSideMenu}></button>
+        <button className="close-side-menu" onClick={toggleSideMenu}><CloseIcon /></button>
       </div>
       <hr style={{ width: 'calc(100% - 18px)', margin: '0 auto 4px' }} />
       <div className={`side-menu-bottom-content ${currClass}`} ref={elInnerRef}>
         <ul>
-          <li>
+          <li onClick={() => setPage('details')}>
             <span></span>
             <div>About this board</div>
           </li>
@@ -43,7 +45,7 @@ export const SideMenuIndex = ({ activities, setPage, isScroll, toggleSideMenu })
           </button>
         )}
       </div>
-    </section>
+    </section >
   );
 };
 

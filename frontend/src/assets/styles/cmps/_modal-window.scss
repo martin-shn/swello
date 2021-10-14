@@ -44,7 +44,7 @@
       background: rgba(0, 0, 0, 0.15);
       position: absolute;
       bottom: 0;
-      content: '';
+      content: "";
       display: block;
       left: 0;
       right: 0;
@@ -62,11 +62,12 @@
     flex-wrap: wrap;
     justify-content: space-between;
     list-style: none;
-    margin: 0 0 0 8px;
+    margin: 10px 0 0;
 
     @include for-narrow-layout {
       width: 100px;
       height: 96px;
+      margin: 0 0 0 8px;
     }
 
     & div {
@@ -90,7 +91,7 @@
         background: rgba(0, 0, 0, 0.15);
         color: rgba(255, 255, 255, 0.6);
         position: absolute;
-        content: '';
+        content: "";
         display: block;
         left: 0;
         right: 0;
@@ -102,7 +103,7 @@
 
       &.marked::after {
         font-family: FA-solid;
-        content: '\f00c';
+        content: "\f00c";
         position: absolute;
         display: block;
         left: 0;
@@ -113,24 +114,6 @@
         z-index: 0;
         text-align: center;
         line-height: 28px;
-      }
-    }
-
-    & div:last-of-type {
-      &::before {
-        font-family: FA-solid;
-        content: '\f141';
-        position: absolute;
-        display: block;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        border-radius: 3px;
-        z-index: 0;
-        text-align: center;
-        line-height: 28px;
-        color: rgb(66, 82, 110);
       }
     }
   }
@@ -147,8 +130,8 @@
       color: #a5adba;
       cursor: not-allowed;
       margin-top: 8px;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans',
-        'Helvetica Neue', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu", "Droid Sans",
+        "Helvetica Neue", sans-serif;
       font-size: 14px;
       line-height: 20px;
       font-weight: 400;
@@ -171,8 +154,8 @@
       border: none;
       color: #ffffff;
       margin-top: 8px;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans',
-        'Helvetica Neue', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu", "Droid Sans",
+        "Helvetica Neue", sans-serif;
       font-size: 14px;
       line-height: 20px;
       font-weight: 400;
@@ -205,8 +188,8 @@
   box-shadow: none;
   box-sizing: border-box;
   color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans',
-    'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu", "Droid Sans",
+    "Helvetica Neue", sans-serif;
   font-size: 16px;
   font-weight: 700;
   left: -8px;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {withRouter} from 'react-router';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
 import { createBoard } from '../../store/actions/board.actions';
@@ -20,11 +20,11 @@ class _BoardAdd extends Component {
     };
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevProps.isModal !== this.props.isModal){
-            this.setState({isModal:this.props.isModal})
+        if (prevProps.isModal !== this.props.isModal) {
+            this.setState({ isModal: this.props.isModal })
         }
     }
-    
+
 
     bgcs = [
         {
@@ -44,16 +44,19 @@ class _BoardAdd extends Component {
         { bgc: 'rgb(210, 144, 52)', title: 'orange' },
         { bgc: 'rgb(81, 152, 57)', title: 'green' },
         { bgc: 'rgb(176, 70, 50)', title: 'red' },
+        { bgc: 'rgb(137, 96, 158)', title: 'puprle' }
     ];
 
     onCloseModal = (ev) => {
-        this.setState({ isModal: false,
+        this.setState({
+            isModal: false,
             markedId: 0,
             boardName: '',
             isAllowed: 'not-allowed',
             isStarredMenuOpen: false,
             isBoardsMenuOpen: false,
-            starredBoards: null }, ()=>{this.props.onClose()});
+            starredBoards: null
+        }, () => { this.props.onClose() });
     };
 
     handleBgc = (targetId) => {
@@ -81,103 +84,110 @@ class _BoardAdd extends Component {
         this.props.history.push(`/board/${newBoard._id}`)
     };
 
-    render(){
+    render() {
         return <Modal showCloseIcon={true} open={this.state.isModal} onClose={this.onCloseModal}>
-        <div className='new-board'>
-            {this.state.markedId < 4 && (
-                <div className='main img' style={{ backgroundImage: `url(${this.bgcs[this.state.markedId].bgc})` }}></div>
-            )}
-            {this.state.markedId > 3 && <div className='main' style={{ backgroundColor: this.bgcs[this.state.markedId].bgc }}></div>}
-            <input
-                autoComplete='off'
-                autoCorrect='off'
-                spellCheck='false'
-                type='text'
-                className='new-board-name'
-                placeholder='Add board title'
-                aria-label='Add board title'
-                data-test-id='create-board-title-input'
-                value={this.state.boardName}
-                onChange={this.handleChange}
-            />
-            <div className='side'>
-                <div
-                    className={`${this.state.markedId === 0 ? 'marked' : ''}`}
-                    onClick={(ev) => {
-                        this.handleBgc(0);
-                    }}
-                    style={{ backgroundImage: `url(${this.bgcs[0].bgc})` }}
-                    title={this.bgcs[0]?.title}
-                ></div>
-                <div
-                    className={`${this.state.markedId === 1 ? 'marked' : ''}`}
-                    onClick={(ev) => {
-                        this.handleBgc(1);
-                    }}
-                    style={{ backgroundImage: `url(${this.bgcs[1].bgc})` }}
-                    title={this.bgcs[1]?.title}
-                ></div>
-                <div
-                    className={`${this.state.markedId === 2 ? 'marked' : ''}`}
-                    onClick={(ev) => {
-                        this.handleBgc(2);
-                    }}
-                    style={{ backgroundImage: `url(${this.bgcs[2].bgc})` }}
-                    title={this.bgcs[2]?.title}
-                ></div>
-                <div
-                    className={`${this.state.markedId === 3 ? 'marked' : ''}`}
-                    onClick={(ev) => {
-                        this.handleBgc(3);
-                    }}
-                    style={{ backgroundImage: `url(${this.bgcs[3].bgc})` }}
-                    title={this.bgcs[3]?.title}
-                ></div>
-                <div
-                    className={`${this.state.markedId === 4 ? 'marked' : ''}`}
-                    onClick={(ev) => {
-                        this.handleBgc(4);
-                    }}
-                    style={{ backgroundColor: `${this.bgcs[4].bgc}` }}
-                    title={this.bgcs[4]?.title}
-                ></div>
-                <div
-                    className={`${this.state.markedId === 5 ? 'marked' : ''}`}
-                    onClick={(ev) => {
-                        this.handleBgc(5);
-                    }}
-                    style={{ backgroundColor: `${this.bgcs[5].bgc}` }}
-                    title={this.bgcs[5]?.title}
-                ></div>
-                <div
-                    className={`${this.state.markedId === 6 ? 'marked' : ''}`}
-                    onClick={(ev) => {
-                        this.handleBgc(6);
-                    }}
-                    style={{ backgroundColor: `${this.bgcs[6].bgc}` }}
-                    title={this.bgcs[6]?.title}
-                ></div>
-                <div
-                    className={`${this.state.markedId === 7 ? 'marked' : ''}`}
-                    onClick={(ev) => {
-                        this.handleBgc(7);
-                    }}
-                    style={{ backgroundColor: `${this.bgcs[7].bgc}` }}
-                    title={this.bgcs[7]?.title}
-                ></div>
-                <div style={{ backgroundColor: 'rgb(255, 255, 255)' }} title='More'></div>
+            <div className='new-board'>
+                {this.state.markedId < 4 && (
+                    <div className='main img' style={{ backgroundImage: `url(${this.bgcs[this.state.markedId].bgc})` }}></div>
+                )}
+                {this.state.markedId > 3 && <div className='main' style={{ backgroundColor: this.bgcs[this.state.markedId].bgc }}></div>}
+                <input
+                    autoComplete='off'
+                    autoCorrect='off'
+                    spellCheck='false'
+                    type='text'
+                    className='new-board-name'
+                    placeholder='Add board title'
+                    aria-label='Add board title'
+                    data-test-id='create-board-title-input'
+                    value={this.state.boardName}
+                    onChange={this.handleChange}
+                />
+                <div className='side'>
+                    <div
+                        className={`${this.state.markedId === 0 ? 'marked' : ''}`}
+                        onClick={(ev) => {
+                            this.handleBgc(0);
+                        }}
+                        style={{ backgroundImage: `url(${this.bgcs[0].bgc})` }}
+                        title={this.bgcs[0]?.title}
+                    ></div>
+                    <div
+                        className={`${this.state.markedId === 1 ? 'marked' : ''}`}
+                        onClick={(ev) => {
+                            this.handleBgc(1);
+                        }}
+                        style={{ backgroundImage: `url(${this.bgcs[1].bgc})` }}
+                        title={this.bgcs[1]?.title}
+                    ></div>
+                    <div
+                        className={`${this.state.markedId === 2 ? 'marked' : ''}`}
+                        onClick={(ev) => {
+                            this.handleBgc(2);
+                        }}
+                        style={{ backgroundImage: `url(${this.bgcs[2].bgc})` }}
+                        title={this.bgcs[2]?.title}
+                    ></div>
+                    <div
+                        className={`${this.state.markedId === 3 ? 'marked' : ''}`}
+                        onClick={(ev) => {
+                            this.handleBgc(3);
+                        }}
+                        style={{ backgroundImage: `url(${this.bgcs[3].bgc})` }}
+                        title={this.bgcs[3]?.title}
+                    ></div>
+                    <div
+                        className={`${this.state.markedId === 4 ? 'marked' : ''}`}
+                        onClick={(ev) => {
+                            this.handleBgc(4);
+                        }}
+                        style={{ backgroundColor: `${this.bgcs[4].bgc}` }}
+                        title={this.bgcs[4]?.title}
+                    ></div>
+                    <div
+                        className={`${this.state.markedId === 5 ? 'marked' : ''}`}
+                        onClick={(ev) => {
+                            this.handleBgc(5);
+                        }}
+                        style={{ backgroundColor: `${this.bgcs[5].bgc}` }}
+                        title={this.bgcs[5]?.title}
+                    ></div>
+                    <div
+                        className={`${this.state.markedId === 6 ? 'marked' : ''}`}
+                        onClick={(ev) => {
+                            this.handleBgc(6);
+                        }}
+                        style={{ backgroundColor: `${this.bgcs[6].bgc}` }}
+                        title={this.bgcs[6]?.title}
+                    ></div>
+                    <div
+                        className={`${this.state.markedId === 7 ? 'marked' : ''}`}
+                        onClick={(ev) => {
+                            this.handleBgc(7);
+                        }}
+                        style={{ backgroundColor: `${this.bgcs[7].bgc}` }}
+                        title={this.bgcs[7]?.title}
+                    ></div>
+                     <div
+                        className={`${this.state.markedId === 8 ? 'marked' : ''}`}
+                        onClick={(ev) => {
+                            this.handleBgc(8);
+                        }}
+                        style={{ backgroundColor: `${this.bgcs[8].bgc}` }}
+                        title={this.bgcs[8]?.title}
+                    ></div>
+                </div>
             </div>
-        </div>
-        <div className='btn'>
-            <button
-                className={this.state.isAllowed}
-                disabled={this.state.isAllowed === 'allowed' ? false : true}
-                onClick={this.onCreateNewBoard}
-            >
-                Create board
-            </button>
-        </div>
-    </Modal>
+            <div className='btn'>
+                <button
+                    className={this.state.isAllowed}
+                    disabled={this.state.isAllowed === 'allowed' ? false : true}
+                    onClick={this.onCreateNewBoard}
+                >
+                    Create board
+                </button>
+            </div>
+        </Modal>
     }
 
 }

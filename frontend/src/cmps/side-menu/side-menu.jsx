@@ -7,6 +7,7 @@ import { updateBoard } from '../../store/actions/board.actions';
 import { SideMenuSearch } from './side-menu-search';
 import { SideMenuArchive } from './side-menu-archive';
 import { SideMenuChangeBg } from './side-menu-change-bg';
+import { SideMenuDetails } from './side-menu-details';
 
 class _SideMenu extends React.Component {
   state = {
@@ -42,6 +43,13 @@ class _SideMenu extends React.Component {
                 setPage={this.setPage}
                 isScroll={isScroll}
                 toggleSideMenu={toggleSideMenu}
+              />
+            )}
+            {currPage === 'details' && (
+              <SideMenuDetails
+                setPage={this.setPage}
+                toggleSideMenu={toggleSideMenu}
+                createdBy={board.createdBy}
               />
             )}
             {currPage === 'search' && (
