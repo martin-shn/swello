@@ -18,9 +18,15 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
+console.log('after service worker delete!');
 // swDev();
-
 // serviceWorkerRegistration.unregister();
-serviceWorkerRegistration.register();
+
+navigator.serviceWorker.getRegistrations().then(function (registrations) {
+  for (let registration of registrations) {
+    registration.unregister();
+  }
+  serviceWorkerRegistration.register();
+});
 
 // reportWebVitals();
