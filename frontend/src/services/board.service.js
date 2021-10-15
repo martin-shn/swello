@@ -143,7 +143,14 @@ function createActivity(card, type, values) {
   const id = utilService.makeId();
   const createdBy = userService.getLoggedinUser();
   const createdAt = Date.now();
-  const activity = { id, type, card, createdBy, createdAt, values };
+  const activity = {
+    id,
+    type,
+    card: { id: card.id, title: card.title },
+    createdBy: { _id: createdBy._id },
+    createdAt,
+    values,
+  };
   return activity;
 }
 
