@@ -147,7 +147,12 @@ function createActivity(card, type, values) {
     id,
     type,
     card: { id: card.id, title: card.title },
-    createdBy: { _id: createdBy._id },
+    createdBy: {
+      _id: createdBy._id,
+      fullname: createdBy.fullname,
+      username: createdBy.username,
+      imgUrl: createdBy.imgUrl,
+    },
     createdAt,
     values,
   };

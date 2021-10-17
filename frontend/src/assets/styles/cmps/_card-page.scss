@@ -21,7 +21,7 @@
   height: fit-content;
   background-color: #f4f5f7;
   border-radius: 2px;
-  margin: 48px 0 80px;
+  margin: 48px 8px 80px;
   padding: 0 8px 8px 16px;
   position: relative;
   max-width: 768px;
@@ -191,7 +191,10 @@
     }
 
     .section-data {
-      margin-left: 38px;
+      margin-left: 0;
+      @include for-narrow-layout {
+        margin-left: 38px;
+      }
     }
   }
 }

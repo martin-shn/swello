@@ -19,10 +19,14 @@
     font-weight: 600;
     padding-top: 6px;
     padding-bottom: 6px;
-    width: 100%;
-    max-width: 650px;
+    // width: 100%;
+    // max-width: 300px;
+    width: calc(100% - 50px);
     padding: 5px;
     word-break: break-word;
+    @include for-narrow-layout {
+      width: calc(100% - 100px);
+    }
   }
 
   .in-list,

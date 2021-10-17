@@ -1,6 +1,10 @@
 .card-members-labels {
-  margin: 8px 0 8px 40px;
+  margin: 8px 0;
   gap: 14px;
+
+  @include for-narrow-layout {
+    margin: 8px 0 8px 40px;
+  }
 
   .card-item {
     display: flex;

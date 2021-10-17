@@ -13,10 +13,8 @@ export const cardService = {
   updateChecklistItem,
   removeChecklistItem,
   getListOfCard,
-  getLocationResults,
   toggleCardMember,
   checkDueDate,
-  getLocationData,
   updateCard,
 };
 
@@ -207,20 +205,6 @@ function updateChecklistItem(card, checklistId, updatedItem) {
     }
   });
   return card;
-}
-
-// Location
-
-const googleKey = process.env.REACT_APP_GOOGLE_API;
-async function getLocationData(locationId) {
-  // const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${locationId}&inputtype=textquery&fields=formatted_address%2Cname%2Cgeometry&key=${key}`
-  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${locationId}&key=${googleKey}&fields=formatted_address,name,geometry`;
-  return await httpService.getFromApi(url);
-}
-
-async function getLocationResults(search) {
-  const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${search}&key=${googleKey}`;
-  return await httpService.getFromApi(url);
 }
 
 // Card Members:
