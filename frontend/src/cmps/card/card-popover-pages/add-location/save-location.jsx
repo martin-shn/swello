@@ -1,34 +1,35 @@
 import React from 'react';
-import { cardService } from '../../../../services/board-services/card.service';
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from 'react-places-autocomplete';
 import { DebounceInput } from 'react-debounce-input';
 
 export class SaveLocation extends React.Component {
   state = {
     search: '',
   };
-  handleChange = ({ target }) => {
-    if (target.value.trim().length < 3) {
-      this.setState({ search: target.value, res: null });
-    } else {
-      this.setState({ search: target.value }, async () => {
-        const res = await cardService.getLocationResults(this.state.search);
-        this.setState({ res });
-      });
+  handleChange = (search) => {
+    this.setState({ search });
+  };
+
+  setAddress = async suggestion => {
+    try {
+      const results = await geocodeByAddress(suggestion);
+      const latLng = await getLatLng(results[0]);
+      const location = {
+        title: suggestion,
+        lat: latLng.lat,
+        lng: latLng.lng,
+        address: results[0].formatted_address
+      };
+      this.props.onSaveLocation(location);
+    } catch (err) {
+      console.error('Error', err);
     }
   };
 
-  setAddress = async address => {
-    const data = await cardService.getLocationData(address.place_id);
-
-    this.props.onSaveLocation({
-      title: data.result.name,
-      lat: data.result.geometry.location.lat,
-      lng: data.result.geometry.location.lng,
-      address: data.result.formatted_address,
-    });
-  };
-
-  render() {
+  render () {
     const {
       card,
       closeCardPopover,
@@ -44,37 +45,46 @@ export class SaveLocation extends React.Component {
           <button className="close-btn" onClick={closeCardPopover}></button>
         </section>
         <section className="popper-content save-location flex column">
-          <DebounceInput
-            debounceTimeout={500}
-            minLength={2}
-            autoFocus
-            className="search"
-            type="search"
-            placeholder="Search location"
-            autoCorrect="off"
-            autoComplete="off"
+          <PlacesAutocomplete
             value={search}
             onChange={this.handleChange}
-          />
-          {this.state.res && (
-            <div className="address-results">
-              <ul>
-                {this.state.res.predictions.map(address => {
-                  return (
-                    <li className="address-container" key={address.place_id}>
-                      <div
-                        className="address"
-                        onClick={() => {
-                          this.setAddress(address);
-                        }}>
-                        {address.description}
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          )}
+            onSelect={this.setAddress}
+          >
+            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+              <>
+                <DebounceInput
+                  debounceTimeout={500}
+                  minLength={2}
+                  autoFocus
+                  {...getInputProps({
+                    placeholder: 'Search location',
+                    className: 'search',
+                  })}
+                  type="search"
+                  autoCorrect="off"
+                  autoComplete="off"
+                />
+
+
+                {suggestions && (
+                  <div className="address-results">
+                    <ul>
+                      {suggestions.map(suggestion => {
+                        return (
+                          <li className="address-container" key={suggestion.placeId} {...getSuggestionItemProps(suggestion, {
+                          })}>
+                            <div className="address">
+                              {suggestion.description}
+                            </div>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                )}
+              </>
+            )}
+          </PlacesAutocomplete>
         </section>
       </>
     );

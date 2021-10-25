@@ -3,6 +3,22 @@
 }
 
 .search-container {
+  &::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: rgba($color: #fff, $alpha: 0.35);
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba($color: #000000, $alpha: 0.15);
+  }
   & hr {
     background-color: #091e4221;
     border: 0;

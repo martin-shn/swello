@@ -17,7 +17,7 @@ class _InviteMain extends Component {
     isQrCode: false,
     isLink: false,
     res: null,
-    isRes: false
+    isRes: false,
   };
 
   componentDidMount () {
@@ -44,7 +44,6 @@ class _InviteMain extends Component {
     }
   };
 
-
   onOpenPopover = (ev, props) => {
     this.props.setCardPopover('', ev.target, props);
   };
@@ -58,7 +57,16 @@ class _InviteMain extends Component {
     const { invitedUserId } = this.state;
     const { user, board } = this.props;
     const url = `/invite/${ board._id }`;
-    const notification = { id: utilService.makeId(), type: 'invite', title: 'Board Invitation', user, isRead: false, txt: `${ user.fullname } invited you to board ${ board.title }`, url, sentAt: Date.now() };
+    const notification = {
+      id: utilService.makeId(),
+      type: 'invite',
+      title: 'Board Invitation',
+      user: { _id: user._id, username: user.username, fullname: user.fullname, imgUrl: user.imgUrl },
+      isRead: false,
+      txt: `${ user.fullname } invited you to board ${ board.title }`,
+      url,
+      sentAt: Date.now(),
+    };
     let userToUpdate = await userService.getById(invitedUserId);
     userToUpdate = { ...userToUpdate, notifications: [notification, ...userToUpdate.notifications] };
     userService.update(userToUpdate, false);
@@ -76,43 +84,69 @@ class _InviteMain extends Component {
           <span>Invite to board</span>
           <button className="close-icon" onClick={this.props.closeCardPopover}></button>
         </div>
-        <div className='invite-content popper-content'>
+        <div className="invite-content popper-content">
           <DebounceInput
             debounceTimeout={500}
-            type='search'
+            type="search"
             autoFocus
-            autoComplete='off'
-            autoCorrect='off'
-            placeholder='Email address or name'
-            onChange={(ev) => {
+            autoComplete="off"
+            autoCorrect="off"
+            placeholder="Email address or name"
+            onChange={ev => {
               this.handleChange(ev);
             }}
             value={this.state.name}
           />
-          <div className='invite-link'>
+          <div className="invite-link">
             <span>
               <LinkIcon />
               Invite with link
             </span>
-            <button className='create-invite-link' onClick={this.createLink}>
+            <button className="create-invite-link" onClick={this.createLink}>
               {this.state.isQrCode ? 'Disable link' : 'Create link'}
             </button>
           </div>
           {this.state.isQrCode && <QrCode boardId={this.props.board._id} />}
-          <button className={this.state.isLink ? 'invite-active' : 'invite-disable'} onClick={this.onSendInvitation}>Send invitation</button>
+          <button className={this.state.isLink ? 'invite-active' : 'invite-disable'} onClick={this.onSendInvitation}>
+            Send invitation
+          </button>
         </div>
-        {this.state.res?.length === 0 && <div className="invite-results"><MiniLoader /></div>}
-        {!this.state.isRes && this.state.name.length > 0 && !this.state.res && <div className="invite-results"><span className="no-results">Looks like that person isn't a Swello member yet.</span></div>}
-        {this.state.res?.length > 0 && <div className="invite-results">
-          <div>
-            {this.state.res.map(user => {
-              return user._id !== this.props.user._id ? <div key={user._id} onClick={() => this.setState({ name: user.username, invitedUserId: user._id, isLink: true, res: null, isRes: true })}>
-                <AppAvatar member={user} />
-                <span>{user.fullname}</span>
-              </div> : <></>;
-            })}
+        {this.state.res?.length === 0 && (
+          <div className="invite-results">
+            <MiniLoader />
           </div>
-        </div>}
+        )}
+        {!this.state.isRes && this.state.name.length > 0 && !this.state.res && (
+          <div className="invite-results">
+            <span className="no-results">Looks like that person isn't a Swello member yet.</span>
+          </div>
+        )}
+        {this.state.res?.length > 0 && (
+          <div className="invite-results">
+            <div>
+              {this.state.res.map(user => {
+                return user._id !== this.props.user._id ? (
+                  <div
+                    key={user._id}
+                    onClick={() =>
+                      this.setState({
+                        name: user.username,
+                        invitedUserId: user._id,
+                        isLink: true,
+                        res: null,
+                        isRes: true,
+                      })
+                    }>
+                    <AppAvatar member={user} />
+                    <span>{user.fullname}</span>
+                  </div>
+                ) : (
+                  <></>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </section>
     );
   }
@@ -123,10 +157,10 @@ const mapDispatchToProps = {
   closeCardPopover,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   cardPopover: state.systemModule.cardPopover,
   board: state.boardModule.board,
-  user: state.userModule.user
+  user: state.userModule.user,
 });
 
 export const InviteMain = connect(mapStateToProps, mapDispatchToProps)(withRouter(_InviteMain));

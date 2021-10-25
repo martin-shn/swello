@@ -19,7 +19,7 @@ const COLORS = [
 
 export class SideMenuChangeBg extends Component {
   state = { colorOrImg: null };
-  render() {
+  render () {
     const { setPage, toggleSideMenu, updateBoard, board } = this.props;
     const { colorOrImg } = this.state;
     return (
@@ -70,11 +70,10 @@ class ChangeBgImg extends Component {
       orientation: 'landscape',
     });
     const images = res.response.results.map(img => ({ id: img.id, urls: img.urls, user: img.user })); // remove useless info
-    console.log(images);
     this.setState({ images });
   };
 
-  render() {
+  render () {
     const { images } = this.state;
     const { board, updateBoard } = this.props;
     return (
@@ -87,7 +86,7 @@ class ChangeBgImg extends Component {
           {images?.length > 0 &&
             images.map(img => (
               <div key={img.id} onClick={() => updateBoard({ ...board, style: { imgUrl: img.urls.regular } })}>
-                <div className="image" style={{ backgroundImage: `url(${img.urls.thumb})` }}>
+                <div className="image" style={{ backgroundImage: `url(${ img.urls.thumb })` }}>
                   <span className="username">{img.user.name}</span>
                 </div>
               </div>
@@ -99,7 +98,7 @@ class ChangeBgImg extends Component {
   }
 }
 
-function ChangeBgColor({ board, updateBoard }) {
+function ChangeBgColor ({ board, updateBoard }) {
   return (
     <section className="change-bg-color options flex wrap">
       {COLORS.map(color => (

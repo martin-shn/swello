@@ -13,10 +13,8 @@ export const cardService = {
   updateChecklistItem,
   removeChecklistItem,
   getListOfCard,
-  getLocationResults,
   toggleCardMember,
   checkDueDate,
-  getLocationData,
   updateCard,
 };
 
@@ -209,22 +207,10 @@ function updateChecklistItem(card, checklistId, updatedItem) {
   return card;
 }
 
-// Location
-
-const googleKey = process.env.REACT_APP_GOOGLE_API;
-async function getLocationData(locationId) {
-  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${locationId}&key=${googleKey}&fields=formatted_address,name,geometry`;
-  return await httpService.getFromApi(url);
-}
-
-async function getLocationResults(search) {
-  const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${search}&key=${googleKey}`;
-  return await httpService.getFromApi(url);
-}
-
 // Card Members:
 
 function toggleCardMember(member, card) {
+  const miniMember = { _id: member._id, fullname: member.fullname, username: member.username, imgUrl: member.imgUrl };
   if (!card.members) card.members = [];
   const memberIdx = card.members.findIndex(cardMember => cardMember._id === member._id);
   let isAdd = false;
@@ -232,9 +218,9 @@ function toggleCardMember(member, card) {
     card.members.splice(memberIdx, 1);
   } else {
     isAdd = true;
-    card.members.push(member);
+    card.members.push(miniMember);
   }
-  const activity = { type: isAdd ? 'ADD-MEMBER' : 'REMOVE-MEMBER', values: { member } };
+  const activity = { type: isAdd ? 'ADD-MEMBER' : 'REMOVE-MEMBER', values: { member: miniMember } };
   return { card, activity };
 }
 
