@@ -4,4 +4,4 @@ const MSG_REMOVE_ATTACHMENT = 'Deleting an attachment is permanent. There is no 
 
 const MSG_REMOVE_CARD = 'There is no undo. You won\'t be able to re-open the card.'
 
-export const constService = { MSG_REMOVE_LABEL, MSG_REMOVE_ATTACHMENT, MSG_REMOVE_CARD };
+export const msgService = { MSG_REMOVE_LABEL, MSG_REMOVE_ATTACHMENT, MSG_REMOVE_CARD };

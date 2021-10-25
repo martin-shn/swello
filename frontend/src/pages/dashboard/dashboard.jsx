@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
-// import Modal from '@mui/material/Modal';
 import { CardPerLabel } from './card-per-label';
 import { CardStatus } from './card-status';
 import { CardPerList } from './card-per-list';
@@ -39,13 +38,9 @@ class _Dashboard extends React.Component {
     const { labels } = this.props.board;
     return (
       <section className="dashboard">
-        {/* <div className="dashboard-header">
-          <DashboardHeader board={this.props.board} />
-        </div> */}
         <div
           className={`dashboard-content${ this.state.isScroll ? ' scroll-visible' : ' no-scroll' }`}
           ref={this.innerRef}>
-          {/* HERE COMES ALL GRAPHES - EACH IS A DIV */}
           <DashboardGraph title="Cards per member">
             <CardPerMember cards={this.allCards} />
           </DashboardGraph>
@@ -71,8 +66,6 @@ const mapStateToProps = state => ({
 });
 
 export const Dashboard = connect(mapStateToProps, mapDispatchToProps)(withRouter(_Dashboard));
-
-// card status
 
 function DashboardGraph ({ title, children }) {
   return (

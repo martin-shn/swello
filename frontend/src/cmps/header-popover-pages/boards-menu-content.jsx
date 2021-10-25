@@ -71,7 +71,6 @@ function _BoardsMenuContent({ boards, board, user, history, onClose }) {
                                         key={board._id}
                                         onClick={(ev) => {
                                             onClose();
-                                            // window.location.href = `/board/${board._id}`;
                                             history.push(`/board/${board._id}`);
                                         }}
                                     >

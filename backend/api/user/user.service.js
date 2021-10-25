@@ -6,7 +6,6 @@ module.exports = {
     query,
     getById,
     getByUsername,
-    // remove,
     update,
     add
 }
@@ -19,8 +18,6 @@ async function query(filterBy = {}) {
         users = users.map(user => {
             delete user.password
             user.createdAt = ObjectId(user._id).getTimestamp()
-            // Returning fake fresh data
-            // user.createdAt = Date.now() - (1000 * 60 * 60 * 24 * 3) // 3 days ago
             return user
         })
         return users
@@ -52,21 +49,11 @@ async function getByUsername(username) {
     }
 }
 
-// async function remove(userId) {
-//     try {
-//         const collection = await dbService.getCollection('user')
-//         await collection.deleteOne({ '_id': ObjectId(userId) })
-//     } catch (err) {
-//         logger.error(`cannot remove user ${userId}`, err)
-//         throw err
-//     }
-// }
-
 async function update(user) {
     try {
         // peek only updatable fields!
         const userToSave = {
-            ...user, 
+            ...user,
             _id: ObjectId(user._id), // needed for the returnd obj
             starredBoardsIds: user.starredBoardsIds
         }
@@ -93,6 +80,7 @@ async function add(user) {
         }
         const collection = await dbService.getCollection('user')
         await collection.insertOne(userToAdd)
+        delete userToAdd.password
         return userToAdd
     } catch (err) {
         logger.error('cannot insert user', err)

@@ -12,7 +12,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { ReactComponent as ArchiveIcon } from '../../assets/svg/archive-icon.svg';
 
 
-import { constService } from '../../services/const.service';
+import { msgService } from '../../services/msg.service';
 import { AppBtn } from '../general/app-btn';
 
 export const CardSidebar = props => {
@@ -99,7 +99,7 @@ export const CardSidebar = props => {
                 onOpenPopover(ev, {
                   item: card,
                   onRemoveItem: onRemoveCard,
-                  msg: constService.MSG_REMOVE_CARD,
+                  msg: msgService.MSG_REMOVE_CARD,
                   itemType: 'card',
                 })
               }>

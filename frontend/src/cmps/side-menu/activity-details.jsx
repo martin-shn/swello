@@ -60,7 +60,6 @@ function _DynamicActivity ({ createdBy, card, type, values, board }) {
     case 'REMOVE-LABEL':
       return <span>removed label <span className={'label ' + values.label.color}>{values.label.title}</span> from <CardLink /></span>;
     default:
-      // return <span>{card.title}, {type}, {JSON.stringify(values)}</span>; // For development. In production comment this.
       return <span></span>;
   }
 }
@@ -71,8 +70,6 @@ const mapStateToProps = state => {
 };
 
 const DynamicActivity = connect(mapStateToProps)(_DynamicActivity);
-
-//
 
 export const ActivityDetails = ({ activity }) => {
   const { id, type, card, createdBy, createdAt, values } = activity;

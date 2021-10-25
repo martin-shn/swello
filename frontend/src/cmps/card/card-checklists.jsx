@@ -39,14 +39,11 @@ export class CardChecklists extends Component {
     this.props.updateField({ checklists: updatedChecklists });
   };
 
-  // add checklist logic is in "add_checklist" cmp (popover)
-
   render() {
     this.card = this.props.card;
     const {
       checklists,
       updateField,
-      // card
     } = this.props;
     const { addingChecklistId } = this.state;
     if (!checklists) return <></>;

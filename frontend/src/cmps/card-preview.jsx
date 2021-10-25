@@ -19,8 +19,6 @@ export class CardPreview extends Component {
   };
   render() {
     const { card, idx, isScroll } = this.props;
-
-    // prettier-ignore
     return (
       <Draggable draggableId={card.id} index={idx}>
         {(provided, snapshot) => {

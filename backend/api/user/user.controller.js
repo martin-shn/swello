@@ -27,16 +27,6 @@ async function getUsers(req, res) {
   }
 }
 
-// async function deleteUser(req, res) {
-//     try {
-//         await userService.remove(req.params.id)
-//         res.send({ msg: 'Deleted successfully' })
-//     } catch (err) {
-//         logger.error('Failed to delete user', err)
-//         res.status(500).send({ err: 'Failed to delete user' })
-//     }
-// }
-
 async function updateUser(req, res) {
   try {
     const user = req.body;
@@ -72,6 +62,5 @@ async function updateUser(req, res) {
 module.exports = {
   getUser,
   getUsers,
-  // deleteUser,
   updateUser,
 };

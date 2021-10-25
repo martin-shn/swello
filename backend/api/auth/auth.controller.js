@@ -18,8 +18,6 @@ async function login(req, res) {
 async function signup(req, res) {
   try {
     const { username, password, fullname, imgUrl } = req.body;
-    // Never log passwords
-    // logger.debug(fullname + ', ' + username + ', ' + password)
     const user = await authService.signup(username, password, fullname, imgUrl);
     logger.debug(`auth.route - new account created: ` + JSON.stringify(user));
     if (!user) res.status(500).send({ err: 'Username already exist' });
@@ -33,7 +31,6 @@ async function signup(req, res) {
 
 async function logout(req, res) {
   try {
-    // req.session.destroy()
     req.session.user = null;
     res.send({ msg: 'Logged out successfully' });
   } catch (err) {

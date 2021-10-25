@@ -5,7 +5,6 @@ import { UserBoards } from './pages/user-boards';
 import { InvitePage } from './pages/invite-page';
 import { Login } from './pages/login';
 import { Signup } from './pages/signup';
-import { Test } from './pages/test';
 
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [
@@ -44,10 +43,6 @@ const routes = [
   {
     path: '/signup',
     component: Signup,
-  },
-  {
-    path: '/test',
-    component: Test,
   },
   {
     path: '/',

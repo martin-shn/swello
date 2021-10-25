@@ -64,14 +64,12 @@ export function clearBoard() {
 export function updateBoard(updatedBoard) {
   return async dispatch => {
     try {
-      // console.log('action board update begin');
       dispatch({ type: 'SET_BOARD', board: updatedBoard });
       const board = await boardService.update(updatedBoard);
       gBoard = _.cloneDeep(board);
       localStorage.setItem(`board-${updatedBoard._id}`, JSON.stringify(updatedBoard));
       return board;
     } catch (err) {
-      console.log('board-action update err:', err.message, navigator.onLine, gBoard);
       if (err.message === 'Network Error' && !navigator.onLine) {
         localStorage.setItem(`board-${updatedBoard._id}`, JSON.stringify(updatedBoard));
         dispatch({ type: 'SET_BOARD', board: _.cloneDeep(updatedBoard) });

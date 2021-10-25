@@ -1,5 +1,5 @@
 const initialState = {
-  boards: [],
+  boards: null,
   templates: null,
   board: null,
   isFullLabels: false,

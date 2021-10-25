@@ -23,7 +23,6 @@ export class QrCode extends React.Component {
 
         // copy url to clipboard
         navigator.clipboard.writeText(url).then(function () {
-            // console.log('Async: Copying to clipboard was successful!');
         }, function (err) {
             console.error('Async: Could not copy text: ', err);
         });
@@ -75,8 +74,6 @@ export class QrCode extends React.Component {
                     {<img alt="QR code" src={this.state.qrCodeSrc} />}
                     <div>
                         <p>Or let anyone scan this QR code to invite them to this board:</p>
-                        {/* <a href={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${url}`} 
-                download="trello-board-invite-qr-code.png">Download</a> */}
                         <button onClick={() => this.download(url)}>Download</button>
                     </div>
                 </div>

@@ -1,4 +1,3 @@
-import { storageService } from './async-storage.service';
 import { userService } from './user.service';
 import { utilService } from './util.service';
 import {
@@ -26,7 +25,6 @@ export const boardService = {
   query,
   templatesQuery,
   update,
-  // remove,
   getById,
   saveLabel,
   removeLabel,
@@ -51,9 +49,7 @@ export const boardService = {
 window.bs = boardService;
 
 function query() {
-  // var queryStr = (!filterBy) ? '' : `?byUser=${filterBy.byUser}`
   return httpService.get(`board`);
-  // return storageService.query('board', filterBy);
 }
 
 function templatesQuery() {
@@ -62,49 +58,14 @@ function templatesQuery() {
 
 function getById(boardId) {
   return httpService.get(`board/${boardId}`);
-  // return storageService.get('board', boardId);
 }
-
-// function remove(boardId) {
-//   // return httpService.delete(`board/${boardId}`)
-//   return storageService.remove('board', boardId);
-// }
 
 async function add(board) {
   const addedBoard = await httpService.post(`board`, board);
-  // board._id = utilService.makeId();
-  // board.createdBy = userService.getLoggedinUser();
-  // board.labels = [
-  //   { id: utilService.makeId(), title: '', color: 'green' },
-  //   { id: utilService.makeId(), title: '', color: 'yellow' },
-  //   { id: utilService.makeId(), title: '', color: 'orange' },
-  //   { id: utilService.makeId(), title: '', color: 'red' },
-  //   { id: utilService.makeId(), title: '', color: 'purple' },
-  //   { id: utilService.makeId(), title: '', color: 'blue' },
-  // ];
-  // // members
-  // board.isFullLabels = false;
-  // board.lists = [];
-  // board.members.push(board.createdBy);
-  // board.createdAt = Date.now();
-  // board.archive = { lists: [], cards: [] }
-  // const addedBoard = storageService.post('board', board);
   return addedBoard;
 }
 
 async function update(updatedBoard) {
-  // Test reject:
-  // return new Promise((resolve, reject) => {
-  //   setTimeout(() => {
-  //     const rand = Math.random();
-  //     if (rand < 0.5) reject('hey');
-  //     else {
-  //       resolve(storageService.put('board', updatedBoard));
-  //     }
-  //   }, 1000);
-  // });
-  //
-  // const board = await storageService.put('board', updatedBoard);
   const board = await httpService.put(`board/${updatedBoard._id}`, updatedBoard);
   return board;
 }
@@ -146,22 +107,3 @@ function createActivity(card, type, values) {
   const activity = { id, type, card, createdBy, createdAt, values };
   return activity;
 }
-
-// This IIFE functions for Dev purposes
-// It allows testing of real time updates (such as sockets) by listening to storage events
-(async () => {
-  var boards = await storageService.query('board');
-
-  // Dev Helper: Listens to when localStorage changes in OTHER browser
-  window.addEventListener('storage', async () => {
-    console.log('Storage updated');
-    const freshBoards = await storageService.query('board');
-    if (freshBoards.length === boards.length + 1) {
-      console.log('Board Added - localStorage updated from another browser');
-      // socketService.emit(SOCKET_EVENT_REVIEW_ADDED, freshBoards[freshBoards.length - 1]);
-    }
-    boards = freshBoards;
-  });
-})();
-
-// types: add, remove, update, attached, joined, left

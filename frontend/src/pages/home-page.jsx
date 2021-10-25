@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import { storageService } from '../services/async-storage.service';
 import { onLogin, onLogout } from '../store/actions/user.actions';
 import { HomeFooter } from '../cmps/home-footer';
 import { HomeHeader } from '../cmps/home-header';

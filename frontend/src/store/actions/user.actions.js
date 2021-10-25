@@ -1,5 +1,4 @@
 import { userService } from '../../services/user.service.js';
-import { showErrorMsg } from '../../services/event-bus.service.js';
 import { socketService, SOCKET_EVENT_USER_UPDATED } from '../../services/socket.service';
 
 export function loadUsers(filterBy) {
@@ -51,11 +50,6 @@ export function listenForUserUpdates() {
     socketService.on(SOCKET_EVENT_USER_UPDATED, user => {
       dispatch({ type: 'SET_USER', user });
       sessionStorage.setItem('loggedinUser', JSON.stringify(user));
-      // if (Notification.permission == 'granted') {
-      //   navigator.serviceWorker.getRegistration().then(function (reg) {
-      //     reg.showNotification(user.notifications[0].txt || 'New notification from Swello!');
-      //   });
-      // }
     });
   };
 }
@@ -85,7 +79,6 @@ export function onLogout() {
       });
       
     } catch (err) {
-      showErrorMsg('Cannot logout');
       console.log('Cannot logout', err);
     }
   };

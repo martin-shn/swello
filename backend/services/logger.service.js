@@ -19,8 +19,6 @@ function isError(e) {
 }
 
 function doLog(level, ...args) {
-
-    // console.log('LOGGER:', args);
     const strs = args.map(arg =>
         (typeof arg === 'string' || isError(arg)) ? arg : JSON.stringify(arg)
     )
@@ -36,7 +34,6 @@ function doLog(level, ...args) {
 
 module.exports = {
     debug(...args) {
-        // if (process.env.NODE_NEV === 'production') return
         doLog('DEBUG', ...args)
     },
     info(...args) {

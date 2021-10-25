@@ -4,7 +4,6 @@ import { utilService } from '../util.service';
 export const listService = { filterLists };
 
 function filterLists(lists, filterBy) {
-  // move this logic to backend later?
   const { labelIds, memberIds, text, dueDate } = filterBy;
   const textRegex = new RegExp(text, 'i');
   const filteredLists = lists.map(list => {
@@ -39,7 +38,6 @@ function filterLists(lists, filterBy) {
     // after filter is done:
     return { ...list, cards: filteredCards };
   });
-  // return filteredLists.filter(list => list.cards.length > 0); // remove empty lists - removed this line because it will always filter out empty lists
   return filteredLists;
 }
 

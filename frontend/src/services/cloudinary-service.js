@@ -8,12 +8,8 @@ const UPLOAD_PRESET = 'k9e87w7t';
 
 async function uploadFile(ev) {
   const formData = new FormData();
-  // console.log('target', ev.target);
   formData.append('file', ev.target.files[0]);
-  // console.log('ev.target.files[0]):', ev.target.files[0]);
   formData.append('upload_preset', UPLOAD_PRESET);
-  // console.log('formData:', formData);
-
   try {
     const res = await axios.post(UPLOAD_URL, formData);
     const { url } = res.data;
@@ -34,11 +30,8 @@ async function uploadFile(ev) {
 
 async function uploadImg(ev) {
   const formData = new FormData();
-  // console.log('target', ev.target);
   formData.append('file', ev.target.files[0]);
-  // console.log('ev.target.files[0]):', ev.target.files[0]);
   formData.append('upload_preset', UPLOAD_PRESET);
-  // console.log('formData:', formData);
 
   try {
     const res = await axios.post(UPLOAD_URL, formData);

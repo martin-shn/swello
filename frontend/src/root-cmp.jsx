@@ -11,7 +11,6 @@ class _RootCmp extends React.Component {
       Notification.requestPermission();
     }
     this.props.listenForUserUpdates();
-    localStorage.clear()
   }
   render() {
     return (

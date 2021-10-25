@@ -16,6 +16,7 @@ class _UserBoards extends React.Component {
     if (!user) return;
     this.props.loadBoards({ byUserId: user._id });
     this.props.loadTemplates();
+    localStorage.clear();
   }
 
   render() {
@@ -23,7 +24,7 @@ class _UserBoards extends React.Component {
     if (!user) {
       history.replace('/');
       return <></>;
-    } else if (!boards || !boards.length) {
+    } else if (!boards) {
       return <>
         <AppHeader />
         <LoaderPage />;

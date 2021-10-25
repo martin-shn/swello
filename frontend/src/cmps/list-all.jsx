@@ -1,5 +1,4 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { ListAdd } from './list-add';
 import { ListPreview } from './list-preview';

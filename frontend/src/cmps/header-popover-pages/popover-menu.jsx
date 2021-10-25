@@ -8,7 +8,6 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
 import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
-// import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 
 class _PopoverMenu extends React.Component {
@@ -23,7 +22,6 @@ class _PopoverMenu extends React.Component {
 
   render () {
     const { isOpen, id, anchor } = this.props.menu;
-    // console.log(anchor, id, this.props.id, !isOpen || id!==this.props.id );
     if (!isOpen || id !== this.props.id) return <></>;
     return (
       <Popper

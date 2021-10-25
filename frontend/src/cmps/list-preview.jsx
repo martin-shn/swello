@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { boardService } from '../services/board.service';
@@ -10,7 +9,6 @@ import { CopyPage } from './list-popover-pages/copy-page';
 import { MovePage } from './list-popover-pages/move-page';
 import { MoveAllCards } from './list-popover-pages/move-all-cards-page';
 import { SortPage } from './list-popover-pages/sort-page';
-// import { utilService } from '../services/util.service';
 import { CardList } from './card-list';
 import { Draggable } from 'react-beautiful-dnd';
 import { AddCard } from './add-card';
@@ -100,16 +98,8 @@ export class _ListPreview extends Component {
       onMoveAllCardsToList,
       onSortList,
       onArchiveList,
-      // board
     } = this.props;
     const { popoverPage } = this.state;
-    // setTimeout(() => {
-    //   if (this.elInnerRef?.current) {
-    //     this.setState({
-    //       class: this.elInnerRef.current.scrollHeight > this.elInnerRef.current.clientHeight ? ' visible-scroll' : '',
-    //     });
-    //   }
-    // }, 100);
     return (
       <Draggable draggableId={list.id} index={idx}>
         {provided => (

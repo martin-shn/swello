@@ -6,7 +6,7 @@ import { boardService } from '../../../../services/board.service';
 import { updateBoard } from '../../../../store/actions/board.actions';
 import { AddEditLabel } from './add-edit-label';
 import { RemoveItem } from './../remove-item';
-import { constService } from '../../../../services/const.service';
+import { msgService } from '../../../../services/msg.service';
 
 export class _AddLabels extends Component {
   state = {
@@ -121,7 +121,7 @@ export class _AddLabels extends Component {
             closeCardPopover={closeCardPopover}
             onBackClick={this.onSetPage}
             onRemoveItem={this.onRemoveLabel}
-            msg={constService.MSG_REMOVE_LABEL}
+            msg={msgService.MSG_REMOVE_LABEL}
             itemType="label"
           />
         )}

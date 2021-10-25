@@ -26,15 +26,6 @@ export class SaveLocation extends React.Component {
       lng: data.result.geometry.location.lng,
       address: data.result.formatted_address,
     });
-
-    // const updatedBoard = cardService.updateCard(this.props.board, {...this.props.card, location:{
-    //   title: data.result.name,
-    //   lat: data.result.geometry.location.lat,
-    //   lng: data.result.geometry.location.lng,
-    //   address: data.result.formatted_address
-    // }})
-    // console.log('updated board:', updatedBoard);
-    // this.props.updateBoard(updatedBoard)
   };
 
   render() {
@@ -42,7 +33,6 @@ export class SaveLocation extends React.Component {
       card,
       closeCardPopover,
       onSetPage,
-      // onSaveLocation,
       isFromNav,
     } = this.props;
     const { search } = this.state;

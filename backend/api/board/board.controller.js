@@ -39,15 +39,6 @@ async function addBoard(req, res) {
     try {
         let board = req.body
         board = await boardService.add(board)
-
-        // prepare the updated review for sending out
-        // review.aboutUser = await userService.getById(review.aboutUserId)
-
-        // console.log('CTRL SessionId:', req.sessionID);
-        // socketService.broadcast({type: 'review-added', data: review, userId: review.byUserId})
-        // socketService.emitToUser({type: 'review-about-you', data: review, userId: review.aboutUserId})
-        // socketService.emitTo({type: 'user-updated', data: fullUser, label: fullUser._id})
-
         res.send(board)
 
     } catch (err) {

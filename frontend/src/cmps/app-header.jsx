@@ -11,13 +11,10 @@ import { ReactComponent as NotificationsIcon } from '../assets/svg/notifications
 import { ReactComponent as CreateIcon } from '../assets/svg/create.svg';
 import { BoardAdd } from './board-list/board-add';
 
-// import MenuItem from '@mui/material/MenuItem';
-
 import { PopoverMenu } from './header-popover-pages/popover-menu';
 import { BoardsMenuContent } from './header-popover-pages/boards-menu-content';
 import { StarredBoardsMenuContent } from './header-popover-pages/starredboards-menu-content';
 
-// import { ReactComponent as StarredImage } from '../assets/svg/starred-board.svg';
 import { HeaderSearch } from './header-popover-pages/header-search';
 import { AppAvatar } from './general/app-avatar';
 import { HeaderNotifications } from './header-popover-pages/header-notifications';
@@ -84,7 +81,7 @@ class _AppHeader extends Component {
     const { isStarredMenuOpen } = this.state;
     const { isUserBoardsPage, boards, board, user, onLogout, isTemplate } = this.props;
     if (!user) return <></>;
-    const starredBoards = boards.filter(board => user.starredBoardsIds.includes(board._id));
+    const starredBoards = boards?.filter(board => user.starredBoardsIds.includes(board._id)) || []
     return (
       <header
         onClick={this.closePopover}
@@ -114,7 +111,6 @@ class _AppHeader extends Component {
             {boards && <BoardsMenuContent boards={boards} board={board} user={user} onClose={this.onClose} />}
           </PopoverMenu>
           <button
-            // ref={this.starredAnchorRef}
             id="composition-button"
             className="btn-starred"
             aria-controls={isStarredMenuOpen ? 'composition-menu' : undefined}

@@ -3,7 +3,7 @@ import CoverIcon from '@mui/icons-material/VideoLabel';
 import { formatDistance } from 'date-fns';
 import React from 'react';
 import { getCoverImgHeight } from '../../services/cloudinary-service';
-import { constService } from '../../services/const.service';
+import { msgService } from '../../services/msg.service';
 import { utilService } from '../../services/util.service';
 import { AppBtn } from '../general/app-btn';
 import _ from 'lodash';
@@ -72,8 +72,6 @@ export const CardAttachments = ({ attachments, setCardPopover, card, updateField
   );
 };
 
-//
-
 function CardAttachmentList ({
   attachments,
   setCardPopover,
@@ -96,7 +94,7 @@ function CardAttachmentList ({
     setCardPopover('remove-item', ev.target, {
       item: attachment,
       onRemoveItem: () => onRemoveAttachment(attachment),
-      msg: constService.MSG_REMOVE_ATTACHMENT,
+      msg: msgService.MSG_REMOVE_ATTACHMENT,
       itemType: 'attachment',
     });
   };

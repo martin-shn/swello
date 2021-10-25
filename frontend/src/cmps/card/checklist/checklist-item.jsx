@@ -9,7 +9,6 @@ import { cardService } from '../../../services/board-services/card.service';
 import { AppAvatar } from '../../general/app-avatar';
 
 const _ChecklistItem = props => {
-  // TODO - Finish the remaining add-member and due-date buttons, enable title edit
   const { item, onUpdateItem, card, board } = props;
   const { id, title, isDone, dueDate, assignedToMemberId } = props.item;
   const assignedToMember = board.members.find(member => member._id === assignedToMemberId);

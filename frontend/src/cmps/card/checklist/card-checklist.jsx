@@ -4,7 +4,6 @@ import { ReactComponent as CloseIcon } from '../../../assets/svg/close.svg';
 import { ChecklistItemList } from './checklist-item-list';
 import { cardService } from '../../../services/board-services/card.service';
 import { AppBtn } from '../../general/app-btn';
-// import { cardService } from '../../../services/board-services/card.service';
 
 const initialState = {
   addedItem: { assignedToMemberId: null, dueDate: null, isDone: false, title: '' },
@@ -60,7 +59,6 @@ export class CardChecklist extends Component {
       isAdding,
       onDeleteChecklist,
       onUpdateChecklist,
-      // onUpdateItem
     } = this.props;
     const { addedItem } = this.state;
     return (
@@ -107,7 +105,6 @@ export class CardChecklist extends Component {
                 onKeyDown={ev => ev.key === 'Enter' && this.onAddItem(ev)}
                 value={addedItem.title}
                 onChange={this.handleChange}
-                // onBlur={() => onAddingItem(false)}
               />
               <div className="add-controls">
                 <button ref={this.addBtnRef} className="btn-add">

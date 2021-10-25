@@ -62,13 +62,11 @@ class ChangeBgImg extends Component {
     const unsplash = createApi({
       accessKey: process.env.REACT_APP_UNSPLASH_ACCESS_KEY,
       secret: process.env.REACT_APP_UNSPLASH_SECRET,
-      // headers: { 'X-Custom-Header': 'foo' },
     });
     const res = await unsplash.search.getPhotos({
       query: ev.target.search.value,
       page: _.random(1, 10),
       perPage: 18,
-      // color: 'green',
       orientation: 'landscape',
     });
     const images = res.response.results.map(img => ({ id: img.id, urls: img.urls, user: img.user })); // remove useless info

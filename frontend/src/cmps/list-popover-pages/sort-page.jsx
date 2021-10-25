@@ -1,4 +1,3 @@
-// import { ReactComponent as CloseIcon } from '../../assets/svg/close.svg';
 import ArrowBackIcon from '@mui/icons-material/ArrowBackIosNew';
 import CloseIcon from '@mui/icons-material/Close';
 export function SortPage({ onMovePage, list, onTogglePopover, onSortList }) {

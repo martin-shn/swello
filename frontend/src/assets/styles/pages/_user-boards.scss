@@ -25,7 +25,6 @@
           margin-bottom: 5px;
           padding: 8px 6px;
           display: flex;
-          // align-items: center;
           border-radius: 4px;
           cursor: pointer;
           font-weight: 700;
@@ -45,10 +44,6 @@
             font-size: 1rem;
             object-fit: scale-down;
           }
-          // & a {
-          //   padding-inline-start: 15px;
-          //   font-weight: 700;
-          // }
         }
       }
     }
@@ -67,7 +62,6 @@
 
   & > h3 {
     align-items: center;
-    // flex: 1;
     font-size: rem(16px);
     font-weight: 700;
     line-height: rem(24px);

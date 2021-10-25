@@ -2,11 +2,6 @@ import FileCopyIcon from '@mui/icons-material/FileCopy';
 import { LoaderPage } from '../loader/loader-page';
 
 export function TemplateList ({ templates, createBoard, history }) {
-//   const onTemplateClick = async template => {
-//     const newBoard = await createBoard(template);
-//     history.push(`/board/${ newBoard._id }`);
-//   };
-
   if (!templates) return <LoaderPage />;
   return (
     <div className="template-list-main">

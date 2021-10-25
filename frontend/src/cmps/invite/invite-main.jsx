@@ -70,7 +70,6 @@ class _InviteMain extends Component {
   };
 
   render () {
-    // console.log(this.state);
     return (
       <section className="invite-main cards-popper">
         <div className="invite-header popper-header">

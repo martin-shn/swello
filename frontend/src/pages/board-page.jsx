@@ -33,7 +33,6 @@ export class _BoardPage extends Component {
             isTopAdd: false,
             template: null,
         },
-        // popoverListId: null, // only one popover can be active at all times
         isAddingList: false,
         currPage: this.props.location.pathname.endsWith('dashboard') ? 'dashboard' : 'board',
         isOnline: navigator.onLine,
@@ -78,8 +77,6 @@ export class _BoardPage extends Component {
     componentWillUnmount() {
         this.props.clearBoard();
         this.props.closeCardPopover();
-        const { boardId } = this.props.match.params;
-        localStorage.removeItem(`board-${boardId}`);
         window.removeEventListener('online', this.showConnecivityUserMsg);
         window.removeEventListener('offline', this.showConnecivityUserMsg);
     }
@@ -176,7 +173,6 @@ export class _BoardPage extends Component {
         await this.props.onUpdateUser(user);
     };
 
-    // TODO: add dynamic text color using contrast-js
     render() {
         let isTemplate = false;
         if (this.props.location.pathname === '/templates' && this.state.template) isTemplate = true;
@@ -195,7 +191,6 @@ export class _BoardPage extends Component {
             activeList,
             isAddingList,
             currPage,
-            // isCardPageOpen
         } = this.state;
         const { popoverListId, filterBy, cardQuickEdit, setQuickEdit, setCardPopover, closeCardPopover, cardPopover } = this.props;
         const { title, members, lists, style } = this.props.board;

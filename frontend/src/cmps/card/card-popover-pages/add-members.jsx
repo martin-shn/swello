@@ -44,7 +44,6 @@ export class _AddMembers extends Component {
   render() {
     const { closeCardPopover } = this.props;
     const { updatedMembers = [], updatedBoardMembers, search } = this.state;
-    // prettier-ignore
     return (
       <>
         <section className="popper-header">
