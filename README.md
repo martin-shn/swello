@@ -1,5 +1,8 @@
 # Swello - A Trello Clone
 Production link - https://swello.herokuapp.com/
+![Board-Page](https://user-images.githubusercontent.com/84678031/139229241-56f82dc1-7f07-49ae-adee-05b072039473.PNG)
+![Board-Page-Mobile](https://user-images.githubusercontent.com/84678031/139231553-8db29357-9e71-4bf5-af66-269311183059.PNG)
+
 ## Features
 * Create boards from template or from scratch.
 * Create, remove, and update lists and cards.
@@ -18,3 +21,14 @@ Production link - https://swello.herokuapp.com/
 * REST API
 * Websockets - Socket.io
 * PWA and push notifications (Webpush)
+
+## Demos
+
+https://user-images.githubusercontent.com/84678031/139223749-638e63cc-e5ef-4f92-a0aa-165f510168a2.mp4
+
+
+https://user-images.githubusercontent.com/84678031/139231059-9cd08063-c4b1-4afc-aa74-095b0d0350cd.mp4
+
+
+https://user-images.githubusercontent.com/84678031/139227586-f70e5e5c-d9e8-496d-b7d6-301aa3e39667.mp4
+
