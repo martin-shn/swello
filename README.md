@@ -1,6 +1,6 @@
 # Swello - A Trello Clone
 Production link - https://swello.herokuapp.com/
-![Board-Page](https://user-images.githubusercontent.com/84678031/139229241-56f82dc1-7f07-49ae-adee-05b072039473.PNG)
+![Board-Page](https://user-images.githubusercontent.com/84678031/139231794-ad3e5202-443b-4a73-8a22-a61c41a1046a.PNG)
 ![Board-Page-Mobile](https://user-images.githubusercontent.com/84678031/139231553-8db29357-9e71-4bf5-af66-269311183059.PNG)
 
 ## Features
