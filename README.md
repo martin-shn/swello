@@ -26,9 +26,7 @@ Production link - https://swello.herokuapp.com/
 
 https://user-images.githubusercontent.com/84678031/139223749-638e63cc-e5ef-4f92-a0aa-165f510168a2.mp4
 
-
 https://user-images.githubusercontent.com/84678031/139231059-9cd08063-c4b1-4afc-aa74-095b0d0350cd.mp4
-
 
 https://user-images.githubusercontent.com/84678031/139227586-f70e5e5c-d9e8-496d-b7d6-301aa3e39667.mp4
 
